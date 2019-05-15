@@ -1,12 +1,12 @@
 import React from 'react'
-import NavBar, { Navbar, Container } from 'react-bootstrap';
+import {BrowserRouter as Router,Route,Switch, NavLink} from 'react-router-dom';
+import NavBar, { Navbar, Container} from 'react-bootstrap';
 
-export const Nav = <Navbar expand="lg" variant="light" bg="light">
-<Container>
-  <row>
-  <Navbar.Brand href="/">Home</Navbar.Brand>
-  <Navbar.Brand href="Login">Login</Navbar.Brand>
-  <Navbar.Brand href="Register">Register</Navbar.Brand>
-  </row>
-</Container>
-</Navbar>;
+export const Nav = 
+<Navbar expand="lg" variant="light" bg="light">
+    <row>
+    <NavLink to="/">Home</NavLink>
+    <NavLink to="/Login">Login</NavLink>
+    <NavLink to="/Register">Register</NavLink>
+    </row>
+</Navbar>

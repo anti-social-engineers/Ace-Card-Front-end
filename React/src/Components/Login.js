@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Container, Row} from 'react-bootstrap';
 import '../App.css';
 export const Login = () => (
