@@ -1,20 +1,21 @@
 import React, {Component} from 'react';
 import './App.css';
-import {Nav} from './Components/Navbar';
-import {Home} from './Components/Home';
-import {Login}from './Components/Login';
-import {Register}  from './Components/Register';
-import {BrowserRouter as Router,Route,Switch, NavLink} from 'react-router-dom';
-import Button from 'react-bootstrap/Button'
-import NavBar, { Navbar, Container } from 'react-bootstrap';
+import Nav from './Components/Navbar';
+import Home from './Components/Home';
+import Login from './Components/Login';
+import Register  from './Components/Register';
+import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 
 
 class App extends Component {
   render() {
     return (
+
       <React.Fragment>
       <Router>     
-        {Nav}
+        
+        <Nav/>
+
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/Login" component={Login} />
@@ -22,6 +23,7 @@ class App extends Component {
           </Switch>
         </Router>
       </React.Fragment>
+      
     ); 
 
   }

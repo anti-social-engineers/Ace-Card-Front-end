@@ -1,12 +1,15 @@
-import React from 'react'
-import {Container, Row} from 'react-bootstrap';
+import React, { Component } from 'react'
 
-export const Home = () => (
-    <Container>
-        <Row>
-        <div>
-            <h1>Test Home</h1>
-        </div>
-    </Row>
-    </Container>
-)
+class Home extends Component {
+    render() {
+    
+    return (
+      <div className="container">
+     
+      </div>
+    )
+  }
+}
+
+
+export default Home;
