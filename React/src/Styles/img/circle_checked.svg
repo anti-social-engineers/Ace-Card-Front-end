@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="23px" height="23px" viewBox="0 0 23 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>circle_checked</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="11.5" cy="11.5" r="11.5"></circle>
+        <filter x="-6.5%" y="-6.5%" width="113.0%" height="113.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Website" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Registreer-2" transform="translate(-966.000000, -358.000000)">
+            <g id="Progress" transform="translate(938.000000, 329.000000)">
+                <g id="circle_checked" transform="translate(28.000000, 29.000000)">
+                    <g id="Oval-Copy" opacity="0.550725446" fill-rule="nonzero">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <circle stroke="#FFFFFF" stroke-width="1" stroke-linejoin="square" cx="11.5" cy="11.5" r="11"></circle>
+                    </g>
+                    <g id="mdi-light:check" opacity="0.399776786" stroke-width="1" fill-rule="evenodd" transform="translate(2.000000, 2.000000)" fill="#000000">
+                        <g id="Icon" fill-rule="nonzero">
+                            <polygon id="Icon-Shape" points="15.75 6.75 7.5 15 3.375 10.875 3.96416667 10.2858333 7.5 13.8216667 15.16 6.16083333 15.7491667 6.75083333"></polygon>
+                            <polygon id="Icon-Rectangle-path" fill-opacity="0" points="0 0 13.8634493 0 20 0 20 20 0 20"></polygon>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

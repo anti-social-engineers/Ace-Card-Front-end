@@ -51,7 +51,7 @@ class Register extends Component {
                   </div>
 
                   <div className="form-content">
-                   <div className="inputs">
+                   <div className="inputs inputs-space">
                         <div className="group">
                         <input type="email" id="email" onChange={this.handleChange} required />
                             <span className="highlight"></span>
@@ -76,7 +76,7 @@ class Register extends Component {
                  
 
                   </div>
-                  <button className="main-button"><span className="main-button-action">Registreren</span></button>
+                  <button className="main-button main-button--margin float-right"><span className="main-button-action">Registreren</span></button>
 
                   </div>
 

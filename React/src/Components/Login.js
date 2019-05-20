@@ -7,11 +7,14 @@ import '../Styles/css/style.css'
 import {NavLink} from 'react-router-dom'
 
 class Login extends Component {
+   constructor(props){
+      super(props);
+   }
   state = {
     email:'',
     password:''
   }
-  
+
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value 
@@ -24,7 +27,7 @@ class Login extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} >
+      <form onSubmit={this.handleSubmit} className={this.props.is_visible} id="login">
          <div className="formarea formarea--center">
             <div className="outerform outerform--center ">
                <div className="form-wrapper">
@@ -33,14 +36,14 @@ class Login extends Component {
                   </div>
                   <div className="form-content">
                      <div className="inputs">
-                        <div className="group">      
-                           <input type="text" required=""/>
+                        <div className="group pb-5">      
+                           <input type="text" id="email" required/>
                            <span className="highlight"></span>
                            <span className="bar"></span>
                            <label>E-mail</label>
                         </div>
-                        <div className="group">      
-                           <input type="password" required=""/>
+                        <div className="group pb-5">      
+                           <input type="password" id="password" required/>
                            <span className="highlight"></span>
                            <span className="bar"></span>
                            <label>Wachtwoord</label>
@@ -65,7 +68,7 @@ class Login extends Component {
 
                     </div>
                     <div className="col">
-                        <button className="main-button main-button--transparent">
+                        <button className="main-button main-button--transparent float-right">
                             <span className="main-button-action">Inloggen</span>
                         </button>
                     </div>
