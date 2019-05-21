@@ -10,10 +10,13 @@ class Login extends Component {
    constructor(props){
       super(props);
    }
-  state = {
-    email:'',
-    password:''
-  }
+
+   state = {
+      is_visible: this.props.is_visible,
+      user: {},
+      logging_in: false,
+      logged_in: false
+   }
 
   handleChange = (e) => {
     this.setState({
@@ -21,29 +24,46 @@ class Login extends Component {
     })
   }
   handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(this.state)
+      e.preventDefault();
+      this.setState({user:{email:this.refs.email.value}, logging_in: true}, () => {console.log(this.state)});
+      
+      setTimeout(function(){
+         this.setState({logged_in:true});
+         console.log("LOGGED IN")
+         setTimeout(function(){
+            this.setState({logging_in:false, is_visible:false});
+            this.props.collapseHeader();
+            this.props.setUser(this.state.user);
+            console.log(this.state.user);
+         }.bind(this), 600);
+      }.bind(this), 600);
+      
+  }
+
+  changeVisibility = () => {
+     this.setState({is_visible: !this.state.is_visible});
+     console.log(this.state);
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className={this.props.is_visible} id="login">
+      <form onSubmit={this.handleSubmit} className={this.state.is_visible ? "" : "d-none"} id="login">
          <div className="formarea formarea--center">
-            <div className="outerform outerform--center ">
+            <div className="outerform outerform--center">
                <div className="form-wrapper">
                   <div className="form-title">
                      <h2>Inloggen</h2>
                   </div>
                   <div className="form-content">
-                     <div className="inputs">
+                     <div className={this.state.logging_in ? "d-none" : "inputs"}>
                         <div className="group pb-5">      
-                           <input type="text" id="email" required/>
+                           <input type="text" id="email" ref="email" required/>
                            <span className="highlight"></span>
                            <span className="bar"></span>
                            <label>E-mail</label>
                         </div>
                         <div className="group pb-5">      
-                           <input type="password" id="password" required/>
+                           <input type="password" id="password" ref="password" required/>
                            <span className="highlight"></span>
                            <span className="bar"></span>
                            <label>Wachtwoord</label>
@@ -59,6 +79,10 @@ class Login extends Component {
                               </label>
                            </div>
                         </div>
+                     </div>
+                     <div className={this.state.logging_in ? "form-loader" : "d-none form-loader--hidden"}>
+                        <span className={this.state.logged_in ? "d-none invis" : "loading-text"}><i className="fas fa-circle-notch fa-spin"></i>Verifying account details...</span>
+                        <span className={this.state.logged_in ? "loading-text" : "d-none invis"}><i className="fas fa-check"></i>Succesfully logged in.</span>
                      </div>
                   </div>
                </div>
