@@ -4,6 +4,7 @@ import Nav from './Components/Navbar';
 import Home from './Components/Home';
 import Login from './Components/Login';
 import Register  from './Components/Register';
+import Account from './Components/Account';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 
 
@@ -13,13 +14,12 @@ class App extends Component {
 
       <React.Fragment>
       <Router>     
-        
-        <Nav/>
-
+      
           <Switch>
             <Route exact path="/" component={Home} />
             {/* <Route path="/Login" component={Nav} /> */}
             <Route path="/Register" component={Register} />
+            <Route path="/Account" component={Account}/>
           </Switch>
         </Router>
       </React.Fragment>

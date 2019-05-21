@@ -6,6 +6,8 @@ import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {connect} from 'react-redux'
 import {createAcc} from '../Helper/actions/authorizationAction'
+import Nav from '../Components/Navbar';
+
 
 class Register extends Component {
   state = {
@@ -28,7 +30,7 @@ class Register extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-
+      <Nav/>
       <div className="content-wrapper">
         <div className="cont">
            <div className="row no-gutters">

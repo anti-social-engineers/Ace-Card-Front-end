@@ -6,6 +6,9 @@ import '../Styles/css/bootstrap.css'
 import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {connect} from 'react-redux'
+import Nav from '../Components/Navbar';
+
+
 
 class Home extends Component {
 
@@ -18,16 +21,19 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <Nav/>
         <div className="container">
           <div className="row">
             <div className="col-md">
                 <div className="mainPageTitle">Uitgaan is nog nooit zo makkelijk geweest</div>
                 <div className="mainPageParagraph">
-                    Met de ACE-card kom je overal makkelijk binnen en heb je nooit meer geldproblemen.
+                  Weet je eigenlijk wel wat je elke maand uitgeeft tijdens het stappen? Met de ACE-card kom je er direct achter.
+                  Wij importeren je uitgaven veilig en snel en plaatsen ze in één helder overzicht. 
                 </div>
+                <div className="mainPageParagraph">Stap elke club binnen, dankzij de ACE-card.</div> 
             </div>
             <div className="col-md" align="center">
-                <div className="square">
+                <div className="squareTop">
                 <img src={require('../Styles/img/card.png')} alt="" className="imgMargin"/>
                     <h4>Placeholder</h4>
                     <p>Heel Lorum Veel Ipsum tekst Bla Dala</p>
@@ -60,7 +66,7 @@ class Home extends Component {
           </div>
         </div>
 
-        <div className="row no-gutters">
+        <div className="row no-gutterr">
         <div className="col-md" align="center">
             <button className="main-home-button"><span className="main-button-action">Registreren</span></button>
         </div>

@@ -457,6 +457,10 @@ p {
 	font-size: 14px;
 }
 
+.group input[type=accountform] {
+    background: #f7f7f7;
+}
+
 .group input:focus {
 	outline: none;
 }
@@ -792,24 +796,23 @@ p {
     background-image: linear-gradient(90deg, #000000 0%, #434343 100%);/* 076 Premium Dark: */
     transform: skew(0deg, 4deg);
     /* height: 100%; */
-    /* width: 100%; */
+    width: 100%;
 }
 
-.square{
+.squareTop{
     width: 250px;
     height: 300px;
     background-color: white;
-    border-top-right-radius: 6%;
-    border-bottom-left-radius: 6%;
+    border-radius: 6%;
     margin: 20px;
+    margin-top: 120px;
 }
 
 .squareskew{
     width: 250px;
     height: 300px;
     background-color: white;
-    border-top-right-radius: 6%;
-    border-bottom-left-radius: 6%;
+    border-radius: 6%;
     margin: 20px;
     transform: skew(0deg, -4deg);
 }
@@ -828,16 +831,16 @@ p {
 }
 
 .mainPageTitle{
-    font-size: 1.90em;
+    font-size: 2.4em;
     font-weight: 700;
     font-family: "Montserrat";
     letter-spacing: 1.0px;
-    margin-top: 20px;
+    margin-top: 120px;
 }
 
 .mainPageParagraph{
     padding-top: 25px;
-    font-size: 1.2em;
+    font-size: 1.4em;
     font-family: "Montserrat";
     letter-spacing: 1px;
 
@@ -895,9 +898,9 @@ overflow:visible;
     display:table;
     border-collapse:collapse;
     border-spacing:0;
-    color:#999;
+    color:#fff;
     font-family: arial;
-    font-size: 25px;
+    font-size: 21px;
     text-decoration:none;
     -webkit-transform:translateZ(0) scale(1,1);
     -webkit-transition:all .1s linear;
@@ -918,8 +921,8 @@ overflow:visible;
     position:relative;
     display:table-cell;
     vertical-align:middle;
-    width:190px;
-  font-family: 'Titillium Web', sans-serif;
+    width:110px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .main-menu>ul.logout {
@@ -971,6 +974,11 @@ nav ul,nav li {
     padding-left: 25%;
     padding-right: 25%;
     width: 100%;
+}
+
+.no-gutterr{
+    margin-right: 0;
+    margin-left: 0;
 }
 
 
