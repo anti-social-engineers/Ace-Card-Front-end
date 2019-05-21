@@ -202,6 +202,7 @@ p {
 	letter-spacing: 2px;
     position: relative;
     margin-top: 20px;
+    margin-bottom: 65px;
 }
 
 .main-button--transparent {
@@ -781,35 +782,36 @@ p {
 
 
 #chevron {
-    margin-top: 120px;
+    margin-top: 180px;
+    margin-bottom: 100px;
+    margin-left: 0px;
     position: relative;
     text-align: center;
     padding-top: 70px;
-    padding-bottom: 180px;
-    margin-bottom: 6px;
-    margin-left: 0px;
-    height: 100%;
-    width: 100%;
-}
-
-#chevron:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 80%;
-    width: 100%;
+    padding-bottom: 70px;
     background-image: linear-gradient(90deg, #000000 0%, #434343 100%);/* 076 Premium Dark: */
-    /* border-radius: 75%/80px 40px 0px 0px; */
     transform: skew(0deg, 4deg);
+    /* height: 100%; */
+    /* width: 100%; */
 }
 
 .square{
     width: 250px;
     height: 300px;
     background-color: white;
-    border-radius: 4%;
+    border-top-right-radius: 6%;
+    border-bottom-left-radius: 6%;
     margin: 20px;
+}
+
+.squareskew{
+    width: 250px;
+    height: 300px;
+    background-color: white;
+    border-top-right-radius: 6%;
+    border-bottom-left-radius: 6%;
+    margin: 20px;
+    transform: skew(0deg, -4deg);
 }
 
 .imgMargin{
@@ -830,7 +832,7 @@ p {
     font-weight: 700;
     font-family: "Montserrat";
     letter-spacing: 1.0px;
-
+    margin-top: 20px;
 }
 
 .mainPageParagraph{
@@ -1047,4 +1049,3 @@ nav ul,nav li {
         /* width: 80%; */
     }
 }
-
