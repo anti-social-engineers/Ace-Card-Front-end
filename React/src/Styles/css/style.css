@@ -799,6 +799,14 @@ p {
     width: 100%;
 }
 
+.square{
+    width: 250px;
+    height: 300px;
+    background-color: white;
+    border-radius: 6%;
+    margin: 20px;
+}
+
 .squareTop{
     width: 250px;
     height: 300px;
