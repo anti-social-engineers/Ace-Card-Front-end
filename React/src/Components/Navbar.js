@@ -15,39 +15,48 @@ class Nav extends Component {
   state = {
     login_clicked:false,
     logged_in:false,
-    user:{}
+    user:{},
+    nav_loading: false
   }
 
   handleLogin = (e) => {
-    console.log(this.state.user.length);
-    if (!this.state.logged_in){
-      console.log("NO USER");
-      var header = document.getElementsByClassName("header")[0];
-      var loginform = document.getElementById("login");
-      if (!this.state.login_clicked) {
-        console.log("not clicked")
-        this.setState({login_clicked:true}, () => {
-          header.style.height = "100%";
-          loginform.style.opacity = "1";
-          this.login.current.changeVisibility();
-        });
-      } else {
-        console.log("clicked")
-        this.setState({login_clicked:false}, () => {
-          header.style.height = "118px";
-          loginform.style.opacity = "0";
-          this.login.current.changeVisibility();
-        });
-      }
-    } else {
-      console.log("DO NOTHING");
-    }
+    // console.log(this.state.user.length);
+    // if (!this.state.logged_in){
+    //   console.log("NO USER");
+    //   var header = document.getElementsByClassName("header")[0];
+    //   var loginform = document.getElementById("login");
+    //   if (!this.state.login_clicked) {
+    //     console.log("not clicked")
+    //     this.setState({login_clicked:true}, () => {
+    //       header.style.height = "100%";
+    //       loginform.style.opacity = "1";
+    //       this.login.current.changeVisibility();
+    //     });
+    //   } else {
+    //     console.log("clicked")
+    //     this.setState({login_clicked:false}, () => {
+    //       header.style.height = "118px";
+    //       loginform.style.opacity = "0";
+    //       this.login.current.changeVisibility();
+    //     });
+    //   }
+    // } else {
+    //   console.log("DO NOTHING");
+    // }
+    console.log("HANDLE LOGIN");
+    this.toggleLoginHeader();
   }
 
-  collapseHeader = () => {
-    console.log("COLLAPASING");
+  toggleLoginHeader = () => {
+    this.setState({login_clicked: !this.state.login_clicked}, () => this.toggleLoginHeaderAnimation());
+  }
+
+  toggleLoginHeaderAnimation = () => {
     var header = document.getElementsByClassName("header")[0];
-    if (header.classList.contains("header--full")) {
+    if (this.state.login_clicked){
+      header.classList.add("header--full");
+      header.style.height = "100%";
+    } else {
       header.classList.remove("header--full");
       header.style.height = "118px";
     }
@@ -59,8 +68,19 @@ class Nav extends Component {
   }
 
   logout = () => {
-    console.log("LOGGIN OUT");
-    this.setState({logged_in: false}, () => console.log(this.state));
+    // this.setState({nav_loading:true}, setTimeout(function () {
+
+    // }.bind(this), 600));
+    this.setState({nav_loading:true});
+    setTimeout(function () {
+      this.setState({nav_loading:false});
+      this.setState({logged_in: false}, () => console.log(this.state));
+      this.login.current.setState({logged_in: false});
+    }.bind(this), 700);
+  }
+
+  toggleVisibility = () => {
+    this.setState({login_clicked: !this.login_clicked}, () => console.log("CHANGE VIS"));
   }
 
   render() {
@@ -76,22 +96,22 @@ class Nav extends Component {
                           </div>
                       </button>
                       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div className={this.state.logged_in ? "d-none" : "navbar-nav"}>
+                        <div className={this.state.logged_in ? "invis d-none" : "navbar-nav no-invis"}>
                           <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
                           <NavLink className="nav-item nav-link" to="/">Over</NavLink>
                           <a className="nav-item nav-link" onClick={this.handleLogin}>Inloggen</a>
                           <NavLink className="nav-item nav-link" to="/AddClub">Contact</NavLink>
                         </div>
-                        <div className={this.state.logged_in ? "navbar-nav" : "d-none"}>
+                        <div className={this.state.logged_in ? "navbar-nav no-invis" : "invis d-none"}>
                           <span className={this.state.user ? "nav-item nav-link user-nav" : "d-none"}>{this.state.user ? this.state.user.email : ""}</span>
                           <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
                           <NavLink className="nav-item nav-link" to="/">Account</NavLink>
                           <a className="nav-item nav-link">Contact</a>
-                          <a className="nav-item nav-link" onClick={this.logout}>Uitloggen</a>
+                          <a className="nav-item nav-link loading-text--pd" onClick={this.logout}><i class={this.state.nav_loading ? "fas fa-circle-notch fa-spin no-invis" : "invis d-none"}></i>Uitloggen</a>
                         </div>
                       </div>
                 </nav>
-                <Login is_visible={this.state.login_clicked} collapseHeader={this.collapseHeader} setUser={this.setUser} ref={this.login}>
+                <Login toggleVisibility={this.toggleLoginHeader}  login_visible={this.state.login_clicked} collapseHeader={this.collapseHeader} setUser={this.setUser} ref={this.login}>
                 </Login>
                 <div className="parabole"></div>
                 </header>)

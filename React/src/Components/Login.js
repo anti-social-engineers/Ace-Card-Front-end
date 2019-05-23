@@ -12,10 +12,13 @@ class Login extends Component {
    }
 
    state = {
-      is_visible: this.props.is_visible,
+      is_visible: this.props.login_visible,
       user: {},
-      logging_in: false,
-      logged_in: false
+      email: "",
+      password: "",
+      loading: false,
+      logged_in: false,
+      login_status: "none"
    }
 
   handleChange = (e) => {
@@ -25,18 +28,33 @@ class Login extends Component {
   }
   handleSubmit = (e) => {
       e.preventDefault();
-      this.setState({user:{email:this.refs.email.value}, logging_in: true}, () => {console.log(this.state)});
+      this.setState({user:{email:this.refs.email.value}, email:this.refs.email.value, password:this.refs.password.value, loading: true});
       
       setTimeout(function(){
-         this.setState({logged_in:true});
-         console.log("LOGGED IN")
-         setTimeout(function(){
-            this.setState({logging_in:false, is_visible:false});
-            this.props.collapseHeader();
-            this.props.setUser(this.state.user);
-            console.log(this.state.user);
-         }.bind(this), 600);
-      }.bind(this), 600);
+         // setTimeout(function(){
+            // this.props.toggleVisibility();
+            // this.setState({loading:false, is_visible:false});
+            // this.props.setUser(this.state.user);
+            console.log(this.state.email)
+            console.log(this.state.password)
+            if (this.state.email === "selim" && this.state.password === "test") {
+               console.log("CORRECT")
+               this.setState({login_status: "success"})
+               // this.setState({logged_in:true});
+            } else {
+               this.setState({login_status: "wrong", loading: false});
+            }
+
+            // console.log("now login")
+            this.setState({logged_in:true});
+
+            // setTimeout(function(){
+               // this.props.toggleVisibility();
+               // this.setState({loading:false, is_visible:false});
+               // this.props.setUser(this.state.user);
+            //    this.setState({logged_in:true});
+            // }.bind(this), 1000);
+      }.bind(this), 800);
       
   }
 
@@ -47,15 +65,18 @@ class Login extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className={this.state.is_visible ? "" : "d-none"} id="login">
+      <form onSubmit={this.handleSubmit} className={this.props.login_visible ? "login--visible" : "login--hidden"} id="login">
          <div className="formarea formarea--center">
             <div className="outerform outerform--center">
                <div className="form-wrapper">
                   <div className="form-title">
                      <h2>Inloggen</h2>
                   </div>
+                  <div class="login-info">
+                     <span className={this.state.login_status === "wrong" ? "loading-text" : "d-none invis"}><i class="fas fa-exclamation-circle"></i>Failed to log in.</span>
+                  </div>
                   <div className="form-content">
-                     <div className={this.state.logging_in ? "d-none" : "inputs"}>
+                     <div className={this.state.loading ? "d-none" : "inputs"}>
                         <div className="group pb-5">      
                            <input type="text" id="email" ref="email" required/>
                            <span className="highlight"></span>
@@ -80,9 +101,10 @@ class Login extends Component {
                            </div>
                         </div>
                      </div>
-                     <div className={this.state.logging_in ? "form-loader" : "d-none form-loader--hidden"}>
+
+                     <div className={this.state.loading ? "form-loader" : "d-none form-loader--hidden"}>
                         <span className={this.state.logged_in ? "d-none invis" : "loading-text"}><i className="fas fa-circle-notch fa-spin"></i>Verifying account details...</span>
-                        <span className={this.state.logged_in ? "loading-text" : "d-none invis"}><i className="fas fa-check"></i>Succesfully logged in.</span>
+                        <span className={this.state.login_status === "success" ? "loading-text" : "d-none invis"}><i className="fas fa-check"></i>Succesfully logged in.</span>
                      </div>
                   </div>
                </div>
