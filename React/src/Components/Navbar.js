@@ -5,13 +5,12 @@ import '../Styles/css/bootstrap.css'
 import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {NavLink} from 'react-router-dom';
-import Login from './Login'
-import LoginFormWrapper from './LoginFormWrapper'
+import NavbarFormWrapper from './Form/Navbar/NavbarFormWrapper'
 
 class Nav extends Component {
   constructor(props){
     super(props);
-    this.login = React.createRef();
+    this.NavbarFormWrapper = React.createRef();
   }
   state = {
     login_clicked:false,
@@ -45,12 +44,12 @@ class Nav extends Component {
   }
 
   logout = () => {
-    this.login.current.setState({loading: false});
+    this.NavbarFormWrapper.current.login.current.setState({loading: false});
     this.setState({nav_loading:true});
     setTimeout(function () {
       this.setState({nav_loading:false});
       this.setState({logged_in: false}, () => console.log(this.state));
-      this.login.current.setState({logged_in: false});
+      this.NavbarFormWrapper.current.setState({logged_in: false});
     }.bind(this), 700);
   }
 
@@ -60,7 +59,7 @@ class Nav extends Component {
 
   render() {
     var login_class = this.state.login_clicked ? "header header--full" : "header";
-         return (<header className={login_class}>
+          return (<header className={login_class}>
               <nav className="navbar navbar-home navbar-expand-lg justify-content-between">
                       <a className="navbar-brand" href="#">acecard</a>
                       <button className="navbar-toggler third-button " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,8 +85,8 @@ class Nav extends Component {
                         </div>
                       </div>
                 </nav>
-                <LoginFormWrapper toggleVisibility={this.toggleLoginHeader}  login_visible={this.state.login_clicked} collapseHeader={this.collapseHeader} setUser={this.setUser} ref={this.login}>
-                </LoginFormWrapper>
+                <NavbarFormWrapper toggleVisibility={this.toggleLoginHeader}  login_visible={this.state.login_clicked} collapseHeader={this.collapseHeader} setUser={this.setUser} ref={this.NavbarFormWrapper}>
+                </NavbarFormWrapper>
                 <div className="parabole"></div>
                 </header>)
                       
