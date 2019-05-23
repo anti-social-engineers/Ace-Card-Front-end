@@ -6,6 +6,7 @@ import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {NavLink} from 'react-router-dom';
 import Login from './Login'
+import LoginFormWrapper from './LoginFormWrapper'
 
 class Nav extends Component {
   constructor(props){
@@ -20,30 +21,6 @@ class Nav extends Component {
   }
 
   handleLogin = (e) => {
-    // console.log(this.state.user.length);
-    // if (!this.state.logged_in){
-    //   console.log("NO USER");
-    //   var header = document.getElementsByClassName("header")[0];
-    //   var loginform = document.getElementById("login");
-    //   if (!this.state.login_clicked) {
-    //     console.log("not clicked")
-    //     this.setState({login_clicked:true}, () => {
-    //       header.style.height = "100%";
-    //       loginform.style.opacity = "1";
-    //       this.login.current.changeVisibility();
-    //     });
-    //   } else {
-    //     console.log("clicked")
-    //     this.setState({login_clicked:false}, () => {
-    //       header.style.height = "118px";
-    //       loginform.style.opacity = "0";
-    //       this.login.current.changeVisibility();
-    //     });
-    //   }
-    // } else {
-    //   console.log("DO NOTHING");
-    // }
-    console.log("HANDLE LOGIN");
     this.toggleLoginHeader();
   }
 
@@ -56,6 +33,7 @@ class Nav extends Component {
     if (this.state.login_clicked){
       header.classList.add("header--full");
       header.style.height = "100%";
+      document.getElementById("email").focus();
     } else {
       header.classList.remove("header--full");
       header.style.height = "118px";
@@ -63,14 +41,11 @@ class Nav extends Component {
   }
 
   setUser = (user_arr) => {
-    console.log("SETTING USER");
     this.setState({user: user_arr, logged_in: true});
   }
 
   logout = () => {
-    // this.setState({nav_loading:true}, setTimeout(function () {
-
-    // }.bind(this), 600));
+    this.login.current.setState({loading: false});
     this.setState({nav_loading:true});
     setTimeout(function () {
       this.setState({nav_loading:false});
@@ -111,8 +86,8 @@ class Nav extends Component {
                         </div>
                       </div>
                 </nav>
-                <Login toggleVisibility={this.toggleLoginHeader}  login_visible={this.state.login_clicked} collapseHeader={this.collapseHeader} setUser={this.setUser} ref={this.login}>
-                </Login>
+                <LoginFormWrapper toggleVisibility={this.toggleLoginHeader}  login_visible={this.state.login_clicked} collapseHeader={this.collapseHeader} setUser={this.setUser} ref={this.login}>
+                </LoginFormWrapper>
                 <div className="parabole"></div>
                 </header>)
                       

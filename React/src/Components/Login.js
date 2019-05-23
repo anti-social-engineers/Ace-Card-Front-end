@@ -28,33 +28,32 @@ class Login extends Component {
   }
   handleSubmit = (e) => {
       e.preventDefault();
-      this.setState({user:{email:this.refs.email.value}, email:this.refs.email.value, password:this.refs.password.value, loading: true});
+      this.setState({user:{email:this.refs.email.value}, email:this.refs.email.value, password:this.refs.password.value, loading: true, logged_in: false, login_status: "none"});
+      var logininfo = document.getElementsByClassName("login-info")[0];
+
+      if (logininfo.classList.contains("animated")){
+         logininfo.classList.remove("animated", "shake");
+      }
       
       setTimeout(function(){
-         // setTimeout(function(){
-            // this.props.toggleVisibility();
-            // this.setState({loading:false, is_visible:false});
-            // this.props.setUser(this.state.user);
-            console.log(this.state.email)
-            console.log(this.state.password)
             if (this.state.email === "selim" && this.state.password === "test") {
-               console.log("CORRECT")
                this.setState({login_status: "success"})
-               // this.setState({logged_in:true});
+
+               setTimeout(function () {
+                  this.props.toggleVisibility();
+                  this.setState({is_visible:false});
+                  this.props.setUser(this.state.user);
+               }.bind(this), 1000);
+
             } else {
-               this.setState({login_status: "wrong", loading: false});
+               var email_field = document.getElementById("email");
+               this.setState({login_status: "wrong", loading: false, logged_in: false});
+               logininfo.classList.add("animated","shake");
+               email_field.focus();
             }
 
-            // console.log("now login")
             this.setState({logged_in:true});
-
-            // setTimeout(function(){
-               // this.props.toggleVisibility();
-               // this.setState({loading:false, is_visible:false});
-               // this.props.setUser(this.state.user);
-            //    this.setState({logged_in:true});
-            // }.bind(this), 1000);
-      }.bind(this), 800);
+      }.bind(this), 400);
       
   }
 
@@ -72,8 +71,8 @@ class Login extends Component {
                   <div className="form-title">
                      <h2>Inloggen</h2>
                   </div>
-                  <div class="login-info">
-                     <span className={this.state.login_status === "wrong" ? "loading-text" : "d-none invis"}><i class="fas fa-exclamation-circle"></i>Failed to log in.</span>
+                   <div class="login-info">
+                     <span className={this.state.login_status === "wrong" && !this.state.loading ? "loading-text" : "d-none invis"}><i class="fas fa-exclamation-circle"></i>Failed to log in.</span>
                   </div>
                   <div className="form-content">
                      <div className={this.state.loading ? "d-none" : "inputs"}>
@@ -103,7 +102,7 @@ class Login extends Component {
                      </div>
 
                      <div className={this.state.loading ? "form-loader" : "d-none form-loader--hidden"}>
-                        <span className={this.state.logged_in ? "d-none invis" : "loading-text"}><i className="fas fa-circle-notch fa-spin"></i>Verifying account details...</span>
+                        <span className={this.state.logged_in || this.state.login_status !== "none" ? "d-none invis" : "loading-text"}><i className="fas fa-circle-notch fa-spin"></i>Verifying account details...</span>
                         <span className={this.state.login_status === "success" ? "loading-text" : "d-none invis"}><i className="fas fa-check"></i>Succesfully logged in.</span>
                      </div>
                   </div>
