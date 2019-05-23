@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import aos from 'aos'
 import '../Styles/css/bootstrap-theme.css'
 import '../Styles/css/bootstrap-theme.min.css'
 import '../Styles/css/bootstrap.css'
@@ -9,14 +10,23 @@ import {connect} from 'react-redux'
 
 class Account extends Component {
 
+componentDidMount(){
+    aos.init({
+        duration : 2000
+    })
+    }
+
   render() {
     return (
         <div>
             <div className="content-wrapper">
                 <div className="row h-100 no-gutterr">
                     <nav className="main-menu">
+                        <div className="nav-icon">
+                            ACE-portal
+                        </div>
                         <ul>
-                            <li className="active">
+                            <li className="active"  data-aos="fade-right" data-aos-duration="1000">
                                 <NavLink className="" to="#">
                                 <i className="fa fa-user fa-1x"></i>
                                     <span className="nav-text">
@@ -43,7 +53,7 @@ class Account extends Component {
                         </ul>
                     </nav>
 
-                    <div className="account-form">
+                    <div className="account-form" data-aos="zoom-in" data-aos-duration="500">
                         <div className="form-wrapper">
                             <div className="form-title">
                                 <h2>Account gegevens</h2>
@@ -77,7 +87,7 @@ class Account extends Component {
                                 </div>
                             </div>
                             <div>
-                                <button className="account-button float-right"><span className="account-button-action">Wachtwoord wijzigen</span></button>
+                                <button className="main-button account-button float-right"><span className="main-button-action">Wachtwoord wijzigen</span></button>
                             </div>
                         </div>
                     </div>
