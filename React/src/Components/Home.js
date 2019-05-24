@@ -8,8 +8,6 @@ import '../Styles/css/style.css'
 import {connect} from 'react-redux'
 import Nav from '../Components/Navbar';
 
-
-
 class Home extends Component {
 
   componentDidMount(){
@@ -76,6 +74,5 @@ class Home extends Component {
     )
   }
 }
-
 
 export default Home;

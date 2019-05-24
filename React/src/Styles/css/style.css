@@ -222,7 +222,11 @@ p {
 	font-weight: 400;
 	letter-spacing: 2px;
     position: relative;
-    margin-top: 17px;
+    margin-top: 10px;
+}
+
+.main-button-right, .button-modal {
+    margin-top: 0px;
 }
 
 .main-home-button{
@@ -1005,7 +1009,6 @@ nav ul,nav li {
     margin-right: 0;
     margin-left: 0;
 }
-
 
 @font-face {
   font-family: 'Titillium Web';

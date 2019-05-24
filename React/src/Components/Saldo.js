@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import MyVerticallyCenteredModal from './MyVerticallyCenteredModal';
 import aos from 'aos'
 import '../Styles/css/bootstrap-theme.css'
 import '../Styles/css/bootstrap-theme.min.css'
@@ -14,13 +15,18 @@ Chart.defaults.global.elements.line.tension = 0.3;
 
 class Saldo extends Component {
 
+    constructor(...args) {
+        super(...args);
     
+        this.state = { modalShow: false };
+      }
+
     chartRef = React.createRef();
 
-componentDidMount(){
-    aos.init({
-        duration : 2000
-    })
+    componentDidMount(){
+        aos.init({
+            duration : 2000
+        })
 
     const node = this.node;
 
@@ -51,6 +57,7 @@ componentDidMount(){
 }
 
   render() {
+    let modalClose = () => this.setState({ modalShow: false });
     return (
         <div>
             <div className="content-wrapper">
@@ -93,13 +100,13 @@ componentDidMount(){
                                 <div className="square">
                                     <h1 className="imgMargin">Saldo</h1>
                                     <h3 className="">Amount: $300</h3>
-                                    <button className="main-button-square"><span className="main-button-action">Overschrijven</span></button>
+                                    <button onClick={() => this.setState({ modalShow: true })} className="main-button-square">Overschrijven</button>                            
                                 </div>
                             </div>
                             <div className="col-md" align="center" data-aos="fade-left" data-aos-duration="600">
                                 <div className="square">
                                 <h1 className="imgMargin">Automatisch opladen</h1>
-                                    <button className="main-button-right"><span className="main-button-action">Instellen</span></button>
+                                    <button  className="main-button-right">Instellen</button>
                                 </div>
                             </div>
                         </div>
@@ -107,10 +114,14 @@ componentDidMount(){
                             <div className="chartMargin">
                                 <canvas
                                 style={{ width: 800, height: 300 }}
-                                ref={node => (this.node = node)}
+                                ref={node => (this.node = node)}    
                                 />
                             </div>
                         </div>
+                        <MyVerticallyCenteredModal
+                            show={this.state.modalShow}
+                            onHide={modalClose}
+                            />                          
                     </div>
                 </div>
             </div>
