@@ -102,7 +102,7 @@ class LostPassForm extends Component {
                     </div>
                     <div className="col">
                         <button className="main-button main-button--transparent float-right">
-                            <span className="main-button-action">{this.state.submission_status == "success" ? "Opnieuw aanvragen" : "Aanvragen"}</span>
+                            <span className="main-button-action">{this.state.submission_status === "success" ? "Opnieuw aanvragen" : "Aanvragen"}</span>
                         </button>
                     </div>
                 </div>

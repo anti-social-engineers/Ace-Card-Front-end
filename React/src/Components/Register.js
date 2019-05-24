@@ -6,86 +6,46 @@ import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {connect} from 'react-redux'
 import {createAcc} from '../Helper/actions/authorizationAction'
+import RegisterForm from './Form/Home/RegisterForm'
 
 class Register extends Component {
+  constructor(props) {
+    super(props);
+    this.registerform = React.createRef();
+  }
   state = {
     email:'',
     password:'',
     repeatpassword:''
   }
   
-  handleChange = (e) => {
-    this.setState({
-      [e.target.id]: e.target.value 
-    })
-  }
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.createAcc(this.state)
-
+    this.registerform.current.handleSubmit();
+    // console.log(this.registerform.current.state.account);
+    // this.props.createAcc(this.registerform.current.state.account);
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-
-      <div className="content-wrapper">
-        <div className="cont">
-           <div className="row no-gutters">
-             <div className="card-area col-sm-12 col-md-12 col-lg-12 col-xl-7">
-               <div className="textarea">
-               <h3>Account aanmaken</h3>
-               <p>lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
-                    
-
+        <div className="content-wrapper">
+          <div className="cont">
+            <div className="row no-gutters">
+                <div className="card-area col-sm-12 col-md-12 col-lg-12 col-xl-7">
+                  <div className="textarea">
+                    <h3>Account aanmaken</h3>
+                    <p>lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
+                  </div>
+                  <img src={require('../Styles/img/cardbox.png')} alt="" className="acecard" />
+                </div>
+                <div className="formarea col-sm-12 col-md-12 col-lg-12 col-xl-5">
+                  <RegisterForm createAcc={this.props.createAcc} timeout={300000} ref={this.registerform}/>
+                </div>
+              </div>
+          </div>    
         </div>
-        <img src={require('../Styles/img/cardbox.png')} alt="" className="acecard" />
-          </div>
-            <div className="formarea col-sm-12 col-md-12 col-lg-12 col-xl-5">
-            <div className="outerform">
-              <div className="form-wrapper">
-
-                <div className="form-title">
-                  <h2>Registreren</h2>
-                  
-                  </div>
-
-                  <div className="form-content">
-                   <div className="inputs inputs-space">
-                        <div className="group">
-                        <input type="email" id="email" onChange={this.handleChange} required />
-                            <span className="highlight"></span>
-                            <span className="bar"></span>
-                            <label>E-mail</label>
-                        </div>
-                        <div className="group">      
-                            <input type="password" id="password" onChange={this.handleChange} required/>
-                              <span className="highlight"></span>
-                            <span className="bar"></span>
-                            <label>Wachtwoord</label>
-                      </div>
-    
-                      <div className="group">      
-                        <input type="repeatpassword" id="repeatpassword" onChange={this.handleChange} required />
-                          <span className="highlight"></span>
-                          <span className="bar"></span>
-                          <label>Wachtwoord herhalen</label>
-                        </div>
-                     </div> 
-                  </div>
-                 
-
-                  </div>
-                  <button className="main-button main-button--margin float-right"><span className="main-button-action">Registreren</span></button>
-
-                  </div>
-
-          </div>
-
-            </div>
-              </div>    
-      </div>
-        </form>
+      </form>
                 
     )
   }

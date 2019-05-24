@@ -154,6 +154,10 @@ a.nav-item.nav-link {
     transition: 0.5s;
 }
 
+.loading-text--small {
+    font-size: 12px;
+}
+
 .loading-text i {
     padding: 12px;
 }
