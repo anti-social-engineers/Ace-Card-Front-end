@@ -6,6 +6,7 @@ import '../../../Styles/css/bootstrap.min.css'
 import '../../../Styles/css/style.css'
 import { NavLink } from 'react-router-dom'
 import Fade from 'react-reveal/Fade';
+import PasswordStrengthMeter from '../../Tools/PasswordStrengthMeter';
 
 class RegisterForm extends Component {
     constructor(props){
@@ -122,8 +123,10 @@ class RegisterForm extends Component {
                             <label>E-mail</label>
                         </div>
                         <div className="group">      
-                            <input type="password" id="password" ref="password" onChange={this.handleChange} required/>
-                              <span className="highlight"></span>
+                            {/* <input type="password" id="password" ref="password" onChange={this.handleChange} required/> */}
+                                    <input autoComplete="off" type="password" onChange={e => this.setState({ password: e.target.value })} />
+                                    <PasswordStrengthMeter password={this.state.password} />
+                            <span className="highlight"></span>
                             <span className="bar"></span>
                             <label>Wachtwoord</label>
                       </div>
