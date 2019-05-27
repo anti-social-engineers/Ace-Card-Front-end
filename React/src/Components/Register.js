@@ -51,10 +51,10 @@ class Register extends Component {
   }
 }
 
-const ObjToProps = (object) => {
-  return {
-    createAcc: (account) => object(createAcc(account))
-  }
-}
+// const ObjToProps = (object) => {
+//   return {
+//     createAcc: (account) => object(createAcc(account))
+//   }
+// }
 
-export default connect(null, ObjToProps)(Register)
+export default Register

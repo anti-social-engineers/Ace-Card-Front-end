@@ -133,6 +133,10 @@ a.nav-item.nav-link {
     opacity: 0;
 }
 
+.form-helper {
+    font-size: 11px;
+}
+
 .invis {
     opacity: 0;
     -webkit-transition: .5s ease-in-out;
@@ -493,7 +497,7 @@ a.nav-item.nav-link {
     position: absolute;
     z-index: 1000;
     left: 311px;
-    top: 30%;
+    top: 150px;
     margin-right: 90px;
     text-align: right;
     width: 310px;
@@ -585,7 +589,6 @@ a.nav-item.nav-link {
 	font-size: 11px;
 	color: #007bff;
 }
-
 
 /* BOTTOM BARS ================================= */
 
@@ -852,7 +855,10 @@ a.nav-item.nav-link {
 }
 
 .status_texts {
-    padding-bottom: 5px;font-weight: 300;font-size: 14px;letter-spacing: 1.5px;
+    padding-bottom: 5px;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 1.5px;
 }
 
 /* ANIMATIONS ================ */

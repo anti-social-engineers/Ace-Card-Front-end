@@ -18,6 +18,7 @@ class RegisterForm extends Component {
         password: "",
         repeat_password: "",
         account: {email: "", password: ""},
+        dummy_data: {email: "lel@gmail.com", password: "test"},
         submission_status: "none",
         loading: false,
         form_submit_count: 0,
@@ -26,7 +27,8 @@ class RegisterForm extends Component {
 
     form_errors = {
         PASSWORD_MISMATCH: "Uw herhaalwachtwoord komt niet overeen met uw wachtwoord",
-        INVALID_EMAIL: "Uw email is incorrect of al in gebruik.",
+        INVALID_EMAIL: "Uw email is incorrect.",
+        ACCOUNT_EXISTS: "De opgegeven email is al in gebruik.",
         TOO_MANY_TRIES: "U heeft het formulier te vaak gestuurd. Probeer nog eens over " + this.props.timeout / 60000 + " minuten."
     }
 
@@ -34,12 +36,20 @@ class RegisterForm extends Component {
         this.setState({
           [e.target.id]: e.target.value 
         })
-        console.log(e.target.value);
 
       }    
+    
+    handlePasswordChange = (e) => {
+      this.setState({
+        [e.target.id]: e.target.value 
+      })
+    }
 
     isValidForm = () => {
-        console.log(this.state.form_submit_count);
+        // console.log(this.state.form_submit_count);
+        console.log("VALIDATING FORM");
+        var logininfo = document.getElementsByClassName("login-info")[0];
+
         if (this.state.form_submit_count >= 5) {
             console.log("Blocking for 5 minutes");
             console.log(this.state.form_error);
@@ -47,15 +57,22 @@ class RegisterForm extends Component {
             setTimeout(function (){
                 this.setState({form_submit_count: 0}, () => console.log(this.state.form_error));
             }.bind(this), this.props.timeout);
+
             return false;
         } else {
             this.setState({form_submit_count: this.state.form_submit_count + 1});
         }
 
-        if (this.refs.password.value !== this.refs.password_repeat.value) {
+        // console.log(this.state.password)
+
+        if (this.state.password !== this.state.repeat_password) {
             console.log("MISMATCH PASSWORD");
             this.setState({form_error: this.form_errors.PASSWORD_MISMATCH});
             return false;
+        } else if (this.state.dummy_data.email == this.state.email) {
+          console.log("Account exists");
+          this.setState({form_error: this.form_errors.ACCOUNT_EXISTS});
+          return false;
         }
 
         return true;
@@ -63,8 +80,10 @@ class RegisterForm extends Component {
 
     handleSubmit = () => {
         if (!this.isValidForm()) {
-            return;
+          console.log("FAILED VALIDATION");
+          return;
         }
+        console.log("PASSED VALIDATION");
 
         if (this.state.submission_status === "success") {
             this.setState({loading:false, submission_status: "none"});
@@ -72,7 +91,7 @@ class RegisterForm extends Component {
         }
 
         console.log("Actually submitting");
-        this.setState({account:{email: this.refs.email.value, password: this.refs.password.value}, loading:true});
+        this.setState({account:{email: this.state.email.value, password: this.state.password.value}, loading:true});
         var logininfo = document.getElementsByClassName("login-info")[0];
   
         if (logininfo.classList.contains("animated")){
@@ -80,19 +99,21 @@ class RegisterForm extends Component {
         }
         
         setTimeout(function(){
-              if (this.state.email !== "selimaydi@gmail.com") {
-                // Valid email
-                this.setState({submission_status: "success"})
-                this.props.createAcc(this.state.account);
-                console.log("Created account");
-              } else {
-                console.log("invalid mail");
-                // Invalid email
-                 var email_field = document.getElementById("email");
-                 this.setState({submission_status: "wrong", loading: false});
-                 logininfo.classList.add("animated","shake");
-                this.refs.email.focus();
-              }
+            // this is a placeholder for server side validation
+            var isValid = true;
+
+            if (isValid) {
+              // Valid email
+              this.setState({submission_status: "success"})
+              // this.props.createAcc(this.state.account);
+              console.log("Created account");
+            } else {
+              console.log("Server side validation failed");
+              // Invalid registration
+              this.setState({submission_status: "wrong", loading: false});
+              logininfo.classList.add("animated","shake");
+              this.refs.email.focus();
+            }
         }.bind(this), 400);
      }
 
@@ -124,17 +145,20 @@ class RegisterForm extends Component {
                         </div>
                         <div className="group">      
                             {/* <input type="password" id="password" ref="password" onChange={this.handleChange} required/> */}
-                                    <input autoComplete="off" type="password" onChange={e => this.setState({ password: e.target.value })} />
-                                    <PasswordStrengthMeter password={this.state.password} />
+                                    <input autoComplete="off" id="password" type="password" onChange={this.handlePasswordChange} required />
                             <span className="highlight"></span>
                             <span className="bar"></span>
+                            <PasswordStrengthMeter password={this.state.password} />
+
                             <label>Wachtwoord</label>
                       </div>
     
                       <div className="group">      
-                        <input type="password" id="repeatpassword" onChange={this.handleChange} ref="password_repeat" onChange={this.handleChange} required />
+                        <input type="password" id="repeat_password" onChange={this.handlePasswordChange} ref="password_repeat" onChange={this.handlePasswordChange} required />
                           <span className="highlight"></span>
                           <span className="bar"></span>
+                          {/* {this.state.repeatpassword && "LEL"} */}
+                          {this.state.repeat_password && this.state.repeat_password !== this.state.password && <span class="form-helper">Wachtwoord komt niet overeen met herhaal wachtwoord.</span>}
                           <label>Wachtwoord herhalen</label>
                         </div>
                      </div> 
