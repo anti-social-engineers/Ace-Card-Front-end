@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import MyVerticallyCenteredModal from './MyVerticallyCenteredModal';
 import aos from 'aos'
 import '../Styles/css/bootstrap-theme.css'
 import '../Styles/css/bootstrap-theme.min.css'
@@ -9,6 +8,7 @@ import '../Styles/css/style.css'
 import {NavLink} from 'react-router-dom';
 import Chart from "chart.js";
 import {connect} from 'react-redux'
+import SaldoModal from './SaldoModal';
 Chart.defaults.global.defaultFontFamily = "'Montserrat', sans-serif"
 Chart.defaults.global.elements.line.tension = 0.3;
 
@@ -38,9 +38,7 @@ class Saldo extends Component {
             {
               label: "Saldo",
               data: [25, 15, 56, 40, 20.33, 33, 10, 23, 37, 67, 35, 19],
-              backgroundColor: [
-                "rgba(52, 128, 249, 0.4)",
-              ]
+              backgroundColor: ["rgba(52, 128, 249, 0.4)",]
             }
           ]
         },
@@ -99,7 +97,7 @@ class Saldo extends Component {
                             <div className="col-md" align="center" data-aos="fade-right" data-aos-duration="600">
                                 <div className="square">
                                     <h1 className="imgMargin">Saldo</h1>
-                                    <h3 className="">Amount: $300</h3>
+                                    <h3 className="" value={this.state.result}>€30,00</h3>
                                     <button onClick={() => this.setState({ modalShow: true })} className="main-button-square">Overschrijven</button>                            
                                 </div>
                             </div>
@@ -118,10 +116,7 @@ class Saldo extends Component {
                                 />
                             </div>
                         </div>
-                        <MyVerticallyCenteredModal
-                            show={this.state.modalShow}
-                            onHide={modalClose}
-                            />                          
+                        <SaldoModal show={this.state.modalShow} onHide={modalClose}/>                          
                     </div>
                 </div>
             </div>
