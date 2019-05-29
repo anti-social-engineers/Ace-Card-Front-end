@@ -34,7 +34,6 @@ class RegisterForm extends Component {
           [e.target.id]: e.target.value 
         })
         console.log(e.target.value);
-
       }    
 
     isValidForm = () => {
@@ -56,11 +55,10 @@ class RegisterForm extends Component {
             this.setState({form_error: this.form_errors.PASSWORD_MISMATCH});
             return false;
         }
-
         return true;
     }
 
-    handleSubmit = () => {
+    handleSubmit = (e) => {
         if (!this.isValidForm()) {
             return;
         }
@@ -82,8 +80,8 @@ class RegisterForm extends Component {
               if (this.state.email !== "selimaydi@gmail.com") {
                 // Valid email
                 this.setState({submission_status: "success"})
-                this.props.createAcc(this.state.account);
                 console.log("Created account");
+                this.props.createAcc(this.state.account);
               } else {
                 console.log("invalid mail");
                 // Invalid email

@@ -6,6 +6,7 @@ import '../../../Styles/css/bootstrap.min.css'
 import '../../../Styles/css/style.css'
 import { NavLink } from 'react-router-dom'
 import Fade from 'react-reveal/Fade';
+import axios from 'axios'
 
 class LoginForm extends Component {
    constructor(props){
@@ -16,6 +17,7 @@ class LoginForm extends Component {
       user: {},
       email: "",
       password: "",
+      account: {email: "", password: ""},
       loading: false,
       logged_in: false,
       login_status: "none",
@@ -23,13 +25,21 @@ class LoginForm extends Component {
    }
    handleSubmit = () => {
       console.log("INSIDE LOGINFORM");
-      this.setState({user:{email:this.refs.email.value}, email:this.refs.email.value, password:this.refs.password.value, loading: true, logged_in: false, login_status: "none"});
+      this.setState({account:{email:this.refs.email.value, password:this.refs.password.value}, loading: true, logged_in: false, login_status: "none"});
       var logininfo = document.getElementsByClassName("login-info")[0];
 
       if (logininfo.classList.contains("animated")){
          logininfo.classList.remove("animated", "shake");
       }
+
+      console.log(this.state.account)
+      //Api Call Login
+      axios.post('http://api.aceofclubs.nl/api/login', this.state.account)
+         .then(function (response) {
+            console.log(response);
+      })
       
+
       setTimeout(function(){
             if (this.state.email === "selim" && this.state.password === "test") {
                this.setState({login_status: "success"})
@@ -38,7 +48,7 @@ class LoginForm extends Component {
                   this.props.toggleVisibility();
                   this.props.setUser(this.state.user);
                }.bind(this), 1000);
-
+               
             } else {
                var email_field = document.getElementById("email");
                this.setState({login_status: "wrong", loading: false, logged_in: false});
@@ -59,7 +69,7 @@ class LoginForm extends Component {
                   <h2>Inloggen</h2>
                </div>
                </Fade>
-                  <div class="login-info">
+                  <div className="login-info">
                   <span className={this.state.login_status === "wrong" && !this.state.loading ? "loading-text" : "d-none invis"}><i class="fas fa-exclamation-circle"></i>Inloggen mislukt.</span>
                </div>
                <div className="form-content">

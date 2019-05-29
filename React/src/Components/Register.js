@@ -7,6 +7,7 @@ import '../Styles/css/style.css'
 import {connect} from 'react-redux'
 import {createAcc} from '../Helper/actions/authorizationAction'
 import RegisterForm from './Form/Home/RegisterForm'
+import axios from 'axios'
 
 class Register extends Component {
   constructor(props) {
@@ -26,6 +27,17 @@ class Register extends Component {
     // this.props.createAcc(this.registerform.current.state.account);
   }
 
+  createAcc(account){
+    console.log(account)
+    axios.post('http://api.aceofclubs.nl/api/register', account)
+    .then(res => {
+      console.log('test' + res)
+    })
+    .then(err => {
+      console.log('error sending request'+"["+ err +"]")
+    })
+  }
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -40,7 +52,7 @@ class Register extends Component {
                   <img src={require('../Styles/img/cardbox.png')} alt="" className="acecard" />
                 </div>
                 <div className="formarea col-sm-12 col-md-12 col-lg-12 col-xl-5">
-                  <RegisterForm createAcc={this.props.createAcc} timeout={300000} ref={this.registerform}/>
+                  <RegisterForm createAcc={this.createAcc} timeout={300000} ref={this.registerform}/>
                 </div>
               </div>
           </div>    
