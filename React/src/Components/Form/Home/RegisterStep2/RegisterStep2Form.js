@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
-import PasswordStrengthMeter from '../../Tools/PasswordStrengthMeter';
+import RegisterSideInfo from './RegisterSideInfo';
+import RegisterTitle from './RegisterTitle/RegisterTitle';
+import RegisterStep1 from './RegisterSteps/RegisterStep1';
+import RegisterStep2 from './RegisterSteps/RegisterStep2';
+import RegisterStep3 from './RegisterSteps/RegisterStep3';
+import RegisterFinished from './RegisterSteps/RegisterFinished';
 
-class RegisterForm extends Component {
+class RegisterStep2Form extends Component {
     constructor(props){
         super(props);
     }
@@ -29,7 +34,6 @@ class RegisterForm extends Component {
         this.setState({
           [e.target.id]: e.target.value 
         })
-
       }    
     
     handlePasswordChange = (e) => {
@@ -39,6 +43,7 @@ class RegisterForm extends Component {
     }
 
     isValidForm = () => {
+        // console.log(this.state.form_submit_count);
         console.log("VALIDATING FORM");
         var logininfo = document.getElementsByClassName("login-info")[0];
 
@@ -107,54 +112,48 @@ class RegisterForm extends Component {
         }.bind(this), 400);
      }
 
+    updateView = (e) => {
+      e.preventDefault();
+      console.log(this.props.current_view);
+      if (this.props.current_view === 4) {
+        this.props.switchView(1);
+        console.log("reached end");
+      } else {
+        this.props.switchView(this.props.current_view + 1);
+        console.log("going next");
+      }
+    }
+
     render() {
         return (
-            <div className="outerform">
-              <div className="form-wrapper">
-                <div className="form-title">
-                  <h2>Registreren</h2>
-                </div>
-                <div class="login-info">
-                     <span className={this.state.form_error ? "loading-text loading-text--small" : "d-none invis"}><i class="fas fa-exclamation-circle"></i>{this.state.form_error}</span>
-                </div>
-                  <div className={this.state.loading ? "form-loader" : "d-none form-loader--hidden"}>
-                        <span className={this.state.submission_status !== "success" ? "loading-text loading-text--small" : "d-none invis"}><i className="fas fa-circle-notch fa-spin"></i>Email valideren...</span>
-                        <span className={this.state.submission_status === "success" ? "loading-text loading-text--small" : "d-none invis"}><i className="fas fa-check"></i>Een email is zojuist gestuurd naar: {this.state.email}</span>
-                </div>
-                  <div className="form-content">
-                   <div className={this.state.loading ? "d-none" : "inputs inputs-space"}>
-                        <div className="group">
-                        <input type="email" id="email" ref="email" onChange={this.handleChange} required />
-                            <span className="highlight"></span>
-                            <span className="bar"></span>
-                            <label>E-mail</label>
-                        </div>
-                        <div className="group">      
-                            <input autoComplete="off" id="password" type="password" onChange={this.handlePasswordChange} required />
-                            <span className="highlight"></span>
-                            <span className="bar"></span>
-                            <PasswordStrengthMeter password={this.state.password} />
-
-                            <label>Wachtwoord</label>
+                  <div className="outerform">
+                    <div className="form-wrapper">
+                      <RegisterTitle step={this.props.current_view}/>
+                      <div className="form-content row no-gutterr">
+                        <RegisterSideInfo/>
+                        {this.props.current_view === 1 && <RegisterStep1/>}
+                        {this.props.current_view === 2 && <RegisterStep2/>}
+                        {this.props.current_view === 3 && <RegisterStep3/>}
+                        {this.props.current_view === 4 && <RegisterFinished/>}
                       </div>
-    
-                      <div className="group">      
-                        <input type="password" id="repeat_password" onChange={this.handlePasswordChange} ref="password_repeat" onChange={this.handlePasswordChange} required />
-                          <span className="highlight"></span>
-                          <span className="bar"></span>
-                          {this.state.repeat_password && this.state.repeat_password !== this.state.password && <span class="form-helper">Wachtwoord komt niet overeen met herhaal wachtwoord.</span>}
-                          <label>Wachtwoord herhalen</label>
+                    </div>
+                    <div className="linkbar-wrapper linkbar-wrapper--mobile d-block d-xl-none">
+                      <div className="row d-flex justify-content-between no-gutterr linkbar self-align-center">
+                        <div>
+                          <a href="#">Meer informatie</a>
                         </div>
-                     </div> 
-                  </div>
-                 
-
-                  </div>
-                    {(this.state.submission_status === "none" || this.state.submission_status === "wrong") && <button className="main-button main-button--margin float-right"><span className="main-button-action">Registreren</span></button>}
+                        <div>
+                          <a href="#">Bestelvoorwaarden</a>
+                          <a href="#">Privacybeleid</a>
+                        </div>
+                      </div>
+                    </div>
+                    {this.props.current_view < 4 && <button className="main-button main-button--margin float-right" onClick={this.updateView}><span className="main-button-action">Volgende</span></button>}
+                  
                   </div>
         );
     }
 
 }
 
-export default RegisterForm
+export default RegisterStep2Form
