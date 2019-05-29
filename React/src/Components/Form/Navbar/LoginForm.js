@@ -97,7 +97,6 @@ class LoginForm extends Component {
             <div className="row login-actions">
                   <div className="col">
                      <NavLink className="dark-link" onClick={this.props.toggleVisibility} to="/Register">Nog geen account?</NavLink>
-
                   </div>
                   <div className="col">
                      <button className="main-button main-button--transparent float-right">

@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import RegisterSideInfo from './RegisterSideInfo';
 import RegisterTitle from './RegisterTitle/RegisterTitle';
-import RegisterStep1 from './RegisterSteps/RegisterStep1';
-import RegisterStep2 from './RegisterSteps/RegisterStep2';
-import RegisterStep3 from './RegisterSteps/RegisterStep3';
-import RegisterFinished from './RegisterSteps/RegisterFinished';
+import RegisterStep2FormViews from './RegisterStep2FormViews';
 
 class RegisterStep2Form extends Component {
     constructor(props){
@@ -12,11 +9,6 @@ class RegisterStep2Form extends Component {
     }
 
     state = {
-        email: "",
-        password: "",
-        repeat_password: "",
-        account: {email: "", password: ""},
-        dummy_data: {email: "lel@gmail.com", password: "test"},
         submission_status: "none",
         loading: false,
         form_submit_count: 0,
@@ -30,12 +22,6 @@ class RegisterStep2Form extends Component {
         TOO_MANY_TRIES: "U heeft het formulier te vaak gestuurd. Probeer nog eens over " + this.props.timeout / 60000 + " minuten."
     }
 
-    handleChange = (e) => {
-        this.setState({
-          [e.target.id]: e.target.value 
-        })
-      }    
-    
     handlePasswordChange = (e) => {
       this.setState({
         [e.target.id]: e.target.value 
@@ -112,45 +98,46 @@ class RegisterStep2Form extends Component {
         }.bind(this), 400);
      }
 
-    updateView = (e) => {
+    updateNext = (e) => {
       e.preventDefault();
-      console.log(this.props.current_view);
-      if (this.props.current_view === 4) {
-        this.props.switchView(1);
-        console.log("reached end");
-      } else {
+      if (this.props.current_view < 4) {
         this.props.switchView(this.props.current_view + 1);
-        console.log("going next");
+      }
+    }
+
+    updatePrev = (e) => {
+      e.preventDefault();
+      if (this.props.current_view > 1) {
+        this.props.switchView(this.props.current_view - 1);
       }
     }
 
     render() {
         return (
-                  <div className="outerform">
-                    <div className="form-wrapper">
-                      <RegisterTitle step={this.props.current_view}/>
-                      <div className="form-content row no-gutterr">
-                        <RegisterSideInfo/>
-                        {this.props.current_view === 1 && <RegisterStep1/>}
-                        {this.props.current_view === 2 && <RegisterStep2/>}
-                        {this.props.current_view === 3 && <RegisterStep3/>}
-                        {this.props.current_view === 4 && <RegisterFinished/>}
-                      </div>
+                <div className="outerform">
+                  <div className="form-wrapper">
+                    <RegisterTitle step={this.props.current_view}/>
+                    <div className="form-content row no-gutterr">
+                      <RegisterSideInfo/>
+                      <RegisterStep2FormViews values={this.props.values} handleDate={this.props.handleDate} handleChange={this.props.handleChange} step={this.props.current_view} />
                     </div>
-                    <div className="linkbar-wrapper linkbar-wrapper--mobile d-block d-xl-none">
-                      <div className="row d-flex justify-content-between no-gutterr linkbar self-align-center">
-                        <div>
-                          <a href="#">Meer informatie</a>
-                        </div>
-                        <div>
-                          <a href="#">Bestelvoorwaarden</a>
-                          <a href="#">Privacybeleid</a>
-                        </div>
-                      </div>
-                    </div>
-                    {this.props.current_view < 4 && <button className="main-button main-button--margin float-right" onClick={this.updateView}><span className="main-button-action">Volgende</span></button>}
-                  
                   </div>
+                  <div className="linkbar-wrapper linkbar-wrapper--mobile d-block d-xl-none">
+                    <div className="row d-flex justify-content-between no-gutterr linkbar self-align-center">
+                      <div class="mr-auto">
+                        <a href="#">Meer informatie</a>
+                      </div>
+                      <div>
+                        <a href="#">Bestelvoorwaarden</a>
+                        <a href="#">Privacybeleid</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex">
+                    {this.props.current_view > 1 && this.props.current_view < 4 && <button className="main-button--prev main-button--margin mr-4" onClick={this.updatePrev}><span className="main-button-action">Vorige</span></button>}
+                    {this.props.current_view < 4 && <button className="main-button main-button--margin ml-auto" onClick={this.updateNext}><span className="main-button-action">Volgende</span></button>}                  
+                  </div>
+                </div>
         );
     }
 

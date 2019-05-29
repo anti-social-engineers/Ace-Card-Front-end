@@ -1,7 +1,35 @@
 import React, { Component } from 'react';
-import Fade from 'react-reveal/Fade';
+import RegisterInfoBar from '../RegisterInfoBar';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+
+import MomentLocaleUtils, {
+    formatDate,
+    parseDate,
+  } from 'react-day-picker/moment';
+  
+import 'moment/locale/nl';
+import 'react-day-picker/lib/style.css';
 
 class RegisterStep1 extends Component {
+    constructor(props){
+        super(props);
+        this.props.handleChange("LEL");
+    }
+
+    state = {
+        voornaam: "",
+        achternaam: "",
+        straat: "",
+        postcode: "",
+        huisnr: "",
+        toevoeging: "",
+        geboortedatum: "",
+        geslacht: "man",
+    }
+
+    handleChange = (e) => {
+        this.props.handleChange(e.target.id, e.target.value);
+    } 
 
     render() {
         return (
@@ -10,7 +38,7 @@ class RegisterStep1 extends Component {
                     <div className="group row">
                         <div className="col-sm-6 col-md-6 col-lg-4 pb-5">
                             <div className="input-wrapper">
-                                <input type="text" required />
+                                <input type="text" value={this.props.values.voornaam} onChange={this.handleChange} ref="voornaam" id="voornaam" required />
                                 <span className="highlight" />
                                 <span className="bar" />
                                 <label>Voornaam</label>
@@ -18,7 +46,7 @@ class RegisterStep1 extends Component {
                         </div>
                         <div className="col-sm-6 col-md-6 col-lg-4 pb-5">
                             <div className="input-wrapper">
-                                <input type="text" required />
+                                <input type="text" value={this.props.values.achternaam} onChange={this.handleChange} ref="achternaam" id="achternaam" required />
                                 <span className="highlight" />
                                 <span className="bar" />
                                 <label>Achternaam</label>
@@ -28,7 +56,7 @@ class RegisterStep1 extends Component {
                     <div className="group row">
                         <div className="col pb-5">
                             <div className="input-wrapper">
-                                <input type="text" required />
+                                <input type="text" value={this.props.values.straat} onChange={this.handleChange} ref="straat" id="straat" required />
                                 <span className="highlight" />
                                 <span className="bar" />
                                 <label>Straat</label>
@@ -36,7 +64,7 @@ class RegisterStep1 extends Component {
                         </div>
                         <div className="col pb-5">
                             <div className="input-wrapper">
-                                <input type="text" required />
+                                <input type="text" id="woonplaats" value={this.props.values.woonplaats} onChange={this.handleChange} ref="woonplaats" required />
                                 <span className="highlight" />
                                 <span className="bar" />
                                 <label>Woonplaats</label>
@@ -46,7 +74,7 @@ class RegisterStep1 extends Component {
                     <div className="group row">
                         <div className="col pb-5">
                             <div className="input-wrapper">
-                                <input type="text" required />
+                                <input type="text" id="postcode" value={this.props.values.postcode} onChange={this.handleChange} ref="postcode" required />
                                 <span className="highlight" />
                                 <span className="bar" />
                                 <label>Postcode</label>
@@ -54,7 +82,7 @@ class RegisterStep1 extends Component {
                         </div>
                         <div className="col pb-5">
                             <div className="input-wrapper">
-                                <input type="text" required />
+                                <input type="text" id="huisnr" value={this.props.values.huisnr} onChange={this.handleChange} ref="huisnr" required />
                                 <span className="highlight" />
                                 <span className="bar" />
                                 <label>Huisnummer</label>
@@ -62,7 +90,7 @@ class RegisterStep1 extends Component {
                         </div>
                         <div className="col pb-5">
                             <div className="input-wrapper">
-                                <input type="text" required />
+                                <input type="text" id="toevoeging" value={this.props.values.toevoeging} onChange={this.handleChange} ref="toevoeging" required />
                                 <span className="highlight" />
                                 <span className="bar" />
                                 <label>Toevoeging</label>
@@ -73,62 +101,36 @@ class RegisterStep1 extends Component {
                         <p>Geboortedatum</p>
                     </div>
                     <div className="group row pb-4">
-                        <div className="col col-md-4 col-lg-4 col-xl-2">
-                            <div className="select">
-                                <select>
-                                    <option>01</option>
-                                    <option>Option</option>
-                                    <option>Option</option>
-                                </select>
-                                <div className="select__arrow" />
-                            </div>
-                        </div>
-                        <div className="col col-md-4 col-lg-4 col-xl-2">
-                            <div className="select">
-                                <select>
-                                    <option>01</option>
-                                    <option>Option</option>
-                                    <option>Option</option>
-                                </select>
-                                <div className="select__arrow" />
-                            </div>
-                        </div>
-                        <div className="col col-md-4 col-lg-4 col-xl-2">
-                            <div className="select">
-                                <select>
-                                    <option>1990</option>
-                                    <option>Option</option>
-                                    <option>Option</option>
-                                </select>
-                                <div className="select__arrow" />
-                            </div>
-                        </div></div>
+                    <div class="col-md-5">
+                        <DayPickerInput
+                            formatDate={formatDate}
+                            parseDate={parseDate}
+                            placeholder={this.props.values.geboortedatum || "JJJJ-MM-DD"}
+                            dayPickerProps={{
+                                locale: 'nl',
+                                localeUtils: MomentLocaleUtils,
+                            }}
+                            onDayChange={this.props.handleDate}
+                            ref="dayp"
+                        />
+                    </div>
+                    </div>
                     <div className="form-label">
                         <p>Geslacht</p>
                     </div>
                     <div className="row radio-wrapper pb-4">
                         <div className="col-sm-2 col-xs-2 col-md-3 col-lg-2 col-xl-1">
                             <div className="radio">
-                                <label><input type="radio" name="optradio" defaultChecked={1} />Man</label>
+                                <label><input type="radio" name="optradio" id="geslacht" onChange={this.handleChange} ref="geslachtman" value="man" checked={1 ? this.props.values.geslacht === "man" : 0} />Man</label>
                             </div>
                         </div>
                         <div className="col-sm-2 col-xs-2 col-md-3 col-lg-2 col-xl-1">
                             <div className="radio">
-                                <label><input type="radio" name="optradio" />Vrouw</label>
+                                <label><input type="radio" name="optradio" id="geslacht" onChange={this.handleChange} ref="geslachtvrouw" value="vrouw" checked={1 ? this.props.values.geslacht === "vrouw" : 0} />Vrouw</label>
                             </div>
                         </div>
                     </div>
-                    <div className="linkbar-wrapper d-none d-xl-block my-4">
-                        <div className="row d-flex justify-content-between no-gutterr linkbar self-align-center">
-                            <div>
-                                <a href="#">Meer informatie</a>
-                            </div>
-                            <div>
-                                <a href="#">Bestelvoorwaarden</a>
-                                <a href="#">Privacybeleid</a>
-                            </div>
-                        </div>
-                    </div>
+                    <RegisterInfoBar/>
                 </div>
             </div>
         );

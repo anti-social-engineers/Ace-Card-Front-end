@@ -6,7 +6,7 @@ class RegisterStep2 extends Component {
     render() {
         return (
             <Fade>
-            <h1>Foto uploaden</h1>
+                <h1>Foto uploaden</h1>
             </Fade>
         );
     }

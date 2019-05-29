@@ -111,6 +111,10 @@ a.nav-item.nav-link {
     flex: 1 0 auto;
 }
 
+.DayPickerInput input {
+    font-size: 13px !important;
+}
+
 .formarea {
     padding-bottom: 50px;
 }
@@ -260,7 +264,7 @@ a.nav-item.nav-link {
   }
 
 
-.main-button {
+.main-button, .main-button--prev {
 	background-image: linear-gradient(90deg, #000000 0%, #434343 100%);
     border-radius: 5px;
     border: 0;
@@ -296,12 +300,16 @@ a.nav-item.nav-link {
     background: transparent;
 }
 
-.main-button:focus {
+.main-button:focus, .main-button--prev:focus {
 	outline: 0;
 }
 
 .main-button span {
 	margin-right: 25px;
+}
+
+.main-button--prev span {
+    margin-left: 25px;
 }
 
 .main-button span:after {
@@ -317,8 +325,26 @@ a.nav-item.nav-link {
     transition: 0.1s;
 }
 
+.main-button--prev span:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f053";
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 900;
+    margin: 0px 0px 0px 8px;
+    position: absolute;
+    left: 15px;
+    top: 14px;
+    transition: 0.1s;
+}
+
 .main-button:hover span:after {
     right: 12px;
+    transition: 0.1s;
+}
+
+.main-button--prev:hover span:before {
+    left: 12px;
     transition: 0.1s;
 }
 

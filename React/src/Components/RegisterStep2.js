@@ -8,7 +8,7 @@ import {connect} from 'react-redux'
 import {createAcc} from '../Helper/actions/authorizationAction'
 import RegisterStep2Form from './Form/Home/RegisterStep2/RegisterStep2Form';
 
-class Register extends Component {
+class RegisterStep2 extends Component {
   constructor(props) {
     super(props);
     this.registerform = React.createRef();
@@ -16,26 +16,44 @@ class Register extends Component {
 
   state = {
     form_status: "none",
-    current_view: 1
+    current_view: 1,
+    voornaam: "",
+    achternaam: "",
+    straat: "",
+    postcode: "",
+    huisnr: "",
+    toevoeging: "",
+    geboortedatum: "",
+    geslacht: "",
+    akkoord: ""
   }
 
   switchView = (view) => {
-      console.log("Switching tot " + view);
-      this.setState({current_view: view});
+    this.setState({current_view: view});
+  }
 
-    switch(view) {
-      case 1:
-        console.log("STEP 1");
-        break;
-      case 2:
-        console.log("STEP 2");
-        break;
-      case 3:
-        console.log("STEP 3");
-        break;
-      default:
-        return;
-    }
+  handleChange = (id, value) => {
+    this.setState({
+      [id]: value 
+    });
+  }
+
+  handleDate = (date) => {
+    this.setState({geboortedatum: this.formatDate(date)});
+  }
+
+  formatDate = (date, american=false) => {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    if (american)
+      return [year, month, day].join('-');
+    return [day, month, year].join('-');
   }
 
   handleSubmit = (e) => {
@@ -50,7 +68,7 @@ class Register extends Component {
           <div className="cont">
             <div className="row no-gutters">
               <div className="formarea col">
-                <RegisterStep2Form switchView={this.switchView} current_view={this.state.current_view}/>
+                <RegisterStep2Form values={this.state} handleChange={this.handleChange} handleDate={this.handleDate} switchView={this.switchView} current_view={this.state.current_view} ref={this.registerform}/>
               </div>
             </div>
           </div>
@@ -60,4 +78,4 @@ class Register extends Component {
   }
 }
 
-export default Register
+export default RegisterStep2
