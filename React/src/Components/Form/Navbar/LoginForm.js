@@ -7,7 +7,8 @@ import '../../../Styles/css/style.css'
 import { NavLink } from 'react-router-dom'
 import Fade from 'react-reveal/Fade';
 import axios from 'axios'
-
+import jwt from 'jsonwebtoken'
+import config from '../../../config/config'
 class LoginForm extends Component {
    constructor(props){
       super(props);
@@ -21,7 +22,7 @@ class LoginForm extends Component {
       loading: false,
       logged_in: false,
       login_status: "none",
-      loading: false
+      loading: false,
    }
    handleSubmit = () => {
       console.log("INSIDE LOGINFORM");
@@ -38,6 +39,8 @@ class LoginForm extends Component {
          .then(function (response) {
             console.log(response);
             localStorage.setItem('jwt token',response.data.jsonWebToken)
+            var decodeToken = jwt.verify(response.data.jsonWebToken, config.config)
+            console.log(decodeToken);
          })
       
 
