@@ -29,7 +29,7 @@ class Register extends Component {
 
   createAcc(account){
     console.log(account)
-    axios.post('http://api.aceofclubs.nl/api/register', account)
+    axios.post('https://api.aceofclubs.nl/api/register', account)
     .then(res => {
       console.log('test' + res)
     })

@@ -34,10 +34,11 @@ class LoginForm extends Component {
 
       console.log(this.state.account)
       //Api Call Login
-      axios.post('http://api.aceofclubs.nl/api/login', this.state.account)
+      axios.post('https://api.aceofclubs.nl/api/login', this.state.account)
          .then(function (response) {
             console.log(response);
-      })
+            localStorage.setItem('jwt token',response.data.jsonWebToken)
+         })
       
 
       setTimeout(function(){
