@@ -28,7 +28,7 @@ class Saldo extends Component {
             duration : 2000
         })
 
-    const node = this.node;
+    const node = this.node;    
 
     var myChart = new Chart(node, {
         type: "line",
@@ -55,6 +55,7 @@ class Saldo extends Component {
 }
 
   render() {
+
     let modalClose = () => this.setState({ modalShow: false });
     return (
         <div>
@@ -97,7 +98,7 @@ class Saldo extends Component {
                             <div className="col-md" align="center" data-aos="fade-right" data-aos-duration="600">
                                 <div className="square">
                                     <h1 className="imgMargin">Saldo</h1>
-                                    <h3 className="" value={this.state.result}>€30,00</h3>
+                                    <h3 className="" value="">€30,00</h3>
                                     <button onClick={() => this.setState({ modalShow: true })} className="main-button-square">Overschrijven</button>                            
                                 </div>
                             </div>

@@ -9,35 +9,31 @@ import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
+import Saldo from './Saldo';
 
 class SaldoModal extends Component {
   
-  constructor(props){
-    super(props);
-    this.state = {
-      operator: '+',
-      num1: '30',
-      num2: '',
-      result: '0'
-    };
-    this.actionHandler = this.actionHandler.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this)
-  }
-  handleChange = (e) => {
-    this.setState({operator: e.target.value})
-  }
+  state ={
+    result: "",
+    num1: "",
+    num2: ""
+  };
 
-  handleInputChange(e){
-    this.setState({
-      [e.target.name]: Number(e.target.value)
-    });
-  }
-  
-  actionHandler = (e) => {
-    e.preventDefault();
-    let x = this.state.num1 + this.state.num2;
-    this.setState({result: x})
-  }
+  handlenum1Change = evt => {
+    const num1 = Number(evt.target.value);
+    this.setState(prevState => ({
+      num1,
+      result: num1 + prevState.num2
+    }));
+  };
+
+  handlenum2Change = evt => {
+    const num2 = Number(evt.target.value);
+    this.setState(prevState => ({
+      num2,
+      result: prevState.num1 + num2
+    }));
+  };
 
     render() {
       return (
@@ -56,30 +52,14 @@ class SaldoModal extends Component {
             <div className="group pb-5">
               <span className="highlight"></span>
               <span className="bar"></span>
-              <input type="text" onChange={this.handleInputChange} name="num1"></input>
+              <input type="text" name="num1" value={this.state.num1} onChange={this.handlenum1Change}></input>
             </div>
-
             <div className="group pb-5">
-            {/* <div className="borderborder"> */}
               <h4 className="saldo-form saldo-form-text">Kies over te schrijven bedrag</h4>
-              {/* <div className="marginmargin"> */}
-                <input type="text" onChange={this.handleInputChange} name="num2"></input>
-              {/* <DropdownButton className="btn-primary dropdown-toggle" title="€ 0,00">
-                <Dropdown.Item as="button" className="dropdowntext">€ 5,00</Dropdown.Item>
-                <Dropdown.Item as="button" className="dropdowntext">€ 10,00</Dropdown.Item>
-                <Dropdown.Item as="button" className="dropdowntext">€ 15,00</Dropdown.Item>
-                <Dropdown.Item as="button" className="dropdowntext">€ 20,00</Dropdown.Item>
-                <Dropdown.Item as="button" className="dropdowntext">€ 25,00</Dropdown.Item>
-                <Dropdown.Item as="button" className="dropdowntext">€ 30,00</Dropdown.Item>
-                <Dropdown.Item as="button" className="dropdowntext">€ 50,00</Dropdown.Item>
-              </DropdownButton> */}
+              <input type="text" name="num2" value={this.state.num2} onChange={this.handlenum2Change} ></input>
             </div>
-            {/* </div>
-            </div> */}
-
             <h4 className="saldo-form">Nieuw saldo</h4>
             <div className="group">
-              {/* <input type="" disabled required /> */}
               <span className="highlight"></span>
               <span className="bar"></span>
               <input type="text" value={this.state.result} readOnly/>
