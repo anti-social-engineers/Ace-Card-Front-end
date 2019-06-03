@@ -25,7 +25,8 @@ class RegisterStep2 extends Component {
     toevoeging: "",
     geboortedatum: "",
     geslacht: "",
-    akkoord: ""
+    akkoord: "",
+    file: []
   }
 
   switchView = (view) => {
@@ -57,7 +58,7 @@ class RegisterStep2 extends Component {
   }
 
   handleSubmit = (e) => {
-      e.preventDefault();
+      // e.preventDefault();
       console.log("submitting form");
   }
 

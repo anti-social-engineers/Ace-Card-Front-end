@@ -13,7 +13,7 @@ class RegisterStep2Form extends Component {
         case 1:
           return (<RegisterStep1 values={this.props.values} handleDate={this.props.handleDate} handleChange={this.props.handleChange}/>)
         case 2:
-          return (<RegisterStep2 handleChange={this.props.handleChange}/>)
+          return (<RegisterStep2 file={this.props.values.file} handleChange={this.props.handleChange} />)
         case 3:
           return (<RegisterStep3 handleChange={this.props.handleChange}/>)
         case 4:

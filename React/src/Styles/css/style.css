@@ -1180,6 +1180,24 @@ nav ul,nav li {
     font-size: 12px !important;
 }
 
+.filepond--action-process-item{
+    visibility:hidden;
+}
+
+.akkoord {
+    padding-top:15px;
+}
+
+.akkoord label {
+    padding-left:10px;
+    text-decoration: underline;
+}
+
+.akkoord a {
+    color: #1a73d2;
+    text-underline-position: under;
+}
+
 @font-face {
   font-family: 'Titillium Web';
   font-style: normal;

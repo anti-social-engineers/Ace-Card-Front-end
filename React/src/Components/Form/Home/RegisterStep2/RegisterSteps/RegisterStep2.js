@@ -30,12 +30,18 @@ registerPlugin(FilePondPluginImageExifOrientation,
 );
 
 class RegisterStep2 extends Component {
-    
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        this.setState({file: this.props.file});
+    }
+
     state = {
-        // Set initial files, type 'local' means this is a file
-        // that has already been uploaded to the server (see docs)
-        files: [],
-        hasUploaded: false
+        file: [],
+        error: false,
+        allow_next: false
     }
 
     handleInit() {
@@ -44,6 +50,28 @@ class RegisterStep2 extends Component {
 
     onUpload = () => {
         console.log("HAS BEEN UPLOADED");
+    }
+
+    handleChange = (file) => {
+        if (file.size !== null){
+            this.props.handleChange("file", file);
+        }
+    }
+
+    onFileRemove = () => {
+        console.log("remove file");
+    }
+
+    onAddFile = (error, file) => {
+        console.log("FILE HAS BEEN ADDED");
+        // console.log(file);
+        if (error) {
+            this.setState({error: true});
+        } else {
+            if (this.state.error) {
+                this.setState({error: false});
+            }
+        }
     }
 
     render() {
@@ -66,11 +94,21 @@ class RegisterStep2 extends Component {
                 <div class="row no-gutterr">
                     <FilePond
                         ref={ref => (this.pond = ref)}
-                        files={this.state.files}
+                        files={this.props.file}
                         allowMultiple={false}
                         allowFileTypeValidation={true}
-                        allowImageCrop={true}
                         allowImageValidateSize={true}
+                        allowFileSizeValidation={true}
+                        maxFileSize={"1MB"}
+                        imageValidateSizeMinWidth={300}
+                        imageValidateSizeMaxWidth={800}
+                        imageValidateSizeMinHeight={300}
+                        imageValidateSizeMaxHeight={800}
+                        imageValidateSizeLabelFormatError=""
+                        imageValidateSizeLabelImageSizeTooSmall="Foto is te klein"
+                        imageValidateSizeLabelImageSizeTooBig="Foto is te groot"
+                        imageValidateSizeLabelExpectedMinSize="Minimum afmeting is {minWidth} × {minHeight}"
+                        imageValidateSizeLabelExpectedMaxSize="Maximum afmeting is {maxWidth} × {maxHeight}"
                         acceptedFileTypes={['image/png', 'image/jpeg']}
                         labelFileTypeNotAllowed="Bestandtype is ongeldig "
                         fileValidateTypeLabelExpectedTypes="Verwacht {allButLastType} of {lastType}"
@@ -102,13 +140,17 @@ class RegisterStep2 extends Component {
                         onupdatefiles={fileItems => {
                             // Set currently active file objects to this.state
                             this.setState({
-                                files: fileItems.map(fileItem => fileItem.file),
+                                file: fileItems.map(fileItem => fileItem.file),
                                 hasUploaded: true
-                            });
+                            }, () => this.handleChange(fileItems.map(fileItem => fileItem.file)));
+                            
                         }}
-                        onprocessfile={console.log("LEL has been added")}
+                        onaddfile={this.onAddFile}
+                        onremovefile={this.onFileRemove}
                     />
                 </div>
+
+                {this.state.file.length > 0 && !this.state.error && <Fade><div class="row no-gutterr"><p>Het geuploade bestand lijkt geldig te zijn. U kunt door naar de volgende stap om de registratieproces af te ronden.</p></div></Fade>}
             </div>
         );
     }
