@@ -785,13 +785,13 @@ a.nav-item.nav-link {
 .info-text-wrapper ul {
     font-family: "Montserrat";
     font-weight: 300;
-    padding-left: 28px;
+    padding-left: 15px;
     list-style: none;
 }
 
 .info-text-wrapper li {
     font-size: 13px;
-    padding:7px;
+    padding:5px;
     margin: 0;
 }
 
@@ -1170,6 +1170,14 @@ nav ul,nav li {
 .no-gutterr{
     margin-left: 0;
     margin-right: 0;
+}
+
+.filepond--wrapper {
+    width: 100%;
+}
+
+.filepond--drop-label label, .filepond--root * {
+    font-size: 12px !important;
 }
 
 @font-face {

@@ -18,10 +18,12 @@ class RegisterSideInfo extends Component {
                     <div className="info-text-wrapper">
                         <h3 className="reqs">Eisen aan de foto upload</h3>
                         <ul>
-                            <li>Lorem ipsum</li>
-                            <li>Lorem ipsum</li>
-                            <li>Lorem ipsum</li>
-                            <li>Lorem ipsum</li>
+                            <li>Moet van een recente datum zijn</li>
+                            <li>Gezicht moet goed zichtbaar zijn</li>
+                            <li>Niet te licht of te donker</li>
+                            <li>Snapchat filters zijn niet toegestaan</li>
+                            <li>Moet een PNG of JPG zijn</li>
+                            <li>Minimaal 50kb Maximaal 5mb</li>
                         </ul>
                     </div>
                 </div>

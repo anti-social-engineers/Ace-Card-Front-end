@@ -6,7 +6,6 @@ import Register  from './Components/Register';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import RegisterStep2 from './Components/RegisterStep2';
 
-
 class App extends Component {
   render() {
     return (
