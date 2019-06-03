@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import './App.css';
 import Nav from './Components/Navbar';
 import Home from './Components/Home';
-import Login from './Components/Login';
 import Register  from './Components/Register';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
-
+import PostData from './Helper/API/PostData'
 
 class App extends Component {
   render() {
@@ -13,15 +12,15 @@ class App extends Component {
 
       <React.Fragment>
       <Router>     
-        
+
         <Nav/>
 
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/Login" component={Login} />
             <Route path="/Register" component={Register} />
           </Switch>
         </Router>
+
       </React.Fragment>
       
     ); 

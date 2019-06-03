@@ -9,3 +9,7 @@ export const createAcc = (account) => {
         })
     }
 }
+
+export const login = (account) => {
+    
+}
