@@ -561,11 +561,7 @@ a.nav-item.nav-link {
 	background-color: transparent;
 }
 
-/* .inputs .group {
-    padding-bottom: 3rem;
-} */
-
-.group input[type=text] {
+.group input[type=text], .group input[type=date] {
 	font-size: 14px;
 }
 

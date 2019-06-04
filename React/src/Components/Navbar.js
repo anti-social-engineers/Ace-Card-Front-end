@@ -81,7 +81,7 @@ class Nav extends Component {
                           <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
                           <NavLink className="nav-item nav-link" to="/">Account</NavLink>
                           <a className="nav-item nav-link">Contact</a>
-                          <a className="nav-item nav-link loading-text--pd" onClick={this.logout}><i class={this.state.nav_loading ? "fas fa-circle-notch fa-spin no-invis" : "invis d-none"}></i>Uitloggen</a>
+                          <a className="nav-item nav-link loading-text--pd" onClick={this.logout}><i className={this.state.nav_loading ? "fas fa-circle-notch fa-spin no-invis" : "invis d-none"}></i>Uitloggen</a>
                         </div>
                       </div>
                 </nav>

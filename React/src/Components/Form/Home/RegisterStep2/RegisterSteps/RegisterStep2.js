@@ -63,8 +63,6 @@ class RegisterStep2 extends Component {
     }
 
     onAddFile = (error, file) => {
-        console.log("FILE HAS BEEN ADDED");
-        // console.log(file);
         if (error) {
             this.setState({error: true});
         } else {
@@ -75,22 +73,14 @@ class RegisterStep2 extends Component {
     }
 
     render() {
-        // const [files, setFiles] = useState([]);
         return (
             <div class="col">
-                <div class="row no-gutterr">
+                <div className="row no-gutterr">
                     <Fade>
                         <h1>Foto uploaden</h1>
                     </Fade>
                 </div>
                 
-
-                {/* <FilePond
-                    files={this.state.files}
-                    allowMultiple={true}
-                    onupdatefiles={this.setState}
-                    labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-                /> */}
                 <div class="row no-gutterr">
                     <FilePond
                         ref={ref => (this.pond = ref)}

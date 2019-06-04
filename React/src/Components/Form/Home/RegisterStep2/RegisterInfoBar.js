@@ -7,7 +7,7 @@ class RegisterTitle extends Component {
         return (
             <div className="linkbar-wrapper d-none d-xl-block my-4">
                 <div className="row d-flex justify-content-between no-gutterr linkbar self-align-center">
-                    <div class="mr-auto">
+                    <div className="mr-auto">
                         <a href="#">Meer informatie</a>
                     </div>
                     <div>

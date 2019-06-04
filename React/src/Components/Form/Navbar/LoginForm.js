@@ -59,8 +59,8 @@ class LoginForm extends Component {
                   <h2>Inloggen</h2>
                </div>
                </Fade>
-                  <div class="login-info">
-                  <span className={this.state.login_status === "wrong" && !this.state.loading ? "loading-text" : "d-none invis"}><i class="fas fa-exclamation-circle"></i>Inloggen mislukt.</span>
+                  <div className="login-info">
+                  <span className={this.state.login_status === "wrong" && !this.state.loading ? "loading-text" : "d-none invis"}><i className="fas fa-exclamation-circle"></i>Inloggen mislukt.</span>
                </div>
                <div className="form-content">
                   <div className={this.state.loading ? "d-none" : "inputs"}>
@@ -82,7 +82,7 @@ class LoginForm extends Component {
                         </div>
                         <div className="col text-right">
                            <input className="input-checkbox" id="ckb1" type="checkbox" name="remember-me"/>
-                           <label for="ckb1" className="rememberme">
+                           <label htmlFor="ckb1" className="rememberme">
                            Remember me
                            </label>
                         </div>
