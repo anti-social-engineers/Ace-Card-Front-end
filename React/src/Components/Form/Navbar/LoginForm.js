@@ -39,7 +39,7 @@ class LoginForm extends Component {
          .then(function (response) {
             console.log(response);
             localStorage.setItem('jwt token',response.data.jsonWebToken)
-            var decodeToken = jwt.verify(response.data.jsonWebToken, config.config)
+            var decodeToken = jwt.verify(response.data.jsonWebToken, config.signature)
             console.log(decodeToken);
          })
       
