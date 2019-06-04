@@ -279,35 +279,50 @@ a.nav-item.nav-link {
 	position: relative;
 }
 
-.main-home-button{
-    background-image: linear-gradient(90deg, #000000 0%, #434343 100%);
+.account-button {
+	background-image: linear-gradient(90deg, #000000 0%, #434343 100%);
     border-radius: 5px;
     border: 0;
 	color: white;
-	width: 240px;
+	width: 230px;
 	cursor: pointer;
-	height: 70px;
+	height: 43px;
 	font-family: "Montserrat";
-	font-size: 20px;
+	font-size: 13px;
 	font-weight: 400;
 	letter-spacing: 2px;
     position: relative;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
-.main-button--transparent {
+.main-button, .btn-primary{
+    background-image: linear-gradient(90deg, #000000 0%, #434343 100%);
+    width: 100px;
+    height: 30px;
+    border-radius: 6%;
+    font-size: 1.0em; 
+}
+
+.btn-primary:hover{
     background-image: none;
-    background: transparent;
+    background-color: #000;
 }
 
+.btn-primary:focus{
+    background-image: none;
+    background-color: #000;
 .main-button:focus, .main-button--prev:focus {
 	outline: 0;
 }
 
+.btn-primary, .dropdown-toggle{
+    background-color: #000;
 .main-button span {
 	margin-right: 25px;
 }
 
+.dropdowntext{
+    font-size: 1.5rem;
 .main-button--prev span {
     margin-left: 25px;
 }
@@ -325,6 +340,9 @@ a.nav-item.nav-link {
     transition: 0.1s;
 }
 
+.saldo-form-text{
+    font-size: 1.5rem;
+    letter-spacing: 0px;
 .main-button--prev span:before {
     font-family: "Font Awesome 5 Free";
     content: "\f053";
@@ -343,6 +361,17 @@ a.nav-item.nav-link {
     transition: 0.1s;
 }
 
+.borderborder{
+    border-bottom: 1px solid #dedede;
+}
+
+.marginmargin{
+    margin-top: 10px;
+    margin-bottom:10px;
+    margin-left: 5px;
+}
+
+.main-button-square {
 .main-button--prev:hover span:before {
     left: 12px;
     transition: 0.1s;
@@ -353,7 +382,7 @@ a.nav-item.nav-link {
     border-radius: 5px;
     border: 0;
 	color: white;
-	width: 230px;
+	width: 150px;
 	cursor: pointer;
 	height: 43px;
 	font-family: "Montserrat";
@@ -361,14 +390,60 @@ a.nav-item.nav-link {
 	font-weight: 400;
 	letter-spacing: 2px;
     position: relative;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
-.account-button span {
+.main-button-right {
+	background-image: linear-gradient(90deg, #000000 0%, #434343 100%);
+    border-radius: 5px;
+    border: 0;
+	color: white;
+	width: 150px;
+	cursor: pointer;
+	height: 43px;
+	font-family: "Montserrat";
+	font-size: 13px;
+	font-weight: 400;
+	letter-spacing: 2px;
+    position: relative;
+    margin-top: 10px;
+}
+
+.main-button-right, .button-modal {
+    margin-top: 7px;
+}
+
+.main-home-button{
+    background-image: linear-gradient(90deg, #000000 0%, #434343 100%);
+    border-radius: 5px;
+    border: 0;
+	color: white;
+	width: 240px;
+	cursor: pointer;
+	height: 70px;
+	font-family: "Montserrat";
+	font-size: 20px;
+	font-weight: 400;
+	letter-spacing: 2px;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 65px;
+}
+
+.main-button--transparent {
+    background-image: none;
+    background: transparent;
+}
+
+.main-button:focus {
+	outline: 0;
+}
+
+.main-button span {
 	margin-right: 15px;
 }
 
-.account-button span:after {
+.main-button span:after {
     font-family: "Font Awesome 5 Free";
     content: "\f054";
     display: inline-block;
@@ -381,12 +456,10 @@ a.nav-item.nav-link {
     transition: 0.1s;
 }
 
-.account-button:hover span:after {
+.main-button:hover span:after {
     right: 12px;
     transition: 0.1s;
 }
-
-
 
 .card-area {
     padding-bottom: 50px;
@@ -567,6 +640,10 @@ a.nav-item.nav-link {
 
 .group input[type=text] {
 	font-size: 14px;
+}
+
+.group input[type=accountform] {
+    background: #f7f7f7;
 }
 
 .group input:focus {
@@ -976,39 +1053,64 @@ a.nav-item.nav-link {
 
 
 #chevron {
-    margin-top: 120px;
+    margin-top: 170px;
+    margin-bottom: 100px;
+    margin-left: 0px;
     position: relative;
     text-align: center;
     padding-top: 70px;
-    padding-bottom: 180px;
-    margin-bottom: 6px;
-    margin-left: 0px;
-    height: 100%;
-    width: 100%;
-}
-
-#chevron:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 80%;
-    width: 100%;
+    padding-bottom: 70px;
     background-image: linear-gradient(90deg, #000000 0%, #434343 100%);/* 076 Premium Dark: */
-    /* border-radius: 75%/80px 40px 0px 0px; */
     transform: skew(0deg, 4deg);
+    /* height: 100%; */
+    width: 100%;
 }
 
 .square{
+    width: 300px;
+    height: 200px;
+    background-color: white;
+    border-radius: 3%;
+    margin: 20px;
+    margin-left: 165px;
+    -webkit-box-shadow: 0px 0px 42px -8px rgba(179,179,179,1);
+    -moz-box-shadow: 0px 0px 42px -8px rgba(179,179,179,1);
+    box-shadow: 0px 0px 42px -8px rgba(179,179,179,1);
+}
+
+.squareTop{
     width: 250px;
     height: 300px;
     background-color: white;
-    border-radius: 4%;
+    border-radius: 6%;
     margin: 20px;
+    margin-top: 120px;
+}
+
+.squareskew{
+    width: 250px;
+    height: 300px;
+    background-color: white;
+    border-radius: 6%;
+    margin: 20px;
+    transform: skew(0deg, -4deg);
+}
+
+.scale{
+    transform: scale(0.9);
+}
+
+.squareText{
+    margin-top: 20px;
+}
+
+.chartMargin{
+    margin: 60px;
+    padding-left: 118px; 
 }
 
 .imgMargin{
-    padding-top: 30px;
+    padding-top: 15px;
     padding-bottom: 25px;
     margin: 5px;
 }
@@ -1021,16 +1123,16 @@ a.nav-item.nav-link {
 }
 
 .mainPageTitle{
-    font-size: 1.90em;
+    font-size: 2.4em;
     font-weight: 700;
     font-family: "Montserrat";
     letter-spacing: 1.0px;
-
+    margin-top: 120px;
 }
 
 .mainPageParagraph{
     padding-top: 25px;
-    font-size: 1.2em;
+    font-size: 1.4em;
     font-family: "Montserrat";
     letter-spacing: 1px;
 
@@ -1088,9 +1190,9 @@ overflow:visible;
     display:table;
     border-collapse:collapse;
     border-spacing:0;
-    color:#999;
+    color:#fff;
     font-family: arial;
-    font-size: 25px;
+    font-size: 21px;
     text-decoration:none;
     -webkit-transform:translateZ(0) scale(1,1);
     -webkit-transition:all .1s linear;
@@ -1100,19 +1202,22 @@ overflow:visible;
 .main-menu .nav-icon {
     position:relative;
     display:table-cell;
-    width:60px;
+    width:200px;
     height:36px;
     text-align:center;
     vertical-align:middle;
-    font-size:18px;
+    font-size: 20px;
+    color: #FFFFFF;
+    padding-top: 10px;
+    padding-right: 5px;
 }
 
 .main-menu .nav-text {
     position:relative;
     display:table-cell;
     vertical-align:middle;
-    width:190px;
-  font-family: 'Titillium Web', sans-serif;
+    width:110px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .main-menu>ul.logout {
@@ -1164,6 +1269,29 @@ nav ul,nav li {
     padding-left: 25%;
     padding-right: 25%;
     width: 100%;
+}
+
+.saldo-form{
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.no-gutterr{
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.modal {
+    display: flex !important;
+    align-items: center;
+}
+
+.modal-footer{
+    border-top: none;
+}
+
+.modal-header{
+    border-bottom: none;
 }
 
 
@@ -1273,4 +1401,3 @@ nav ul,nav li {
         /* width: 80%; */
     }
 }
-

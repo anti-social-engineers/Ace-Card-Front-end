@@ -8,6 +8,8 @@ import {connect} from 'react-redux'
 import {createAcc} from '../Helper/actions/authorizationAction'
 import RegisterForm from './Form/Home/RegisterForm'
 import axios from 'axios'
+import Nav from '../Components/Navbar';
+
 
 class Register extends Component {
   constructor(props) {
@@ -41,13 +43,26 @@ class Register extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className="content-wrapper">
-          <div className="cont">
-            <div className="row no-gutters">
-                <div className="card-area col-sm-12 col-md-12 col-lg-12 col-xl-7">
-                  <div className="textarea">
-                    <h3>Account aanmaken</h3>
-                    <p>lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
+      <Nav/>
+      <div className="content-wrapper">
+        <div className="cont">
+           <div className="row no-gutters">
+             <div className="card-area col-sm-12 col-md-12 col-lg-12 col-xl-7">
+               <div className="textarea">
+               <h3>Account aanmaken</h3>
+               <p>lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
+                    
+
+        </div>
+        <img src={require('../Styles/img/cardbox.png')} alt="" className="acecard" />
+          </div>
+            <div className="formarea col-sm-12 col-md-12 col-lg-12 col-xl-5">
+            <div className="outerform">
+              <div className="form-wrapper">
+
+                <div className="form-title">
+                  <h2>Registreren</h2>
+                  
                   </div>
                   <img src={require('../Styles/img/cardbox.png')} alt="" className="acecard" />
                 </div>

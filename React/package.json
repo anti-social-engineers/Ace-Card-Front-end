@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "aos": "^2.3.4",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
+    "chart.js": "^2.8.0",
     "filepond": "^4.4.8",
     "filepond-plugin-file-validate-type": "^1.2.4",
     "filepond-plugin-image-crop": "^2.0.3",
@@ -21,6 +23,9 @@
     "react-bootstrap": "^1.0.0-beta.8",
     "react-day-picker": "^7.3.0",
     "react-dom": "^16.8.6",
+    "react-drop-down": "^1.1.0",
+    "react-dropdown": "^1.6.4",
+    "react-modal": "^3.8.1",
     "react-filepond": "^7.0.1",
     "react-moment": "^0.9.2",
     "react-redux": "^7.0.3",
@@ -31,6 +36,8 @@
     "react-scripts": "3.0.1",
     "redux": "^4.0.1",
     "redux-firestore": "^0.8.0",
+    "redux-thunk": "^2.3.0",
+    "semantic-ui-react": "^0.87.1"
     "redux-thunk": "^2.3.0",
     "zxcvbn": "^4.4.2"
   },
