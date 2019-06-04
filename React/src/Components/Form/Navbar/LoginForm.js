@@ -45,7 +45,7 @@ class LoginForm extends Component {
       
 
       setTimeout(function(){
-            if (this.state.email === "selim" && this.state.password === "test") {
+            if (this.state.email === "selimaydi@gmail.com" && this.state.password === "test") {
                this.setState({login_status: "success"})
 
                setTimeout(function () {
@@ -79,7 +79,7 @@ class LoginForm extends Component {
                <div className="form-content">
                   <div className={this.state.loading ? "d-none" : "inputs"}>
                      <div className="group pb-5">      
-                        <input type="text" id="email" ref="email" required/>
+                        <input type="email" id="email" ref="email" required/>
                         <span className="highlight"></span>
                         <span className="bar"></span>
                         <label>E-mail</label>
@@ -110,8 +110,7 @@ class LoginForm extends Component {
             </div>
             <div className="row login-actions">
                   <div className="col">
-                     <NavLink className="dark-link" to="/Register">Nog geen account?</NavLink>
-
+                     <NavLink className="dark-link" onClick={this.props.toggleVisibility} to="/Register">Nog geen account?</NavLink>
                   </div>
                   <div className="col">
                      <button className="main-button main-button--transparent float-right">

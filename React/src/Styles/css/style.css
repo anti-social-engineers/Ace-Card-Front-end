@@ -111,6 +111,10 @@ a.nav-item.nav-link {
     flex: 1 0 auto;
 }
 
+.DayPickerInput input {
+    font-size: 13px !important;
+}
+
 .formarea {
     padding-bottom: 50px;
 }
@@ -131,6 +135,10 @@ a.nav-item.nav-link {
 
 .form-loader--hidden {
     opacity: 0;
+}
+
+.form-helper {
+    font-size: 11px;
 }
 
 .invis {
@@ -256,7 +264,7 @@ a.nav-item.nav-link {
   }
 
 
-.main-button {
+.main-button, .main-button--prev {
 	background-image: linear-gradient(90deg, #000000 0%, #434343 100%);
     border-radius: 5px;
     border: 0;
@@ -292,12 +300,16 @@ a.nav-item.nav-link {
     background: transparent;
 }
 
-.main-button:focus {
+.main-button:focus, .main-button--prev:focus {
 	outline: 0;
 }
 
 .main-button span {
 	margin-right: 25px;
+}
+
+.main-button--prev span {
+    margin-left: 25px;
 }
 
 .main-button span:after {
@@ -313,8 +325,26 @@ a.nav-item.nav-link {
     transition: 0.1s;
 }
 
+.main-button--prev span:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f053";
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 900;
+    margin: 0px 0px 0px 8px;
+    position: absolute;
+    left: 15px;
+    top: 14px;
+    transition: 0.1s;
+}
+
 .main-button:hover span:after {
     right: 12px;
+    transition: 0.1s;
+}
+
+.main-button--prev:hover span:before {
+    left: 12px;
     transition: 0.1s;
 }
 
@@ -493,7 +523,7 @@ a.nav-item.nav-link {
     position: absolute;
     z-index: 1000;
     left: 311px;
-    top: 30%;
+    top: 150px;
     margin-right: 90px;
     text-align: right;
     width: 310px;
@@ -585,7 +615,6 @@ a.nav-item.nav-link {
 	font-size: 11px;
 	color: #007bff;
 }
-
 
 /* BOTTOM BARS ================================= */
 
@@ -756,13 +785,13 @@ a.nav-item.nav-link {
 .info-text-wrapper ul {
     font-family: "Montserrat";
     font-weight: 300;
-    padding-left: 28px;
+    padding-left: 15px;
     list-style: none;
 }
 
 .info-text-wrapper li {
     font-size: 13px;
-    padding:7px;
+    padding:5px;
     margin: 0;
 }
 
@@ -790,18 +819,21 @@ a.nav-item.nav-link {
 
 .form-title-left h2 {
   font-size: 28px;
-  padding-left: 45px;
 }
 
 .statusbar {
-    background-color: #e9e9e9;
     height: 5px;
     margin-top: 14px;
-    width: 80px;
+    width: 160px;
+    background: linear-gradient(to right, black 50%, #e9e9e9 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .5s ease-out;
 }
 
 .statusbar--checked {
     background-color: #3a3636;
+    background-position: left bottom;
 }
 
 .statuscircle {
@@ -852,7 +884,10 @@ a.nav-item.nav-link {
 }
 
 .status_texts {
-    padding-bottom: 5px;font-weight: 300;font-size: 14px;letter-spacing: 1.5px;
+    padding-bottom: 5px;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 1.5px;
 }
 
 /* ANIMATIONS ================ */
@@ -1131,6 +1166,37 @@ nav ul,nav li {
     width: 100%;
 }
 
+
+.no-gutterr{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.filepond--wrapper {
+    width: 100%;
+}
+
+.filepond--drop-label label, .filepond--root * {
+    font-size: 12px !important;
+}
+
+.filepond--action-process-item{
+    visibility:hidden;
+}
+
+.akkoord {
+    padding-top:15px;
+}
+
+.akkoord label {
+    padding-left:10px;
+    text-decoration: underline;
+}
+
+.akkoord a {
+    color: #1a73d2;
+    text-underline-position: under;
+}
 
 @font-face {
   font-family: 'Titillium Web';
