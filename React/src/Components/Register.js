@@ -9,6 +9,7 @@ import {createAcc} from '../Helper/actions/authorizationAction'
 import RegisterForm from './Form/Home/RegisterForm'
 import axios from 'axios'
 import Nav from '../Components/Navbar';
+import config from '../config/config'
 
 
 class Register extends Component {
@@ -31,7 +32,7 @@ class Register extends Component {
 
   createAcc(account){
     console.log(account)
-    axios.post('https://api.aceofclubs.nl/api/register', account)
+    axios.post(config.API_URL+'/api/register', account)
     .then(res => {
       console.log(res)
     })

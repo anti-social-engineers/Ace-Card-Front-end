@@ -4,13 +4,15 @@ import '../../../Styles/css/bootstrap-theme.min.css'
 import '../../../Styles/css/bootstrap.css'
 import '../../../Styles/css/bootstrap.min.css'
 import '../../../Styles/css/style.css'
-import { NavLink,Redirect} from 'react-router-dom'
+import { NavLink,Router} from 'react-router-dom'
 import Fade from 'react-reveal/Fade';
 import axios from 'axios'
 import jwt from 'jsonwebtoken'
 import config from '../../../config/config'
 import Account from '../../Account';
-
+import Home from '../../Home';
+import Axios from 'axios';
+import auth from '../../../Helper/actions/auth'
 
 class LoginForm extends Component {
    constructor(props){
@@ -28,6 +30,7 @@ class LoginForm extends Component {
       loading: false,
       decodeToken: null,
    }
+
    handleChange = (e) => {
       this.setState({
          [e.target.id]: e.target.value,
@@ -45,21 +48,20 @@ class LoginForm extends Component {
       this.setState({loading: true, logged_in: false, login_status: "none"})
       console.log(this.state.account)
       //Api Call Login
-      axios.post('https://api.aceofclubs.nl/api/login', this.state.account)
+      axios.post(config.API_URL+'/api/login', this.state.account)
          .then(response => {
             console.log(response);
             localStorage.setItem('jwt token',response.data.jsonWebToken)
-            var decodeToken = jwt.verify(response.data.jsonWebToken, config.signature)
-            console.log(decodeToken);
-            this.setState({decodeToken: decodeToken})
+            // var decodeToken = jwt.verify(response.data.jsonWebToken, config.signature)
+            // console.log(decodeToken);
+            // this.setState({decodeToken: decodeToken})
          })
-      
 
       setTimeout(function(){
          //still incorect approach
             if (localStorage.getItem('jwt token') != null) {
                this.setState({login_status: "success"})
-
+               auth.login()
                setTimeout(function () {
                   this.props.toggleVisibility();
                   this.props.setUser(this.state.user);

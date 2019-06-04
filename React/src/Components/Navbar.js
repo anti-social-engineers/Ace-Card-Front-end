@@ -6,6 +6,7 @@ import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {NavLink} from 'react-router-dom';
 import NavbarFormWrapper from './Form/Navbar/NavbarFormWrapper'
+import auth from '../Helper/actions/auth'
 
 class Nav extends Component {
   constructor(props){
@@ -46,6 +47,7 @@ class Nav extends Component {
       this.setState({logged_in: true})
     }
   }
+  
 
   setUser = (user_arr) => {
     this.setState({user: user_arr, logged_in: true});
@@ -56,10 +58,10 @@ class Nav extends Component {
     this.NavbarFormWrapper.current.login.current.setState({loading: false});
     this.setState({nav_loading:true});
     localStorage.removeItem('jwt token')
+    auth.loguit()
     setTimeout(function () {
       this.setState({nav_loading:false});
       this.setState({logged_in: false}, () => console.log(this.state));
-      this.NavbarFormWrapper.current.setState({logged_in: false});
     }.bind(this), 700);
   }
 
@@ -91,7 +93,9 @@ class Nav extends Component {
                           <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
                           <NavLink className="nav-item nav-link" to="/Account">Account</NavLink>
                           <a className="nav-item nav-link">Contact</a>
+                          <NavLink to="/">
                           <a className="nav-item nav-link loading-text--pd" onClick={this.logout}><i class={this.state.nav_loading ? "fas fa-circle-notch fa-spin no-invis" : "invis d-none"}></i>Uitloggen</a>
+                          </NavLink>
                         </div>
                       </div>
                 </nav>
