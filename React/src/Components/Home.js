@@ -7,6 +7,7 @@ import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {connect} from 'react-redux'
 import Nav from '../Components/Navbar';
+import {NavLink} from 'react-router-dom';
 
 class Home extends Component {
 
@@ -66,7 +67,9 @@ class Home extends Component {
 
         <div className="row no-gutterr">
         <div className="col-md" align="center">
+          <NavLink to="/register">
             <button className="main-home-button"><span className="main-button-action">Registreren</span></button>
+          </NavLink>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ import '../Styles/css/style.css'
 import {connect} from 'react-redux'
 import {createAcc} from '../Helper/actions/authorizationAction'
 import RegisterStep2Form from './Form/Home/RegisterStep2/RegisterStep2Form';
-
+import Nav from '../Components/Navbar'
 class RegisterStep2 extends Component {
   constructor(props) {
     super(props);
@@ -64,6 +64,8 @@ class RegisterStep2 extends Component {
 
   render() {
     return (
+      <div>
+      <Nav/>
       <form onSubmit={this.handleSubmit}>
         <div className="content-wrapper">
           <div className="cont">
@@ -75,6 +77,7 @@ class RegisterStep2 extends Component {
           </div>
         </div>
       </form>
+      </div>
     )
   }
 }

@@ -57,10 +57,6 @@ class RegisterForm extends Component {
             console.log("MISMATCH PASSWORD");
             this.setState({form_error: this.form_errors.PASSWORD_MISMATCH});
             return false;
-        } else if (this.state.dummy_data.email == this.state.email) {
-          console.log("Account exists");
-          this.setState({form_error: this.form_errors.ACCOUNT_EXISTS});
-          return false;
         }
         return true;
     }

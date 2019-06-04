@@ -19,7 +19,7 @@ class Register extends Component {
   state = {
     email:'',
     password:'',
-    repeatpassword:''
+    repeatpassword:'',
   }
   
   handleSubmit = (e) => {
@@ -42,37 +42,27 @@ class Register extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <div>
       <Nav/>
-      <div className="content-wrapper">
-        <div className="cont">
-           <div className="row no-gutters">
-             <div className="card-area col-sm-12 col-md-12 col-lg-12 col-xl-7">
-               <div className="textarea">
-               <h3>Account aanmaken</h3>
-               <p>lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
-                    
-
-        </div>
-        <img src={require('../Styles/img/cardbox.png')} alt="" className="acecard" />
-          </div>
-            <div className="formarea col-sm-12 col-md-12 col-lg-12 col-xl-5">
-            <div className="outerform">
-              <div className="form-wrapper">
-
-                <div className="form-title">
-                  <h2>Registreren</h2>
-                  
+      <form onSubmit={this.handleSubmit}>
+        <div className="content-wrapper">
+          <div className="cont">
+            <div className="row no-gutters">
+                <div className="card-area col-sm-12 col-md-12 col-lg-12 col-xl-7">
+                  <div className="textarea">
+                    <h3>Account aanmaken</h3>
+                    <p>lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
                   </div>
                   <img src={require('../Styles/img/cardbox.png')} alt="" className="acecard" />
                 </div>
                 <div className="formarea col-sm-12 col-md-12 col-lg-12 col-xl-5">
-                  <RegisterForm createAcc={this.createAcc} timeout={300000} ref={this.registerform}/>
+                  <RegisterForm createAcc={this.props.createAcc} timeout={300000} ref={this.registerform}/>
                 </div>
               </div>
           </div>    
         </div>
       </form>
+      </div>
                 
     )
   }
