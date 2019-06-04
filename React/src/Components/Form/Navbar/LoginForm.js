@@ -4,11 +4,14 @@ import '../../../Styles/css/bootstrap-theme.min.css'
 import '../../../Styles/css/bootstrap.css'
 import '../../../Styles/css/bootstrap.min.css'
 import '../../../Styles/css/style.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink,Redirect} from 'react-router-dom'
 import Fade from 'react-reveal/Fade';
 import axios from 'axios'
 import jwt from 'jsonwebtoken'
 import config from '../../../config/config'
+import Account from '../../Account';
+
+
 class LoginForm extends Component {
    constructor(props){
       super(props);
@@ -23,29 +26,38 @@ class LoginForm extends Component {
       logged_in: false,
       login_status: "none",
       loading: false,
+      decodeToken: null,
    }
+   handleChange = (e) => {
+      this.setState({
+         [e.target.id]: e.target.value,
+         account:{email:this.refs.email.value, password:this.refs.password.value}}
+
+      )
+    } 
    handleSubmit = () => {
       console.log("INSIDE LOGINFORM");
-      this.setState({account:{email:this.refs.email.value, password:this.refs.password.value}, loading: true, logged_in: false, login_status: "none"});
       var logininfo = document.getElementsByClassName("login-info")[0];
 
       if (logininfo.classList.contains("animated")){
          logininfo.classList.remove("animated", "shake");
       }
-
+      this.setState({loading: true, logged_in: false, login_status: "none"})
       console.log(this.state.account)
       //Api Call Login
       axios.post('https://api.aceofclubs.nl/api/login', this.state.account)
-         .then(function (response) {
+         .then(response => {
             console.log(response);
             localStorage.setItem('jwt token',response.data.jsonWebToken)
             var decodeToken = jwt.verify(response.data.jsonWebToken, config.signature)
             console.log(decodeToken);
+            this.setState({decodeToken: decodeToken})
          })
       
 
       setTimeout(function(){
-            if (this.state.email === "selim" && this.state.password === "test") {
+         //still incorect approach
+            if (localStorage.getItem('jwt token') != null) {
                this.setState({login_status: "success"})
 
                setTimeout(function () {
@@ -61,7 +73,8 @@ class LoginForm extends Component {
             }
 
             this.setState({logged_in:true});
-      }.bind(this), 400);
+         }.bind(this), 400);
+
    }
 
    render() {
@@ -79,13 +92,13 @@ class LoginForm extends Component {
                <div className="form-content">
                   <div className={this.state.loading ? "d-none" : "inputs"}>
                      <div className="group pb-5">      
-                        <input type="text" id="email" ref="email" required/>
+                        <input type="email" id="email" ref="email" onChange={this.handleChange} required/>
                         <span className="highlight"></span>
                         <span className="bar"></span>
                         <label>E-mail</label>
                      </div>
                      <div className="group pb-5">      
-                        <input type="password" id="password" ref="password" required/>
+                        <input type="password" id="password" ref="password" onChange={this.handleChange} required/>
                         <span className="highlight"></span>
                         <span className="bar"></span>
                         <label>Wachtwoord</label>
@@ -110,8 +123,7 @@ class LoginForm extends Component {
             </div>
             <div className="row login-actions">
                   <div className="col">
-                     <NavLink className="dark-link" to="/Register">Nog geen account?</NavLink>
-
+                     <NavLink className="dark-link" onClick={this.props.toggleVisibility} to="/Register">Nog geen account?</NavLink>
                   </div>
                   <div className="col">
                      <button className="main-button main-button--transparent float-right">

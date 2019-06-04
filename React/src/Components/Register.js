@@ -8,6 +8,8 @@ import {connect} from 'react-redux'
 import {createAcc} from '../Helper/actions/authorizationAction'
 import RegisterForm from './Form/Home/RegisterForm'
 import axios from 'axios'
+import Nav from '../Components/Navbar';
+
 
 class Register extends Component {
   constructor(props) {
@@ -17,7 +19,7 @@ class Register extends Component {
   state = {
     email:'',
     password:'',
-    repeatpassword:''
+    repeatpassword:'',
   }
   
   handleSubmit = (e) => {
@@ -31,15 +33,17 @@ class Register extends Component {
     console.log(account)
     axios.post('https://api.aceofclubs.nl/api/register', account)
     .then(res => {
-      console.log('test' + res)
+      console.log(res)
     })
     .then(err => {
-      console.log('error sending request'+"["+ err +"]")
+      console.log(err)
     })
-  }
+  }  
 
   render() {
     return (
+      <div>
+      <Nav/>
       <form onSubmit={this.handleSubmit}>
         <div className="content-wrapper">
           <div className="cont">
@@ -52,21 +56,21 @@ class Register extends Component {
                   <img src={require('../Styles/img/cardbox.png')} alt="" className="acecard" />
                 </div>
                 <div className="formarea col-sm-12 col-md-12 col-lg-12 col-xl-5">
-                  <RegisterForm createAcc={this.createAcc} timeout={300000} ref={this.registerform}/>
-                </div>
+                <RegisterForm createAcc={this.createAcc} timeout={300000} ref={this.registerform}/>                </div>
               </div>
           </div>    
         </div>
       </form>
+      </div>
                 
     )
   }
 }
 
-const ObjToProps = (object) => {
-  return {
-    createAcc: (account) => object(createAcc(account))
-  }
-}
+// const ObjToProps = (object) => {
+//   return {
+//     createAcc: (account) => object(createAcc(account))
+//   }
+// }
 
-export default connect(null, ObjToProps)(Register)
+export default Register

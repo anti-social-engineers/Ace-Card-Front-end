@@ -47,7 +47,7 @@ class LostPassForm extends Component {
         }
         
         setTimeout(function(){
-              if (this.state.email === "lel") {
+              if (this.state.email === "selimaydi@gmail.com") {
                 // Valid email
                 this.setState({submission_status: "success"})
                 console.log("SENT EMAIL");
@@ -82,7 +82,7 @@ class LostPassForm extends Component {
                   <div className="form-content">
                      <div className="inputs">
                         <div className={this.state.loading ? "d-none" : "group pb-5"}>      
-                           <input type="text" id="email" ref="email" required/>
+                           <input type="email" id="email" ref="email" required/>
                            <span className="highlight"></span>
                            <span className="bar"></span>
                            <label>E-mail</label>
