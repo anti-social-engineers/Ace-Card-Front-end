@@ -87,7 +87,7 @@ componentDidMount(){
                                 </div>
                             </div>
                             <div>
-                                <button className="main-button account-button float-right"><span className="main-button-action">Wachtwoord wijzigen</span></button>
+                                <button className="account-button float-right"><span className="main-button-action">Wachtwoord wijzigen</span></button>
                             </div>
                         </div>
                     </div>
