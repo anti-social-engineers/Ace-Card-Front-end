@@ -33,12 +33,12 @@ class Register extends Component {
     console.log(account)
     axios.post('https://api.aceofclubs.nl/api/register', account)
     .then(res => {
-      console.log('test' + res)
+      console.log(res)
     })
     .then(err => {
-      console.log('error sending request'+"["+ err +"]")
+      console.log(err)
     })
-  }
+  }  
 
   render() {
     return (
@@ -56,8 +56,7 @@ class Register extends Component {
                   <img src={require('../Styles/img/cardbox.png')} alt="" className="acecard" />
                 </div>
                 <div className="formarea col-sm-12 col-md-12 col-lg-12 col-xl-5">
-                  <RegisterForm createAcc={this.props.createAcc} timeout={300000} ref={this.registerform}/>
-                </div>
+                <RegisterForm createAcc={this.createAcc} timeout={300000} ref={this.registerform}/>                </div>
               </div>
           </div>    
         </div>

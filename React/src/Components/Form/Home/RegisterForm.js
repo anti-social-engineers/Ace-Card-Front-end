@@ -74,7 +74,7 @@ class RegisterForm extends Component {
         }
 
         console.log("Actually submitting");
-        this.setState({account:{email: this.state.email.value, password: this.state.password.value}, loading:true});
+        this.setState({account:{email: this.state.email, password: this.state.password}, loading:true});
         var logininfo = document.getElementsByClassName("login-info")[0];
   
         if (logininfo.classList.contains("animated")){
@@ -88,7 +88,7 @@ class RegisterForm extends Component {
             if (isValid) {
               // Valid email
               this.setState({submission_status: "success"})
-              // this.props.createAcc(this.state.account);
+              this.props.createAcc(this.state.account);
               console.log("Created account");
             } else {
               console.log("Server side validation failed");

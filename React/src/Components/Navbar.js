@@ -16,9 +16,10 @@ class Nav extends Component {
     login_clicked:false,
     logged_in:false,
     user:{},
-    nav_loading: false
+    nav_loading: false,
+        
   }
-
+  
   handleLogin = (e) => {
     this.toggleLoginHeader();
   }
@@ -39,13 +40,22 @@ class Nav extends Component {
     }
   }
 
+  componentDidMount=()=>{
+    if(localStorage.getItem('jwt token') != null)
+    {
+      this.setState({logged_in: true})
+    }
+  }
+
   setUser = (user_arr) => {
     this.setState({user: user_arr, logged_in: true});
+    
   }
 
   logout = () => {
     this.NavbarFormWrapper.current.login.current.setState({loading: false});
     this.setState({nav_loading:true});
+    localStorage.removeItem('jwt token')
     setTimeout(function () {
       this.setState({nav_loading:false});
       this.setState({logged_in: false}, () => console.log(this.state));
@@ -56,8 +66,7 @@ class Nav extends Component {
   toggleVisibility = () => {
     this.setState({login_clicked: !this.login_clicked}, () => console.log("CHANGE VIS"));
   }
-
-  render() {
+  render(){
     var login_class = this.state.login_clicked ? "header header--full" : "header";
           return (<header className={login_class}>
               <nav className="navbar navbar-home navbar-expand-lg justify-content-between">
@@ -76,6 +85,7 @@ class Nav extends Component {
                           <a className="nav-item nav-link" onClick={this.handleLogin}>Inloggen</a>
                           <NavLink className="nav-item nav-link" to="/AddClub">Contact</NavLink>
                         </div>
+                        
                         <div className={this.state.logged_in ? "navbar-nav no-invis" : "invis d-none"}>
                           <span className={this.state.user ? "nav-item nav-link user-nav" : "d-none"}>{this.state.user ? this.state.user.email : ""}</span>
                           <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
