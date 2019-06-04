@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import RegisterInfoBar from '../RegisterInfoBar';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
-
+import MaskedInput from 'react-text-mask'
 import MomentLocaleUtils, {
     formatDate,
     parseDate,
@@ -29,7 +29,11 @@ class RegisterStep1 extends Component {
 
     handleChange = (e) => {
         this.props.handleChange(e.target.id, e.target.value);
-    } 
+    }
+
+    handleDate = () => {
+        this.props.handleDate();
+    }
 
     render() {
         return (
@@ -74,7 +78,21 @@ class RegisterStep1 extends Component {
                     <div className="group row">
                         <div className="col pb-5">
                             <div className="input-wrapper">
-                                <input type="text" id="postcode" value={this.props.values.postcode} onChange={this.handleChange} ref="postcode" required />
+                                {/* <input type="text" id="postcode" value={this.props.values.postcode} onChange={this.handleChange} ref="postcode" required /> */}
+                                <MaskedInput
+                                    mask={[/[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[A-Z]/i, /[A-Z]/i]}
+                                    guide={true}
+                                    id="postcode"
+                                    type="text"
+                                    onFocus={(e) => e.target.placeholder = "1234AB"}
+                                    onBlur={(e) => e.target.placeholder = ""}
+                                    onChange={() => {}}
+                                    value={this.props.values.postcode}
+                                    onChange={this.handleChange}
+                                    ref="postcode"
+                                    pipe={(v) => {return v.toUpperCase()}}
+                                    required
+                                />
                                 <span className="highlight" />
                                 <span className="bar" />
                                 <label>Postcode</label>
@@ -89,11 +107,11 @@ class RegisterStep1 extends Component {
                             </div>
                         </div>
                         <div className="col pb-5">
-                            <div className="input-wrapper">
-                                <input type="text" id="toevoeging" value={this.props.values.toevoeging} onChange={this.handleChange} ref="toevoeging" required />
+                            <div className="input-wrapper notreqq">
+                                <input type="text" id="toevoeging" value={this.props.values.toevoeging || ""} placeholder='Toevoeging' onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = "Toevoeging"}  onChange={this.handleChange} ref="toevoeging" />
                                 <span className="highlight" />
                                 <span className="bar" />
-                                <label>Toevoeging</label>
+                                <label class="noreq--label">Toevoeging</label>
                             </div>
                         </div>
                     </div>
@@ -105,12 +123,16 @@ class RegisterStep1 extends Component {
                         <DayPickerInput
                             formatDate={formatDate}
                             parseDate={parseDate}
-                            placeholder={this.props.values.geboortedatum || "JJJJ-MM-DD"}
+                            placeholder={this.props.values.geboortedatum !== "" ? this.props.values.geboortedatum : "JJJJ-MM-DD" }
+                            value={this.props.values.geboortedatum}
                             dayPickerProps={{
                                 locale: 'nl',
                                 localeUtils: MomentLocaleUtils,
                             }}
-                            onDayChange={this.props.handleDate}
+                            inputProps={
+                                { required: true }
+                            } 
+                            onDayChange={this.handleDate}
                             ref="dayp"
                         />
                     </div>
@@ -121,7 +143,7 @@ class RegisterStep1 extends Component {
                     <div className="row radio-wrapper pb-4">
                         <div className="col-sm-2 col-xs-2 col-md-3 col-lg-2 col-xl-1">
                             <div className="radio">
-                                <label><input type="radio" name="optradio" id="geslacht" onChange={this.handleChange} ref="geslachtman" value="man" checked={1 ? this.props.values.geslacht === "man" : 0} />Man</label>
+                                <label><input type="radio" name="optradio" id="geslacht" onChange={this.handleChange} ref="geslachtman" value="man" required checked={1 ? this.props.values.geslacht === "man" : 0} />Man</label>
                             </div>
                         </div>
                         <div className="col-sm-2 col-xs-2 col-md-3 col-lg-2 col-xl-1">

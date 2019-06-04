@@ -60,16 +60,17 @@ class RegisterStep2 extends Component {
   handleSubmit = (e) => {
       // e.preventDefault();
       console.log("submitting form");
+      console.log(this.refs.form);
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} ref="form">
         <div className="content-wrapper">
           <div className="cont">
             <div className="row no-gutters">
               <div className="formarea col">
-                <RegisterStep2Form values={this.state} handleChange={this.handleChange} handleDate={this.handleDate} switchView={this.switchView} current_view={this.state.current_view} ref={this.registerform}/>
+                <RegisterStep2Form values={this.state} form={this.refs.form} handleChange={this.handleChange} handleDate={this.handleDate} switchView={this.switchView} current_view={this.state.current_view} ref={this.registerform}/>
               </div>
             </div>
           </div>

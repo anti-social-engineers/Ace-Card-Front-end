@@ -101,8 +101,12 @@ class RegisterStep2Form extends Component {
 
     updateNext = (e) => {
       e.preventDefault();
-      if (this.props.current_view < 4) {
-        this.props.switchView(this.props.current_view + 1);
+      console.log(this.props.form);
+      this.props.form.reportValidity();
+      if (this.props.form.checkValidity()){
+        if (this.props.current_view < 4) {
+          this.props.switchView(this.props.current_view + 1);
+        }
       }
     }
 
@@ -137,6 +141,7 @@ class RegisterStep2Form extends Component {
                   <div class="d-flex">
                     {this.props.current_view > 1 && this.props.current_view < 4 && <button className="main-button--prev main-button--margin mr-4" onClick={this.updatePrev}><span className="main-button-action">Vorige</span></button>}
                     {this.props.current_view < 4 && this.state.allow_next && <button className="main-button main-button--margin ml-auto" onClick={this.updateNext}><span className="main-button-action">Volgende</span></button>}                  
+                    {this.props.current_view === 4 &&  <button className="main-button main-button--margin ml-auto" onClick={this.updateNext}><span className="main-button-action">Inloggen</span></button>}                  
                   </div>
                 </div>
         );

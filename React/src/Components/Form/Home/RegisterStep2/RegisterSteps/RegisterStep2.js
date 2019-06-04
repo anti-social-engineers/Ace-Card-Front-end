@@ -100,6 +100,7 @@ class RegisterStep2 extends Component {
                         allowImageValidateSize={true}
                         allowFileSizeValidation={true}
                         maxFileSize={"1MB"}
+                        required={true}
                         imageValidateSizeMinWidth={300}
                         imageValidateSizeMaxWidth={800}
                         imageValidateSizeMinHeight={300}
