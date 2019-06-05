@@ -72,7 +72,7 @@ class RegisterStep2 extends Component {
 
     render() {
         return (
-            <div class="col">
+            <div className="col">
                 <div className="row no-gutterr">
                     <Fade>
                         <h1>Foto uploaden</h1>
@@ -139,7 +139,7 @@ class RegisterStep2 extends Component {
                     />
                 </div>
 
-                {this.state.file.length > 0 && !this.state.error && <Fade><div class="row no-gutterr"><p>Het geuploade bestand lijkt geldig te zijn. U kunt door naar de volgende stap om de registratieproces af te ronden.</p></div></Fade>}
+                {this.state.file.length > 0 && !this.state.error && <Fade><div className="row no-gutterr"><p>Het geuploade bestand lijkt geldig te zijn. U kunt door naar de volgende stap om de registratieproces af te ronden.</p></div></Fade>}
             </div>
         );
     }

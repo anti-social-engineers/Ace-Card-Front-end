@@ -20,7 +20,7 @@ class RegisterStep3 extends Component {
                 <div className="row no-gutterr">
                         <div className="akkoord">
                             <input className="input-checkbox" id="akk" type="checkbox" name="akkoord" required></input>
-                            <label for="ckb1">
+                            <label htmlFor="ckb1">
                                 <a href="#">Ik ga akkoord met de voorwaarden</a>
                             </label>
                         </div>

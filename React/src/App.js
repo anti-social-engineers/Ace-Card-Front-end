@@ -23,7 +23,7 @@ class App extends Component {
             <ProtectedRoute path="/Account" component={Account}/>
             <ProtectedRoute path="/Saldo" component={Saldo}/>
             <Route path="/Confirm/:id" component={Confirm} />
-            <ProtectedRoute
+            <Route
              path="/Register2" component={RegisterStep2} 
              />
 

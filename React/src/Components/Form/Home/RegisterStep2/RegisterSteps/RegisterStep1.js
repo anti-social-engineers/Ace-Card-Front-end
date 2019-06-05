@@ -80,7 +80,7 @@ class RegisterStep1 extends Component {
                         <div className="col pb-5">
                             <div className="input-wrapper">
                                 <MaskedInput
-                                    mask={[/[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[A-Z]/i, /[A-Z]/i]}
+                                    mask={[/[1-9]/, /[0-9]/, /[0-9]/, /[0-9]/, /[A-Z]/i, /[A-Z]/i]}
                                     pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}"
                                     guide={false}
                                     id="postcode"
@@ -102,7 +102,7 @@ class RegisterStep1 extends Component {
                         <div className="col pb-5">
                             <div className="input-wrapper">
                                 <MaskedInput
-                                    mask={[/[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/]}
+                                    mask={[/[1-9]/, /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/]}
                                     guide={false}
                                     id="huisnr"
                                     type="text"
@@ -145,7 +145,7 @@ class RegisterStep1 extends Component {
                     </div>
                     <div className="group row pb-4">
                     <div className="col-md-5">
-                            <input type="date" value={this.props.values.geboortedatum} onChange={this.handleDate} max={this.getDOB(18)} min={this.getDOB(80)}></input>
+                            <input type="date" value={this.props.values.geboortedatum} onChange={this.handleDate} max={this.getDOB(18)} min={this.getDOB(80)} required></input>
                     </div>
                     </div>
                     <div className="form-label">

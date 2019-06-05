@@ -67,7 +67,7 @@ class RegisterStep2 extends Component {
     return (
       <div>
       <Nav/>
-      <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} ref="form">
         <div className="content-wrapper">
           <div className="cont">
             <div className="row no-gutters">

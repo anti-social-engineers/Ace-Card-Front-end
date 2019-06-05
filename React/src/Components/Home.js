@@ -59,8 +59,8 @@ class Home extends Component {
                   <p>Lorum Ipsum Je Weet Zelf gekke Tekskt hierzo</p>
               </div>   
           </div>
-          <div class="col-md" align="center">
-              <div class="squareskew">
+          <div className="col-md" align="center">
+              <div className="squareskew">
               <img src={require('../Styles/img/party.png')} alt="" className="imgMargin"/>
                 <h4>Feest er op los!</h4>
                 <p>Nog Meer gekke Lorum Ipsum Tekst jwz</p>

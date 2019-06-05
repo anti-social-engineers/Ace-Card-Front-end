@@ -8,6 +8,10 @@ class RegisterStep2Form extends Component {
         super(props);
     }
 
+    componentDidMount(){
+      console.log(this.props.form);
+    }
+
     state = {
         submission_status: "none",
         loading: false,
@@ -100,12 +104,14 @@ class RegisterStep2Form extends Component {
      }
 
     updateNext = (e) => {
-      e.preventDefault();
       console.log(this.props.form);
-      this.props.form.reportValidity();
-      if (this.props.form.checkValidity()){
-        if (this.props.current_view < 4) {
-          this.props.switchView(this.props.current_view + 1);
+      if (this.props.form){
+        e.preventDefault();
+        this.props.form.reportValidity();
+        if (this.props.form.checkValidity()) {
+          if (this.props.current_view < 4) {
+            this.props.switchView(this.props.current_view + 1);
+          }
         }
       }
     }
