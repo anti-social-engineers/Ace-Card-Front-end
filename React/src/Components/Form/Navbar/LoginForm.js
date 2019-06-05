@@ -4,8 +4,15 @@ import '../../../Styles/css/bootstrap-theme.min.css'
 import '../../../Styles/css/bootstrap.css'
 import '../../../Styles/css/bootstrap.min.css'
 import '../../../Styles/css/style.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink,Router} from 'react-router-dom'
 import Fade from 'react-reveal/Fade';
+import axios from 'axios'
+import jwt from 'jsonwebtoken'
+import config from '../../../config/config'
+import Account from '../../Account';
+import Home from '../../Home';
+import Axios from 'axios';
+import auth from '../../../Helper/actions/auth'
 
 class LoginForm extends Component {
 
@@ -13,29 +20,50 @@ class LoginForm extends Component {
       user: {},
       email: "",
       password: "",
+      account: {email: "", password: ""},
       loading: false,
       logged_in: false,
-      login_status: "none"
+      login_status: "none",
+      loading: false,
+      decodeToken: null,
    }
 
+   handleChange = (e) => {
+      this.setState({
+         [e.target.id]: e.target.value,
+         account:{email:this.refs.email.value, password:this.refs.password.value}}
+
+      )
+    } 
    handleSubmit = () => {
       console.log("INSIDE LOGINFORM");
-      this.setState({user:{email:this.refs.email.value}, email:this.refs.email.value, password:this.refs.password.value, loading: true, logged_in: false, login_status: "none"});
       var logininfo = document.getElementsByClassName("login-info")[0];
 
       if (logininfo.classList.contains("animated")){
          logininfo.classList.remove("animated", "shake");
       }
-      
-      setTimeout(function(){
-            if (this.state.email === "selimaydi@gmail.com" && this.state.password === "test") {
-               this.setState({login_status: "success"})
+      this.setState({loading: true, logged_in: false, login_status: "none"})
+      console.log(this.state.account)
+      //Api Call Login
+      axios.post(config.API_URL+'/api/login', this.state.account)
+         .then(response => {
+            console.log(response);
+            localStorage.setItem('jwt token',response.data.jsonWebToken)
+            // var decodeToken = jwt.verify(response.data.jsonWebToken, config.signature)
+            // console.log(decodeToken);
+            // this.setState({decodeToken: decodeToken})
+         })
 
+      setTimeout(function(){
+         //still incorect approach
+            if (localStorage.getItem('jwt token') != null) {
+               this.setState({login_status: "success"})
+               auth.login()
                setTimeout(function () {
                   this.props.toggleVisibility();
                   this.props.setUser(this.state.user);
                }.bind(this), 1000);
-
+               
             } else {
                var email_field = document.getElementById("email");
                this.setState({login_status: "wrong", loading: false, logged_in: false});
@@ -44,7 +72,8 @@ class LoginForm extends Component {
             }
 
             this.setState({logged_in:true});
-      }.bind(this), 400);
+         }.bind(this), 400);
+
    }
 
    render() {
@@ -57,18 +86,18 @@ class LoginForm extends Component {
                </div>
                </Fade>
                   <div className="login-info">
-                  <span className={this.state.login_status === "wrong" && !this.state.loading ? "loading-text" : "d-none invis"}><i className="fas fa-exclamation-circle"></i>Inloggen mislukt.</span>
+                  <span className={this.state.login_status === "wrong" && !this.state.loading ? "loading-text" : "d-none invis"}><i class="fas fa-exclamation-circle"></i>Inloggen mislukt.</span>
                </div>
                <div className="form-content">
                   <div className={this.state.loading ? "d-none" : "inputs"}>
                      <div className="group pb-5">      
-                        <input type="email" id="email" ref="email" required/>
+                        <input type="email" id="email" ref="email" onChange={this.handleChange} required/>
                         <span className="highlight"></span>
                         <span className="bar"></span>
                         <label>E-mail</label>
                      </div>
                      <div className="group pb-5">      
-                        <input type="password" id="password" ref="password" required/>
+                        <input type="password" id="password" ref="password" onChange={this.handleChange} required/>
                         <span className="highlight"></span>
                         <span className="bar"></span>
                         <label>Wachtwoord</label>

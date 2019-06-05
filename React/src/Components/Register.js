@@ -7,6 +7,10 @@ import '../Styles/css/style.css'
 import {connect} from 'react-redux'
 import {createAcc} from '../Helper/actions/authorizationAction'
 import RegisterForm from './Form/Home/RegisterForm'
+import axios from 'axios'
+import Nav from '../Components/Navbar';
+import config from '../config/config'
+
 
 class Register extends Component {
   constructor(props) {
@@ -16,7 +20,7 @@ class Register extends Component {
   state = {
     email:'',
     password:'',
-    repeatpassword:''
+    repeatpassword:'',
   }
   
   handleSubmit = (e) => {
@@ -26,8 +30,21 @@ class Register extends Component {
     // this.props.createAcc(this.registerform.current.state.account);
   }
 
+  createAcc(account){
+    console.log(account)
+    axios.post(config.API_URL+'/api/register', account)
+    .then(res => {
+      console.log(res)
+    })
+    .then(err => {
+      console.log(err)
+    })
+  }  
+
   render() {
     return (
+      <div>
+      <Nav/>
       <form onSubmit={this.handleSubmit}>
         <div className="content-wrapper">
           <div className="cont">
@@ -40,12 +57,12 @@ class Register extends Component {
                   <img src={require('../Styles/img/cardbox.png')} alt="" className="acecard" />
                 </div>
                 <div className="formarea col-sm-12 col-md-12 col-lg-12 col-xl-5">
-                  <RegisterForm createAcc={this.props.createAcc} timeout={300000} ref={this.registerform}/>
-                </div>
+                <RegisterForm createAcc={this.createAcc} timeout={300000} ref={this.registerform}/>                </div>
               </div>
           </div>    
         </div>
       </form>
+      </div>
                 
     )
   }

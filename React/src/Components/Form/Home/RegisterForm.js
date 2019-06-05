@@ -8,7 +8,6 @@ class RegisterForm extends Component {
         password: "",
         repeat_password: "",
         account: {email: "", password: ""},
-        dummy_data: {email: "lel@gmail.com", password: "test"},
         submission_status: "none",
         loading: false,
         form_submit_count: 0,
@@ -54,16 +53,11 @@ class RegisterForm extends Component {
             console.log("MISMATCH PASSWORD");
             this.setState({form_error: this.form_errors.PASSWORD_MISMATCH});
             return false;
-        } else if (this.state.dummy_data.email === this.state.email) {
-          console.log("Account exists");
-          this.setState({form_error: this.form_errors.ACCOUNT_EXISTS});
-          return false;
         }
-
         return true;
     }
 
-    handleSubmit = () => {
+    handleSubmit = (e) => {
         if (!this.isValidForm()) {
           console.log("FAILED VALIDATION");
           return;
@@ -76,7 +70,7 @@ class RegisterForm extends Component {
         }
 
         console.log("Actually submitting");
-        this.setState({account:{email: this.state.email.value, password: this.state.password.value}, loading:true});
+        this.setState({account:{email: this.state.email, password: this.state.password}, loading:true});
         var logininfo = document.getElementsByClassName("login-info")[0];
   
         if (logininfo.classList.contains("animated")){
@@ -90,7 +84,7 @@ class RegisterForm extends Component {
             if (isValid) {
               // Valid email
               this.setState({submission_status: "success"})
-              // this.props.createAcc(this.state.account);
+              this.props.createAcc(this.state.account);
               console.log("Created account");
             } else {
               console.log("Server side validation failed");
