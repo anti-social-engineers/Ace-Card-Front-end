@@ -1,4 +1,4 @@
-import React, { Component , useState } from 'react';
+import React, { Component } from 'react';
 import Fade from 'react-reveal/Fade';
 
 import { FilePond, registerPlugin } from 'react-filepond';
@@ -30,19 +30,17 @@ registerPlugin(FilePondPluginImageExifOrientation,
 );
 
 class RegisterStep2 extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
-        this.setState({file: this.props.file});
-    }
 
     state = {
         file: [],
         error: false,
         allow_next: false
     }
+
+    componentDidMount() {
+        this.setState({file: this.props.file});
+    }
+
 
     handleInit() {
         console.log('FilePond instance has initialised', this.pond);
@@ -63,8 +61,6 @@ class RegisterStep2 extends Component {
     }
 
     onAddFile = (error, file) => {
-        console.log("FILE HAS BEEN ADDED");
-        // console.log(file);
         if (error) {
             this.setState({error: true});
         } else {
@@ -75,23 +71,15 @@ class RegisterStep2 extends Component {
     }
 
     render() {
-        // const [files, setFiles] = useState([]);
         return (
             <div class="col">
-                <div class="row no-gutterr">
+                <div className="row no-gutterr">
                     <Fade>
                         <h1>Foto uploaden</h1>
                     </Fade>
                 </div>
                 
-
-                {/* <FilePond
-                    files={this.state.files}
-                    allowMultiple={true}
-                    onupdatefiles={this.setState}
-                    labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-                /> */}
-                <div class="row no-gutterr">
+                <div className="row no-gutterr">
                     <FilePond
                         ref={ref => (this.pond = ref)}
                         files={this.props.file}
@@ -100,6 +88,7 @@ class RegisterStep2 extends Component {
                         allowImageValidateSize={true}
                         allowFileSizeValidation={true}
                         maxFileSize={"1MB"}
+                        required={true}
                         imageValidateSizeMinWidth={300}
                         imageValidateSizeMaxWidth={800}
                         imageValidateSizeMinHeight={300}

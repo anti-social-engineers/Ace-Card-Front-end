@@ -72,7 +72,7 @@ class Nav extends Component {
     var login_class = this.state.login_clicked ? "header header--full" : "header";
           return (<header className={login_class}>
               <nav className="navbar navbar-home navbar-expand-lg justify-content-between">
-                      <a className="navbar-brand" href="#">acecard</a>
+                      <NavLink className="navbar-brand" to="/">acecard</NavLink>
                       <button className="navbar-toggler third-button " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                           <div className="animated-icon3">
                               <span></span>

@@ -15,9 +15,6 @@ import Axios from 'axios';
 import auth from '../../../Helper/actions/auth'
 
 class LoginForm extends Component {
-   constructor(props){
-      super(props);
-   }
 
    state = {
       user: {},
@@ -111,7 +108,7 @@ class LoginForm extends Component {
                         </div>
                         <div className="col text-right">
                            <input className="input-checkbox" id="ckb1" type="checkbox" name="remember-me"/>
-                           <label for="ckb1" className="rememberme">
+                           <label htmlFor="ckb1" className="rememberme">
                            Remember me
                            </label>
                         </div>

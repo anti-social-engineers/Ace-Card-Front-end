@@ -96,7 +96,7 @@ a.nav-item.nav-link {
     flex-grow: 0;
 }
 
-.navbar-brand {
+.navbar-brand, .navbar-brand:hover, .navbar-brand:focus {
     color: white;
 }
 
@@ -594,11 +594,7 @@ a.nav-item.nav-link {
 	background-color: transparent;
 }
 
-/* .inputs .group {
-    padding-bottom: 3rem;
-} */
-
-.group input[type=text] {
+.group input[type=text], .group input[type=date] {
 	font-size: 14px;
 }
 
@@ -627,7 +623,7 @@ a.nav-item.nav-link {
 
 /* LABEL ======================================= */
 
-.form-label p, .group label{
+.form-label p, .group label, .group input::placeholder{
 	color: #999;
 	font-size: 13px;
 	font-weight: normal;
@@ -647,10 +643,34 @@ a.nav-item.nav-link {
 /* active state */
 
 .group input:focus~label,
-.group input:valid~label {
+.group input:valid~label
+{
 	top: -20px;
 	font-size: 11px;
 	color: #007bff;
+}
+
+.notreqq input:focus~label
+{
+    top: -20px !important;
+	font-size: 11px;
+    color: #007bff !important;
+    opacity: 1;
+}
+
+.notreqq input:focus~::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.noreq {
+    top: initial;
+    color: inherit;
+}
+
+.noreq--label {
+    top: 10px !important;
+    opacity: 0;
+    color: #999 !important;
 }
 
 /* BOTTOM BARS ================================= */
@@ -719,11 +739,13 @@ a.nav-item.nav-link {
 .login--hidden {
     transition: 0.5s ease-in-out;
     opacity: 0;
+    display: none;
 }
 
 .login--visible {
     transition: 0.5s ease-in-out;
     opacity: 1;
+    display: block;
 }
 
 .login-options a, .login-options label, .dark-link {
@@ -1276,7 +1298,7 @@ nav ul,nav li {
     padding-top:15px;
 }
 
-.akkoord label {
+.akkoord label { 
     padding-left:10px;
     text-decoration: underline;
 }
@@ -1312,7 +1334,8 @@ nav ul,nav li {
         display: none;
     }
     .header {
-        padding-bottom: 10px;
+        padding: 12px;
+        height: initial !important;
     }
 
 }

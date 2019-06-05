@@ -43,7 +43,7 @@ class RegisterStep2 extends Component {
     this.setState({geboortedatum: this.formatDate(date)});
   }
 
-  formatDate = (date, american=false) => {
+  formatDate = (date, american=true) => {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
@@ -60,6 +60,7 @@ class RegisterStep2 extends Component {
   handleSubmit = (e) => {
       // e.preventDefault();
       console.log("submitting form");
+      console.log(this.refs.form);
   }
 
   render() {
@@ -71,7 +72,7 @@ class RegisterStep2 extends Component {
           <div className="cont">
             <div className="row no-gutters">
               <div className="formarea col">
-                <RegisterStep2Form values={this.state} handleChange={this.handleChange} handleDate={this.handleDate} switchView={this.switchView} current_view={this.state.current_view} ref={this.registerform}/>
+                <RegisterStep2Form values={this.state} form={this.refs.form} handleChange={this.handleChange} handleDate={this.handleDate} switchView={this.switchView} current_view={this.state.current_view} ref={this.registerform}/>
               </div>
             </div>
           </div>
