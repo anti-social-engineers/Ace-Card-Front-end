@@ -1,4 +1,4 @@
-import React, { Component , useState } from 'react';
+import React, { Component } from 'react';
 import Fade from 'react-reveal/Fade';
 
 import { FilePond, registerPlugin } from 'react-filepond';
@@ -30,19 +30,17 @@ registerPlugin(FilePondPluginImageExifOrientation,
 );
 
 class RegisterStep2 extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
-        this.setState({file: this.props.file});
-    }
 
     state = {
         file: [],
         error: false,
         allow_next: false
     }
+
+    componentDidMount() {
+        this.setState({file: this.props.file});
+    }
+
 
     handleInit() {
         console.log('FilePond instance has initialised', this.pond);
@@ -81,7 +79,7 @@ class RegisterStep2 extends Component {
                     </Fade>
                 </div>
                 
-                <div class="row no-gutterr">
+                <div className="row no-gutterr">
                     <FilePond
                         ref={ref => (this.pond = ref)}
                         files={this.props.file}

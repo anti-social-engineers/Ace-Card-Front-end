@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import PasswordStrengthMeter from '../../Tools/PasswordStrengthMeter';
 
 class RegisterForm extends Component {
-    constructor(props){
-        super(props);
-    }
 
     state = {
         email: "",
@@ -39,7 +36,6 @@ class RegisterForm extends Component {
 
     isValidForm = () => {
         console.log("VALIDATING FORM");
-        var logininfo = document.getElementsByClassName("login-info")[0];
 
         if (this.state.form_submit_count >= 5) {
             console.log("Blocking for 5 minutes");
@@ -58,7 +54,7 @@ class RegisterForm extends Component {
             console.log("MISMATCH PASSWORD");
             this.setState({form_error: this.form_errors.PASSWORD_MISMATCH});
             return false;
-        } else if (this.state.dummy_data.email == this.state.email) {
+        } else if (this.state.dummy_data.email === this.state.email) {
           console.log("Account exists");
           this.setState({form_error: this.form_errors.ACCOUNT_EXISTS});
           return false;
@@ -138,7 +134,7 @@ class RegisterForm extends Component {
                       </div>
     
                       <div className="group">      
-                        <input type="password" id="repeat_password" onChange={this.handlePasswordChange} ref="password_repeat" onChange={this.handlePasswordChange} required />
+                        <input type="password" id="repeat_password" onChange={this.handlePasswordChange} ref="password_repeat" required />
                           <span className="highlight"></span>
                           <span className="bar"></span>
                           {this.state.repeat_password && this.state.repeat_password !== this.state.password && <span class="form-helper">Wachtwoord komt niet overeen met herhaal wachtwoord.</span>}

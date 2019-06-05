@@ -96,7 +96,7 @@ a.nav-item.nav-link {
     flex-grow: 0;
 }
 
-.navbar-brand {
+.navbar-brand, .navbar-brand:hover, .navbar-brand:focus {
     color: white;
 }
 

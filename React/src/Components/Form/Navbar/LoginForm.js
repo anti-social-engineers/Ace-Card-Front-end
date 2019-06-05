@@ -8,9 +8,6 @@ import { NavLink } from 'react-router-dom'
 import Fade from 'react-reveal/Fade';
 
 class LoginForm extends Component {
-   constructor(props){
-      super(props);
-   }
 
    state = {
       user: {},
@@ -18,9 +15,9 @@ class LoginForm extends Component {
       password: "",
       loading: false,
       logged_in: false,
-      login_status: "none",
-      loading: false
+      login_status: "none"
    }
+
    handleSubmit = () => {
       console.log("INSIDE LOGINFORM");
       this.setState({user:{email:this.refs.email.value}, email:this.refs.email.value, password:this.refs.password.value, loading: true, logged_in: false, login_status: "none"});

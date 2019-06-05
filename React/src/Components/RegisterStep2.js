@@ -43,7 +43,7 @@ class RegisterStep2 extends Component {
     this.setState({geboortedatum: this.formatDate(date)});
   }
 
-  formatDate = (date, american=false) => {
+  formatDate = (date, american=true) => {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),

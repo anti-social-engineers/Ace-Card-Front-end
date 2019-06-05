@@ -17,7 +17,7 @@ class RegisterStep1 extends Component {
         postcode: "",
         huisnr: "",
         toevoeging: "",
-        geboortedatum: "",
+        geboortedatum: this.props.values.geboortedatum,
         geslacht: "man"
     }
 
@@ -28,7 +28,7 @@ class RegisterStep1 extends Component {
     handleDate = (e) => { 
         if (e.target.checkValidity()) {
             this.props.handleDate(e.target.value);
-            this.setState({geboortedatum: e.target.value})
+            // this.setState({geboortedatum: e.target.value})
         }
     }
 
@@ -145,7 +145,7 @@ class RegisterStep1 extends Component {
                     </div>
                     <div className="group row pb-4">
                     <div className="col-md-5">
-                        <input type="date" onChange={this.handleDate} max={this.getDOB(18)} min={this.getDOB(80)}></input>
+                            <input type="date" value={this.props.values.geboortedatum} onChange={this.handleDate} max={this.getDOB(18)} min={this.getDOB(80)}></input>
                     </div>
                     </div>
                     <div className="form-label">

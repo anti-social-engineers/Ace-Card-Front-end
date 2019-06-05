@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import RegisterStatus from './RegisterTitle/RegisterStatus';
 
 class RegisterTitle extends Component {
 
