@@ -109,7 +109,7 @@ class Saldo extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div classname="row no-gutterr">
+                        <div className="row no-gutterr">
                             <div className="chartMargin">
                                 <canvas
                                 style={{ width: 800, height: 300 }}
