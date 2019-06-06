@@ -25,16 +25,16 @@ class Home extends Component {
       <div>
         <Nav/>
         <div className="container">
-          <div className="row">
+          <div className="row" data-aos="fade-left" data-aos-duration="500">
             <div className="col-md">
                 <div className="mainPageTitle">Uitgaan is nog nooit zo makkelijk geweest</div>
                 <div className="mainPageParagraph">
-                  Weet je eigenlijk wel wat je elke maand uitgeeft tijdens het stappen? Met de ACE-card kom je er direct achter.
-                  Wij importeren je uitgaven veilig en snel en plaatsen ze in één helder overzicht. 
+                  <p>Weet je eigenlijk wel wat je elke maand uitgeeft tijdens het stappen? Met de ACE-card kom je er direct achter.</p>
+                 <p>Wij importeren je uitgaven veilig en snel en plaatsen ze in één helder overzicht.</p>
                 </div>
-                <div className="mainPageParagraph">Stap elke club binnen, dankzij de ACE-card.</div> 
+                <div className="mainPageParagraph"><p>Stap elke club binnen, dankzij de ACE-card.</p></div> 
             </div>
-            <div className="col-md" align="center">
+            <div className="col-md align-self-center" align="center">
                 <div className="squareTop">
                 <img src={require('../Styles/img/card.png')} alt="" className="imgMargin"/>
                     <h4>Placeholder</h4>
@@ -44,7 +44,7 @@ class Home extends Component {
         </div>
         </div>
 
-        <div data-aos="fade-up" data-aos-duration="4000" className="row no-gutters" id="chevron">
+        <div data-aos="fade" data-aos-duration="800" className="row no-gutters" id="chevron">
           <div className="col-md" align="center">
               <div className="squareskew">
                 <img src={require('../Styles/img/card.png')} alt="" className="imgMargin"/>

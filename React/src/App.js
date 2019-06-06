@@ -20,8 +20,8 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/Register" component={Register} />
-            <ProtectedRoute path="/Account" component={Account}/>
-            <ProtectedRoute path="/Saldo" component={Saldo}/>
+            <Route path="/Account" component={Account}/>
+            <Route path="/Saldo" component={Saldo}/>
             <Route path="/Confirm/:id" component={Confirm} />
             <Route
              path="/Register2" component={RegisterStep2} 

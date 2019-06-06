@@ -64,28 +64,30 @@ class Account extends Component {
                             ACE-portal
                         </div>
                         <ul>
-                            <li className="active"  data-aos="fade-right" data-aos-duration="1000">
+                            <li aria-current="page" className="active">
                                 <NavLink className="" to="#">
-                                <i className="fa fa-user fa-1x"></i>
-                                    <span className="nav-text">
+                                    <div data-aos="fade" data-aos-duration="500">
+                                        <i className="fa fa-user fa-1x"></i>
+                                        <span className="nav-text" >
                                             Account
                                     </span>
+                                </div>
                                 </NavLink><span className="sr-only"></span>
                             </li>
                             <li>
                                 <NavLink className="" to="Saldo">
-                                <i className="fa fa-chart-line fa-1x"></i>
-                                    <span className="nav-text">
-                                        Saldo
-                                    </span>
+                                    <i className="fa fa-chart-line fa-1x"></i>
+                                        <span className="nav-text">
+                                            Saldo
+                                        </span>
                                 </NavLink><span className="sr-only"></span>
                             </li>
                             <li>
-                                <NavLink className="" onClick={this.handleLogout} to="/">
-                                <i className="fa fa-sign-out-alt fa-1x"></i>
-                                    <span className="nav-text">
-                                        Log-out
-                                    </span>
+                                <NavLink className="" onClick={this.handleLogout} to="#">
+                                    <i className="fa fa-sign-out-alt fa-1x"></i>
+                                        <span className="nav-text">
+                                            Log-out
+                                        </span>
                                 </NavLink><span className="sr-only"></span>
                             </li>
                         </ul>

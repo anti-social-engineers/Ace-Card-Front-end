@@ -10,7 +10,7 @@ import RegisterForm from './Form/Home/RegisterForm'
 import axios from 'axios'
 import Nav from '../Components/Navbar';
 import config from '../config/config'
-
+import aos from 'aos'
 
 class Register extends Component {
   constructor(props) {
@@ -21,6 +21,12 @@ class Register extends Component {
     email:'',
     password:'',
     repeatpassword:'',
+  }
+
+  componentDidMount = () => {
+    aos.init({
+      duration: 2000
+    })
   }
   
   handleSubmit = (e) => {
@@ -49,14 +55,14 @@ class Register extends Component {
         <div className="content-wrapper">
           <div className="cont">
             <div className="row no-gutters">
-                <div className="card-area col-sm-12 col-md-12 col-lg-12 col-xl-7">
+                <div className="card-area col-sm-12 col-md-12 col-lg-12 col-xl-7" data-aos="fade-left" data-aos-duration="500">
                   <div className="textarea">
                     <h3>Account aanmaken</h3>
                     <p>lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
                   </div>
                   <img src={require('../Styles/img/cardbox.png')} alt="" className="acecard" />
                 </div>
-                <div className="formarea col-sm-12 col-md-12 col-lg-12 col-xl-5">
+                <div className="formarea col-sm-12 col-md-12 col-lg-12 col-xl-5" data-aos="fade-right" data-aos-duration="500">
                 <RegisterForm createAcc={this.createAcc} timeout={300000} ref={this.registerform}/>                </div>
               </div>
           </div>    
