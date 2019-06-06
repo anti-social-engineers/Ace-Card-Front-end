@@ -66,7 +66,7 @@ class Account extends Component {
                         <ul>
                             <li aria-current="page" className="active">
                                 <NavLink className="" to="#">
-                                    <div data-aos="fade" data-aos-duration="500">
+                                    <div data-aos="fade-right" data-aos-duration="400">
                                         <i className="fa fa-user fa-1x"></i>
                                         <span className="nav-text" >
                                             Account

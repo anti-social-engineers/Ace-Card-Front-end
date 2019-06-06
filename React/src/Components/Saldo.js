@@ -76,7 +76,7 @@ class Saldo extends Component {
                             </li>
                             <li className="active">
                                 <NavLink className="" to="#">
-                                    <div data-aos="fade" data-aos-duration="500">
+                                    <div data-aos="fade-right" data-aos-duration="500">
                                         <i className="fa fa-chart-line fa-1x"></i>
                                             <span className="nav-text">
                                                 Saldo
