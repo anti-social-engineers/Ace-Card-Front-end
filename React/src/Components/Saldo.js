@@ -18,7 +18,10 @@ class Saldo extends Component {
     constructor(...args) {
         super(...args);
     
-        this.state = { modalShow: false };
+        this.state = { 
+            modalShow: false,
+            balance: 30
+        };
       }
 
     chartRef = React.createRef();
@@ -119,7 +122,7 @@ class Saldo extends Component {
                                 />
                             </div>
                         </div>
-                        <SaldoModal show={this.state.modalShow} onHide={modalClose}/>                          
+                        <SaldoModal balance={this.state.balance} show={this.state.modalShow} onHide={modalClose}/>                          
                     </div>
                 </div>
             </div>
