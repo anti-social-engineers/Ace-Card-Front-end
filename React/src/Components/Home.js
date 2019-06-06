@@ -5,7 +5,6 @@ import '../Styles/css/bootstrap-theme.min.css'
 import '../Styles/css/bootstrap.css'
 import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
-import {connect} from 'react-redux'
 import Nav from '../Components/Navbar';
 import {NavLink} from 'react-router-dom';
 import config from '../config/config'
@@ -38,7 +37,7 @@ class Home extends Component {
             </div>
             <div className="col-xl-6" align="center">
                 <div className="squareTop">
-                <img src={require('../Styles/img/acecard@2x.png')} alt="" className="imgMargin"/>
+                  <img src={require('../Styles/img/acecard@2x.png')} alt="" className="imgMargin"/>
                 </div>
             </div>
         </div>
