@@ -42,7 +42,7 @@ class Register extends Component {
     .then(res => {
       console.log(res)
     })
-    .then(err => {
+    .catch(err => {
       console.log(err)
     })
   }  

@@ -25,7 +25,7 @@ export class Confirm extends Component {
             console.log(res)
         })
               
-        }
+    }
 
     render() {
         return (

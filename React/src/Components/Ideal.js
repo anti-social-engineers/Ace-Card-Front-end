@@ -5,6 +5,7 @@ import {
   StripeProvider,
   Elements,
 } from 'react-stripe-elements';
+import axios from 'axios'
 
 // You can customize your Elements to give it the look and feel of your site.
 const createOptions = () => {
@@ -29,8 +30,45 @@ const createOptions = () => {
 class _IdealBankForm extends Component {
   state ={
     result: "",
-    newBalance: 0.00
+    newBalance: 0.00,
+    redirect: false
   };
+
+  componentDidMount(){
+    console.log(this.props.queryparams);
+    console.log(this.props.stripe);
+    if (this.props.queryparams.source && this.props.queryparams.client_secret) {
+      console.log("source and clientsecr found");
+      this.props.stripe.retrieveSource({id: this.props.queryparams.source, client_secret: this.props.queryparams.client_secret}).then(({source}) => {
+          console.log(source);
+          if (source.status === 'chargeable') {
+              console.log("chargeable");
+              const body = {
+                source: this.props.queryparams.source,
+                amount: source.amount
+              }
+              console.log("printing body");
+              console.log(body);
+              const header = 'Bearer ' + localStorage.getItem('jwt token')
+              axios.post('https://api.aceofclubs.nl/api/payments/charge', body, {headers:{Authorization: header}})
+                .then(res => {
+                  console.log(res)
+              })
+                .catch(err => {
+                  console.log(err)
+              });
+              
+            // Make a request to your server to charge the Source.
+            // Depending on the Charge status, show your customer the relevant message.
+          } else if (source.status === 'pending') {
+              console.log("chargeable");
+          } else {
+            // Depending on the Source status, show your customer the relevant message.
+            console.log("none of the above statuses")
+          }
+      });
+    }
+  }
 
   updateAddedValue = (e) => {
     if (e.target.value && !isNaN(e.target.value)){
@@ -55,7 +93,7 @@ class _IdealBankForm extends Component {
             name: ev.target.fname.value,
           },
           redirect: {
-            return_url: 'https://your-website.com/ideal-redirect',
+            return_url: 'http://4f52b748.ngrok.io/lel/',
           },
         })
         .then(this.props.handleResult);
@@ -103,7 +141,7 @@ export class Ideal extends Component {
     return (
       <StripeProvider apiKey="pk_test_AKuV25JNq2XSRshR11ZjJpBT002DMqhIMq">
         <Elements>
-          <IdealForm handleResult={this.props.handleResult} balance={this.props.balance} toggleLoad={this.props.toggleLoad} />
+          <IdealForm queryparams={this.props.queryparams} handleResult={this.props.handleResult} balance={this.props.balance} toggleLoad={this.props.toggleLoad} />
         </Elements>
       </StripeProvider>
     );

@@ -10,6 +10,7 @@ import RegisterStep2 from './Components/RegisterStep2';
 import Confirm from './Components/Confirm';
 import {ProtectedRoute} from './protected.route'
 import { Ideal } from './Components/Ideal';
+import SaldoModal from './Components/SaldoModal';
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
             <Route path="/Saldo" component={Saldo}/>
             <Route path="/ideal" component={Ideal}/>
             <Route path="/Confirm/:id" component={Confirm} />
+            <Route path="/lel" component={Saldo}/>
             <Route
              path="/Register2" component={RegisterStep2} 
              />
