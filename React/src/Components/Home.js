@@ -5,7 +5,6 @@ import '../Styles/css/bootstrap-theme.min.css'
 import '../Styles/css/bootstrap.css'
 import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
-import {connect} from 'react-redux'
 import Nav from '../Components/Navbar';
 import {NavLink} from 'react-router-dom';
 import config from '../config/config'
@@ -24,27 +23,27 @@ class Home extends Component {
     return (
       <div>
         <Nav/>
-        <div className="container">
-          <div className="row">
-            <div className="col-md">
+        <div className="container-fluid">
+          <div className="row" data-aos="fade-left" data-aos-duration="500">
+            <div className="col-md-12 col-xl-6 d-flex justify-content-center">
+            <div class="col-md-9">
                 <div className="mainPageTitle">Uitgaan is nog nooit zo makkelijk geweest</div>
                 <div className="mainPageParagraph">
-                  Weet je eigenlijk wel wat je elke maand uitgeeft tijdens het stappen? Met de ACE-card kom je er direct achter.
-                  Wij importeren je uitgaven veilig en snel en plaatsen ze in één helder overzicht. 
+                  <p>Weet je eigenlijk wel wat je elke maand uitgeeft tijdens het stappen? Met de ACE-card kom je er direct achter.</p>
+                 <p>Wij importeren je uitgaven veilig en snel en plaatsen ze in één helder overzicht.</p>
                 </div>
-                <div className="mainPageParagraph">Stap elke club binnen, dankzij de ACE-card.</div> 
+                <div className="mainPageParagraph"><p>Stap elke club binnen, dankzij de ACE-card.</p></div>
             </div>
-            <div className="col-md" align="center">
+            </div>
+            <div className="col-xl-6" align="center">
                 <div className="squareTop">
-                <img src={require('../Styles/img/card.png')} alt="" className="imgMargin"/>
-                    <h4>Placeholder</h4>
-                    <p>Heel Lorum Veel Ipsum tekst Bla Dala</p>
+                  <img src={require('../Styles/img/acecard@2x.png')} alt="" className="imgMargin"/>
                 </div>
             </div>
         </div>
         </div>
 
-        <div data-aos="fade-up" data-aos-duration="4000" className="row no-gutters" id="chevron">
+        <div className="row no-gutters" id="chevron">
           <div className="col-md" align="center">
               <div className="squareskew">
                 <img src={require('../Styles/img/card.png')} alt="" className="imgMargin"/>
@@ -59,8 +58,8 @@ class Home extends Component {
                   <p>Lorum Ipsum Je Weet Zelf gekke Tekskt hierzo</p>
               </div>   
           </div>
-          <div class="col-md" align="center">
-              <div class="squareskew">
+          <div className="col-md" align="center">
+              <div className="squareskew">
               <img src={require('../Styles/img/party.png')} alt="" className="imgMargin"/>
                 <h4>Feest er op los!</h4>
                 <p>Nog Meer gekke Lorum Ipsum Tekst jwz</p>

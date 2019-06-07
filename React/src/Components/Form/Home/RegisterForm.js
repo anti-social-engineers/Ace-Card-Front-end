@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import PasswordStrengthMeter from '../../Tools/PasswordStrengthMeter';
 
 class RegisterForm extends Component {
-    constructor(props){
-        super(props);
-    }
 
     state = {
         email: "",
@@ -38,7 +35,6 @@ class RegisterForm extends Component {
 
     isValidForm = () => {
         console.log("VALIDATING FORM");
-        var logininfo = document.getElementsByClassName("login-info")[0];
 
         if (this.state.form_submit_count >= 5) {
             console.log("Blocking for 5 minutes");
@@ -107,8 +103,8 @@ class RegisterForm extends Component {
                 <div className="form-title">
                   <h2>Registreren</h2>
                 </div>
-                <div class="login-info">
-                     <span className={this.state.form_error ? "loading-text loading-text--small" : "d-none invis"}><i class="fas fa-exclamation-circle"></i>{this.state.form_error}</span>
+                <div className="login-info">
+                     <span className={this.state.form_error ? "loading-text loading-text--small" : "d-none invis"}><i className="fas fa-exclamation-circle"></i>{this.state.form_error}</span>
                 </div>
                   <div className={this.state.loading ? "form-loader" : "d-none form-loader--hidden"}>
                         <span className={this.state.submission_status !== "success" ? "loading-text loading-text--small" : "d-none invis"}><i className="fas fa-circle-notch fa-spin"></i>Email valideren...</span>
@@ -132,10 +128,10 @@ class RegisterForm extends Component {
                       </div>
     
                       <div className="group">      
-                        <input type="password" id="repeat_password" onChange={this.handlePasswordChange} ref="password_repeat" onChange={this.handlePasswordChange} required />
+                        <input type="password" id="repeat_password" onChange={this.handlePasswordChange} ref="password_repeat" required />
                           <span className="highlight"></span>
                           <span className="bar"></span>
-                          {this.state.repeat_password && this.state.repeat_password !== this.state.password && <span class="form-helper">Wachtwoord komt niet overeen met herhaal wachtwoord.</span>}
+                          {this.state.repeat_password && this.state.repeat_password !== this.state.password && <span className="form-helper">Wachtwoord komt niet overeen met herhaal wachtwoord.</span>}
                           <label>Wachtwoord herhalen</label>
                         </div>
                      </div> 

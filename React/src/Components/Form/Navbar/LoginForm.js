@@ -15,9 +15,6 @@ import Axios from 'axios';
 import auth from '../../../Helper/actions/auth'
 
 class LoginForm extends Component {
-   constructor(props){
-      super(props);
-   }
 
    state = {
       user: {},
@@ -51,31 +48,28 @@ class LoginForm extends Component {
       axios.post(config.API_URL+'/api/login', this.state.account)
          .then(response => {
             console.log(response);
-            localStorage.setItem('jwt token',response.data.jsonWebToken)
-            // var decodeToken = jwt.verify(response.data.jsonWebToken, config.signature)
-            // console.log(decodeToken);
-            // this.setState({decodeToken: decodeToken})
-         })
-
-      setTimeout(function(){
-         //still incorect approach
-            if (localStorage.getItem('jwt token') != null) {
-               this.setState({login_status: "success"})
+            if (response.status === 200) {
+               console.log("lel");
+               this.setState({ login_status: "success" })
                auth.login()
                setTimeout(function () {
                   this.props.toggleVisibility();
                   this.props.setUser(this.state.user);
-               }.bind(this), 1000);
-               
-            } else {
-               var email_field = document.getElementById("email");
-               this.setState({login_status: "wrong", loading: false, logged_in: false});
-               logininfo.classList.add("animated","shake");
-               email_field.focus();
+               }.bind(this), 800);
+               this.setState({ logged_in: true });
             }
-
-            this.setState({logged_in:true});
-         }.bind(this), 400);
+            localStorage.setItem('jwt token',response.data.jsonWebToken)
+            // var decodeToken = jwt.verify(response.data.jsonWebToken, config.signature)
+            // console.log(decodeToken);
+            // this.setState({decodeToken: decodeToken})
+         }).catch((err) => {
+            console.log(err);
+            console.log("INCORRECT");
+            var email_field = document.getElementById("email");
+            this.setState({ login_status: "wrong", loading: false, logged_in: false });
+            logininfo.classList.add("animated", "shake");
+            email_field.focus();
+         });
 
    }
 
@@ -89,7 +83,7 @@ class LoginForm extends Component {
                </div>
                </Fade>
                   <div className="login-info">
-                  <span className={this.state.login_status === "wrong" && !this.state.loading ? "loading-text" : "d-none invis"}><i class="fas fa-exclamation-circle"></i>Inloggen mislukt.</span>
+                  <span className={this.state.login_status === "wrong" && !this.state.loading ? "loading-text" : "d-none invis"}><i className="fas fa-exclamation-circle"></i>Inloggen mislukt.</span>
                </div>
                <div className="form-content">
                   <div className={this.state.loading ? "d-none" : "inputs"}>
@@ -111,7 +105,7 @@ class LoginForm extends Component {
                         </div>
                         <div className="col text-right">
                            <input className="input-checkbox" id="ckb1" type="checkbox" name="remember-me"/>
-                           <label for="ckb1" className="rememberme">
+                           <label htmlFor="ckb1" className="rememberme">
                            Remember me
                            </label>
                         </div>

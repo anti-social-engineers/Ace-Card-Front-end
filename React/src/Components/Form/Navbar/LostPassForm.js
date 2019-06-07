@@ -71,9 +71,9 @@ class LostPassForm extends Component {
                   </div>
                 </Fade>
 
-                   <div class="login-info">
-                     <span className={this.state.submission_status === "wrong" && !this.state.loading && this.state.form_submit_count < 5 ? "loading-text" : "d-none invis"}><i class="fas fa-exclamation-circle"></i>Uw email is incorrect of kan niet gevonden worden.</span>
-                     <span className={this.state.form_submit_count >= 5 && !this.state.loading ? "loading-text" : "d-none invis"}><i class="fas fa-exclamation-circle"></i>U heeft het formulier te vaak gestuurd. Probeer nog eens over {this.timeout / 60000} minuten.</span>                  
+                   <div className="login-info">
+                     <span className={this.state.submission_status === "wrong" && !this.state.loading && this.state.form_submit_count < 5 ? "loading-text" : "d-none invis"}><i className="fas fa-exclamation-circle"></i>Uw email is incorrect of kan niet gevonden worden.</span>
+                     <span className={this.state.form_submit_count >= 5 && !this.state.loading ? "loading-text" : "d-none invis"}><i className="fas fa-exclamation-circle"></i>U heeft het formulier te vaak gestuurd. Probeer nog eens over {this.timeout / 60000} minuten.</span>                  
                   </div>
                   <div className={this.state.loading ? "form-loader" : "d-none form-loader--hidden"}>
                         <span className={this.state.submission_status !== "success" ? "loading-text" : "d-none invis"}><i className="fas fa-circle-notch fa-spin"></i>Email valideren...</span>
@@ -89,7 +89,7 @@ class LostPassForm extends Component {
                         </div>
                         <div className={this.state.loading && this.state.submission_status !== "success" ? "d-none" : "row login-options"}>
                            <div className="col back">
-                              <a class="backbutton" onClick={() => this.props.switchView("login")}>Terug naar inloggen</a>
+                              <a className="backbutton" onClick={() => this.props.switchView("login")}>Terug naar inloggen</a>
                            </div>
                         </div>
                      </div>

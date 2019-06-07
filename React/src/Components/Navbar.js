@@ -30,15 +30,7 @@ class Nav extends Component {
   }
 
   toggleLoginHeaderAnimation = () => {
-    var header = document.getElementsByClassName("header")[0];
-    if (this.state.login_clicked){
-      header.classList.add("header--full");
-      header.style.height = "100%";
-      document.getElementById("email").focus();
-    } else {
-      header.classList.remove("header--full");
-      header.style.height = "118px";
-    }
+    document.querySelector('.header').classList.toggle('header--collapsed');
   }
 
   componentDidMount=()=>{
@@ -69,10 +61,9 @@ class Nav extends Component {
     this.setState({login_clicked: !this.login_clicked}, () => console.log("CHANGE VIS"));
   }
   render(){
-    var login_class = this.state.login_clicked ? "header header--full" : "header";
-          return (<header className={login_class}>
+          return (<header className="header header--collapsed">
               <nav className="navbar navbar-home navbar-expand-lg justify-content-between">
-                      <a className="navbar-brand" href="#">acecard</a>
+                      <NavLink className="navbar-brand" to="/">acecard</NavLink>
                       <button className="navbar-toggler third-button " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                           <div className="animated-icon3">
                               <span></span>
@@ -84,7 +75,7 @@ class Nav extends Component {
                         <div className={this.state.logged_in ? "invis d-none" : "navbar-nav no-invis"}>
                           <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
                           <NavLink className="nav-item nav-link" to="/">Over</NavLink>
-                          <a className="nav-item nav-link" onClick={this.handleLogin}>Inloggen</a>
+                          <a className="nav-item nav-link" onClick={this.toggleLoginHeader}>Inloggen</a>
                           <NavLink className="nav-item nav-link" to="/AddClub">Contact</NavLink>
                         </div>
                         
@@ -94,7 +85,7 @@ class Nav extends Component {
                           <NavLink className="nav-item nav-link" to="/Account">Account</NavLink>
                           <a className="nav-item nav-link">Contact</a>
                           <NavLink to="/">
-                          <a className="nav-item nav-link loading-text--pd" onClick={this.logout}><i class={this.state.nav_loading ? "fas fa-circle-notch fa-spin no-invis" : "invis d-none"}></i>Uitloggen</a>
+                          <a className="nav-item nav-link loading-text--pd" onClick={this.logout}><i className={this.state.nav_loading ? "fas fa-circle-notch fa-spin no-invis" : "invis d-none"}></i>Uitloggen</a>
                           </NavLink>
                         </div>
                       </div>

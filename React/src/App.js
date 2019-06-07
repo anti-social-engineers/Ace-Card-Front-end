@@ -9,6 +9,7 @@ import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import RegisterStep2 from './Components/RegisterStep2';
 import Confirm from './Components/Confirm';
 import {ProtectedRoute} from './protected.route'
+import { Ideal } from './Components/Ideal';
 
 class App extends Component {
   render() {
@@ -20,10 +21,11 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/Register" component={Register} />
-            <ProtectedRoute path="/Account" component={Account}/>
-            <ProtectedRoute path="/Saldo" component={Saldo}/>
+            <Route path="/Account" component={Account}/>
+            <Route path="/Saldo" component={Saldo}/>
+            <Route path="/ideal" component={Ideal}/>
             <Route path="/Confirm/:id" component={Confirm} />
-            <ProtectedRoute
+            <Route
              path="/Register2" component={RegisterStep2} 
              />
 

@@ -19,8 +19,8 @@ class RegisterStep3 extends Component {
                 </div>
                 <div className="row no-gutterr">
                         <div className="akkoord">
-                            <input className="input-checkbox" id="akk" type="checkbox" name="akkoord"></input>
-                            <label for="ckb1">
+                            <input className="input-checkbox" id="akk" type="checkbox" name="akkoord" required></input>
+                            <label htmlFor="ckb1">
                                 <a href="#">Ik ga akkoord met de voorwaarden</a>
                             </label>
                         </div>
