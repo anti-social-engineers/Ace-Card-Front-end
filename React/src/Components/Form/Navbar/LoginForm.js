@@ -38,6 +38,9 @@ class LoginForm extends Component {
    handleSubmit = () => {
       console.log("INSIDE LOGINFORM");
       var logininfo = document.getElementsByClassName("login-info")[0];
+      
+      
+
 
       if (logininfo.classList.contains("animated")){
          logininfo.classList.remove("animated", "shake");
@@ -47,6 +50,7 @@ class LoginForm extends Component {
       //Api Call Login
       axios.post(config.API_URL+'/api/login', this.state.account)
          .then(response => {
+            
             console.log(response);
             if (response.status === 200) {
                console.log("lel");

@@ -18,7 +18,7 @@ class RegisterStep1 extends Component {
         huisnr: "",
         toevoeging: "",
         geboortedatum: this.props.values.geboortedatum,
-        geslacht: "man"
+        geslacht: "m"
     }
 
     handleChange = (e) => {
@@ -154,12 +154,12 @@ class RegisterStep1 extends Component {
                     <div className="row radio-wrapper pb-4">
                         <div className="col-sm-2 col-xs-2 col-md-3 col-lg-2 col-xl-1">
                             <div className="radio">
-                                <label><input type="radio" name="optradio" id="geslacht" onChange={this.handleChange} ref="geslachtman" value="man" required checked={1 ? this.props.values.geslacht === "man" : 0} />Man</label>
+                                <label><input type="radio" name="optradio" id="geslacht" onChange={this.handleChange} ref="geslachtman" value="m" required checked={1 ? this.props.values.geslacht === "m" : 0} />Man</label>
                             </div>
                         </div>
                         <div className="col-sm-2 col-xs-2 col-md-3 col-lg-2 col-xl-1">
                             <div className="radio">
-                                <label><input type="radio" name="optradio" id="geslacht" onChange={this.handleChange} ref="geslachtvrouw" value="vrouw" checked={1 ? this.props.values.geslacht === "vrouw" : 0} />Vrouw</label>
+                                <label><input type="radio" name="optradio" id="geslacht" onChange={this.handleChange} ref="geslachtvrouw" value="f" checked={1 ? this.props.values.geslacht === "f" : 0} />Vrouw</label>
                             </div>
                         </div>
                     </div>
