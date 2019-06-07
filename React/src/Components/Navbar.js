@@ -5,32 +5,65 @@ import '../Styles/css/bootstrap.css'
 import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {NavLink} from 'react-router-dom';
-import Login from './Login'
+import NavbarFormWrapper from './Form/Navbar/NavbarFormWrapper'
+import auth from '../Helper/actions/auth'
 
 class Nav extends Component {
+  constructor(props){
+    super(props);
+    this.NavbarFormWrapper = React.createRef();
+  }
   state = {
-    login_clicked:false
+    login_clicked:false,
+    logged_in:false,
+    user:{},
+    nav_loading: false,
+        
+  }
+  
+  handleLogin = (e) => {
+    this.toggleLoginHeader();
   }
 
-  handleLogin = (e) => {
-    var header = document.getElementsByClassName("header")[0];
-    var loginform = document.getElementById("login");
-    if (!this.state.login_clicked) {
-      this.setState({login_clicked:true});
-      header.style.height = "100%";
-      loginform.style.opacity = "1";
-    } else {
-      this.setState({login_clicked:false});
-      header.style.height = "118px";
-      loginform.style.opacity = "0";
+  toggleLoginHeader = () => {
+    this.setState({login_clicked: !this.state.login_clicked}, () => this.toggleLoginHeaderAnimation());
+  }
+
+  toggleLoginHeaderAnimation = () => {
+    document.querySelector('.header').classList.toggle('header--collapsed');
+  }
+
+  componentDidMount=()=>{
+    if(localStorage.getItem('jwt token') != null)
+    {
+      this.setState({logged_in: true})
     }
   }
+  
 
-  render() {
-    var login_class = this.state.login_clicked ? "header header--full" : "header";
-         return (<header className={login_class}>
+  setUser = (user_arr) => {
+    this.setState({user: user_arr, logged_in: true});
+    
+  }
+
+  logout = () => {
+    this.NavbarFormWrapper.current.login.current.setState({loading: false});
+    this.setState({nav_loading:true});
+    localStorage.removeItem('jwt token')
+    auth.loguit()
+    setTimeout(function () {
+      this.setState({nav_loading:false});
+      this.setState({logged_in: false}, () => console.log(this.state));
+    }.bind(this), 700);
+  }
+
+  toggleVisibility = () => {
+    this.setState({login_clicked: !this.login_clicked}, () => console.log("CHANGE VIS"));
+  }
+  render(){
+          return (<header className="header header--collapsed">
               <nav className="navbar navbar-home navbar-expand-lg justify-content-between">
-                      <a className="navbar-brand" href="#">acecard</a>
+                      <NavLink className="navbar-brand" to="/">acecard</NavLink>
                       <button className="navbar-toggler third-button " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                           <div className="animated-icon3">
                               <span></span>
@@ -39,16 +72,26 @@ class Nav extends Component {
                           </div>
                       </button>
                       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div className="navbar-nav">
+                        <div className={this.state.logged_in ? "invis d-none" : "navbar-nav no-invis"}>
                           <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
                           <NavLink className="nav-item nav-link" to="/">Over</NavLink>
-                          <a className="nav-item nav-link" onClick={this.handleLogin}>Inloggen</a>
+                          <a className="nav-item nav-link" onClick={this.toggleLoginHeader}>Inloggen</a>
                           <NavLink className="nav-item nav-link" to="/AddClub">Contact</NavLink>
+                        </div>
+                        
+                        <div className={this.state.logged_in ? "navbar-nav no-invis" : "invis d-none"}>
+                          <span className={this.state.user ? "nav-item nav-link user-nav" : "d-none"}>{this.state.user ? this.state.user.email : ""}</span>
+                          <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
+                          <NavLink className="nav-item nav-link" to="/Account">Account</NavLink>
+                          <a className="nav-item nav-link">Contact</a>
+                          <NavLink to="/">
+                          <a className="nav-item nav-link loading-text--pd" onClick={this.logout}><i className={this.state.nav_loading ? "fas fa-circle-notch fa-spin no-invis" : "invis d-none"}></i>Uitloggen</a>
+                          </NavLink>
                         </div>
                       </div>
                 </nav>
-                <Login is_visible={this.state.login_clicked ? "" : "d-none"} >
-                </Login>
+                <NavbarFormWrapper toggleVisibility={this.toggleLoginHeader}  login_visible={this.state.login_clicked} collapseHeader={this.collapseHeader} setUser={this.setUser} ref={this.NavbarFormWrapper}>
+                </NavbarFormWrapper>
                 <div className="parabole"></div>
                 </header>)
                       
