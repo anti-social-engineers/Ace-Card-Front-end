@@ -1,31 +1,7 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap/Modal'
-import '../Styles/css/bootstrap-theme.css'
-import '../Styles/css/bootstrap-theme.min.css'
-import '../Styles/css/bootstrap.css'
-import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {Ideal} from './Ideal';
-
-const createOptions = () => {
-  return {
-    style: {
-      base: {
-        fontSize: '16px',
-        color: '#424770',
-        letterSpacing: '0.025em',
-        padding: '10px 14px',
-        '::placeholder': {
-          color: '#aab7c4',
-        },
-      },
-      invalid: {
-        color: '#c23d4b',
-      },
-    },
-  };
-};
-
 
 class SaldoModal extends Component {
 

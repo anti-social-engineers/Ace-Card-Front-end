@@ -1,9 +1,4 @@
 import React, { Component } from 'react'
-import '../Styles/css/bootstrap-theme.css'
-import '../Styles/css/bootstrap-theme.min.css'
-import '../Styles/css/bootstrap.css'
-import '../Styles/css/bootstrap.min.css'
-import '../Styles/css/style.css'
 import {NavLink} from 'react-router-dom';
 import NavbarFormWrapper from './Form/Navbar/NavbarFormWrapper'
 import auth from '../Helper/actions/auth'
@@ -82,7 +77,7 @@ class Nav extends Component {
                         <div className={this.state.logged_in ? "navbar-nav no-invis" : "invis d-none"}>
                           <span className={this.state.user ? "nav-item nav-link user-nav" : "d-none"}>{this.state.user ? this.state.user.email : ""}</span>
                           <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
-                          <NavLink className="nav-item nav-link" to="/Account">Account</NavLink>
+                          <NavLink className="nav-item nav-link" to="/Test">Account</NavLink>
                           <a className="nav-item nav-link">Contact</a>
                           <NavLink to="/">
                           <a className="nav-item nav-link loading-text--pd" onClick={this.logout}><i className={this.state.nav_loading ? "fas fa-circle-notch fa-spin no-invis" : "invis d-none"}></i>Uitloggen</a>

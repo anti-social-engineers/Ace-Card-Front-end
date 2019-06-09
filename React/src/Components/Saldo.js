@@ -1,18 +1,11 @@
 import React, { Component } from 'react'
 import aos from 'aos'
-import '../Styles/css/bootstrap-theme.css'
-import '../Styles/css/bootstrap-theme.min.css'
-import '../Styles/css/bootstrap.css'
-import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {NavLink} from 'react-router-dom';
 import Chart from "chart.js";
 import {connect} from 'react-redux'
 import SaldoModal from './SaldoModal';
 import queryString from "query-string";
-import {
-    injectStripe
-  } from 'react-stripe-elements';
 Chart.defaults.global.defaultFontFamily = "'Montserrat', sans-serif"
 Chart.defaults.global.elements.line.tension = 0.3;
 

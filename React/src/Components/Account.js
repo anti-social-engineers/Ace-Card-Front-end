@@ -1,20 +1,12 @@
 import React, { Component } from 'react'
 import aos from 'aos'
-import '../Styles/css/bootstrap-theme.css'
-import '../Styles/css/bootstrap-theme.min.css'
-import '../Styles/css/bootstrap.css'
-import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux'
 import axios from 'axios'
 import config from '../config/config'
-import RegisterStep2 from './Form/Home/RegisterStep2/RegisterSteps/RegisterStep2';
 
 class Account extends Component {
-    constructor(props) {
-        super(props);
-      }
       state = {
         user: null,
         hasPas: false,
