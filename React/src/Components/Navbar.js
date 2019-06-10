@@ -77,7 +77,7 @@ class Nav extends Component {
                         <div className={this.state.logged_in ? "navbar-nav no-invis" : "invis d-none"}>
                           <span className={this.state.user ? "nav-item nav-link user-nav" : "d-none"}>{this.state.user ? this.state.user.email : ""}</span>
                           <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
-                          <NavLink className="nav-item nav-link" to="/Test">Account</NavLink>
+                          <NavLink className="nav-item nav-link" to="/Dashboard">Account</NavLink>
                           <a className="nav-item nav-link">Contact</a>
                           <NavLink to="/">
                           <a className="nav-item nav-link loading-text--pd" onClick={this.logout}><i className={this.state.nav_loading ? "fas fa-circle-notch fa-spin no-invis" : "invis d-none"}></i>Uitloggen</a>

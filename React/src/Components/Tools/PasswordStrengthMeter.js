@@ -21,9 +21,23 @@ class PasswordStrengthMeter extends Component {
         }
     }
 
+    getTestResult = () => {
+        this.result = zxcvbn(this.props.password);
+        return this.result;
+    }
+    
+    passTestResult = () => {
+        this.props.getResult(this.result);
+    }
+
     render() {
         const { password } = this.props;
-        const testedResult = zxcvbn(password);
+        const testedResult = this.getTestResult();
+        console.log(this.props.hasSubmitted);
+        // console.log(this.result);
+        if (this.props.hasSubmitted) {
+            this.passTestResult();
+        }
         return (
             <div className={ password ? "password-strength-meter" : "d-none"}>
                 <progress

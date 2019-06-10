@@ -3,6 +3,11 @@ import PasswordStrengthMeter from '../../Tools/PasswordStrengthMeter';
 
 class RegisterForm extends Component {
 
+    constructor(props){
+      super(props);
+      this.passwordRepeatRef = React.createRef()
+    }
+
     state = {
         email: "",
         password: "",
@@ -11,7 +16,8 @@ class RegisterForm extends Component {
         submission_status: "none",
         loading: false,
         form_submit_count: 0,
-        form_error: ""
+        form_error: "",
+        hasSubmitted: false
     }
 
     form_errors = {
@@ -58,11 +64,13 @@ class RegisterForm extends Component {
     }
 
     handleSubmit = (e) => {
+        this.setState({hasSubmitted: true});
         if (!this.isValidForm()) {
           console.log("FAILED VALIDATION");
           return;
         }
         console.log("PASSED VALIDATION");
+        
 
         if (this.state.submission_status === "success") {
             this.setState({loading:false, submission_status: "none"});
@@ -96,6 +104,12 @@ class RegisterForm extends Component {
         }.bind(this), 400);
      }
 
+    getResult = (result) => {
+      console.log(result);
+      this.setState({hasSubmitted: false});
+    }
+    
+
     render() {
         return (
             <div className="outerform">
@@ -118,17 +132,17 @@ class RegisterForm extends Component {
                             <span className="bar"></span>
                             <label>E-mail</label>
                         </div>
-                        <div className="group">      
+                        <div className={this.state.password.length > 0 ? "group pb-4" : "group"}>      
                             <input autoComplete="off" id="password" type="password" onChange={this.handlePasswordChange} required />
                             <span className="highlight"></span>
                             <span className="bar"></span>
-                            <PasswordStrengthMeter password={this.state.password} />
+                            <PasswordStrengthMeter hasSubmitted={this.state.hasSubmitted} getResult={this.getResult} password={this.state.password} />
 
                             <label>Wachtwoord</label>
                       </div>
     
                       <div className="group">      
-                        <input type="password" id="repeat_password" onChange={this.handlePasswordChange} ref="password_repeat" required />
+                        <input type="password" id="repeat_password" onChange={this.handlePasswordChange} required />
                           <span className="highlight"></span>
                           <span className="bar"></span>
                           {this.state.repeat_password && this.state.repeat_password !== this.state.password && <span className="form-helper">Wachtwoord komt niet overeen met herhaal wachtwoord.</span>}

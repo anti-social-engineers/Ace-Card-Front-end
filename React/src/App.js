@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Home  from './Components/Home';
+import Page404  from './Components/Page404';
 import Register  from './Components/Register';
 import Account from './Components/Account';
 import Saldo from './Components/Saldo';
@@ -27,7 +28,10 @@ class App extends Component {
             <Route path="/Confirm/:id" component={Confirm} />
             <Route path="/lel" component={Saldo}/>
             <Route path="/Register2" component={RegisterStep2}/>
-            <Route path="/Test" component={Dashboard}/>
+            <Route path="/Dashboard" component={Dashboard}/>
+            <Route path="/Dashboard/Account" component={Dashboard}/>
+            {/* <Route path="/Dashboard/Pending" component={PendingActivation} /> */}
+            <Route component={Page404} />
           </Switch>
         </Router>
 

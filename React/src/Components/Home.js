@@ -18,7 +18,7 @@ class Home extends Component {
     return (
       <div>
         <Nav/>
-        <div className="container-fluid">
+        <div className="container-fluid p-0">
           <div className="row" data-aos="fade-left" data-aos-duration="500">
             <div className="col-md-12 col-xl-6 d-flex justify-content-center">
             <div class="col-md-9">
@@ -30,7 +30,7 @@ class Home extends Component {
                 <div className="mainPageParagraph"><p>Stap elke club binnen, dankzij de ACE-card.</p></div>
             </div>
             </div>
-            <div className="col-xl-6" align="center">
+            <div className="col-xl-6 p-0" align="center">
                 <div className="squareTop">
                   <img src={require('../Styles/img/acecard@2x.png')} alt="" className="imgMargin"/>
                 </div>
