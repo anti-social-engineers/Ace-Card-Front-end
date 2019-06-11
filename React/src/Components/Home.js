@@ -4,6 +4,8 @@ import '../Styles/css/style.css'
 import Nav from '../Components/Navbar';
 import {NavLink} from 'react-router-dom';
 import config from '../config/config'
+import Footer from './Dashboard/Footer';
+import HomeFooter from './HomeFooter';
 
 class Home extends Component {
 
@@ -62,15 +64,25 @@ class Home extends Component {
           </div>
         </div>
 
-        <div className="row no-gutterr">
-        <div className="col-md" align="center">
-          <NavLink to="/register">
-            <button className="main-home-button"><span className="main-button-action">Registreren</span></button>
-          </NavLink>
+        <div className="row no-gutterr ctarow">
+          <div className="col-md-12 col-xl-6 d-flex justify-content-around" align="center">
+            <div class="col-md cta" data-aos="fade-left" data-aos-duration="500">
+              <div className="mainPageTitle ctatext">
+                Klaar om ACE member te worden?
+              </div>
+              <div className="mainPageParagraph ctaparatext">
+                  Neem contact met ons op of creëer een account.
+              </div>
+            </div>
+          </div>
+          <div className="col-md justify-content-around cta-button-spacing" data-aos="fade-left" data-aos-duration="500" align="center">
+            <NavLink to="/register">
+              <button className="main-home-button cta-button"><span className="main-button-action">Account aanmaken</span></button>
+            </NavLink>
+          </div>
         </div>
-      </div>
+      <HomeFooter/>
     </div>
-
     )
   }
 }

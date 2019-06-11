@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
 import aos from 'aos'
-import '../Styles/css/bootstrap-theme.css'
-import '../Styles/css/bootstrap-theme.min.css'
-import '../Styles/css/bootstrap.css'
-import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import Nav from '../Components/Navbar';
 import {NavLink} from 'react-router-dom';
