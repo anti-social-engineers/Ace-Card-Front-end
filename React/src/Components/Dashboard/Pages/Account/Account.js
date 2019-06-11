@@ -7,7 +7,9 @@ export default class Account extends Component {
         console.log("renderingggg");
         return (
             <>
-                { this.props.user.has_card ? <AccountContent/> : <PendingCard/>}
+                {/* { this.props.user.has_card ? <AccountContent/> : <PendingCard/>} */}
+                <PendingCard/>
+                <AccountContent/>
             </>
         )
     }

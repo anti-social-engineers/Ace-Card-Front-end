@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {ReactComponent as WomanHoldingCard} from '../Styles/img/wamen.svg'
 import aos from 'aos'
 import '../Styles/css/style.css'
 import Nav from '../Components/Navbar';
@@ -21,7 +22,7 @@ class Home extends Component {
         <div className="container-fluid p-0">
           <div className="row" data-aos="fade-left" data-aos-duration="500">
             <div className="col-md-12 col-xl-6 d-flex justify-content-center">
-            <div class="col-md-9">
+            <div class="col-md-9 home-content">
                 <div className="mainPageTitle">Uitgaan is nog nooit zo makkelijk geweest</div>
                 <div className="mainPageParagraph">
                   <p>Weet je eigenlijk wel wat je elke maand uitgeeft tijdens het stappen? Met de ACE-card kom je er direct achter.</p>
@@ -32,7 +33,8 @@ class Home extends Component {
             </div>
             <div className="col-xl-6 p-0" align="center">
                 <div className="squareTop">
-                  <img src={require('../Styles/img/acecard@2x.png')} alt="" className="imgMargin"/>
+                  {/* <img src={require('../Styles/img/acecard@2x.png')} alt="" className="imgMargin"/> */}
+                  <WomanHoldingCard/>
                 </div>
             </div>
         </div>

@@ -8,6 +8,7 @@ class Nav extends Component {
     super(props);
     this.NavbarFormWrapper = React.createRef();
   }
+
   state = {
     login_clicked:false,
     logged_in:false,
@@ -15,7 +16,7 @@ class Nav extends Component {
     nav_loading: false,
         
   }
-  
+
   handleLogin = (e) => {
     this.toggleLoginHeader();
   }
@@ -26,16 +27,16 @@ class Nav extends Component {
 
   toggleLoginHeaderAnimation = () => {
     document.querySelector('.header').classList.toggle('header--collapsed');
+    document.getElementById('email').focus();
   }
 
-  componentDidMount=()=>{
+  componentDidMount = () => {
     if(localStorage.getItem('jwt token') != null)
     {
       this.setState({logged_in: true})
     }
   }
   
-
   setUser = (user_arr) => {
     this.setState({user: user_arr, logged_in: true});
     

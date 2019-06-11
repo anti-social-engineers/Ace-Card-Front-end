@@ -4,8 +4,9 @@ import '../Styles/css/style.css'
 import {NavLink} from 'react-router-dom';
 import Chart from "chart.js";
 import {connect} from 'react-redux'
-import SaldoModal from './SaldoModal';
+// import SaldoModal from './SaldoModal';
 import queryString from "query-string";
+import BalanceModal from './Dashboard/Pages/Account/BalanceModal';
 Chart.defaults.global.defaultFontFamily = "'Montserrat', sans-serif"
 Chart.defaults.global.elements.line.tension = 0.3;
 
@@ -29,7 +30,7 @@ class Saldo extends Component {
         })
 
         var parsed = queryString.parse(window.location.search);
-        parsed = {"client_secret": parsed.client_secret, "source": parsed.source, "livemode": parsed.livemode};
+        // parsed = {"client_secret": parsed.client_secret, "source": parsed.source, "livemode": parsed.livemode};
         console.log(parsed);
         this.setState({queryparams: parsed});
 
@@ -124,7 +125,7 @@ class Saldo extends Component {
                                 />
                             </div>
                         </div>
-                        <SaldoModal queryparams={this.state.queryparams}  balance={this.state.balance} show={this.state.modalShow} onHide={modalClose}/>                          
+                        { this.state.modalShow && <BalanceModal queryparams={this.state.queryparams} balance={this.state.balance} onHide={modalClose}/>}                          
                     </div>
                 </div>
             </div>
