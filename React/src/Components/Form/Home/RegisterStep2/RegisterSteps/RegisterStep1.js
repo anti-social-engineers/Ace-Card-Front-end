@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import RegisterInfoBar from '../RegisterInfoBar';
 import MaskedInput from 'react-text-mask'
   
-import 'moment/locale/nl';
-import 'react-day-picker/lib/style.css';
-
 class RegisterStep1 extends Component {
     state = {
         voornaam: "",
@@ -24,7 +21,6 @@ class RegisterStep1 extends Component {
     handleDate = (e) => { 
         if (e.target.checkValidity()) {
             this.props.handleDate(e.target.value);
-            // this.setState({geboortedatum: e.target.value})
         }
     }
 

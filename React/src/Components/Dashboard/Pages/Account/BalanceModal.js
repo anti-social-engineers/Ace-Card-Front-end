@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Modal from 'react-bootstrap/Modal'
 import '../../../../Styles/css/style.css'
 import {Ideal} from '../../../Ideal';
 
@@ -10,19 +9,6 @@ class BalanceModal extends Component {
     redirect: ""
   };
 
-//   componentDidMount () {
-//     console.log(this.props);
-//     console.log("----balancemodal")
-//     console.log(this.props.queryparams)
-//     console.log("----balancemodal")
-//   }
-
-
-  componentWillReceiveProps(nextProps) {
-      console.log("balancemodal")
-      console.log(nextProps);
-  }
-  
 
   handleResult = (res) => {
     this.toggleLoad();
