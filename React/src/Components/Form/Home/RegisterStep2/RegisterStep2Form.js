@@ -4,10 +4,6 @@ import RegisterTitle from './RegisterTitle/RegisterTitle';
 import RegisterStep2FormViews from './RegisterStep2FormViews';
 
 class RegisterStep2Form extends Component {
-    constructor(props){
-        super(props);
-    }
-
     componentDidMount(){
       console.log(this.props.form);
     }
@@ -34,9 +30,7 @@ class RegisterStep2Form extends Component {
     }
 
     isValidForm = () => {
-        // console.log(this.state.form_submit_count);
         console.log("VALIDATING FORM");
-        var logininfo = document.getElementsByClassName("login-info")[0];
 
         if (this.state.form_submit_count >= 5) {
             console.log("Blocking for 5 minutes");
@@ -55,7 +49,7 @@ class RegisterStep2Form extends Component {
             console.log("MISMATCH PASSWORD");
             this.setState({form_error: this.form_errors.PASSWORD_MISMATCH});
             return false;
-        } else if (this.state.dummy_data.email == this.state.email) {
+        } else if (this.state.dummy_data.email === this.state.email) {
           console.log("Account exists");
           this.setState({form_error: this.form_errors.ACCOUNT_EXISTS});
           return false;

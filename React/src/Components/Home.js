@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
 import aos from 'aos'
-import '../Styles/css/bootstrap-theme.css'
-import '../Styles/css/bootstrap-theme.min.css'
-import '../Styles/css/bootstrap.css'
-import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import Nav from '../Components/Navbar';
 import {NavLink} from 'react-router-dom';
@@ -16,14 +12,13 @@ class Home extends Component {
       duration : 2000
     })
     console.log(config.API_URL)
-
   }
 
   render() {
     return (
       <div>
         <Nav/>
-        <div className="container-fluid">
+        <div className="container-fluid p-0">
           <div className="row" data-aos="fade-left" data-aos-duration="500">
             <div className="col-md-12 col-xl-6 d-flex justify-content-center">
             <div class="col-md-9">
@@ -35,7 +30,7 @@ class Home extends Component {
                 <div className="mainPageParagraph"><p>Stap elke club binnen, dankzij de ACE-card.</p></div>
             </div>
             </div>
-            <div className="col-xl-6" align="center">
+            <div className="col-xl-6 p-0" align="center">
                 <div className="squareTop">
                   <img src={require('../Styles/img/acecard@2x.png')} alt="" className="imgMargin"/>
                 </div>

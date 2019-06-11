@@ -1,8 +1,4 @@
 import React, { Component } from 'react'
-import '../Styles/css/bootstrap-theme.css'
-import '../Styles/css/bootstrap-theme.min.css'
-import '../Styles/css/bootstrap.css'
-import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {connect} from 'react-redux'
 import Nav from '../Components/Navbar';
@@ -25,7 +21,7 @@ export class Confirm extends Component {
             console.log(res)
         })
               
-        }
+    }
 
     render() {
         return (

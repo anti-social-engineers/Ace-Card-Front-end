@@ -7,6 +7,7 @@
     "axios": "^0.18.1",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
+    "classnames": "^2.2.6",
     "filepond": "^4.4.8",
     "filepond-plugin-file-validate-type": "^1.2.4",
     "filepond-plugin-image-crop": "^2.0.3",
@@ -19,8 +20,10 @@
     "firebase": "^6.0.2",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
+    "query-string": "^6.6.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
+    "react-chartjs-2": "^2.7.6",
     "react-day-picker": "^7.3.0",
     "react-dom": "^16.8.6",
     "react-drop-down": "^1.1.0",
@@ -40,6 +43,7 @@
     "redux-firestore": "^0.8.0",
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.87.1",
+    "startbootstrap-sb-admin-2": "^4.0.5",
     "zxcvbn": "^4.4.2"
   },
   "scripts": {
@@ -62,5 +66,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
   }
 }

@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
-import './App.css';
-import Nav from './Components/Navbar';
-import Home from './Components/Home';
+import Home  from './Components/Home';
+import Page404  from './Components/Page404';
 import Register  from './Components/Register';
 import Account from './Components/Account';
 import Contact from './Components/Contact';
 import Saldo from './Components/Saldo';
-import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import RegisterStep2 from './Components/RegisterStep2';
 import Confirm from './Components/Confirm';
 import {ProtectedRoute} from './protected.route'
 import { Ideal } from './Components/Ideal';
+import Dashboard from './Components/Dashboard/Dashboard';
+
+import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 
 
 class App extends Component {
@@ -18,8 +19,7 @@ class App extends Component {
     return (
 
       <React.Fragment>
-      <Router>     
-      
+      <Router>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/Register" component={Register} />
@@ -28,9 +28,12 @@ class App extends Component {
             <Route path="/Saldo" component={Saldo}/>
             <Route path="/ideal" component={Ideal}/>
             <Route path="/Confirm/:id" component={Confirm} />
-            <Route
-             path="/Register2" component={RegisterStep2} 
-             />
+            <Route path="/lel" component={Saldo}/>
+            <Route path="/Register2" component={RegisterStep2}/>
+            <Route path="/Dashboard" component={Dashboard}/>
+            <Route path="/Dashboard/Account" component={Dashboard}/>
+            {/* <Route path="/Dashboard/Pending" component={PendingActivation} /> */}
+            <Route component={Page404} />
           </Switch>
         </Router>
 
