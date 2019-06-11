@@ -1095,6 +1095,11 @@ a.nav-item.nav-link {
     margin: 5px;
 }
 
+.email-image{
+    margin-top: 55px;
+    margin-right: 30px;
+}
+
 .imgShading{
     margin: 10px;
     -webkit-box-shadow: 0px 0px 23px 10px rgba(133,126,133,1);
@@ -1110,12 +1115,15 @@ a.nav-item.nav-link {
     margin-top: 120px;
 }
 
+.mainPageTitle, .contact{
+    margin-top: 95px;
+}
+
 .mainPageParagraph{
     padding-top: 25px;
     font-size: 1.4em;
     font-family: "Montserrat";
     letter-spacing: 1px;
-
 }
 
 .main-menu .fa-2x {
@@ -1136,6 +1144,10 @@ a.nav-item.nav-link {
 width:250px;
 overflow:visible;
 } */
+
+.cp-margin{
+    margin-top: 30px;
+}
 
 .main-menu {
     background-image: linear-gradient(90deg, #000000 0%, #434343 100%);/* 076 Premium Dark: */
@@ -1257,6 +1269,10 @@ nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.d
     padding-left: 25%;
     padding-right: 25%;
     width: 100%;
+}
+
+.account-form, .adminPost-form{
+    padding-top: 10%;
 }
 
 .saldo-form{

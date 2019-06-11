@@ -76,7 +76,7 @@ class Nav extends Component {
                           <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
                           <NavLink className="nav-item nav-link" to="/">Over</NavLink>
                           <a className="nav-item nav-link" onClick={this.toggleLoginHeader}>Inloggen</a>
-                          <NavLink className="nav-item nav-link" to="/AddClub">Contact</NavLink>
+                          <NavLink className="nav-item nav-link" to="/Contact">Contact</NavLink>
                         </div>
                         
                         <div className={this.state.logged_in ? "navbar-nav no-invis" : "invis d-none"}>

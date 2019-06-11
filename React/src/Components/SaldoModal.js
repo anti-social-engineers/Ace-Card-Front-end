@@ -106,8 +106,7 @@ class SaldoModal extends Component {
           <Ideal handleResult={this.handleResult} toggleLoad={this.toggleLoad} balance={this.props.balance}/>
         </Modal.Body>
         <Modal.Footer>
-        <button onClick={this.props.onHide} className="main-button-right button-modal">Sluiten</button>
-        <button onClick={this.actionHandler} type="submit" className="main-button-right button-modal">Overschrijven</button>
+          <button onClick={this.props.onHide} className="main-button-right button-modal">Sluiten</button>
         </Modal.Footer>
       </Modal>
     );
