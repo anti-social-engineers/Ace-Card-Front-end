@@ -6,7 +6,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #f7f7f7 !important;
-    color: #484747;
+    color: #2b2c2d;
     font-family: "Montserrat";
     margin: 0;
     padding: 0;
@@ -1062,9 +1062,9 @@ a.nav-item.nav-link {
     margin-left: 0px;
     position: relative;
     text-align: center;
-    padding-top: 70px;
+    padding-top: 120px;
     padding-bottom: 70px;
-    background-image: linear-gradient(90deg, #000000 0%, #434343 100%);/* 076 Premium Dark: */
+    background-image: linear-gradient(90deg, #424242 0%, #1f1d1d 100%);
     transform: skew(0deg, 4deg);
     width: 100%;
 }
@@ -1089,12 +1089,48 @@ a.nav-item.nav-link {
 }
 
 .squareskew{
-    width: 250px;
-    height: 300px;
+    width: 300px;
+    color: #171717;
+    min-height: 350px;
     background-color: white;
-    border-radius: 6%;
+    box-shadow: 0 0 24px 0 rgba(0,0,0,.1);
+    border-radius: 10px;
     margin: 20px;
     transform: skew(0deg, -4deg);
+    padding: 10px;
+    border: solid 5px #eaebeb;
+}
+
+.edge-fix {
+    position: absolute;
+    bottom: -1px;
+    background: #f7f7f7;
+    height: 10px;
+    width: 100%;
+}
+
+.card--body p {
+    font-size: 0.8rem;
+    color: #151515;
+    font-weight: 100;
+    letter-spacing: 0.8px;
+}
+
+.squareskew svg {
+    padding-bottom: 15px;
+}
+
+.card--title {
+    padding-bottom: 10px;
+    letter-spacing: 1.2px;
+}
+
+.home-card--wrapper {
+    width: 90%;
+}
+
+.card--body {
+    padding-bottom: 10px;
 }
 
 .scale{

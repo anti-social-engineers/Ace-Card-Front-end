@@ -16,7 +16,6 @@ export default class AccountContent extends Component {
     
 
     componentDidMount() {
-        console.log("leqwlelwq")
         var parsed = queryString.parse(window.location.search);
         parsed = {"client_secret": parsed.client_secret, "source": parsed.source, "livemode": parsed.livemode};
         console.log(parsed);
