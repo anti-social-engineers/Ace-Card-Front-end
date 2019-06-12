@@ -92,7 +92,7 @@ class _IdealBankForm extends Component {
             name: ev.target.fname.value,
           },
           redirect: {
-            return_url: 'http://4f52b748.ngrok.io/lel/',
+            return_url: 'http://4a219e03.ngrok.io/dashboard',
           },
         })
         .then(this.props.handleResult);
@@ -103,7 +103,7 @@ class _IdealBankForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
+      <form onSubmit={this.handleSubmit.bind(this)} autocomplete="off">
           <div className="form-content">
                 <div className={this.state.loading ? "d-none" : "inputs inputs-space"}>
                     <div className="group">
