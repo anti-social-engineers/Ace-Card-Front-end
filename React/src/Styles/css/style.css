@@ -326,7 +326,7 @@ a.nav-item.nav-link {
     background-image: none;
     opacity: 0.8;
     transition: 0.5s;
-    background-color: #2b90fe !important;
+    background-color: #007bff !important;
 }
 
 .cta-button:hover {
@@ -570,6 +570,7 @@ a.nav-item.nav-link {
 
 #homeFooter-border{
     border-top: 2px solid #cdcfcf;
+    opacity: 0.3;
     }
 
 .homeFooter{
@@ -579,6 +580,7 @@ a.nav-item.nav-link {
 }
 
 .homeFooter-title{
+    margin-bottom: 10px;
     font-weight: 600;
 }
 
@@ -1166,6 +1168,15 @@ a.nav-item.nav-link {
     margin-top: 120px;
 }
 
+.contactTitle{
+    font-size: 2.1em;
+    font-weight: 700;
+    color: #2d2c2c;
+    font-family: "Montserrat";
+    letter-spacing: 1.0px;
+    margin-top: 95px;
+}
+
 .mainPageTitle, .ctatext{
     margin-top: 20px !important;
     /* margin-left: 100px !important; */
@@ -1173,8 +1184,8 @@ a.nav-item.nav-link {
     font-weight: 500 !important;
 }
 
-.mainPageTitle, .contact{
-    margin-top: 95px;
+.p-size{
+    font-size: 0.7em;
 }
 
 .mainPageParagraph{
@@ -1184,9 +1195,13 @@ a.nav-item.nav-link {
     letter-spacing: 1px;
 }
 
+.paragraphPadding{
+    padding-bottom: 10px;
+}
+
 .mainPageParagraph, .ctaparatext{
     padding-top: 10px;
-    font-size: 1.7em;
+    font-size: 1.4em;
 }
 
 .ctarow{

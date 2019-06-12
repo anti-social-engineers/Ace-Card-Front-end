@@ -2,11 +2,11 @@ import React from 'react'
 
 const HomeFooter = () => {
     return (
-      <div className="row no-gutterr" id="homeFooter-border">
+      <div className="row no-gutterr">
         <div className="container">
           <div className="row homeFooter">
             <div className="col-sm">
-              <ul> 
+              <ul align="left"> 
                 <div className="homeFooter-title">
                   Producten
                 </div>
@@ -15,7 +15,7 @@ const HomeFooter = () => {
               </ul>
             </div>
             <div className="col-sm">
-              <ul> 
+              <ul align="left"> 
                 <div className="homeFooter-title">
                   Zakelijk
                 </div>
@@ -25,7 +25,7 @@ const HomeFooter = () => {
               </ul>
             </div>
             <div className="col-sm">
-              <ul> 
+              <ul align="left"> 
                 <div className="homeFooter-title">
                   Bedrijf
                 </div>

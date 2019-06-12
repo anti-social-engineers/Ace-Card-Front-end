@@ -4,7 +4,6 @@ import '../Styles/css/style.css'
 import Nav from '../Components/Navbar';
 import {NavLink} from 'react-router-dom';
 import config from '../config/config'
-import Footer from './Dashboard/Footer';
 import HomeFooter from './HomeFooter';
 
 class Home extends Component {
@@ -27,9 +26,9 @@ class Home extends Component {
                 <div className="mainPageTitle">Uitgaan is nog nooit zo makkelijk geweest</div>
                 <div className="mainPageParagraph">
                   <p>Weet je eigenlijk wel wat je elke maand uitgeeft tijdens het stappen? Met de ACE-card kom je er direct achter.</p>
-                 <p>Wij importeren je uitgaven veilig en snel en plaatsen ze in één helder overzicht.</p>
+                  <p>Wij importeren je uitgaven veilig en snel en plaatsen ze in één helder overzicht.</p>
+                  <p>Stap elke club binnen, dankzij de ACE-card.</p>
                 </div>
-                <div className="mainPageParagraph"><p>Stap elke club binnen, dankzij de ACE-card.</p></div>
             </div>
             </div>
             <div className="col-xl-6 p-0" align="center">
@@ -80,6 +79,9 @@ class Home extends Component {
               <button className="main-home-button cta-button"><span className="main-button-action">Account aanmaken</span></button>
             </NavLink>
           </div>
+        </div>
+        <div className="row" id="homeFooter-border">
+
         </div>
       <HomeFooter/>
     </div>

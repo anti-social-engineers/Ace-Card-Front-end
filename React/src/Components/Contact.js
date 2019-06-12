@@ -21,7 +21,7 @@ class Home extends Component {
             <div className="row" data-aos="fade-left" data-aos-duration="500">
                 <div className="col-md-12 col-xl-6 d-flex justify-content-center">
                     <div class="col-md-9">
-                        <div className="mainPageTitle contact">Neem contact met ons op</div>
+                        <div className="contactTitle">Neem contact met ons op</div>
                         <div className="mainPageParagraph contactParagraph">
                             <p>Bent u benieuwd naar de mogelijkheden van de ACE-card als clubeigenaar, neem dan contact op met ons team:
                             <br></br>
