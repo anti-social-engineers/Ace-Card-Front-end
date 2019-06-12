@@ -66,7 +66,8 @@ class LoginForm extends Component {
 
    render() {
       return (
-            <Fade>
+            <Fade >
+               <div data-aos="fade-up" data-aos-duration="400">
                <div className="form-wrapper">
                <div className="form-title">
                   <h2>Inloggen</h2>
@@ -108,7 +109,7 @@ class LoginForm extends Component {
             </div>
             <div className="row login-actions">
                   <div className="col">
-                     <NavLink className="dark-link" onClick={this.props.toggleVisibility} to="/Register">Nog geen account?</NavLink>
+                     <NavLink className="login-button" onClick={this.props.toggleVisibility} to="/Register">Nog geen account?</NavLink>
                   </div>
                   <div className="col">
                      <button className="main-button main-button--transparent float-right">
@@ -116,6 +117,7 @@ class LoginForm extends Component {
                      </button>
                   </div>
                </div>
+            </div>
          </Fade>
       );
    }

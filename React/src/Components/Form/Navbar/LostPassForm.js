@@ -92,8 +92,7 @@ class LostPassForm extends Component {
                </div>
                <div className="row login-actions">
                    <div className="col">
-                       <NavLink className="dark-link" to="/Register">Nog geen account?</NavLink>
-
+                     <NavLink className="login-button" to="/Register">Nog geen account?</NavLink>
                     </div>
                     <div className="col">
                         <button className="main-button main-button--transparent float-right">

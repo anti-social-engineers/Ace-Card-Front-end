@@ -127,7 +127,7 @@ class RegisterForm extends Component {
                   <div className="form-content">
                    <div className={this.state.loading ? "d-none" : "inputs inputs-space"}>
                         <div className="group">
-                        <input type="email" id="email" ref="email" onChange={this.handleChange} required />
+                            <input type="email" id="email" ref="email" onChange={this.handleChange} required />
                             <span className="highlight"></span>
                             <span className="bar"></span>
                             <label>E-mail</label>
@@ -137,9 +137,8 @@ class RegisterForm extends Component {
                             <span className="highlight"></span>
                             <span className="bar"></span>
                             <PasswordStrengthMeter hasSubmitted={this.state.hasSubmitted} getResult={this.getResult} password={this.state.password} />
-
                             <label>Wachtwoord</label>
-                      </div>
+                        </div>
     
                       <div className="group">      
                         <input type="password" id="repeat_password" onChange={this.handlePasswordChange} required />

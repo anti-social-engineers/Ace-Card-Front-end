@@ -8,6 +8,7 @@ class Nav extends Component {
     super(props);
     this.NavbarFormWrapper = React.createRef();
   }
+
   state = {
     login_clicked:false,
     logged_in:false,
@@ -15,7 +16,7 @@ class Nav extends Component {
     nav_loading: false,
         
   }
-  
+
   handleLogin = (e) => {
     this.toggleLoginHeader();
   }
@@ -26,16 +27,16 @@ class Nav extends Component {
 
   toggleLoginHeaderAnimation = () => {
     document.querySelector('.header').classList.toggle('header--collapsed');
+    document.getElementById('email').focus();
   }
 
-  componentDidMount=()=>{
+  componentDidMount = () => {
     if(localStorage.getItem('jwt token') != null)
     {
       this.setState({logged_in: true})
     }
   }
   
-
   setUser = (user_arr) => {
     this.setState({user: user_arr, logged_in: true});
     
@@ -58,7 +59,10 @@ class Nav extends Component {
   render(){
           return (<header className="header header--collapsed">
               <nav className="navbar navbar-home navbar-expand-lg justify-content-between">
-                      <NavLink className="navbar-brand" to="/">acecard</NavLink>
+                      <NavLink className="navbar-brand" to="/">
+                        <img src={require('../Styles/img/acelogo.png')} alt="" style={{width: "100px"}}/>
+                        <span>acecard</span>                     
+                      </NavLink>
                       <button className="navbar-toggler third-button " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                           <div className="animated-icon3">
                               <span></span>

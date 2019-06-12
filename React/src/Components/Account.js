@@ -13,7 +13,7 @@ class Account extends Component {
         account: {first_name:'', surname:'', mail:'', dob: '' ,gender:'' }
       }
       
-    componentDidMount=()=>{
+    componentDidMount = () => {
         aos.init({
             duration : 2000
         })
