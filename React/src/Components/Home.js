@@ -37,7 +37,6 @@ class Home extends Component {
             </div>
             <div className="col-xl-6 p-0" align="center">
                 <div className="squareTop">
-                  {/* <img src={require('../Styles/img/acecard@2x.png')} alt="" className="imgMargin"/> */}
                   <WomanHoldingCard/>
                 </div>
             </div>
@@ -55,13 +54,13 @@ class Home extends Component {
           </div>
           <div className="col-md" align="center">
               <div className="squareskew row no-gutters d-flex justify-content-center">
-                  <PartyTimeSVG/>
+                  <LoadCardSVG/>
                   <div class="row no-gutters home-card--wrapper text-center pt-4"><div class="card--title text-center mx-auto"><h4>Laad je pas op</h4></div><div class="card--body"><p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing.</p></div></div>
               </div>   
           </div>
           <div className="col-md" align="center">
               <div className="squareskew row no-gutters d-flex justify-content-center">
-                <LoadCardSVG/>
+                <PartyTimeSVG/>
                 <div class="row no-gutters home-card--wrapper text-center pt-3"><div class="card--title text-center mx-auto"><h4>Feest erop los!</h4></div><div class="card--body"><p>Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor.</p></div></div>              
               </div>
           </div>

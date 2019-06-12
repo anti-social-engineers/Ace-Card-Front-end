@@ -41,7 +41,7 @@ p {
 }
 
 .header--collapsed {
-    height:118px;
+    height:158px;
     transition: height 0.3s ease-out;
 
 }
@@ -94,12 +94,21 @@ a.nav-item.nav-link {
     flex-grow: 0;
 }
 
+.logotext {
+    font-size: 1.8rem;
+    letter-spacing: 4px;
+    margin-left: 10px;
+}
+
+.logoimg {
+    width: 70px;
+}
+
 .navbar-brand, .navbar-brand:hover, .navbar-brand:focus {
     color: white;
 }
 
 .navbar-nav {
-    margin-top: 20px;
     letter-spacing: 1.3px;
     font-size: 13px;
 }
@@ -158,6 +167,7 @@ a.nav-item.nav-link {
 .loading-text {
     opacity: 1;
     transition: 0.5s;
+    font-size: 0.9rem;
 }
 
 .loading-text--small {

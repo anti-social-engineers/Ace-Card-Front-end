@@ -59,7 +59,10 @@ class Nav extends Component {
   render(){
           return (<header className="header header--collapsed">
               <nav className="navbar navbar-home navbar-expand-lg justify-content-between">
-                      <NavLink className="navbar-brand" to="/">acecard</NavLink>
+                      <NavLink className="navbar-brand" to="/">
+                        <img src={require('../Styles/img/acelogo.png')} alt="" style={{width: "100px"}}/>
+                        <span>acecard</span>                     
+                      </NavLink>
                       <button className="navbar-toggler third-button " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                           <div className="animated-icon3">
                               <span></span>
