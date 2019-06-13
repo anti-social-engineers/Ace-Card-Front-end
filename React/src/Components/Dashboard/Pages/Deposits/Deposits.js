@@ -1,8 +1,24 @@
 import React, { Component } from 'react'
 import Table from './Table';
+import axios from 'axios';
+import config from '../../../../config/config'
 
-export default class AccountContent extends Component {
+export default class Deposits extends Component {
 
+    state = {
+        count: 0
+    }
+
+    async componentDidMount() {
+        const header = 'Bearer ' + localStorage.getItem('jwt token')
+        const res = await axios.get(config.API_URL+'/api/account/deposits/asc', {headers: {Authorization:header}})
+        console.log("DEPOSITS-----------------------", res.data);
+    }
+
+    updateCount = (count) => {
+        this.setState({count: this.state.count + count});
+    }
+    
     render() {
         return (
             <div className="container-fluid" data-aos="fade-up" data-aos-duration="400">
@@ -14,7 +30,7 @@ export default class AccountContent extends Component {
                 <div className="card shadow mb-4">
                 <div className="card-header py-3">
                     <h6 className="m-0 font-weight-bold text-primary">
-                    DataTables Example
+                    Lijst van je laatste stortingen
                     </h6>
                 </div>
                 <div className="card-body">
@@ -55,7 +71,7 @@ export default class AccountContent extends Component {
                             </div>
                         </div>
                         </div>
-                        <Table/>
+                        <Table updateCount={this.updateCount} />
                         <div className="row no-gutters d-flex justify-content-between">
                         <div>
                             <div
@@ -64,7 +80,7 @@ export default class AccountContent extends Component {
                             role="status"
                             aria-live="polite"
                             >
-                            Showing 31 to 40 of 57 entries
+                            Showing {this.state.count}
                             </div>
                         </div>
                         <div>

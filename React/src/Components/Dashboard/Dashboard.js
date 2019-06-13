@@ -33,18 +33,15 @@ class Dashboard extends Component {
 
     var parsed = queryString.parse(window.location.search);
     parsed = {"client_secret": parsed.client_secret, "source": parsed.source, "livemode": parsed.livemode};
-    console.log(parsed);
     this.setState({queryparams: parsed});
 
     const header = 'Bearer ' + localStorage.getItem('jwt token')
-    console.log(localStorage.getItem('jwt token'))
     axios.get(config.API_URL+'/api/account', {headers: {Authorization:header}})
       .then(res => {
           this.setState({
               user: res.data, 
               hasCard: res.data.has_card
             });
-          console.log(this.state.user);   
       })
       .catch((err) => {
         console.log(err);

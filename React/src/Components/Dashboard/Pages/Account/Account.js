@@ -5,7 +5,6 @@ import Deposits from '../Deposits/Deposits';
 
 export default class Account extends Component {
     render() {
-        console.log("renderingggg");
         return (
             <>
                 {/* { this.props.hasCard ? <AccountContent/> : <PendingCard/> } */}
