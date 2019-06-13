@@ -1,4 +1,5 @@
 import React from 'react'
+import {NavLink} from 'react-router-dom';
 
 const HomeFooter = () => {
     return (
@@ -29,7 +30,7 @@ const HomeFooter = () => {
                 <div className="homeFooter-title">
                   Bedrijf
                 </div>
-                <li>Over</li>
+                <li><NavLink className="footerNav" to="/Over">Over</NavLink></li>
                 <li>FAQ</li>
                 <li>Klanten</li>
                 <li>Vacatures</li>

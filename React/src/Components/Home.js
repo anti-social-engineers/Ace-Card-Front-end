@@ -17,7 +17,7 @@ class Home extends Component {
     aos.init({
       duration : 2000
     })
-    console.log(config.API_URL)
+    console.log(config.API_URL + " //remove this line after testing")
   }
 
   render() {
@@ -66,7 +66,8 @@ class Home extends Component {
               </div>
           </div>
         </div>
-
+        {/* <div className="row" id="homeFooter-border">
+        </div> */}
         <div className="row no-gutterr ctarow">
           <div className="col-md-12 col-xl-6 d-flex justify-content-around" align="center">
             <div class="col-md cta" data-aos="fade-left" data-aos-duration="500">
@@ -85,7 +86,6 @@ class Home extends Component {
           </div>
         </div>
         <div className="row" id="homeFooter-border">
-
         </div>
       <HomeFooter/>
     </div>

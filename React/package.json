@@ -7,6 +7,7 @@
     "axios": "^0.18.1",
     "chart.js": "^2.8.0",
     "classnames": "^2.2.6",
+    "dotenv": "^8.0.0",
     "filepond": "^4.4.8",
     "filepond-plugin-file-validate-type": "^1.2.4",
     "filepond-plugin-image-crop": "^2.0.3",

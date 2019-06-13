@@ -5,7 +5,7 @@ import Nav from '../Components/Navbar';
 import {NavLink} from 'react-router-dom';
 import config from '../config/config'
 
-class Home extends Component {
+class Contact extends Component {
 
   componentDidMount(){
     aos.init({
@@ -48,4 +48,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Contact;

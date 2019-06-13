@@ -73,7 +73,7 @@ class Nav extends Component {
                       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className={this.state.logged_in ? "invis d-none" : "navbar-nav no-invis"}>
                           <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
-                          <NavLink className="nav-item nav-link" to="/">Over</NavLink>
+                          <NavLink className="nav-item nav-link" to="/Over">Over</NavLink>
                           <a className="nav-item nav-link" onClick={this.toggleLoginHeader}>Inloggen</a>
                           <NavLink className="nav-item nav-link" to="/Contact">Contact</NavLink>
                         </div>

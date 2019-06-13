@@ -11,7 +11,8 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import CookieConsent from "react-cookie-consent";
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import Saldo from './Components/Saldo';
-
+import Contact from './Components/Contact';
+import Over from './Components/Over';
 
 class App extends Component {
   render() {
@@ -29,6 +30,8 @@ class App extends Component {
             <Route path="/ideal" component={Ideal}/>
             <Route path="/Confirm/:id" component={Confirm} />
             <Route path="/Register2" component={RegisterStep2}/>
+            <Route path="/Contact" component={Contact}/>
+            <Route path="/Over" component={Over}/>
             <Route path="/lel" component={Saldo}/>
             <Route path="/Dashboard" component={Dashboard}/>
             <Route path="/Dashboard/Account" component={Dashboard}/>
