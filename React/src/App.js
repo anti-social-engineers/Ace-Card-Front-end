@@ -34,6 +34,7 @@ class App extends Component {
             <Route path="/Client" component={Client}/>
             <Route path="/Dashboard" component={Dashboard}/>
             <Route path="/Dashboard/Account" component={Dashboard}/>
+            <Route path="/Dashboard/Account/PaymentRequest" component={Dashboard}/>
             {/* <Route path="/Dashboard/Pending" component={PendingActivation} /> */}
             <Route component={Page404} />
           </Switch>

@@ -6,7 +6,6 @@ import {
   Elements,
 } from 'react-stripe-elements';
 import axios from 'axios'
-import { SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION } from 'constants';
 
 // You can customize your Elements to give it the look and feel of your site.
 const createOptions = () => {
@@ -92,7 +91,7 @@ class _IdealBankForm extends Component {
             name: ev.target.fname.value,
           },
           redirect: {
-            return_url: 'http://4a219e03.ngrok.io/dashboard',
+            return_url: 'http://localhost:3000/dashboard',
           },
         })
         .then(this.props.handleResult);
