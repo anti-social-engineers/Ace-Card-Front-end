@@ -1,6 +1,8 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom';
 
+//Footer for the homepage to redirect to different
+
 const HomeFooter = () => {
     return (
       <div className="row no-gutterr">
@@ -31,9 +33,9 @@ const HomeFooter = () => {
                   Bedrijf
                 </div>
                 <li><NavLink className="footerNav" to="/Over">Over</NavLink></li>
-                <li>FAQ</li>
-                <li>Klanten</li>
-                <li>Vacatures</li>
+                <li><NavLink className="footerNav" to="/FAQ">FAQ</NavLink></li>
+                <li><NavLink className="footerNav" to="/Contact">Contact</NavLink></li>
+                <li><NavLink className="footerNav" to="/Vacatures">Vacatures</NavLink></li>
               </ul>
             </div>
           </div>

@@ -583,7 +583,11 @@ a.nav-item.nav-link {
 #homeFooter-border{
     border-top: 2px solid #cdcfcf;
     opacity: 0.3;
-    }
+}
+
+.FAQfootermargin{
+    margin-top: 70px;
+}
 
 .homeFooter{
     margin-top: 30px;
@@ -623,6 +627,43 @@ a.nav-item.nav-link {
     text-align: right;
     width: 310px;
     text-align: center;
+}
+
+
+/* Accordion styling */
+
+.accordion-margin{
+    margin-bottom: 30px;
+}
+.accordion-section .panel-default > .panel-heading {
+    border: 0;
+    padding-top: 2rem;
+}
+.accordion-section .panel-default .panel-title a {
+    display: block;
+    font-size: 1.5rem;
+    color: #2b2c2d;
+}
+
+.accordion-border{
+    border-bottom: 2px solid #dedede;
+    margin-top: 10px;
+}
+
+.accordion-section .panel-default .panel-title a:after {
+    font-family: 'FontAwesome';
+    font-style: normal;
+    font-size: 3rem;
+    float: right;
+    margin-top: -12px;
+}
+
+.accordion-icon{
+    float: right;
+}
+
+.accordion-section .panel-default .panel-body {
+    font-size: 1.2rem;
 }
 
 /* form starting stylings ------------------------------- */
@@ -1148,7 +1189,7 @@ a.nav-item.nav-link {
     width: 100%;
     height: 500px;
     border-radius: 6%;
-    padding-top: 80px;
+    padding-top: 40px;
 }
 
 .squareskew{
@@ -1233,24 +1274,23 @@ a.nav-item.nav-link {
     color: #2d2c2c;
     font-family: "Montserrat";
     letter-spacing: 1.0px;
-    margin-top: 120px;
+    margin-top: 90px;
 }
 
 .contactTitle{
     font-size: 2.1em;
-    font-weight: 700;
-    color: #2d2c2c;
-    font-family: "Montserrat";
-    letter-spacing: 1.0px;
     margin-top: 95px;
 }
 
 .overTitle{
-    font-size: 2.4em;
-    margin-top: 130px;
+    margin-top: 90px;
 }
 
-.mainPageTitle, .ctatext{
+.FAQTitle{
+    margin-top: 70px;
+}
+
+.ctatext{
     margin-top: 20px !important;
     /* margin-left: 100px !important; */
     font-size: 1.8em !important;
@@ -1267,6 +1307,11 @@ a.nav-item.nav-link {
     color: #a2a1a1;
     font-family: "Montserrat";
     letter-spacing: 1px;
+}
+
+.vacaturesParagraph{
+    padding-top: 40px;
+    padding-bottom: 8%;
 }
 
 .overParagraph{

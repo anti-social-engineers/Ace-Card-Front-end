@@ -13,6 +13,8 @@ import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import Saldo from './Components/Saldo';
 import Contact from './Components/Contact';
 import Over from './Components/Over';
+import FAQ from './Components/FAQ';
+import Vacatures from './Components/Vacatures';
 
 class App extends Component {
   render() {
@@ -35,6 +37,8 @@ class App extends Component {
             <Route path="/lel" component={Saldo}/>
             <Route path="/Dashboard" component={Dashboard}/>
             <Route path="/Dashboard/Account" component={Dashboard}/>
+            <Route path="/FAQ" component={FAQ}/>
+            <Route path="/Vacatures" component={Vacatures}/>
             {/* <Route path="/Dashboard/Pending" component={PendingActivation} /> */}
             <Route component={Page404} />
           </Switch>

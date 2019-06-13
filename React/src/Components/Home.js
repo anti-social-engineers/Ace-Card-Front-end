@@ -85,8 +85,7 @@ class Home extends Component {
             </NavLink>
           </div>
         </div>
-        <div className="row" id="homeFooter-border">
-        </div>
+        <div className="row" id="homeFooter-border"></div>
       <HomeFooter/>
     </div>
     )
