@@ -14,6 +14,10 @@ import aos from 'aos'
 import axios from 'axios'
 import config from '../../config/config'
 import queryString from "query-string";
+// import auth from '../Helper/actions/auth'
+import {Redirect} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
+import auth from '../../Helper/actions/auth'
 
 class Dashboard extends Component {
   state = {
@@ -34,27 +38,41 @@ class Dashboard extends Component {
 
     const header = 'Bearer ' + localStorage.getItem('jwt token')
     console.log(localStorage.getItem('jwt token'))
-
-    const res = await axios.get(config.API_URL+'/api/account', {headers: {Authorization:header}});
-
-    try {
-      this.setState({user: res.data});
-      console.log(this.state.user)  
-    } catch(err) {
-      console.log(err);
-    }
-
+    axios.get(config.API_URL+'/api/account', {headers: {Authorization:header}})
+      .then(res => {
+          this.setState({
+              user: res.data, 
+              hasCard: res.data.has_card
+            });
+          console.log(this.state.user);   
+      })
+      .catch((err) => {
+        console.log(err);
+      }
+    );
   }
 
+  logout = () => {
+    // this.setState({nav_loading:true});
+    localStorage.removeItem('jwt token')
+    auth.loguit()
+    // this.setState({loggedIn: false})
+    setTimeout(function () {
+      this.setState({loggedIn: false});
+    }.bind(this), 500);
+  }
+  
   render() {
       return (
+        <>
+      { !this.state.loggedIn && <Redirect to={{pathname: "/Dashboard"}}  /> }
       <div className={'dashboard'}>
       <div id="wrapper">
         <Sidebar/>
         <div id="content-wrapper" className="d-flex flex-column">
           <div id="content">
             <AccountTopBar user={this.state.user}/>
-            <Account user={this.state.user}/>
+            <Account user={this.state.user} hasCard={this.state.hasCard}/>
           </div>
           <Footer/>
         </div>
@@ -75,16 +93,21 @@ class Dashboard extends Component {
             </div>
             <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div className="modal-footer">
-              <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <a className="btn btn-primary" href="login.html">Logout</a>
+              <button className="btn btn-secondary" type="button" data-dismiss="modal">Annuleren</button>
+              <a className="btn btn-primary" data-dismiss="modal" onClick={this.logout}>Logout</a>
             </div>
           </div>
         </div>
       </div>
     </div>
+  { !this.state.loggedIn && <Redirect to={
+                      {
+                          pathname: "/"
+                      }
+      }/>}
+    </>
       )
   }
 }
-
 
 export default Dashboard;

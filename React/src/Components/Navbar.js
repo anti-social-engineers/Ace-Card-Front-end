@@ -48,8 +48,7 @@ class Nav extends Component {
     localStorage.removeItem('jwt token')
     auth.loguit()
     setTimeout(function () {
-      this.setState({nav_loading:false});
-      this.setState({logged_in: false}, () => console.log(this.state));
+      this.setState({nav_loading:false, logged_in: false});
     }.bind(this), 700);
   }
 

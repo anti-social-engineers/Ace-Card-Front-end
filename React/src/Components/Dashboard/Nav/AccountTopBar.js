@@ -147,7 +147,7 @@ export default class AccountTopBar extends Component {
             {/* Nav Item - User Information */}
             <li className="nav-item dropdown no-arrow">
                 <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span className="mr-2 d-none d-lg-inline text-gray-600 small">{this.props.user.length ? this.props.user.first_name + " " + this.props.user.first_name : "Gebruiker"}</span>
+                <span className="mr-2 d-none d-lg-inline text-gray-600 small">{this.props.user.has_card ? this.props.user.first_name + " " + this.props.user.surname : "Gebruiker"}</span>
                 <img className="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" />
                 </a>
                 {/* Dropdown - User Information */}

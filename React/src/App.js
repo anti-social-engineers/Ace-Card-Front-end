@@ -12,7 +12,7 @@ import CookieConsent from "react-cookie-consent";
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import Saldo from './Components/Saldo';
 import Client from './Components/Dashboard/Client';
-
+import Logout from './Components/Logout';
 
 class App extends Component {
   render() {
@@ -32,9 +32,10 @@ class App extends Component {
             <Route path="/Register2" component={RegisterStep2}/>
             <Route path="/lel" component={Saldo}/>
             <Route path="/Client" component={Client}/>
+            <Route path="/logout" component={Logout}/>
             <Route path="/Dashboard" component={Dashboard}/>
-            <Route path="/Dashboard/Account" component={Dashboard}/>
-            <Route path="/Dashboard/Account/PaymentRequest" component={Dashboard}/>
+            <ProtectedRoute path="/Dashboard/Account" component={Dashboard}/>
+            <ProtectedRoute path="/Dashboard/Account/PaymentRequest" component={Dashboard}/>
             {/* <Route path="/Dashboard/Pending" component={PendingActivation} /> */}
             <Route component={Page404} />
           </Switch>

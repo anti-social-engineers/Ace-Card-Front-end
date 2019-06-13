@@ -21,22 +21,21 @@ class Account extends Component {
         const header = 'Bearer ' + localStorage.getItem('jwt token')
         console.log(localStorage.getItem('jwt token'))
         axios.get(config.API_URL+'/api/account', {headers: {Authorization:header}})
-        .then(res => {
-        this.setState({
-            user: res.data, 
-            hasPas: res.data.has_card, 
-            account:{
-                first_name:res.data.first_name,
-                surname: res.data.surname,
-                mail: res.data.mail,
-                dob: res.data.dob,
-                gender: res.data.gender
-            }})
-        
-            console.log(this.state.user)    
-        })
-        .catch((err) => {
-        });
+            .then(res => {
+                this.setState({
+                    user: res.data, 
+                    hasPas: res.data.has_card, 
+                    account:{
+                        first_name:res.data.first_name,
+                        surname: res.data.surname,
+                        mail: res.data.mail,
+                        dob: res.data.dob,
+                        gender: res.data.gender
+                    }})
+                    console.log(this.state.user)    
+                })
+            .catch((err) => {
+            });
     }
 
     handleLogout = () => {
