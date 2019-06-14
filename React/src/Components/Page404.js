@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export default function Page404() {
-    return (
-        <div>
-            404 not found
-        </div>
-    )
+export default class Page404 extends Component {
+    render() {
+        return (
+            <div>
+                Error 404. Pagina kon niet gevonden worden!
+            </div>
+        )
+    }
 }

@@ -2,24 +2,30 @@ import React, { Component } from 'react'
 import Table from './Table';
 import axios from 'axios';
 import config from '../../../../config/config'
-
+import Dashboard from '../../Dashboard';
+if (process.env.NODE_ENV !== 'production') {
+    const whyDidYouRender = require('@welldone-software/why-did-you-render/dist/no-classes-transpile/umd/whyDidYouRender.min.js');
+    whyDidYouRender(React);
+}
 export default class Deposits extends Component {
+    static whyDidYouRender = true
 
     state = {
         count: 0
     }
 
-    async componentDidMount() {
-        const header = 'Bearer ' + localStorage.getItem('jwt token')
-        const res = await axios.get(config.API_URL+'/api/account/deposits/asc', {headers: {Authorization:header}})
-        console.log("DEPOSITS-----------------------", res.data);
-    }
+    // async componentDidMount() {
+    //     const header = 'Bearer ' + localStorage.getItem('jwt token')
+    //     const res = await axios.get(config.API_URL+'/api/account/deposits/asc', {headers: {Authorization:header}})
+    //     console.log("DEPOSITS-----------------------", res.data);
+    // }
 
     updateCount = (count) => {
         this.setState({count: this.state.count + count});
     }
     
     render() {
+        console.log("RENDERING DEPOSITS")
         return (
             <div className="container-fluid" data-aos="fade-up" data-aos-duration="400">
                 {/* Page Heading */}
@@ -64,7 +70,6 @@ export default class Deposits extends Component {
                                 Search:<input
                                 type="search"
                                 className="form-control form-control-sm"
-                                placeholder
                                 aria-controls="dataTable"
                                 />
                             </label>

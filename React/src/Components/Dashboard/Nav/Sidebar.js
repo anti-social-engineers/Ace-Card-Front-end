@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
+import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default class Sidebar extends Component {
     state = {
@@ -14,37 +15,37 @@ export default class Sidebar extends Component {
         return (
           <ul className={ classNames("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion", { toggled: this.state.navCollapsed }) } id="accordionSidebar" ref='sidebar'>
           {/* Sidebar - Brand */}
-          <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+          <NavLink className="sidebar-brand d-flex align-items-center justify-content-center" to="/dashboard">
             <div className="sidebar-brand-icon rotate-n-15">
               <i className="fas fa-laugh-wink" />
             </div>
             <div className="sidebar-brand-text mx-3">Ace Paneel</div>
-          </a>
+          </NavLink>
           {/* Divider */}
           <hr className="sidebar-divider my-0" />
           {/* Nav Item - Dashboard */}
           <li className="nav-item active">
-            <a className="nav-link" href="index.html">
-              <i className="fas fa-fw fa-user" />
-              <span>Account</span></a>
+            <NavLink className="nav-link" to="/dashboard">
+              <i className="fas fa-fw fa-home" />
+              <span>Dashboard</span></NavLink>
           </li>
           {/* Divider */}
           <hr className="sidebar-divider" />
           {/* Heading */}
           <div className="sidebar-heading">
-            Interface
+            Overzicht
           </div>
           {/* Nav Item - Pages Collapse Menu */}
           <li className="nav-item">
-            <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-              <i className="fas fa-fw fa-cog" />
-              <span>Components</span>
-            </a>
+            <NavLink className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+              <i className="fas fa-fw fa-user" />
+              <span>Account</span>
+            </NavLink>
             <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
               <div className="bg-white py-2 collapse-inner rounded">
-                <h6 className="collapse-header">Custom Components:</h6>
-                <a className="collapse-item" href="buttons.html">Buttons</a>
-                <a className="collapse-item" href="cards.html">Cards</a>
+                <h6 className="collapse-header">Mijn Account:</h6>
+                <NavLink className="collapse-item" to="/dashboard/deposits">Stortingen</NavLink>
+                <NavLink className="collapse-item" to="/dashboard/transactions">Uitgaves</NavLink>
               </div>
             </div>
           </li>
@@ -56,7 +57,7 @@ export default class Sidebar extends Component {
             </a>
             <div id="collapseUtilities" className="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
               <div className="bg-white py-2 collapse-inner rounded">
-                <h6 className="collapse-header">Custom Utilities:</h6>
+                <h6 className="collapse-header">Mijn instellingen:</h6>
                 <a className="collapse-item" href="utilities-color.html">Colors</a>
                 <a className="collapse-item" href="utilities-border.html">Borders</a>
                 <a className="collapse-item" href="utilities-animation.html">Animations</a>

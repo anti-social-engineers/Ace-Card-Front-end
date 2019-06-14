@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Fade from 'react-reveal/Fade';
+import {ReactComponent as SelfieWoman} from '../../../../../Styles/img/svg/selfie2.svg'
 
 import { FilePond, registerPlugin } from 'react-filepond';
 
@@ -138,7 +139,7 @@ class RegisterStep2 extends Component {
                         onremovefile={this.onFileRemove}
                     />
                 </div>
-
+                {(this.state.file.length < 1 || this.state.error) && <div className="row no-gutterr" style={{height: '430px'}}><SelfieWoman/></div>}
                 {this.state.file.length > 0 && !this.state.error && <Fade><div className="row no-gutterr"><p>Het geuploade bestand lijkt geldig te zijn. U kunt door naar de volgende stap om de registratieproces af te ronden.</p></div></Fade>}
             </div>
         );

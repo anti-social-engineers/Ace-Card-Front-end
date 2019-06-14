@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@welldone-software/why-did-you-render": "^3.2.0",
     "aos": "^2.3.4",
     "axios": "^0.18.1",
     "chart.js": "^2.8.0",

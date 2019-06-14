@@ -3,7 +3,13 @@ import InfiniteScroll from 'react-infinite-scroller';
 import axios from 'axios';
 import config from '../../../../config/config'
 
+if (process.env.NODE_ENV !== 'production') {
+    const whyDidYouRender = require('@welldone-software/why-did-you-render/dist/no-classes-transpile/umd/whyDidYouRender.min.js');
+    whyDidYouRender(React);
+}
+
 export default class Table extends Component {
+    static whyDidYouRender = true
     state = {
         deposits: [],
         hasMoreItems: true,
@@ -68,21 +74,22 @@ export default class Table extends Component {
     
 
     render() {
+        console.log("RENDERINGGG!!!!!!!")
         const loader = <div className="loader">Loading ...</div>;
 
         var items = [];
-        this.state.deposits.map((deposit, i) => {
-            items.push(
-                <tr>
-                    <td className="sorting_1">{deposit.id}</td>
-                    <td>€{deposit.amount}</td>
-                    <td>{deposit.time}</td>
-                    <td>21</td>
-                    <td>2009/02/27</td>
-                    <td>$103,500</td>
-                </tr>
-            );
-        });
+        // this.state.deposits.map((deposit, i) => {
+        //     items.push(
+        //         <tr>
+        //             <td className="sorting_1">{deposit.id}</td>
+        //             <td>€{deposit.amount}</td>
+        //             <td>{deposit.time}</td>
+        //             <td>21</td>
+        //             <td>2009/02/27</td>
+        //             <td>$103,500</td>
+        //         </tr>
+        //     );
+        // });
 
         return (
             <div className="row no-gutters">
@@ -153,7 +160,7 @@ export default class Table extends Component {
                     </th>
                     </tr>
                 </thead>
-                    <InfiniteScroll
+                    {/* <InfiniteScroll
                         pageStart={0}
                         element={'tbody'}
                         loadMore={this.loadItems}
@@ -161,7 +168,7 @@ export default class Table extends Component {
                         loader={loader}>
 
                         {items}
-                    </InfiniteScroll>
+                    </InfiniteScroll> */}
                 </table>
             </div>
             </div>

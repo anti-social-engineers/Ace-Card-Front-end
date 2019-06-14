@@ -9,7 +9,7 @@ import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import Account from './Pages/Account/Account';
 import BalanceModal from './Pages/Account/BalanceModal';
 import PendingActivation from './Pages/PendingCard';
-import Page404 from '../Page404';
+import Page404 from './Pages/Page404';
 import aos from 'aos'
 import axios from 'axios'
 import config from '../../config/config'
@@ -18,8 +18,13 @@ import queryString from "query-string";
 import {Redirect} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import auth from '../../Helper/actions/auth'
-
+if (process.env.NODE_ENV !== 'production') {
+  const whyDidYouRender = require('@welldone-software/why-did-you-render/dist/no-classes-transpile/umd/whyDidYouRender.min.js');
+  whyDidYouRender(React);
+}
 class Dashboard extends Component {
+  static whyDidYouRender = true
+
   state = {
     loggedIn: true,
     user: {},
@@ -60,6 +65,7 @@ class Dashboard extends Component {
   }
   
   render() {
+      const { children } = this.props;
       return (
         <>
       { !this.state.loggedIn && <Redirect to={{pathname: "/Dashboard"}}  /> }
@@ -69,7 +75,8 @@ class Dashboard extends Component {
         <div id="content-wrapper" className="d-flex flex-column">
           <div id="content">
             <AccountTopBar user={this.state.user}/>
-            <Account user={this.state.user} hasCard={this.state.hasCard}/>
+            {/* <Account user={this.state.user} hasCard={this.state.hasCard}/> */}
+            { children }
           </div>
           <Footer/>
         </div>
