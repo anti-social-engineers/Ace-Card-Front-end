@@ -15,6 +15,8 @@ import Contact from './Components/Contact';
 import Over from './Components/Over';
 import FAQ from './Components/FAQ';
 import Vacatures from './Components/Vacatures';
+import Clubeigenaar from './Components/Clubeigenaar';
+import Bewaker from './Components/Bewaker';
 
 class App extends Component {
   render() {
@@ -39,6 +41,8 @@ class App extends Component {
             <Route path="/Dashboard/Account" component={Dashboard}/>
             <Route path="/FAQ" component={FAQ}/>
             <Route path="/Vacatures" component={Vacatures}/>
+            <Route path="/Clubeigenaar" component={Clubeigenaar}/>
+            <Route path="/Bewaker" component={Bewaker}/>
             {/* <Route path="/Dashboard/Pending" component={PendingActivation} /> */}
             <Route component={Page404} />
           </Switch>

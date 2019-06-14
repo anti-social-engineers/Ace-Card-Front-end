@@ -5,7 +5,7 @@ import Nav from '../Components/Navbar';
 import {NavLink} from 'react-router-dom';
 import HomeFooter from '../Components/HomeFooter';
 
-class Vacatures extends Component {
+class Bewaker extends Component {
 
   componentDidMount(){
     aos.init({
@@ -21,13 +21,18 @@ class Vacatures extends Component {
             <div className="row" data-aos="fade-left" data-aos-duration="500">
                 <div className="col-md">
                     <div className="mainPageTitle overTitle">
-                        Vacatures
+                        Bewaker
                     </div>
                 </div>
             </div>
             <div className="row" data-aos="fade-left" data-aos-duration="500">
                 <div className="col-md mainpageParagraph vacaturesParagraph">
-                    Momenteel zijn wij niet op zoek naar nieuwe werknemers.
+                    Als bewaker ben je verantwoordelijk voor de veiligheid in de club. Wij vinden het dan ook erg belangrijk om jouw werk
+                    zo makkelijk mogelijk te maken.
+                    <br/>
+                    <br/>
+                    Met behulp van ons systeem is het mogelijk om in een oogopslag te zien of iemand toelaatbaar is in jouw club.
+                    Daarnaast kan jij als bewaker zelf notities maken om het voor elke collega veilig te houden. 
                 </div>
             </div>
         </div>
@@ -38,4 +43,4 @@ class Vacatures extends Component {
   }
 }
 
-export default Vacatures;
+export default Bewaker;

@@ -14,7 +14,6 @@ const HomeFooter = () => {
                   Producten
                 </div>
                 <li>ACE-card</li>
-                <li>Data</li>
               </ul>
             </div>
             <div className="col-sm">
@@ -22,9 +21,8 @@ const HomeFooter = () => {
                 <div className="homeFooter-title">
                   Zakelijk
                 </div>
-                <li>Clubeigenaar</li>
-                <li>Bewaker</li>
-                <li>Procedures</li>
+                <li><NavLink className="footerNav" to="/Clubeigenaar">Clubeigenaar</NavLink></li>
+                <li><NavLink className="footerNav" to="/Bewaker">Bewaker</NavLink></li>
               </ul>
             </div>
             <div className="col-sm">

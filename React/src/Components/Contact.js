@@ -23,7 +23,7 @@ class Contact extends Component {
         <div className="container-fluid">
             <div className="row" data-aos="fade-left" data-aos-duration="500">
                 <div className="col-md-12 col-xl-6 d-flex justify-content-center">
-                    <div class="col-md-9">
+                    <div className="col-md-9">
                         <div className="mainPageTitle contactTitle">Neem contact met ons op</div>
                         <div className="">
                             <p>Bent u benieuwd naar de mogelijkheden van de acecard als clubeigenaar, neem dan contact op met ons team:

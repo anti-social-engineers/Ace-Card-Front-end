@@ -5,7 +5,7 @@ import Nav from '../Components/Navbar';
 import {NavLink} from 'react-router-dom';
 import HomeFooter from '../Components/HomeFooter';
 
-class Vacatures extends Component {
+class Clubeigenaar extends Component {
 
   componentDidMount(){
     aos.init({
@@ -21,13 +21,18 @@ class Vacatures extends Component {
             <div className="row" data-aos="fade-left" data-aos-duration="500">
                 <div className="col-md">
                     <div className="mainPageTitle overTitle">
-                        Vacatures
+                        Clubeigenaar
                     </div>
                 </div>
             </div>
             <div className="row" data-aos="fade-left" data-aos-duration="500">
                 <div className="col-md mainpageParagraph vacaturesParagraph">
-                    Momenteel zijn wij niet op zoek naar nieuwe werknemers.
+                    Er zijn veel voordelen om uw club of horecagelgenheid aan te melden bij ACE. Dankzij de acecard kunt u als eigenaar eenvoudig
+                    zien wie er allemaaal uw club binnenkomt. Doordat u de kaart van een klant kunt scannen zien uw bewakers in een helder overzicht
+                    of alles in orde is.
+                    <br/>
+                    <br/>
+                    Heeft u interesse en wilt u zich aanmelden bij ACE, of heeft u vragen? Neem dan <NavLink className="footerNav clubeigenaar-underline" to="/Contact">hier</NavLink> contact met ons op.
                 </div>
             </div>
         </div>
@@ -38,4 +43,4 @@ class Vacatures extends Component {
   }
 }
 
-export default Vacatures;
+export default Clubeigenaar;

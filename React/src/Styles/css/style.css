@@ -585,6 +585,10 @@ a.nav-item.nav-link {
     opacity: 0.3;
 }
 
+.clubeigenaar-underline{
+    border-bottom: 1px solid #cdcfcf;
+}
+
 .FAQfootermargin{
     margin-top: 70px;
 }
