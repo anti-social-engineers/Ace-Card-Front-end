@@ -273,6 +273,10 @@ a.nav-item.nav-link {
 
 
 
+.margin-for-dropdown{
+    margin-top: 25px;
+}
+
 .btn-primary:hover{
     background-image: none;
     background-color: #000;
@@ -324,6 +328,25 @@ a.nav-item.nav-link {
 	font-weight: 400;
 	letter-spacing: 2px;
     position: relative;
+    margin-top: 20px;
+}
+
+.main-home-button, .cta-button{
+    font-size: 18px;
+    height: 60px;
+    width: 250px;
+    background-image: none;
+    opacity: 0.8;
+    transition: 0.5s;
+    background-color: #007bff !important;
+}
+
+.cta-button:hover {
+    opacity: 1;
+    background-color: #176ac4;
+}
+
+.cta-button-spacing{
     margin-top: 20px;
 }
 
@@ -557,6 +580,44 @@ a.nav-item.nav-link {
     bottom: 50px;
 }
 
+#homeFooter-border{
+    border-top: 2px solid #cdcfcf;
+    opacity: 0.3;
+}
+
+.clubeigenaar-underline{
+    border-bottom: 1px solid #cdcfcf;
+}
+
+.FAQfootermargin{
+    margin-top: 70px;
+}
+
+.homeFooter{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: #f6f6f6;
+    color: #a2a1a1;
+}
+
+.homeFooter-title{
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.homeFooter, li{
+    list-style-type: none;
+    margin-bottom: 10px;
+}
+
+.footerNav{
+    color: #a2a1a1;
+}
+
+.cta {
+    margin-left: 20px;
+}
+
 .footer-wrapper {
     position: relative;
 }
@@ -570,6 +631,43 @@ a.nav-item.nav-link {
     text-align: right;
     width: 310px;
     text-align: center;
+}
+
+
+/* Accordion styling */
+
+.accordion-margin{
+    margin-bottom: 30px;
+}
+.accordion-section .panel-default > .panel-heading {
+    border: 0;
+    padding-top: 2rem;
+}
+.accordion-section .panel-default .panel-title a {
+    display: block;
+    font-size: 1.5rem;
+    color: #2b2c2d;
+}
+
+.accordion-border{
+    border-bottom: 2px solid #dedede;
+    margin-top: 10px;
+}
+
+.accordion-section .panel-default .panel-title a:after {
+    font-family: 'FontAwesome';
+    font-style: normal;
+    font-size: 3rem;
+    float: right;
+    margin-top: -12px;
+}
+
+.accordion-icon{
+    float: right;
+}
+
+.accordion-section .panel-default .panel-body {
+    font-size: 1.2rem;
 }
 
 /* form starting stylings ------------------------------- */
@@ -1068,7 +1166,7 @@ a.nav-item.nav-link {
 
 #chevron {
     margin-top: 80px;
-    margin-bottom: 100px;
+    margin-bottom: 20px;
     margin-left: 0px;
     position: relative;
     text-align: center;
@@ -1095,7 +1193,7 @@ a.nav-item.nav-link {
     width: 100%;
     height: 500px;
     border-radius: 6%;
-    padding-top: 80px;
+    padding-top: 40px;
 }
 
 .squareskew{
@@ -1162,6 +1260,11 @@ a.nav-item.nav-link {
     margin: 5px;
 }
 
+.email-image{
+    margin-top: 55px;
+    margin-right: 30px;
+}
+
 .imgShading{
     margin: 10px;
     -webkit-box-shadow: 0px 0px 23px 10px rgba(133,126,133,1);
@@ -1175,16 +1278,66 @@ a.nav-item.nav-link {
     color: #2d2c2c;
     font-family: "Montserrat";
     letter-spacing: 1.0px;
-    margin-top: 120px;
+    margin-top: 90px;
+}
+
+.contactTitle{
+    font-size: 2.1em;
+    margin-top: 95px;
+}
+
+.overTitle{
+    margin-top: 90px;
+}
+
+.FAQTitle{
+    margin-top: 70px;
+}
+
+.ctatext{
+    margin-top: 20px !important;
+    /* margin-left: 100px !important; */
+    font-size: 1.8em !important;
+    font-weight: 500 !important;
+}
+
+.p-size{
+    font-size: 0.7em;
 }
 
 .mainPageParagraph{
-    padding-top: 25px;
+    /* margin-left: 100px !important; */
     font-size: 1.4em;
     color: #a2a1a1;
     font-family: "Montserrat";
     letter-spacing: 1px;
+}
 
+.vacaturesParagraph{
+    padding-top: 40px;
+    padding-bottom: 8%;
+}
+
+.overParagraph{
+    margin-top: 20px;
+    font-size: 1.4em;
+}
+
+.overParagraphbot{
+    margin-bottom: 70px;
+}
+
+.paragraphPadding{
+    padding-bottom: 10px;
+}
+
+.mainPageParagraph, .ctaparatext{
+    padding-top: 10px;
+    font-size: 1.4em;
+}
+
+.ctarow{
+    margin-bottom: 80px;
 }
 
 .main-menu .fa-2x {
@@ -1205,6 +1358,10 @@ a.nav-item.nav-link {
 width:250px;
 overflow:visible;
 } */
+
+.cp-margin{
+    margin-top: 30px;
+}
 
 .main-menu {
     background-image: linear-gradient(90deg, #000000 0%, #434343 100%);/* 076 Premium Dark: */
@@ -1326,6 +1483,10 @@ nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.d
     padding-left: 25%;
     padding-right: 25%;
     width: 100%;
+}
+
+.account-form, .adminPost-form{
+    padding-top: 10%;
 }
 
 .saldo-form{
