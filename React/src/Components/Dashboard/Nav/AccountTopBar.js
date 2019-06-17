@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-
-
 import TimeAgo from 'react-timeago'
+import {NavLink} from 'react-router-dom';
 import dutchStrings from 'react-timeago/lib/language-strings/nl'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
  
@@ -11,7 +10,19 @@ const formatter = buildFormatter(dutchStrings)
 export default class AccountTopBar extends Component {
 
     render() {
-        console.log("rendering accountbar")
+        let name;
+        let img;
+        let imgStyle;
+        let imgSrc;
+        let defaultimg ='../../Styles/img/acelogo.png';
+        if (this.props.data.user && this.props.data.user.has_card) {
+            name = this.props.data.user.first_name + " " + this.props.data.user.surname;
+            img = this.props.data.user.image;
+        } else {
+            name = "Gebruiker";
+            imgStyle = {backgroundColor: "#ececec", padding: "5px"};
+            // imgSrc = '../../../Styles/img/acelogo.png';
+        }
 
         var output_amount_notifications;
         if (this.props.data.notifications !== undefined) {
@@ -61,7 +72,7 @@ export default class AccountTopBar extends Component {
                 </div>
             </li>
             {/* Nav Item - Alerts */}
-            <li className="nav-item dropdown no-arrow mx-1">
+            { img && <li className="nav-item dropdown no-arrow mx-1">
                 <a className="nav-link dropdown-toggle"  id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i className="fas fa-bell fa-fw" />
                 {/* Counter - Alerts */}
@@ -73,36 +84,19 @@ export default class AccountTopBar extends Component {
                     Alerts Center
                 </h6>
                 <MiniNotifications notifications={this.props.data.notifications && this.props.data.notifications}/>
-                {this.props.data.notifications && this.props.data.notifications.length > 0 && <a className="dropdown-item text-center small text-gray-500" >Laat alle notificaties zien</a>}                
+                {this.props.data.notifications && this.props.data.notifications.length > 0 && <NavLink to="/dashboard/notifications" className="dropdown-item text-center small text-gray-500" >Laat alle notificaties zien</NavLink>}                
                 </div>
-            </li>
+            </li>}
             <div className="topbar-divider d-none d-sm-block" />
             {/* Nav Item - User Information */}
             <li className="nav-item dropdown no-arrow">
                 <a className="nav-link dropdown-toggle"  id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span className="mr-2 d-none d-lg-inline text-gray-600 small">{this.props.data.user ? this.props.data.user.first_name + " " + this.props.data.user.surname : "Gebruiker"}</span>
-                <img className="img-profile rounded-circle" src={this.props.data.user && this.props.data.user.image } />
+                <span className="mr-2 d-none d-lg-inline text-gray-600 small">{ name }</span>
+                {/* { <img className="img-profile rounded-circle" src={ img ? img : {require(defaultimg)}} />} */}
+                { img ? <img className="img-profile rounded-circle" src={ img } /> : <img className="img-profile rounded-circle" style={{backgroundColor: "#ececec", padding: "2px"}} src={require('../../../Styles/img/profileplaceholder.png')} />}
                 </a>
                 {/* Dropdown - User Information */}
-                <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a className="dropdown-item" >
-                    <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
-                    Profile
-                </a>
-                <a className="dropdown-item" >
-                    <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" />
-                    Settings
-                </a>
-                <a className="dropdown-item" >
-                    <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />
-                    Activity Log
-                </a>
-                <div className="dropdown-divider" />
-                <a className="dropdown-item" data-toggle="modal" data-target="#logoutModal">
-                    <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
-                    Logout
-                </a>
-                </div>
+                <Dropdown img={img} />
             </li>
             </ul>
         </nav>
@@ -111,10 +105,36 @@ export default class AccountTopBar extends Component {
 }
 
 
+class Dropdown extends Component {
+    render() {
+        return (
+            <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                { this.props.img && <> <a className="dropdown-item" >
+                    <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
+                        Profile
+                    </a>
+                    <a className="dropdown-item" >
+                        <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" />
+                        Settings
+                    </a>
+                    <a className="dropdown-item" >
+                        <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />
+                        Activity Log
+                    </a>
+                    <div className="dropdown-divider"/></>
+                }
+
+                <a className="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                    <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
+                    Logout
+                </a>
+            </div>
+        )
+    }
+}
 
 class MiniNotifications extends Component {
     render() {
-        console.log("MINI NOTIFS");
         let notifications;
         let success;
         if (this.props.notifications){
@@ -135,7 +155,7 @@ class MiniNotifications extends Component {
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="small notification-time text-gray-500"><TimeAgo date={notification.date} formatter={formatter}></TimeAgo></div>
+                                    <div className="small notification-time text-gray-500"><TimeAgo date={notification.datetime} formatter={formatter}></TimeAgo></div>
                                     {message}
                                 </div>
                             </a>

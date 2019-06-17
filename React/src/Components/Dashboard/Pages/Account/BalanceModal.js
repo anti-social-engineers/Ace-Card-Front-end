@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../../../../Styles/css/style.css'
 import {Ideal} from '../../../Ideal';
+import { myContext } from '../../../Authenticator';
 
 class BalanceModal extends Component {
 
@@ -13,7 +14,8 @@ class BalanceModal extends Component {
   handleResult = (res) => {
     this.toggleLoad();
     console.log(res);
-    window.location.href = res.source.redirect.url;
+    // window.location.href = res.source.redirect.url;
+    // window.open(res.source.redirect.url, '_blank');
   }
 
   toggleLoad = () => {
@@ -33,7 +35,7 @@ class BalanceModal extends Component {
             </div>
             <div className="modal-body">
                 { this.state.loading && <span>Transactie voorbereiden...</span> }
-                <Ideal queryparams={this.props.queryparams} handleResult={this.handleResult} toggleLoad={this.toggleLoad} balance={this.props.balance}/>
+                <Ideal context={this.context} queryparams={this.props.queryparams} handleResult={this.handleResult} toggleLoad={this.toggleLoad} balance={this.props.balance}/>
             </div>
             <div className="modal-footer">
               <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -47,3 +49,4 @@ class BalanceModal extends Component {
 }
 
 export default BalanceModal;
+BalanceModal.contextType = myContext;

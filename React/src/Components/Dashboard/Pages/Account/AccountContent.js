@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import BarChart from '../../Charts/BarChart'
 import BalanceModal from './BalanceModal';
 import queryString from "query-string";
+import {myContext} from '../../../Authenticator'
+import CountUp from 'react-countup';
 
-export default class AccountContent extends Component {
+class AccountContent extends Component {
 
     constructor(...args) {
         super(...args);
@@ -29,8 +31,18 @@ export default class AccountContent extends Component {
     }
 
     render() {
-        console.log("kek")
         let modalClose = () => this.setState({ modalShow: false });
+        let balance;
+
+        console.log("TESTTTTTT");
+        // console.log(this.context.data.notifications && this.context.data.notifications[0].updated_balance);
+
+        if (this.context.data.notifications && this.context.data.notifications.length > 0) {
+            balance = this.context.data.notifications[0].updated_balance;
+        } else {
+            balance = this.context.data.user.credits;
+        }
+
         return (
             <div className="container-fluid" data-aos="fade-up" data-aos-duration="400">
                 {/* Page Heading */}
@@ -47,7 +59,7 @@ export default class AccountContent extends Component {
                         <div className="row no-gutters align-items-center mb-2">
                           <div className="col mr-2">
                             <div className="text-xs font-weight-bold text-primary text-success text-uppercase mb-1">Huidige Saldo</div>
-                            <div className="h5 mb-0 font-weight-bold text-gray-800">€150.00</div>
+                            <div className="h5 mb-0 font-weight-bold text-gray-800">€{balance}</div>
                           </div>
                           <div className="col-auto">
                             <i className="fas fa-euro-sign fa-2x text-gray-300" />
@@ -190,3 +202,6 @@ export default class AccountContent extends Component {
         )
     }
 }
+
+AccountContent.contextType = myContext;
+export default AccountContent;

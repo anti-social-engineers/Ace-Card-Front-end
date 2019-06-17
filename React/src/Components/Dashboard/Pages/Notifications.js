@@ -51,6 +51,10 @@ class Notification extends Component {
     render() {
         const notifications = this.props.notifications && this.props.notifications.map(
             notification => {
+                console.log("INSIDE NOTIFICATION")
+                console.log(notification);
+                var time = new Date();
+                // console.log(time);
                 var message = notification.name === "deposit" ?  `€${notification.amount} is zojuist gestort in uw account!` : notification.message;
                 return (
                     <a className="dropdown-item d-flex align-items-center" href="#">
@@ -60,7 +64,7 @@ class Notification extends Component {
                             </div>
                         </div>
                         <div>
-                            <div className="small text-gray-500"><TimeAgo date={notification.date} formatter={formatter}></TimeAgo></div>
+                            <div className="small text-gray-500"><TimeAgo date={notification.datetime} formatter={formatter}></TimeAgo></div>
                             {message}
                         </div>
                     </a>
