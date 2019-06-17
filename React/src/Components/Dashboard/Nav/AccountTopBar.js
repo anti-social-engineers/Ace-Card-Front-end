@@ -16,7 +16,11 @@ export default class AccountTopBar extends Component {
         var output_amount_notifications;
         if (this.props.data.notifications !== undefined) {
             var notifications_amount = this.props.data.notifications.length;
-            output_amount_notifications = notifications_amount;
+            if (notifications_amount > 0) {
+                output_amount_notifications = notifications_amount;
+            } else {
+                output_amount_notifications = "";
+            }
         }
         return (
             <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -61,7 +65,7 @@ export default class AccountTopBar extends Component {
                 <a className="nav-link dropdown-toggle"  id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i className="fas fa-bell fa-fw" />
                 {/* Counter - Alerts */}
-                <span className="badge badge-danger badge-counter">{ output_amount_notifications && output_amount_notifications}</span>
+                    <span className="badge badge-danger badge-counter">{output_amount_notifications}</span>
                 </a>
                 {/* Dropdown - Alerts */}
                 <div className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">

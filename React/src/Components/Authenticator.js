@@ -8,7 +8,8 @@ export const myContext = React.createContext();
 export default class Authenticator extends Component {
 
     state = {
-        data: []
+        data: [],
+        hasConnected: false
     }
     
     async componentDidMount() {
@@ -23,23 +24,34 @@ export default class Authenticator extends Component {
             data: {user}
         });
 
-        const io = socketIOClient(config.REDIS_URL, { query: {jwt: localStorage.getItem('jwt token')} });
+        const io = socketIOClient(config.REDIS_URL, { query: {jwt: localStorage.getItem('jwt token')} }, () => console.log("hi"));
 
         io.on("connection", socket => {
             console.log("Initial connect");
             socket.emit("jwt", localStorage.getItem('jwt token'));
         })
 
+        io.on("firstConnect", data => {
+            // console.log(object)
+            console.log("FIRST CONNECT!!!!!!!!!!!");
+            this.setState({hasConnected: true});
+        });
+
         io.on("event", data => {
-            if (data !== this.state.notifications){
+            if (data !== this.state.notifications) {
                 var curr_data = Object.assign({}, this.state.data);
                 curr_data["notifications"] = data;
+                // var isFirstConnect = curr_data["firstConnect"];
+                // console.log("FIRST CONNECT: ", isFirstConnect);
                 this.setState({data: curr_data}, () => {
                     // TODO
-                    var dropdown = document.getElementById("alertsDropdown");
-                    if (dropdown.getAttribute('aria-expanded') === "false") {
-                        document.getElementById("alertsDropdown").click()
+                    if (this.state.hasConnected){
+                        var dropdown = document.getElementById("alertsDropdown");
+                        if (dropdown.getAttribute('aria-expanded') === "false") {
+                            document.getElementById("alertsDropdown").click()
+                        }
                     }
+                    
                 });
 
                 console.log("RECEIVED EMITTION BY NODEJS")
@@ -52,8 +64,6 @@ export default class Authenticator extends Component {
             io.emit("jwt", localStorage.getItem('jwt token'));
         })
     }
-
-    
 
     updateLel = () => {
         console.log("finished!");
