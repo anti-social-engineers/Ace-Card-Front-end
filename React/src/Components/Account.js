@@ -1,27 +1,19 @@
 import React, { Component } from 'react'
 import aos from 'aos'
-import '../Styles/css/bootstrap-theme.css'
-import '../Styles/css/bootstrap-theme.min.css'
-import '../Styles/css/bootstrap.css'
-import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux'
 import axios from 'axios'
 import config from '../config/config'
-import RegisterStep2 from './Form/Home/RegisterStep2/RegisterSteps/RegisterStep2';
 
 class Account extends Component {
-    constructor(props) {
-        super(props);
-      }
       state = {
         user: null,
         hasPas: false,
         account: {first_name:'', surname:'', mail:'', dob: '' ,gender:'' }
       }
       
-    componentDidMount=()=>{
+    componentDidMount = () => {
         aos.init({
             duration : 2000
         })
@@ -29,22 +21,21 @@ class Account extends Component {
         const header = 'Bearer ' + localStorage.getItem('jwt token')
         console.log(localStorage.getItem('jwt token'))
         axios.get(config.API_URL+'/api/account', {headers: {Authorization:header}})
-        .then(res => {
-        this.setState({
-            user: res.data, 
-            hasPas: res.data.has_card, 
-            account:{
-                first_name:res.data.first_name,
-                surname: res.data.surname,
-                mail: res.data.mail,
-                dob: res.data.dob,
-                gender: res.data.gender
-            }})
-        
-            console.log(this.state.user)    
-        })
-        .catch((err) => {
-        });
+            .then(res => {
+                this.setState({
+                    user: res.data, 
+                    hasPas: res.data.has_card, 
+                    account:{
+                        first_name:res.data.first_name,
+                        surname: res.data.surname,
+                        mail: res.data.mail,
+                        dob: res.data.dob,
+                        gender: res.data.gender
+                    }})
+                    console.log(this.state.user)    
+                })
+            .catch((err) => {
+            });
     }
 
     handleLogout = () => {

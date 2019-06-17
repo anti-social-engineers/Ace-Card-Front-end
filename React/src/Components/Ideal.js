@@ -5,6 +5,7 @@ import {
   StripeProvider,
   Elements,
 } from 'react-stripe-elements';
+import axios from 'axios'
 
 // You can customize your Elements to give it the look and feel of your site.
 const createOptions = () => {
@@ -29,9 +30,10 @@ const createOptions = () => {
 class _IdealBankForm extends Component {
   state ={
     result: "",
-    newBalance: 0.00
+    newBalance: 0.00,
+    redirect: false
   };
-
+  
   updateAddedValue = (e) => {
     if (e.target.value && !isNaN(e.target.value)){
       this.setState({newBalance: this.props.balance + parseFloat(e.target.value)});
@@ -47,7 +49,7 @@ class _IdealBankForm extends Component {
       this.props.stripe
         .createSource({
           type: 'ideal',
-          amount: ev.target.amount.value,
+          amount: ev.target.amount.value * 100,
           currency: 'eur',
           // You can specify a custom statement descriptor.
           statement_descriptor: 'ORDER AT11990',
@@ -55,7 +57,7 @@ class _IdealBankForm extends Component {
             name: ev.target.fname.value,
           },
           redirect: {
-            return_url: 'https://your-website.com/ideal-redirect',
+            return_url: 'http://localhost:3000/dashboard',
           },
         })
         .then(this.props.handleResult);
@@ -66,31 +68,34 @@ class _IdealBankForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
-            <h4 className="saldo-form">Huidige Saldo</h4>
-            <div className="group pb-5">
-              <span className="highlight"></span>
-              <span className="bar"></span>
-              <span name="num1">{"€" + this.props.balance.toFixed(2)}</span>
-            </div>
-            <div className="group pb-5">
-              <h4 className="saldo-form saldo-form-text">Naam</h4>
-              <input type="text" name="fname"></input>
-            </div>
-            <div className="group pb-5">
-              <h4 className="saldo-form saldo-form-text">Kies over te schrijven bedrag</h4>
-              <input type="text" name="amount" onChange={this.updateAddedValue} ></input>
-            </div>
-            <div className="group pb-5">
-              <h4 className="saldo-form">Nieuw saldo</h4>
-              <input type="text" value={"€" + this.state.newBalance.toFixed(2)} readOnly/>
-            </div>
+      <form onSubmit={this.handleSubmit.bind(this)} autocomplete="off">
+          <div className="form-content">
+                <div className={this.state.loading ? "d-none" : "inputs inputs-space"}>
+                    <div className="group">
+                        <input type="text" name="fname" id="naam" onChange={this.handleChange} required />
+                        <span className="highlight"></span>
+                        <span className="bar"></span>
+                        <label>Naam</label>
+                    </div>
+                    <div className="group">
+                        <input type="text" name="amount" id="naam" onChange={this.updateAddedValue} required />
+                        <span className="highlight"></span>
+                        <span className="bar"></span>
+                        <label>Kies over te schrijven bedrag</label>
+                    </div>
+                    <div className="group">
+                        <input type="text" value={"€" + this.state.newBalance.toFixed(2)} readOnly/>
+                        <span className="highlight"></span>
+                        <span className="bar"></span>
+                    </div>
 
-          <div className="group pb-5">
-              <h4 className="saldo-form saldo-form-text">Selecteer uw bank</h4>
-              <IdealBankElement className="IdealBankElement" {...createOptions()} />
-          </div>
-          <button>Opwaarderen</button>
+                    <div className="group pb-5">
+                        <h4 className="saldo-form saldo-form-text">Selecteer uw bank</h4>
+                        <IdealBankElement className="IdealBankElement" {...createOptions()} />
+                    </div>
+                    <button>Opwaarderen</button>
+                </div>
+            </div>
         </form>
     );
   }
@@ -99,13 +104,14 @@ class _IdealBankForm extends Component {
 const IdealForm = injectStripe(_IdealBankForm);
 
 export class Ideal extends Component {
-  render() {
-    return (
-      <StripeProvider apiKey="pk_test_AKuV25JNq2XSRshR11ZjJpBT002DMqhIMq">
-        <Elements>
-          <IdealForm handleResult={this.props.handleResult} balance={this.props.balance} toggleLoad={this.props.toggleLoad} />
-        </Elements>
-      </StripeProvider>
-    );
-  }
+    
+    render() {
+        return (
+        <StripeProvider apiKey="pk_test_AKuV25JNq2XSRshR11ZjJpBT002DMqhIMq">
+            <Elements>
+            <IdealForm queryparams={this.props.queryparams} handleResult={this.props.handleResult} balance={this.props.balance} toggleLoad={this.props.toggleLoad} />
+            </Elements>
+        </StripeProvider>
+        );
+    }
 }

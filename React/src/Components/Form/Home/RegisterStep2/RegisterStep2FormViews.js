@@ -5,9 +5,6 @@ import RegisterStep3 from './RegisterSteps/RegisterStep3';
 import RegisterFinished from './RegisterSteps/RegisterFinished';
 
 class RegisterStep2Form extends Component {
-  constructor(props){
-      super(props);
-  }
   render() {
       switch (this.props.step) {
         case 1:
@@ -22,7 +19,6 @@ class RegisterStep2Form extends Component {
           return (<RegisterStep1/>)
       }
   }
-
 }
 
 export default RegisterStep2Form

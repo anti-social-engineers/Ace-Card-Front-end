@@ -2,14 +2,7 @@ import React, { Component } from 'react';
 import RegisterInfoBar from '../RegisterInfoBar';
 import MaskedInput from 'react-text-mask'
   
-import 'moment/locale/nl';
-import 'react-day-picker/lib/style.css';
-
 class RegisterStep1 extends Component {
-    constructor(props){
-        super(props);
-    }
-
     state = {
         voornaam: "",
         achternaam: "",
@@ -28,7 +21,6 @@ class RegisterStep1 extends Component {
     handleDate = (e) => { 
         if (e.target.checkValidity()) {
             this.props.handleDate(e.target.value);
-            // this.setState({geboortedatum: e.target.value})
         }
     }
 
@@ -87,7 +79,6 @@ class RegisterStep1 extends Component {
                                     type="text"
                                     onFocus={(e) => e.target.placeholder = "1234AB"}
                                     onBlur={(e) => e.target.placeholder = ""}
-                                    onChange={() => {}}
                                     value={this.props.values.postcode}
                                     onChange={this.handleChange}
                                     ref="postcode"

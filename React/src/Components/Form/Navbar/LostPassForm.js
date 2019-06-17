@@ -1,9 +1,4 @@
 import React, { Component } from 'react'
-import '../../../Styles/css/bootstrap-theme.css'
-import '../../../Styles/css/bootstrap-theme.min.css'
-import '../../../Styles/css/bootstrap.css'
-import '../../../Styles/css/bootstrap.min.css'
-import '../../../Styles/css/style.css'
 import { NavLink } from 'react-router-dom'
 import Fade from 'react-reveal/Fade';
 
@@ -97,8 +92,7 @@ class LostPassForm extends Component {
                </div>
                <div className="row login-actions">
                    <div className="col">
-                       <NavLink className="dark-link" to="/Register">Nog geen account?</NavLink>
-
+                     <NavLink className="login-button" to="/Register">Nog geen account?</NavLink>
                     </div>
                     <div className="col">
                         <button className="main-button main-button--transparent float-right">

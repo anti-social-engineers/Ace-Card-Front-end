@@ -1,17 +1,9 @@
 import React, { Component } from 'react'
-import '../../../Styles/css/bootstrap-theme.css'
-import '../../../Styles/css/bootstrap-theme.min.css'
-import '../../../Styles/css/bootstrap.css'
-import '../../../Styles/css/bootstrap.min.css'
-import '../../../Styles/css/style.css'
-import { NavLink,Router} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Fade from 'react-reveal/Fade';
 import axios from 'axios'
 import jwt from 'jsonwebtoken'
 import config from '../../../config/config'
-import Account from '../../Account';
-import Home from '../../Home';
-import Axios from 'axios';
 import auth from '../../../Helper/actions/auth'
 
 class LoginForm extends Component {
@@ -24,7 +16,6 @@ class LoginForm extends Component {
       loading: false,
       logged_in: false,
       login_status: "none",
-      loading: false,
       decodeToken: null,
    }
 
@@ -79,13 +70,12 @@ class LoginForm extends Component {
 
    render() {
       return (
-         <div>
+            <Fade >
+               <div data-aos="fade-up" data-aos-duration="400">
                <div className="form-wrapper">
-               <Fade>
                <div className="form-title">
                   <h2>Inloggen</h2>
                </div>
-               </Fade>
                   <div className="login-info">
                   <span className={this.state.login_status === "wrong" && !this.state.loading ? "loading-text" : "d-none invis"}><i className="fas fa-exclamation-circle"></i>Inloggen mislukt.</span>
                </div>
@@ -123,7 +113,7 @@ class LoginForm extends Component {
             </div>
             <div className="row login-actions">
                   <div className="col">
-                     <NavLink className="dark-link" onClick={this.props.toggleVisibility} to="/Register">Nog geen account?</NavLink>
+                     <NavLink className="login-button" onClick={this.props.toggleVisibility} to="/Register">Nog geen account?</NavLink>
                   </div>
                   <div className="col">
                      <button className="main-button main-button--transparent float-right">
@@ -131,7 +121,8 @@ class LoginForm extends Component {
                      </button>
                   </div>
                </div>
-         </div>
+            </div>
+         </Fade>
       );
    }
 

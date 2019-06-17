@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import aos from 'aos'
-import '../Styles/css/bootstrap-theme.css'
-import '../Styles/css/bootstrap-theme.min.css'
-import '../Styles/css/bootstrap.css'
-import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {NavLink} from 'react-router-dom';
 import Chart from "chart.js";
 import {connect} from 'react-redux'
-import SaldoModal from './SaldoModal';
+// import SaldoModal from './SaldoModal';
+import queryString from "query-string";
+import BalanceModal from './Dashboard/Pages/Account/BalanceModal';
 Chart.defaults.global.defaultFontFamily = "'Montserrat', sans-serif"
 Chart.defaults.global.elements.line.tension = 0.3;
 
@@ -31,31 +29,36 @@ class Saldo extends Component {
             duration : 2000
         })
 
-    const node = this.node;    
+        var parsed = queryString.parse(window.location.search);
+        // parsed = {"client_secret": parsed.client_secret, "source": parsed.source, "livemode": parsed.livemode};
+        console.log(parsed);
+        this.setState({queryparams: parsed});
 
-    var myChart = new Chart(node, {
-        type: "line",
-        data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"],
-          datasets: [
-            {
-              label: "Saldo",
-              data: [25, 15, 56, 40, 20.33, 33, 10, 23, 37, 67, 35, 19],
-              backgroundColor: ["rgba(52, 128, 249, 0.4)",]
+        const node = this.node;    
+
+        var myChart = new Chart(node, {
+            type: "line",
+            data: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"],
+            datasets: [
+                {
+                label: "Saldo",
+                data: [25, 15, 56, 40, 20.33, 33, 10, 23, 37, 67, 35, 19],
+                backgroundColor: ["rgba(52, 128, 249, 0.4)",]
+                }
+            ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
             }
-          ]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-      });
-}
+        });
+    }
 
   render() {
 
@@ -114,7 +117,7 @@ class Saldo extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div classname="row no-gutterr">
+                        <div className="row no-gutterr">
                             <div className="chartMargin">
                                 <canvas
                                 style={{ width: 800, height: 300 }}
@@ -122,7 +125,7 @@ class Saldo extends Component {
                                 />
                             </div>
                         </div>
-                        <SaldoModal balance={this.state.balance} show={this.state.modalShow} onHide={modalClose}/>                          
+                        { this.state.modalShow && <BalanceModal queryparams={this.state.queryparams} balance={this.state.balance} onHide={modalClose}/>}                          
                     </div>
                 </div>
             </div>
@@ -130,6 +133,5 @@ class Saldo extends Component {
     )
   }
 }
-
 
 export default Saldo;
