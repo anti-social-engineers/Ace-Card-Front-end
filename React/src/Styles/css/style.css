@@ -6,9 +6,11 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #f7f7f7 !important;
+    color: #2b2c2d;
     font-family: "Montserrat";
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {
@@ -23,7 +25,6 @@ p {
     font-size: 14px;
     line-height: 2;
     font-family: "Montserrat";
-    color: #676767;
 }
 
 .cont {
@@ -35,17 +36,14 @@ p {
     background-image: linear-gradient(90deg, #000000 0%, #434343 100%);/* 076 Premium Dark: */
     position: relative;
     padding-bottom: 60px;
-    transition: 0.5s;
-    height: 118px;
+    transition: height 0.3s ease-out;
+    height:100vh;
 }
 
-.header--full {
-    /* height: 100%; */
-    padding: 0;
-    position: absolute !important;
-    width: 100%;
-    z-index: 5000;
-    transition: height 0.3s ease-in-out;
+.header--collapsed {
+    height:158px;
+    transition: height 0.3s ease-out;
+
 }
 
 .parabole {
@@ -96,12 +94,21 @@ a.nav-item.nav-link {
     flex-grow: 0;
 }
 
+.logotext {
+    font-size: 1.8rem;
+    letter-spacing: 4px;
+    margin-left: 10px;
+}
+
+.logoimg {
+    width: 70px;
+}
+
 .navbar-brand, .navbar-brand:hover, .navbar-brand:focus {
     color: white;
 }
 
 .navbar-nav {
-    margin-top: 20px;
     letter-spacing: 1.3px;
     font-size: 13px;
 }
@@ -160,6 +167,7 @@ a.nav-item.nav-link {
 .loading-text {
     opacity: 1;
     transition: 0.5s;
+    font-size: 0.9rem;
 }
 
 .loading-text--small {
@@ -284,8 +292,9 @@ a.nav-item.nav-link {
     letter-spacing: 0px;
 }
 
-
-
+.home-content p {
+    color: #6b6a6a;
+}
 
 .main-button, .main-button--prev {
 	background-image: linear-gradient(90deg, #000000 0%, #434343 100%);
@@ -736,6 +745,14 @@ a.nav-item.nav-link {
     padding-left: 5px;
 }
 
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus{
+    z-index: 2;
+    color: #fff !important;
+    background-color: #007bff !important;
+    background-image: none;
+    border-color: #007bff !important;
+}
+
 .login--hidden {
     transition: 0.5s ease-in-out;
     opacity: 0;
@@ -753,6 +770,21 @@ a.nav-item.nav-link {
     line-height: 2;
     font-family: "Montserrat";
     color: #676767;
+}
+
+.login-button:hover {
+    color: #e0e0e0;
+}
+
+.login-button {
+    font-size: 13px;
+    line-height: 2;
+    font-family: "Montserrat";
+    color: white;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    height: 43px;
 }
 
 .login-options {
@@ -1035,16 +1067,15 @@ a.nav-item.nav-link {
 
 
 #chevron {
-    margin-top: 170px;
+    margin-top: 80px;
     margin-bottom: 100px;
     margin-left: 0px;
     position: relative;
     text-align: center;
-    padding-top: 70px;
+    padding-top: 120px;
     padding-bottom: 70px;
-    background-image: linear-gradient(90deg, #000000 0%, #434343 100%);/* 076 Premium Dark: */
+    background-image: linear-gradient(90deg, #424242 0%, #1f1d1d 100%);
     transform: skew(0deg, 4deg);
-    /* height: 100%; */
     width: 100%;
 }
 
@@ -1061,21 +1092,55 @@ a.nav-item.nav-link {
 }
 
 .squareTop{
-    width: 250px;
-    height: 300px;
-    background-color: white;
+    width: 100%;
+    height: 500px;
     border-radius: 6%;
-    margin: 20px;
-    margin-top: 120px;
+    padding-top: 80px;
 }
 
 .squareskew{
-    width: 250px;
-    height: 300px;
+    width: 300px;
+    color: #171717;
+    min-height: 350px;
     background-color: white;
-    border-radius: 6%;
+    box-shadow: 0 0 24px 0 rgba(0,0,0,.1);
+    border-radius: 10px;
     margin: 20px;
     transform: skew(0deg, -4deg);
+    padding: 10px;
+    border: solid 5px #eaebeb;
+}
+
+.edge-fix {
+    position: absolute;
+    bottom: -1px;
+    background: #f7f7f7;
+    height: 10px;
+    width: 100%;
+}
+
+.card--body p {
+    font-size: 0.8rem;
+    color: #151515;
+    font-weight: 100;
+    letter-spacing: 0.8px;
+}
+
+.squareskew svg {
+    padding-bottom: 15px;
+}
+
+.card--title {
+    padding-bottom: 10px;
+    letter-spacing: 1.2px;
+}
+
+.home-card--wrapper {
+    width: 90%;
+}
+
+.card--body {
+    padding-bottom: 10px;
 }
 
 .scale{
@@ -1107,6 +1172,7 @@ a.nav-item.nav-link {
 .mainPageTitle{
     font-size: 2.4em;
     font-weight: 700;
+    color: #2d2c2c;
     font-family: "Montserrat";
     letter-spacing: 1.0px;
     margin-top: 120px;
@@ -1115,22 +1181,23 @@ a.nav-item.nav-link {
 .mainPageParagraph{
     padding-top: 25px;
     font-size: 1.4em;
+    color: #a2a1a1;
     font-family: "Montserrat";
     letter-spacing: 1px;
 
 }
 
-.fa-2x {
+.main-menu .fa-2x {
     font-size: 3em;
 }
 
-.fa {
+.main-menu .fa {
     position: relative;
     display: table-cell;
     width: 60px;
     text-align: center;
     vertical-align: middle;
-    font-size:20px;
+    font-size:12px;
 }
 
 
@@ -1142,7 +1209,8 @@ overflow:visible;
 .main-menu {
     background-image: linear-gradient(90deg, #000000 0%, #434343 100%);/* 076 Premium Dark: */
     border-right:1px solid #e5e5e5;
-    position: absolute;
+    box-sizing: initial;
+    position: fixed;
     top:0;
     bottom:0;
     height:100%;
@@ -1154,6 +1222,10 @@ overflow:visible;
     min-height: 300px;
 }
 
+.main-menu span {
+    font-family: 'Montserrat', sans-serif;
+}
+
 .main-menu>ul {
     margin:7px 0;
     padding-top: 30px;
@@ -1162,9 +1234,12 @@ overflow:visible;
 .main-menu li {
     position:relative;
     display:block;
-    width:170px;
-    margin-top: 13px;
-    margin-bottom: 13px
+    padding: 13px 0px 13px;
+
+}
+
+.main-menu .active {
+    background-color: #5fa2db;
 }
 
 .main-menu li>a {
@@ -1174,7 +1249,7 @@ overflow:visible;
     border-spacing:0;
     color:#fff;
     font-family: arial;
-    font-size: 21px;
+    font-size: 12px;
     text-decoration:none;
     -webkit-transform:translateZ(0) scale(1,1);
     -webkit-transition:all .1s linear;
@@ -1188,7 +1263,7 @@ overflow:visible;
     height:36px;
     text-align:center;
     vertical-align:middle;
-    font-size: 20px;
+    font-size: 12px;
     color: #FFFFFF;
     padding-top: 10px;
     padding-right: 5px;
@@ -1199,7 +1274,7 @@ overflow:visible;
     display:table-cell;
     vertical-align:middle;
     width:110px;
-    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
 }
 
 .main-menu>ul.logout {
@@ -1234,7 +1309,7 @@ nav ul,nav li {
     margin:0;
     padding:0;
 }
-.main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
+nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
     color:#fff;
     background-color:#5fa2db;
 }
@@ -1261,25 +1336,6 @@ nav ul,nav li {
 .no-gutterr{
     margin-right: 0;
     margin-left: 0;
-}
-
-.modal {
-    display: flex !important;
-    align-items: center;
-}
-
-.modal-footer{
-    border-top: none;
-}
-
-.modal-header{
-    border-bottom: none;
-}
-
-
-.no-gutterr{
-    margin-left: 0;
-    margin-right: 0;
 }
 
 .filepond--wrapper {

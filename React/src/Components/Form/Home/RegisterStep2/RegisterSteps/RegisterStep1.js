@@ -2,14 +2,7 @@ import React, { Component } from 'react';
 import RegisterInfoBar from '../RegisterInfoBar';
 import MaskedInput from 'react-text-mask'
   
-import 'moment/locale/nl';
-import 'react-day-picker/lib/style.css';
-
 class RegisterStep1 extends Component {
-    constructor(props){
-        super(props);
-    }
-
     state = {
         voornaam: "",
         achternaam: "",
@@ -28,7 +21,6 @@ class RegisterStep1 extends Component {
     handleDate = (e) => { 
         if (e.target.checkValidity()) {
             this.props.handleDate(e.target.value);
-            // this.setState({geboortedatum: e.target.value})
         }
     }
 
@@ -80,14 +72,13 @@ class RegisterStep1 extends Component {
                         <div className="col pb-5">
                             <div className="input-wrapper">
                                 <MaskedInput
-                                    mask={[/[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[A-Z]/i, /[A-Z]/i]}
+                                    mask={[/[1-9]/, /[0-9]/, /[0-9]/, /[0-9]/, /[A-Z]/i, /[A-Z]/i]}
                                     pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}"
                                     guide={false}
                                     id="postcode"
                                     type="text"
                                     onFocus={(e) => e.target.placeholder = "1234AB"}
                                     onBlur={(e) => e.target.placeholder = ""}
-                                    onChange={() => {}}
                                     value={this.props.values.postcode}
                                     onChange={this.handleChange}
                                     ref="postcode"
@@ -102,7 +93,7 @@ class RegisterStep1 extends Component {
                         <div className="col pb-5">
                             <div className="input-wrapper">
                                 <MaskedInput
-                                    mask={[/[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/]}
+                                    mask={[/[1-9]/, /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/]}
                                     guide={false}
                                     id="huisnr"
                                     type="text"
@@ -145,7 +136,7 @@ class RegisterStep1 extends Component {
                     </div>
                     <div className="group row pb-4">
                     <div className="col-md-5">
-                            <input type="date" value={this.props.values.geboortedatum} onChange={this.handleDate} max={this.getDOB(18)} min={this.getDOB(80)}></input>
+                            <input type="date" value={this.props.values.geboortedatum} onChange={this.handleDate} max={this.getDOB(18)} min={this.getDOB(80)} required></input>
                     </div>
                     </div>
                     <div className="form-label">

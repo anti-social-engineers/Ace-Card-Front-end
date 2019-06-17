@@ -1,39 +1,57 @@
 import React, {Component} from 'react';
-import './App.css';
-import Nav from './Components/Navbar';
-import Home from './Components/Home';
+import Home  from './Components/Home';
+import Page404Dashboard  from './Components/Dashboard/Pages/Page404';
 import Register  from './Components/Register';
-import Account from './Components/Account';
-import Saldo from './Components/Saldo';
-import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+import Account from './Components/Dashboard/Pages/Account/Account';
 import RegisterStep2 from './Components/RegisterStep2';
 import Confirm from './Components/Confirm';
 import {ProtectedRoute} from './protected.route'
+import Dashboard, { GlobalTheme } from './Components/Dashboard/Dashboard';
+import CookieConsent from "react-cookie-consent";
+import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+import Notifications from './Components/Dashboard/Pages/Notifications';
+import Logout from './Components/Logout';
+import Deposits from './Components/Dashboard/Pages/Deposits/Deposits';
+import Page404 from './Components/Page404';
+import Authenticator from './Components/Authenticator'
+import EnhancedTable from './Components/Dashboard/Table';
 
 class App extends Component {
   render() {
-    return (
+    return (<Router>
+    <CookieConsent>
+      This website uses cookies to enhance the user experience.
+    </CookieConsent>
 
-      <React.Fragment>
-      <Router>     
-      
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/Register" component={Register} />
-            <ProtectedRoute path="/Account" component={Account}/>
-            <ProtectedRoute path="/Saldo" component={Saldo}/>
-            <Route path="/Confirm/:id" component={Confirm} />
-            <ProtectedRoute
-             path="/Register2" component={RegisterStep2} 
-             />
+      <Authenticator>
+        <Route
+          path="/dashboard"
+          render={({ match: { url } }) => (
+                    <Dashboard sup={"lel"}>
+                      <Switch>
+                        <Route path={`${url}/Account`} component={Account} exact />
+                        <Route path={`${url}/Deposits`} component={Deposits} exact />
+                        <Route path={`${url}/Notifications`} component={Notifications} exact />
+                        <Route path={`${url}/Table`} component={EnhancedTable} exact />
+                        {/* <Route path={`${url}/Settings`} component={Settings} exact /> */}
+                        <Route path={`${url}/`} component={Account} exact /> */}
+                        <Route component={Page404Dashboard} />
+                      </Switch>
+                    </Dashboard>
+          )}/>
+      </Authenticator>
 
-          </Switch>
-        </Router>
-
-      </React.Fragment>
-      
-    ); 
-
+    <Switch>
+      <Route path="/" component={Home} exact />
+      <Route path="/Home" component={Home} />
+      <Route path="/Register" component={Register} />
+      <Route path="/Register2" component={RegisterStep2}/>
+      <Route path="/Confirm/:id" component={Confirm} />
+      <Route path="/logout" component={Logout}/>
+      {/* <Route component={Page404} /> */}
+    </Switch>
+  
+  </Router>)
   }
 }
 

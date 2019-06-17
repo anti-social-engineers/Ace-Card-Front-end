@@ -1,17 +1,9 @@
 import React, { Component } from 'react'
-import '../../../Styles/css/bootstrap-theme.css'
-import '../../../Styles/css/bootstrap-theme.min.css'
-import '../../../Styles/css/bootstrap.css'
-import '../../../Styles/css/bootstrap.min.css'
-import '../../../Styles/css/style.css'
-import { NavLink,Router} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Fade from 'react-reveal/Fade';
 import axios from 'axios'
 import jwt from 'jsonwebtoken'
 import config from '../../../config/config'
-import Account from '../../Account';
-import Home from '../../Home';
-import Axios from 'axios';
 import auth from '../../../Helper/actions/auth'
 
 class LoginForm extends Component {
@@ -24,7 +16,6 @@ class LoginForm extends Component {
       loading: false,
       logged_in: false,
       login_status: "none",
-      loading: false,
       decodeToken: null,
    }
 
@@ -48,45 +39,41 @@ class LoginForm extends Component {
       axios.post(config.API_URL+'/api/login', this.state.account)
          .then(response => {
             console.log(response);
-            localStorage.setItem('jwt token',response.data.jsonWebToken)
-            // var decodeToken = jwt.verify(response.data.jsonWebToken, config.signature)
-            // console.log(decodeToken);
-            // this.setState({decodeToken: decodeToken})
-         })
-
-      setTimeout(function(){
-         //still incorect approach
-            if (localStorage.getItem('jwt token') != null) {
-               this.setState({login_status: "success"})
+            if (response.status === 200) {
+               console.log("lel");
+               this.setState({ login_status: "success" })
                auth.login()
                setTimeout(function () {
                   this.props.toggleVisibility();
                   this.props.setUser(this.state.user);
-               }.bind(this), 1000);
-               
-            } else {
-               var email_field = document.getElementById("email");
-               this.setState({login_status: "wrong", loading: false, logged_in: false});
-               logininfo.classList.add("animated","shake");
-               email_field.focus();
+               }.bind(this), 800);
+               this.setState({ logged_in: true });
             }
-
-            this.setState({logged_in:true});
-         }.bind(this), 400);
+            localStorage.setItem('jwt token',response.data.jsonWebToken)
+            // var decodeToken = jwt.verify(response.data.jsonWebToken, config.signature)
+            // console.log(decodeToken);
+            // this.setState({decodeToken: decodeToken})
+         }).catch((err) => {
+            console.log(err);
+            console.log("INCORRECT");
+            var email_field = document.getElementById("email");
+            this.setState({ login_status: "wrong", loading: false, logged_in: false });
+            logininfo.classList.add("animated", "shake");
+            email_field.focus();
+         });
 
    }
 
    render() {
       return (
-         <div>
+            <Fade >
+               <div data-aos="fade-up" data-aos-duration="400">
                <div className="form-wrapper">
-               <Fade>
                <div className="form-title">
                   <h2>Inloggen</h2>
                </div>
-               </Fade>
                   <div className="login-info">
-                  <span className={this.state.login_status === "wrong" && !this.state.loading ? "loading-text" : "d-none invis"}><i class="fas fa-exclamation-circle"></i>Inloggen mislukt.</span>
+                  <span className={this.state.login_status === "wrong" && !this.state.loading ? "loading-text" : "d-none invis"}><i className="fas fa-exclamation-circle"></i>Inloggen mislukt.</span>
                </div>
                <div className="form-content">
                   <div className={this.state.loading ? "d-none" : "inputs"}>
@@ -122,7 +109,7 @@ class LoginForm extends Component {
             </div>
             <div className="row login-actions">
                   <div className="col">
-                     <NavLink className="dark-link" onClick={this.props.toggleVisibility} to="/Register">Nog geen account?</NavLink>
+                     <NavLink className="login-button" onClick={this.props.toggleVisibility} to="/Register">Nog geen account?</NavLink>
                   </div>
                   <div className="col">
                      <button className="main-button main-button--transparent float-right">
@@ -130,7 +117,8 @@ class LoginForm extends Component {
                      </button>
                   </div>
                </div>
-         </div>
+            </div>
+         </Fade>
       );
    }
 

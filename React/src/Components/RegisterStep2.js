@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import '../Styles/css/bootstrap-theme.css'
-import '../Styles/css/bootstrap-theme.min.css'
-import '../Styles/css/bootstrap.css'
-import '../Styles/css/bootstrap.min.css'
 import '../Styles/css/style.css'
 import {connect} from 'react-redux'
 import {createAcc} from '../Helper/actions/authorizationAction'
 import RegisterStep2Form from './Form/Home/RegisterStep2/RegisterStep2Form';
 import Nav from '../Components/Navbar'
+import aos from 'aos'
+
 class RegisterStep2 extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +25,12 @@ class RegisterStep2 extends Component {
     geslacht: "",
     akkoord: "",
     file: []
+  }
+
+  componentDidMount = () => {
+    aos.init({
+      duration: 2000
+    })
   }
 
   switchView = (view) => {
@@ -67,11 +71,11 @@ class RegisterStep2 extends Component {
     return (
       <div>
       <Nav/>
-      <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} ref="form">
         <div className="content-wrapper">
           <div className="cont">
             <div className="row no-gutters">
-              <div className="formarea col">
+              <div className="formarea col" data-aos="zoom-in" data-aos-duration="500">
                 <RegisterStep2Form values={this.state} form={this.refs.form} handleChange={this.handleChange} handleDate={this.handleDate} switchView={this.switchView} current_view={this.state.current_view} ref={this.registerform}/>
               </div>
             </div>
