@@ -1,25 +1,19 @@
 import React, { Component } from 'react'
 import AccountContent from './AccountContent';
 import PendingCard from '../PendingCard';
-import Deposits from '../Deposits/Deposits';
-import Dashboard from '../../Dashboard';
+import {myContext} from '../../../Authenticator'
 
-export default class Account extends Component {
+class Account extends Component {
     render() {
+        console.log(this.context.data && this.context.data);
         console.log("RENDERING ACCOUNT");
         return (
-            // <Dashboard>
-            //     { this.props.hasCard ? <AccountContent/> : <PendingCard/> }
-            //     {/* <PendingCard/>
-            //     <AccountContent/> */}
-            //     {/* <Deposits/> */}
-            //     {/* <h1>lel</h1> */}
-            // </Dashboard>
-            // { this.props.hasCard ? <AccountContent/> : <PendingCard/> }
-            // <AccountContent/>
             <>
                 { this.props.hasCard ? <AccountContent/> : <PendingCard/> }
             </>
         )
     }
 }
+
+Account.contextType = myContext;
+export default Account;

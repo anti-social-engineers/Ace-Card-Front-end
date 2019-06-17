@@ -1,29 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component , createContext} from 'react'
 import '../../Styles/css/Dashboard/lel.css'
-import classNames from 'classnames'
-import BarChart from './Charts/BarChart'
 import AccountTopBar from './Nav/AccountTopBar';
 import Sidebar from './Nav/Sidebar';
 import Footer from './Footer';
-import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
-import Account from './Pages/Account/Account';
 import BalanceModal from './Pages/Account/BalanceModal';
-import PendingActivation from './Pages/PendingCard';
-import Page404 from './Pages/Page404';
 import aos from 'aos'
 import axios from 'axios'
 import config from '../../config/config'
-import queryString from "query-string";
-// import auth from '../Helper/actions/auth'
 import {Redirect} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import auth from '../../Helper/actions/auth'
+import {myContext} from '../Authenticator'
+
+
 if (process.env.NODE_ENV !== 'production') {
   const whyDidYouRender = require('@welldone-software/why-did-you-render/dist/no-classes-transpile/umd/whyDidYouRender.min.js');
   whyDidYouRender(React);
 }
 class Dashboard extends Component {
-  static whyDidYouRender = true
+  // static whyDidYouRender = true
 
   state = {
     loggedIn: true,
@@ -31,27 +26,10 @@ class Dashboard extends Component {
     balance: 150
   }
   
-  async componentDidMount(){
+  componentDidMount(){
     aos.init({
         duration : 2000
-    })
-
-    var parsed = queryString.parse(window.location.search);
-    parsed = {"client_secret": parsed.client_secret, "source": parsed.source, "livemode": parsed.livemode};
-    this.setState({queryparams: parsed});
-
-    const header = 'Bearer ' + localStorage.getItem('jwt token')
-    axios.get(config.API_URL+'/api/account', {headers: {Authorization:header}})
-      .then(res => {
-          this.setState({
-              user: res.data, 
-              hasCard: res.data.has_card
-            });
-      })
-      .catch((err) => {
-        console.log(err);
-      }
-    );
+    });
   }
 
   logout = () => {
@@ -65,17 +43,20 @@ class Dashboard extends Component {
   }
   
   render() {
-      const { children } = this.props;
+    console.log("Rendering dashboard");
+      const {children} = this.props;
       return (
         <>
+        {/* <myContext.Consumer>
+          {(context) => (<h1>test {context[</h1>)}
+        </myContext.Consumer> */}
       { !this.state.loggedIn && <Redirect to={{pathname: "/Dashboard"}}  /> }
       <div className={'dashboard'}>
       <div id="wrapper">
         <Sidebar/>
         <div id="content-wrapper" className="d-flex flex-column">
           <div id="content">
-            <AccountTopBar user={this.state.user}/>
-            {/* <Account user={this.state.user} hasCard={this.state.hasCard}/> */}
+              <AccountTopBar data={this.context.data}/>
             { children }
           </div>
           <Footer/>
@@ -113,5 +94,7 @@ class Dashboard extends Component {
       )
   }
 }
+
+Dashboard.contextType = myContext;
 
 export default Dashboard;

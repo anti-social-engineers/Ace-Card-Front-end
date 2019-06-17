@@ -33,40 +33,6 @@ class _IdealBankForm extends Component {
     newBalance: 0.00,
     redirect: false
   };
-
-  componentWillReceiveProps(props) {
-    if (props.queryparams.source && props.queryparams.client_secret) {
-        console.log("source and clientsecr found");
-        props.stripe.retrieveSource({id: props.queryparams.source, client_secret: props.queryparams.client_secret}).then(({source}) => {
-            console.log(source);
-            if (source.status === 'chargeable') {
-                console.log("chargeable");
-                const body = {
-                  source: props.queryparams.source,
-                  amount: source.amount
-                }
-                console.log("printing body");
-                console.log(body);
-                const header = 'Bearer ' + localStorage.getItem('jwt token')
-                axios.post('https://api.aceofclubs.nl/api/payments/charge', body, {headers:{Authorization: header}})
-                  .then(res => {
-                    console.log(res)
-                })
-                  .catch(err => {
-                    console.log(err)
-                });
-                
-              // Make a request to your server to charge the Source.
-              // Depending on the Charge status, show your customer the relevant message.
-            } else if (source.status === 'pending') {
-                console.log("chargeable");
-            } else {
-              // Depending on the Source status, show your customer the relevant message.
-              console.log("none of the above statuses")
-            }
-        });
-      }
-    }
   
   updateAddedValue = (e) => {
     if (e.target.value && !isNaN(e.target.value)){

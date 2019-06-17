@@ -200,9 +200,6 @@ body {
   text-align: left;
   caption-side: bottom;
 }
-.dashboard th {
-  text-align: inherit;
-}
 .dashboard label {
   display: inline-block;
   margin-bottom: 0.5rem;
@@ -376,6 +373,9 @@ body {
 .dashboard .small {
   font-size: 80%;
   font-weight: 400;
+}
+.dashboard .notification-time {
+  font-size: 70% !important;
 }
 .dashboard mark,
 .dashboard .mark {
@@ -9559,6 +9559,9 @@ body {
 .dashboard .text-xs {
   font-size: 0.7rem;
 }
+.dashboard .text-sm {
+  font-size: 0.85rem;
+}
 .dashboard .text-lg {
   font-size: 1.2rem;
 }
@@ -9712,6 +9715,7 @@ body {
 .dashboard .topbar .nav-item .nav-link .img-profile {
   height: 2rem;
   width: 2rem;
+  object-fit: cover;
 }
 .dashboard .topbar {
   height: 4.375rem;
@@ -10676,3 +10680,23 @@ body {
 }
 
 /*# sourceMappingURL=lel.css.map */
+
+.dashboard .MuiPaper-elevation1 {
+  box-shadow: none !important;
+}
+.dashboard .MuiCheckbox-colorSecondary.Mui-checked {
+  color: #779aff !important;
+}
+
+.dashboard .tableTitle {
+  font-family: "Montserrat";
+}
+.dashboard .MuiTableRow-root.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+.dashboard .MuiIconButton-root {
+  border-radius: 50%;
+}
+.dashboard .MuiIconButton-root:focus {
+  outline: 0;
+}
