@@ -50,19 +50,19 @@ class Home extends Component {
           <div className="col-md" align="center">
               <div className="squareskew row no-gutters d-flex justify-content-center">
                 <RequestCardSVG/>
-                <div className="row no-gutters text-center home-card--wrapper"><div className="card--title mx-auto"><h4>Vraag de pas aan</h4></div><div className="card--body"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p></div></div>              
+                <div className="row no-gutters text-center home-card--wrapper"><div className="card--title mx-auto"><h4>Vraag de pas aan</h4></div><div className="card--body"><p>Vul je gegevens in en ontvang binnen enkele dagen je eigen acecard!</p></div></div>              
               </div>
           </div>
           <div className="col-md" align="center">
               <div className="squareskew row no-gutters d-flex justify-content-center">
                   <LoadCardSVG/>
-                  <div className="row no-gutters home-card--wrapper text-center pt-4"><div className="card--title text-center mx-auto"><h4>Laad je pas op</h4></div><div className="card--body"><p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing.</p></div></div>
+                  <div className="row no-gutters home-card--wrapper text-center pt-4"><div className="card--title text-center mx-auto"><h4>Laad je pas op</h4></div><div className="card--body"><p>Log in op je account en heb binnen een minuut met enkel een paar clicks genoeg saldo op je pas staan om de hele avond te kunnen stappen!</p></div></div>
               </div>   
           </div>
           <div className="col-md" align="center">
               <div className="squareskew row no-gutters d-flex justify-content-center">
                 <PartyTimeSVG/>
-                <div className="row no-gutters home-card--wrapper text-center pt-3"><div className="card--title text-center mx-auto"><h4>Feest erop los!</h4></div><div className="card--body"><p>Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor.</p></div></div>              
+                <div className="row no-gutters home-card--wrapper text-center pt-3"><div className="card--title text-center mx-auto"><h4>Feest erop los!</h4></div><div className="card--body"><p>Met je pas aangevraagd en opgeladen kom jij elke club binnen. Waar wacht je nog op!</p></div></div>              
               </div>
           </div>
         </div>
