@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import PasswordStrengthMeter from '../../Tools/PasswordStrengthMeter';
+import config from '../../../config/config'
+import axios from 'axios'
 
 class RegisterForm extends Component {
 
     constructor(props){
       super(props);
       this.passwordRepeatRef = React.createRef()
+      this.createAcc = this.createAcc.bind(this)
     }
 
     state = {
@@ -17,7 +20,8 @@ class RegisterForm extends Component {
         loading: false,
         form_submit_count: 0,
         form_error: "",
-        hasSubmitted: false
+        hasSubmitted: false,
+        message:''
     }
 
     form_errors = {
@@ -38,6 +42,13 @@ class RegisterForm extends Component {
         [e.target.id]: e.target.value 
       })
     }
+
+    createAcc(account){
+      console.log(account)
+
+    }  
+  
+
 
     isValidForm = () => {
         console.log("VALIDATING FORM");
@@ -87,20 +98,25 @@ class RegisterForm extends Component {
         
         setTimeout(function(){
             // this is a placeholder for server side validation
-            var isValid = true;
-
-            if (isValid) {
-              // Valid email
-              this.setState({submission_status: "success"})
-              this.props.createAcc(this.state.account);
+            axios.post(config.API_URL+'/api/register', this.state.account)
+            .then(res => {
+              console.log(res)
+              this.setState({form_error:'', submission_status: "success"})
               console.log("Created account");
-            } else {
-              console.log("Server side validation failed");
-              // Invalid registration
-              this.setState({submission_status: "wrong", loading: false});
-              logininfo.classList.add("animated","shake");
-              this.refs.email.focus();
-            }
+
+            })
+            .catch(err => {
+              console.log(err)
+              if(err == 'Error: Request failed with status code 409'){
+                this.setState({submission_status: "wrong", loading: false, form_error:'Het gegeven email adres bestaat al!' });
+              }
+              if(err == 'Error: Request failed with status code 422'){
+                this.setState({ submission_status: "wrong", loading: false, form_error: 'Formaat van email is verkeerd!' });
+              }
+              if(err == 'Error: Request failed with status code 500'){
+                this.setState({ submission_status: "wrong", loading: false, form_error: 'Er is iets fout met de server. Excuses voor het ongemak!'});
+              }})
+
         }.bind(this), 400);
      }
 

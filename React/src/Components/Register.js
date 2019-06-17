@@ -5,7 +5,6 @@ import {createAcc} from '../Helper/actions/authorizationAction'
 import RegisterForm from './Form/Home/RegisterForm'
 import axios from 'axios'
 import Nav from '../Components/Navbar';
-import config from '../config/config'
 import aos from 'aos'
 
 class Register extends Component {
@@ -17,6 +16,8 @@ class Register extends Component {
     email:'',
     password:'',
     repeatpassword:'',
+    error: '',
+    message:''
   }
 
   componentDidMount = () => {
@@ -32,16 +33,6 @@ class Register extends Component {
     // this.props.createAcc(this.registerform.current.state.account);
   }
 
-  createAcc(account){
-    console.log(account)
-    axios.post(config.API_URL+'/api/register', account)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }  
 
   render() {
     return (
@@ -59,7 +50,7 @@ class Register extends Component {
                   <img src={require('../Styles/img/cardbox.png')} alt="" className="acecard" />
                 </div>
                 <div className="formarea col-sm-12 col-md-12 col-lg-12 col-xl-5" data-aos="fade-right" data-aos-duration="500">
-                <RegisterForm createAcc={this.createAcc} timeout={300000} ref={this.registerform}/>                </div>
+                <RegisterForm  timeout={300000} ref={this.registerform}/>                </div>
               </div>
           </div>    
         </div>
