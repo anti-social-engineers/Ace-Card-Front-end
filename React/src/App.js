@@ -9,6 +9,12 @@ import {ProtectedRoute} from './protected.route'
 import Dashboard, { GlobalTheme } from './Components/Dashboard/Dashboard';
 import CookieConsent from "react-cookie-consent";
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+import Notifications from './Components/Dashboard/Pages/Notifications';
+import Logout from './Components/Logout';
+import Deposits from './Components/Dashboard/Pages/Deposits/Deposits';
+import Page404 from './Components/Page404';
+import Authenticator from './Components/Authenticator'
+import EnhancedTable from './Components/Dashboard/Table';
 import Saldo from './Components/Saldo';
 import Contact from './Components/Contact';
 import Over from './Components/Over';
@@ -16,44 +22,13 @@ import FAQ from './Components/FAQ';
 import Vacatures from './Components/Vacatures';
 import Clubeigenaar from './Components/Clubeigenaar';
 import Bewaker from './Components/Bewaker';
-import Notifications from './Components/Dashboard/Pages/Notifications';
-import Logout from './Components/Logout';
-import Deposits from './Components/Dashboard/Pages/Deposits/Deposits';
-import Page404 from './Components/Page404';
-import Authenticator from './Components/Authenticator'
-import EnhancedTable from './Components/Dashboard/Table';
 
 class App extends Component {
   render() {
-    return (
-      <>
-        <CookieConsent>
-            This website uses cookies to enhance the user experience.
-        </CookieConsent>
-      <Router>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/Register" component={Register} />
-            <Route path="/Account" component={Account}/>
-            {/* <Route path="/Saldo" component={Saldo}/> */}
-            <Route path="/ideal" component={Ideal}/>
-            <Route path="/Confirm/:id" component={Confirm} />
-            <Route path="/Register2" component={RegisterStep2}/>
-            <Route path="/Contact" component={Contact}/>
-            <Route path="/Over" component={Over}/>
-            <Route path="/lel" component={Saldo}/>
-            <Route path="/Dashboard" component={Dashboard}/>
-            <Route path="/Dashboard/Account" component={Dashboard}/>
-            <Route path="/FAQ" component={FAQ}/>
-            <Route path="/Vacatures" component={Vacatures}/>
-            <Route path="/Clubeigenaar" component={Clubeigenaar}/>
-            <Route path="/Bewaker" component={Bewaker}/>
-            {/* <Route path="/Dashboard/Pending" component={PendingActivation} /> */}
-            <Route component={Page404} />
-          </Switch>
-        </Router>
-      </>
-    ); 
+    return (<Router>
+    <CookieConsent>
+      This website uses cookies to enhance the user experience.
+    </CookieConsent>
 
       <Authenticator>
         <Route
@@ -74,11 +49,18 @@ class App extends Component {
       </Authenticator>
 
     <Switch>
-      <Route path="/" component={Home} exact />
-      <Route path="/Home" component={Home} />
-      <Route path="/Register" component={Register} />
-      <Route path="/Register2" component={RegisterStep2}/>
-      <Route path="/Confirm/:id" component={Confirm} />
+    <Route exact path="/" component={Home} />
+            <Route path="/Register" component={Register} />
+            <Route path="/Account" component={Account}/>
+            <Route path="/Confirm/:id" component={Confirm} />
+            <Route path="/Register2" component={RegisterStep2}/>
+            <Route path="/Contact" component={Contact}/>
+            <Route path="/Over" component={Over}/>
+            <Route path="/lel" component={Saldo}/>
+            <Route path="/FAQ" component={FAQ}/>
+            <Route path="/Vacatures" component={Vacatures}/>
+            <Route path="/Clubeigenaar" component={Clubeigenaar}/>
+            <Route path="/Bewaker" component={Bewaker}/>
       <Route path="/logout" component={Logout}/>
       {/* <Route component={Page404} /> */}
     </Switch>
