@@ -16,10 +16,10 @@ export default class Sidebar extends Component {
           <ul className={ classNames("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion", { toggled: this.state.navCollapsed }) } id="accordionSidebar" ref='sidebar'>
           {/* Sidebar - Brand */}
           <NavLink className="sidebar-brand d-flex align-items-center justify-content-center" to="/dashboard">
-            <div className="sidebar-brand-icon rotate-n-15">
-              <i className="fas fa-laugh-wink" />
+            <div className="sidebar-brand-icon">
+              <img src={require('../../../Styles/img/acelogo.png')} alt="" style={{width: "80px"}}/>
             </div>
-            <div className="sidebar-brand-text mx-3">Ace Paneel</div>
+            <div class="sidebar-brand-text mx-2"><span style={{fontSize: "8px"}}>Ace of Clubs</span> Dashboard</div>
           </NavLink>
           {/* Divider */}
           <hr className="sidebar-divider my-0" />

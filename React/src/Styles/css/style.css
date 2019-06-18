@@ -33,7 +33,7 @@ p {
 }
 
 .header {
-    background-image: linear-gradient(90deg, #000000 0%, #434343 100%);/* 076 Premium Dark: */
+    background-image: linear-gradient(90deg, #1d1c1c 0%, #232323 100%);
     position: relative;
     padding-bottom: 60px;
     transition: height 0.3s ease-out;
@@ -63,6 +63,13 @@ p {
     padding-left: 1.2rem !important;
     padding-right: 1.2rem !important;
     cursor: pointer;
+}
+
+.sidebar-brand-text.mx-2 {
+    text-transform: UPPERCASE;
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: 1.5px;
 }
 
 a.nav-item.nav-link:hover {

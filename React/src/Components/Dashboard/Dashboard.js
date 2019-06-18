@@ -1,5 +1,5 @@
 import React, { Component , createContext} from 'react'
-import '../../Styles/css/Dashboard/lel.css'
+import '../../Styles/css/Dashboard/dashboard.css'
 import AccountTopBar from './Nav/AccountTopBar';
 import Sidebar from './Nav/Sidebar';
 import Footer from './Footer';
@@ -44,6 +44,7 @@ class Dashboard extends Component {
   
   render() {
     console.log("Rendering dashboard");
+    console.log(this.context.data);
       const {children} = this.props;
       return (
         <>
@@ -65,19 +66,21 @@ class Dashboard extends Component {
       <a className="scroll-to-top rounded" href="#page-top">
         <i className="fas fa-angle-up" />
       </a>
-      <BalanceModal queryparams={this.state.queryparams} balance={this.state.balance} />           
+      <BalanceModal queryparams={this.state.queryparams} balance={this.context.data.user && this.context.data.user.credits} />           
 
       <div className="modal fade" id="logoutModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-              <button className="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
+            <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 className="m-0 font-weight-bold text-primary">Uitloggen</h6>
+              <div className="dropdown no-arrow">
+                  <a className="dropdown-toggle" role="button" data-dismiss="modal">
+                      <i className="fas fa-times fa-sm fa-fw text-gray-400" />
+                  </a>
+              </div>
             </div>
             <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div className="modal-footer">
+            <div className="modal-footer d-flex justify-content-between">
               <button className="btn btn-secondary" type="button" data-dismiss="modal">Annuleren</button>
               <a className="btn btn-primary" data-dismiss="modal" onClick={this.logout}>Logout</a>
             </div>
