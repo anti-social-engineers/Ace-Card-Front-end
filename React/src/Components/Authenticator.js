@@ -38,6 +38,15 @@ export default class Authenticator extends Component {
             io.on("event", data => {
                 if (data !== this.state.notifications) {
                     var curr_data = Object.assign({}, this.state.data);
+
+                    if (data[0] && data[0].name === "deposit") {
+                        console.log("GOT deposit!!");
+                        console.log(data[0]);
+                        curr_data.user.credits = data[0].updated_balance;
+                        console.log(data[0].updated_balance);
+                        // curr_data["lel"] = data.updated_balance;
+                    }
+
                     curr_data["notifications"] = data;
                     // var isFirstConnect = curr_data["firstConnect"];
                     // console.log("FIRST CONNECT: ", isFirstConnect);
@@ -52,8 +61,6 @@ export default class Authenticator extends Component {
                         
                     });
 
-                    console.log("RECEIVED EMITTION BY NODEJS")
-                    console.log(data);
                 }
             });
 
@@ -70,14 +77,10 @@ export default class Authenticator extends Component {
         
     }
 
-    updateLel = () => {
-        console.log("finished!");
-    }
-    
+
 
     render() {
         console.log("RENDERING AUTHENTICATOR");
-        console.log(this.state.data.notifications && this.state.data.notifications);
         return (
             <myContext.Provider value={{ ...this.state, updateNumber: this.updateNumber }}>
                 {this.props.children}

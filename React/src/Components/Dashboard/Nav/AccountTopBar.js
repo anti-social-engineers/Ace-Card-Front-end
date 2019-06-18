@@ -52,25 +52,6 @@ export default class AccountTopBar extends Component {
             </form>
             {/* Topbar Navbar */}
             <ul className="navbar-nav ml-auto">
-            {/* Nav Item - Search Dropdown (Visible Only XS) */}
-            <li className="nav-item dropdown no-arrow d-sm-none">
-                <a className="nav-link dropdown-toggle" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i className="fas fa-search fa-fw" />
-                </a>
-                {/* Dropdown - Messages */}
-                <div className="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form className="form-inline mr-auto w-100 navbar-search">
-                    <div className="input-group">
-                    <input type="text" className="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                    <div className="input-group-append">
-                        <button className="btn btn-primary" type="button">
-                        <i className="fas fa-search fa-sm" />
-                        </button>
-                    </div>
-                    </div>
-                </form>
-                </div>
-            </li>
             {/* Nav Item - Alerts */}
             { img && <li className="nav-item dropdown no-arrow mx-1">
                 <a className="nav-link dropdown-toggle"  id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -84,7 +65,7 @@ export default class AccountTopBar extends Component {
                     Alerts Center
                 </h6>
                 <MiniNotifications notifications={this.props.data.notifications && this.props.data.notifications}/>
-                {this.props.data.notifications && this.props.data.notifications.length > 0 && <NavLink to="/dashboard/notifications" className="dropdown-item text-center small text-gray-500" >Laat alle notificaties zien</NavLink>}                
+                {this.props.data.notifications && this.props.data.notifications.length > 0 && <NavLink to="/dashboard/notifications" className="dropdown-item text-center small text-gray-500 dropdown-show-notifications" >Laat alle notificaties zien</NavLink>}                
                 </div>
             </li>}
             <div className="topbar-divider d-none d-sm-block" />
@@ -92,7 +73,6 @@ export default class AccountTopBar extends Component {
             <li className="nav-item dropdown no-arrow">
                 <a className="nav-link dropdown-toggle"  id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span className="mr-2 d-none d-lg-inline text-gray-600 small">{ name }</span>
-                {/* { <img className="img-profile rounded-circle" src={ img ? img : {require(defaultimg)}} />} */}
                 { img ? <img className="img-profile rounded-circle" src={ img } /> : <img className="img-profile rounded-circle" style={{backgroundColor: "#ececec", padding: "2px"}} src={require('../../../Styles/img/profileplaceholder.png')} />}
                 </a>
                 {/* Dropdown - User Information */}
@@ -108,7 +88,7 @@ export default class AccountTopBar extends Component {
 class Dropdown extends Component {
     render() {
         return (
-            <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+            <div className="dropdown-menu dropdown-menu-right dropdown-menu-profile shadow animated--grow-in" aria-labelledby="userDropdown">
                 { this.props.img && <> <a className="dropdown-item" >
                     <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
                         Profile
@@ -174,9 +154,8 @@ class MiniNotifications extends Component {
             <div>
             { !success && <a className="dropdown-item d-flex align-items-center" href="#">
                     <div className="mr-3">
-                        <div className="icon-circle text-gray-500" style={{}}>
-                        {" "}
-                        <i className="fas fa-circle-notch fa-spin" />
+                        <div className="icon-circle text-gray-500">
+                        <i className="fas fa-circle-notch fa-spin"/>
                         </div>
                     </div>
                     <div>

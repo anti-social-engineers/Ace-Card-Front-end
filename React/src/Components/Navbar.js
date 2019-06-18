@@ -58,9 +58,16 @@ class Nav extends Component {
   render(){
           return (<header className="header header--collapsed">
               <nav className="navbar navbar-home navbar-expand-lg justify-content-between">
-                      <NavLink className="navbar-brand" to="/">
-                        <img src={require('../Styles/img/acelogo.png')} alt="" style={{width: "100px"}}/>
-                        <span>acecard</span>                     
+                      <NavLink className="sidebar-brand d-flex align-items-center justify-content-center active" to="/">
+                          <div className="sidebar-brand-icon">
+                              <img src="/static/media/acelogo.00b6d2e8.png" alt style={{ width: 88 }} />
+                          </div>
+                          <div className="sidebar-brand-text mx-2">
+                              <div className="row">
+                                  <span style={{ fontSize: 8, color: "rgba(255, 255, 255, 0.47058823529411764)", fontWeight: 400 }}>Ace of Clubs</span>
+                              </div>
+                              <span style={{ fontWeight: 900, letterSpacing: "2.5px", color: "white" }}>Acecard</span>
+                          </div>
                       </NavLink>
                       <button className="navbar-toggler third-button " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                           <div className="animated-icon3">
@@ -82,8 +89,8 @@ class Nav extends Component {
                           <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
                           <NavLink className="nav-item nav-link" to="/Dashboard">Account</NavLink>
                           <a className="nav-item nav-link">Contact</a>
-                          <NavLink to="/">
-                          <a className="nav-item nav-link loading-text--pd" onClick={this.logout}><i className={this.state.nav_loading ? "fas fa-circle-notch fa-spin no-invis" : "invis d-none"}></i>Uitloggen</a>
+                          <NavLink to="/" className="nav-item nav-link loading-text--pd" onClick={this.logout}>
+                            <i className={this.state.nav_loading ? "fas fa-circle-notch fa-spin no-invis" : "invis d-none"}></i>Uitloggen
                           </NavLink>
                         </div>
                       </div>

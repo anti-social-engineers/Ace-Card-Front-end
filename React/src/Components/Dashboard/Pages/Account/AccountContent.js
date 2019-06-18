@@ -6,49 +6,25 @@ import {myContext} from '../../../Authenticator'
 import CountUp from 'react-countup';
 
 class AccountContent extends Component {
-
-    constructor(...args) {
-        super(...args);
-    }
-
     state = {
-        modalShow: false,
-        balance: 30
+        balance: this.context.data.user.credits
     }
-    
 
-    componentDidMount() {
-        var parsed = queryString.parse(window.location.search);
-        parsed = {"client_secret": parsed.client_secret, "source": parsed.source, "livemode": parsed.livemode};
-        console.log(parsed);
-        this.setState({queryparams: parsed});
-    }
-    
-
-    showModal = () => {
-        console.log("lel");
-        this.setState({modalShow: true});
+    componentWillReceiveProps(nextProps){
+      console.log("ACCOUTN RCV PROPS")
+      console.log(nextProps);
+      if (nextProps.balance) {
+          var balance = parseFloat(nextProps.balance)
+          this.setState({balance: balance});
+      }
     }
 
     render() {
-        let modalClose = () => this.setState({ modalShow: false });
-        let balance;
-
-        console.log("TESTTTTTT");
-        // console.log(this.context.data.notifications && this.context.data.notifications[0].updated_balance);
-
-        if (this.context.data.notifications && this.context.data.notifications.length > 0) {
-            balance = this.context.data.notifications[0].updated_balance;
-        } else {
-            balance = this.context.data.user.credits;
-        }
-
         return (
             <div className="container-fluid" data-aos="fade-up" data-aos-duration="400">
                 {/* Page Heading */}
                 <div className="d-sm-flex align-items-center justify-content-between mb-4">
                   <h1 className="h3 mb-0 text-gray-800 panel-header-text">Account overzicht</h1>
-                  <a href="#" onClick={this.showModal} className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm text-xs"><i className="fas fa-download fa-sm text-white-50" /> Genereer Rapport</a>
                 </div>
                 {/* Content Row */}
                 <div className="row">
@@ -59,7 +35,25 @@ class AccountContent extends Component {
                         <div className="row no-gutters align-items-center mb-2">
                           <div className="col mr-2">
                             <div className="text-xs font-weight-bold text-primary text-success text-uppercase mb-1">Huidige Saldo</div>
-                            <div className="h5 mb-0 font-weight-bold text-gray-800">€{balance}</div>
+                            <div className="h5 mb-0 font-weight-bold text-gray-800">€{this.context.data.user.credits}</div>
+                            <div className="h5 mb-0 font-weight-bold text-gray-800">
+                              {/* <CountUp
+                                start={this.context.data.user.credits}
+                                end={160527.012}
+                                duration={2.75}
+                                decimals={2}
+                                prefix="€ "
+                                onEnd={() => console.log('Ended! 👏')}
+                                onStart={() => console.log('Started! 💨')}
+                              >
+                                {({ countUpRef, start }) => (
+                                  <div>
+                                    <span ref={countUpRef} />
+                                    <button onClick={start}>Start</button>
+                                  </div>
+                                )}
+                              </CountUp> */}
+                            </div>
                           </div>
                           <div className="col-auto">
                             <i className="fas fa-euro-sign fa-2x text-gray-300" />
@@ -67,7 +61,7 @@ class AccountContent extends Component {
                         </div>
                         <div className="row no-gutters">
                               <button data-toggle="modal" data-target="#saldoModal" className="text-xs font-weight-bold text-primary mb-1 text-link">Opwaarderen...</button>
-                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
