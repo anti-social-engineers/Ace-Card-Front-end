@@ -4,14 +4,73 @@ import BalanceModal from './BalanceModal';
 import queryString from "query-string";
 import {myContext} from '../../../Authenticator'
 import CountUp from 'react-countup';
+import axios from 'axios';
+import config from '../../../../config/config'
 
 class AccountContent extends Component {
     state = {
         balance: this.context.data.user.credits
     }
 
+    async componentDidMount() {
+      const header = 'Bearer ' + localStorage.getItem('jwt token')
+      const res = await axios.get(config.API_URL+'/api/account/graphs/payments', {headers: {Authorization:header}});
+      // const graph_data
+      const graph = res.data.data[0]
+      // graph = graph.map (date => new Date(date));
+      // console.log("GRAPH", graph);
+      var data = []
+      var now = new Date();
+      for (var i = 0; i < 30; i++) {
+        console.log(i);
+        now = new Date(now)
+        now.setDate(now.getDate() - 1);
+        data.push(now.toISOString().substring(0, 10));
+      }
+      data = data.reverse();
+      console.log("graph", graph);
+      console.log("dates", data);
+
+      var graph_values = data.map(item => {
+        for (var key in graph) {
+          if (key === item) {
+            console.log("found1item");
+            return graph[key];
+          }
+          return 0;
+        }
+      });
+      console.log("graph_values", graph_values);
+
+      this.setState({graph_values: Object.values(graph_values), dates:data});
+      // data.forEach(item => {
+      //   if (item in graph) {
+      //     console.log("thedate", item);
+      //   } else {
+      //     console.log("thedate", "NONE");
+      //   }
+      // });
+      // for (var i = 0; i < 30; i++) {
+      //   for (var key in graph) {
+      //     console.log("-----")
+      //     console.log(key);
+      //     console.log(graph[key]);
+      //   }
+      // }
+
+      // var newlist = new Array(30);
+      // for (var i in data){
+      //   for (var x in newlist) {
+      //     if ()
+      //   }
+      // }
+      // console.log(data.reverse());
+      console.log("dataaa", data);
+      // var kek = graph.map( (item, index) => if () )
+    }
+    
     componentWillReceiveProps(nextProps){
-      console.log("ACCOUTN RCV PROPS")
+      console.log("ACCOUNT RCV PROPS")
       console.log(nextProps);
       if (nextProps.balance) {
           var balance = parseFloat(nextProps.balance)
@@ -19,7 +78,42 @@ class AccountContent extends Component {
       }
     }
 
+    updateBalance = (end) => {
+      this.setState({prevBalance: parseInt(this.context.data.user.credits), currentBalance: end});      
+    }
+    
+
     render() {
+        // const countAnimation;
+        console.log("ACCOUNT CONTENT!!!!!!");
+        console.log(this.context.data.notifications && this.context.data.notifications[0] && this.context.data.notifications[0].datetime);
+        
+        const hasNotification = this.context.data.notifications && this.context.data.notifications[0];
+        if (hasNotification) {
+          console.log("HAS NOTIFICATION");
+          const lastNotification = this.context.data.notifications[0];
+
+          // if got notification less than 5 seconds ago
+          if (((new Date()) - new Date(lastNotification.datetime)) < 5000) {
+            console.log("JUST NOW");
+            var end;
+            if (lastNotification.name === 'deposit') {
+              end = parseInt(lastNotification.amount) + parseInt(lastNotification.updated_balance);
+              console.log("final end:", end);
+              console.log("calculation: adding updated_balance:" + lastNotification.updated_balance + " " + lastNotification.amount)
+            } else {
+              end = parseInt(lastNotification.updated_balance);
+            }
+            console.log("start:", this.context.data.user.credits);
+            console.log("end", end);
+            var justGotNotification = true;
+            // this.updateBalance(end);
+            // this.setState({prevBalance: parseInt(this.context.data.user.credits), currentBalance: end});
+          } else {
+            console.log("AGES AGO");
+          }
+        }
+
         return (
             <div className="container-fluid" data-aos="fade-up" data-aos-duration="400">
                 {/* Page Heading */}
@@ -35,24 +129,15 @@ class AccountContent extends Component {
                         <div className="row no-gutters align-items-center mb-2">
                           <div className="col mr-2">
                             <div className="text-xs font-weight-bold text-primary text-success text-uppercase mb-1">Huidige Saldo</div>
-                            <div className="h5 mb-0 font-weight-bold text-gray-800">€{this.context.data.user.credits}</div>
+                            <div className="h5 mb-0 font-weight-bold text-gray-800">€{this.context.data.user.credits} regular</div>
                             <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              {/* <CountUp
-                                start={this.context.data.user.credits}
-                                end={160527.012}
-                                duration={2.75}
-                                decimals={2}
-                                prefix="€ "
-                                onEnd={() => console.log('Ended! 👏')}
-                                onStart={() => console.log('Started! 💨')}
-                              >
-                                {({ countUpRef, start }) => (
-                                  <div>
-                                    <span ref={countUpRef} />
-                                    <button onClick={start}>Start</button>
-                                  </div>
-                                )}
-                              </CountUp> */}
+                              { justGotNotification && <CountUp
+                                    start={this.state.prevBalance}
+                                    end={end}
+                                    duration={20.75}
+                                    decimals={2}
+                                    prefix="€ "
+                                  />}
                             </div>
                           </div>
                           <div className="col-auto">
@@ -148,7 +233,7 @@ class AccountContent extends Component {
                       <div className="card-body">
                         <div className="chart-area">
                           {/* <canvas id="myAreaChart" /> */}
-                          <BarChart ref="chart" data={[130, 300, 233, 54.30, 35, 321, 242, 349, 71.50, 400, 323, 139.44]} />
+                          <BarChart ref="chart" data={this.state.graph_values} labels={this.state.dates}/>
                         </div>
                       </div>
                     </div>

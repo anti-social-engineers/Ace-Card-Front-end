@@ -55,52 +55,66 @@ class _IdealBankForm extends Component {
     }
 
     updateAddedValue = (e) => {
-        if (e.target.value && !isNaN(e.target.value)){
+        var return_url = 'http://localhost:3000/dashboard';
+        // console.log(e.target.value);
+        var amount = e.target.value;
+        if (!isNaN(e.target.value)){
             var calc = this.state.balance + parseFloat(e.target.value);
-            this.setState({newBalance: calc});
+            if (isNaN(calc)) {
+                this.setState({amount});
+            } else {
+                calc = this.state.balance + parseFloat(e.target.value);
+                this.setState({amount, newBalance: calc}, () => {
+                    console.log(amount);
+                });
+            }
+
         } else {
             this.setState({newBalance: this.state.balance});
         };
     }
 
-    createDeposit = async (amount, return_url) => {
-        console.log(amount);
-        console.log(return_url);
-        const body = {
-            amount,
-            return_url
-        };
-        console.log(body);
-        const header = 'Bearer ' + localStorage.getItem('jwt token');
-        const res = await axios.post(config.API_URL + 'api/deposits/create', body, {headers: {Authorization:header}});
-        console.log("response", res);
-        return res;
-    }
-
-
     handleSubmit = (ev) => {
-        ev.preventDefault();
-        if (this.props.stripe) {
-            var return_url = 'http://localhost:3000/dashboard';
-            var response = this.createDeposit(parseInt(ev.target.amount.value) * 100, return_url);
-            response.then(
-                (res) => {
-                    console.log(res.data.url);
-                    // window.close();
-                    this.props.handleResult();
-                    if (res.data.url) window.open(res.data.url, '_blank');
-                }
-            ).catch((err) => {
-                console.log(err);
-            });
-        } else {
-        console.log("Stripe.js hasn't loaded yet.");
+        // ev.preventDefault();
+        console.log(ev.target.value);
+        var return_url = 'http://localhost:3000/dashboard';
+
+        // if (this.props.stripe) {
+        //     var return_url = 'http://localhost:3000/dashboard';
+        //     var response = this.createDeposit(parseInt(ev.target.amount.value) * 100, return_url);
+        //     response.then(
+        //         (res) => {
+        //             console.log(res.data.url);
+        //             // window.close();
+        //             this.props.handleResult();
+        //             if (res.data.url) window.open(res.data.url, '_blank');
+        //         }
+        //     ).catch((err) => {
+        //         console.log(err);
+        //     });
+        // } else {
+        // console.log("Stripe.js hasn't loaded yet.");
+        // }
+        if (this.props.submitted){
+            this.props.handleResult(parseInt(ev.target.amount.value) * 100, return_url);
         }
     };
 
     render() {
+        if (this.props.submitted) {
+            var form = document.getElementById('depositForm');
+            form.reportValidity();
+            if(this.state.amount){
+                console.log(this.state.amount);
+                console.log("FORM HS BEEN SUBMITTED");
+                this.props.handleResult(this.state.amount, this.props.stripe);
+            } else {
+                console.log("NO AMOUNT GIVEN");
+                this.props.toggleSubmit();
+            }
+        }
         return (
-        <form onSubmit={this.handleSubmit.bind(this)} autocomplete="off">
+        <form id='depositForm' onSubmit={this.handleSubmit.bind(this)} autocomplete="off">
             <div className="form-content">
                     <div className={this.state.loading ? "d-none" : "inputs inputs-space"}>
                         <div className="group">
@@ -140,14 +154,13 @@ export class Ideal extends Component {
     }
 
     render() {
+        console.log("SUBMITTED FORM: ", this.props.submitted);
         return (
         <StripeProvider apiKey={config.STRIPE_API_KEY}>
             <Elements locale={"nl"} family={"Montserrat"}>
-                <IdealForm context={this.props.context} queryparams={this.props.queryparams} handleResult={this.props.handleResult} balance={this.props.balance} toggleLoad={this.props.toggleLoad} />
+                <IdealForm toggleSubmit={this.props.toggleSubmit} context={this.props.context} submitted={this.props.submitted} queryparams={this.props.queryparams} handleResult={this.props.handleResult} balance={this.props.balance} toggleLoad={this.props.toggleLoad} />
             </Elements>
         </StripeProvider>
         );
     }
 }
-
-

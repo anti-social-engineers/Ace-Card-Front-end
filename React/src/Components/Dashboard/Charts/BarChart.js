@@ -3,13 +3,13 @@ import { Bar } from 'react-chartjs-2';
 
 class BarChart extends Component {
     data = {
-        labels: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"],
+        labels: this.props.labels,
         datasets: [{
           label: "Uitgave",
           backgroundColor: "#4e73df",
           hoverBackgroundColor: "#2e59d9",
           borderColor: "#4e73df",
-          data: this.props.data,
+          data: [0, 40, 50],
         }],
       };
 
@@ -26,7 +26,7 @@ class BarChart extends Component {
         scales: {
           xAxes: [{
             time: {
-              unit: 'month'
+              unit: 'day'
             },
             gridLines: {
               display: false,
@@ -43,7 +43,7 @@ class BarChart extends Component {
               max: 400,
               maxTicksLimit: 5,
               padding: 10,
-              // Include a dollar sign in the ticks
+              // Include a euro sign in the ticks
               callback: function(value, index, values) {
                 return '€' + this.number_format(value);
               }.bind(this)
@@ -108,8 +108,12 @@ class BarChart extends Component {
     
 
     render() {
+      console.log("BARCHART labels: ", this.props.labels)
+      console.log("BARCHART graph values: ", this.props.data)
         return (
-            <Bar ref='chart' data={this.data} options={this.options} />
+          <>
+            {this.props.data && <Bar ref='chart' data={this.props.data} options={this.options} />}
+          </>
         )
     }
 }

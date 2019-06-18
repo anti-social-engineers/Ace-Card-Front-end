@@ -16,6 +16,7 @@ export default class Authenticator extends Component {
         const auth_token = localStorage.getItem('jwt token')
         const header = 'Bearer ' + auth_token;
         const res = await axios.get(config.API_URL+'api/account', {headers: {Authorization:header}});
+        console.log("AUTH: ", res);
         console.log(res.data);
         var user = res.data;
         if (res.data.has_card) {
@@ -36,6 +37,8 @@ export default class Authenticator extends Component {
             });
 
             io.on("event", data => {
+                console.log("INITIAL DATA");
+                console.log(data);
                 if (data !== this.state.notifications) {
                     var curr_data = Object.assign({}, this.state.data);
 
@@ -76,8 +79,6 @@ export default class Authenticator extends Component {
 
         
     }
-
-
 
     render() {
         console.log("RENDERING AUTHENTICATOR");
