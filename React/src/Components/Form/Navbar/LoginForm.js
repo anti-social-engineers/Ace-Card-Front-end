@@ -40,7 +40,6 @@ class LoginForm extends Component {
          .then(response => {
             console.log(response);
             if (response.status === 200) {
-               console.log("lel");
                this.setState({ login_status: "success" })
                auth.login()
                setTimeout(function () {

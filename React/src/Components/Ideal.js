@@ -5,11 +5,9 @@ import {
   StripeProvider,
   Elements,
 } from 'react-stripe-elements';
-import axios from 'axios'
 import config from '../config/config'
 import { myContext } from './Authenticator';
 
-// You can customize your Elements to give it the look and feel of your site.
 const createOptions = () => {
   return {
     style: {
@@ -55,8 +53,6 @@ class _IdealBankForm extends Component {
     }
 
     updateAddedValue = (e) => {
-        var return_url = 'http://localhost:3000/dashboard';
-        // console.log(e.target.value);
         var amount = e.target.value;
         if (!isNaN(e.target.value)){
             var calc = this.state.balance + parseFloat(e.target.value);
@@ -64,9 +60,7 @@ class _IdealBankForm extends Component {
                 this.setState({amount});
             } else {
                 calc = this.state.balance + parseFloat(e.target.value);
-                this.setState({amount, newBalance: calc}, () => {
-                    console.log(amount);
-                });
+                this.setState({amount, newBalance: calc});
             }
 
         } else {
@@ -75,26 +69,7 @@ class _IdealBankForm extends Component {
     }
 
     handleSubmit = (ev) => {
-        // ev.preventDefault();
-        console.log(ev.target.value);
         var return_url = 'http://localhost:3000/dashboard';
-
-        // if (this.props.stripe) {
-        //     var return_url = 'http://localhost:3000/dashboard';
-        //     var response = this.createDeposit(parseInt(ev.target.amount.value) * 100, return_url);
-        //     response.then(
-        //         (res) => {
-        //             console.log(res.data.url);
-        //             // window.close();
-        //             this.props.handleResult();
-        //             if (res.data.url) window.open(res.data.url, '_blank');
-        //         }
-        //     ).catch((err) => {
-        //         console.log(err);
-        //     });
-        // } else {
-        // console.log("Stripe.js hasn't loaded yet.");
-        // }
         if (this.props.submitted){
             this.props.handleResult(parseInt(ev.target.amount.value) * 100, return_url);
         }
@@ -118,7 +93,7 @@ class _IdealBankForm extends Component {
             <div className="form-content">
                     <div className={this.state.loading ? "d-none" : "inputs inputs-space"}>
                         <div className="group">
-                            <input type="number" step="0.01" min="5" name="amount" id="bedrag" onChange={this.updateAddedValue} required />
+                            <input type="number" step="0.01" min="5" max="10000" name="amount" id="bedrag" onChange={this.updateAddedValue} required />
                             <span className="highlight"></span>
                             <span className="bar"></span>
                             <label>Kies over te schrijven bedrag</label>
@@ -143,18 +118,11 @@ class _IdealBankForm extends Component {
 _IdealBankForm.contextType = myContext;
 const IdealForm = injectStripe(_IdealBankForm);
 export class Ideal extends Component {
-    componentDidMount() {
-        console.log("IDEAL: ", this.props);
-    }
-    
     componentWillReceiveProps(nextProps) {
-        console.log("NEXT PROPS")
-        console.log(nextProps);
         this.setState({mydata: nextProps.data})
     }
 
     render() {
-        console.log("SUBMITTED FORM: ", this.props.submitted);
         return (
         <StripeProvider apiKey={config.STRIPE_API_KEY}>
             <Elements locale={"nl"} family={"Montserrat"}>

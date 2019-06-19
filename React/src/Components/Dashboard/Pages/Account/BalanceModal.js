@@ -17,14 +17,11 @@ class BalanceModal extends Component {
 
   handleResult = (amount, stripe) => {
     this.setState({waiting: true, loading: !this.state.loading});
-    console.log("HANDLING RESULT!!!!!!!");
     if (stripe) {
           var return_url = config.HOME_URL;
           var response = this.createDeposit(amount, return_url);
           response.then(
               (res) => {
-                  console.log(res.data.url);
-                  // window.close();
                   if (res.data.url) window.open(res.data.url, '_blank');
               }
           ).catch((err) => {
@@ -40,22 +37,16 @@ class BalanceModal extends Component {
   }
   
   createDeposit = async (amount, return_url) => {
-    console.log(amount);
-    console.log(return_url);
     const body = {
         amount: parseInt(amount) * 100,
         return_url
     };
-    console.log(body);
     const header = 'Bearer ' + localStorage.getItem('jwt token');
     const res = await axios.post(config.API_URL + 'api/deposits/create', body, {headers: {Authorization:header}});
-    console.log("response", res);
     return res;
   }
 
   render() {
-    console.log("BALANCE MODAL!!");
-    console.log(this.props.balance);
     return (
         <div className="modal fade" id="saldoModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog" role="document">
@@ -86,15 +77,9 @@ class BalanceModal extends Component {
 }
 
 class IdealArea extends Component {
-  componentDidMount() {
-    console.log("IDEALAREA:", this.props.toggleSubmit);
-  }
-  
   render() {
     return (
-      <>
         <Ideal toggleSubmit={this.props.toggleSubmit} submitted={this.props.submitted} balance={this.props.balance && this.props.balance} handleResult={this.props.handleResult} toggleLoad={this.props.toggleLoad} balance={this.props.balance}/>
-      </>
     );
   }
 }

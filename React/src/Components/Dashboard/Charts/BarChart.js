@@ -2,17 +2,22 @@ import React, { Component } from 'react'
 import { Bar } from 'react-chartjs-2';
 
 class BarChart extends Component {
-    data = {
-        labels: this.props.labels,
+  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data) {
+      this.data = {
+        labels: nextProps.labels.map(date => this.convertDate(date)),
         datasets: [{
           label: "Uitgave",
           backgroundColor: "#4e73df",
           hoverBackgroundColor: "#2e59d9",
           borderColor: "#4e73df",
-          data: [0, 40, 50],
+          data: nextProps.data,
         }],
       };
-
+    }
+  }
+  
     options = {
         maintainAspectRatio: false,
         layout: {
@@ -75,7 +80,7 @@ class BarChart extends Component {
           callbacks: {
             label: function(tooltipItem, chart) {
               var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-              return datasetLabel + ': €' + this.number_format(tooltipItem.yLabel);
+              return datasetLabel + ': €' + this.number_format(tooltipItem.yLabel);;
             }.bind(this)
           }
         },
@@ -105,14 +110,18 @@ class BarChart extends Component {
         }
         return s.join(dec);
     }
+
+    convertDate = (inputFormat) => {
+      function pad(s) { return (s < 10) ? '0' + s : s; }
+      var d = new Date(inputFormat);
+      return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+    }
     
 
     render() {
-      console.log("BARCHART labels: ", this.props.labels)
-      console.log("BARCHART graph values: ", this.props.data)
         return (
           <>
-            {this.props.data && <Bar ref='chart' data={this.props.data} options={this.options} />}
+            {this.data && <Bar ref='chart' data={this.data} options={this.options} />}
           </>
         )
     }

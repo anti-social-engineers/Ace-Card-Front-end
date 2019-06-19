@@ -43,8 +43,6 @@ class Dashboard extends Component {
   }
   
   render() {
-    console.log("Rendering dashboard");
-    console.log(this.context.data);
       const {children} = this.props;
       return (
         <>

@@ -72,6 +72,24 @@ p {
     letter-spacing: 1.5px;
 }
 
+.loadingtext {
+    position: absolute;
+    z-index: 500;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: 40vh auto 0;
+}
+
+.loadingtext h1 {
+    font-size: 2rem;
+    color: #dadada;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
 a.nav-item.nav-link:hover {
     color: #999999;
     transition: 0.2s;

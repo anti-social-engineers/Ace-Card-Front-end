@@ -8,7 +8,6 @@ import aos from 'aos'
 import '../Styles/css/style.css'
 import Nav from '../Components/Navbar';
 import {NavLink} from 'react-router-dom';
-import config from '../config/config'
 
 class Home extends Component {
 
@@ -16,7 +15,6 @@ class Home extends Component {
     aos.init({
       duration : 2000
     })
-    console.log(config.API_URL)
   }
 
   render() {

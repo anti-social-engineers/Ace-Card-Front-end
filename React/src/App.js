@@ -15,13 +15,26 @@ import Deposits from './Components/Dashboard/Pages/Deposits/Deposits';
 import Page404 from './Components/Page404';
 import Authenticator from './Components/Authenticator'
 import EnhancedTable from './Components/Dashboard/Table';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
+
+toast.configure({
+  position: "top-center",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true
+});
 
 class App extends Component {
   render() {
-    return (<Router>
-    <CookieConsent>
-      This website uses cookies to enhance the user experience.
-    </CookieConsent>
+    return (
+    <Router>
+      <CookieConsent>
+        This website uses cookies to enhance the user experience.
+      </CookieConsent>
 
       <Authenticator>
         <Route

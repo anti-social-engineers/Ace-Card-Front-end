@@ -5,4 +5,4 @@ export default{
     REDIS_URL: "http://199.247.8.9:8000",
     STRIPE_API_KEY: "pk_test_AKuV25JNq2XSRshR11ZjJpBT002DMqhIMq"
     // REDIS_URL: "http://localhost:8000"
-} 
+}

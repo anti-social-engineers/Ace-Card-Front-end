@@ -15,12 +15,12 @@ export default class Sidebar extends Component {
         return (
           <ul className={ classNames("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion", { toggled: this.state.navCollapsed }) } id="accordionSidebar" ref='sidebar'>
           {/* Sidebar - Brand */}
-          <NavLink className="sidebar-brand d-flex align-items-center justify-content-center" to="/dashboard">
-            <div className="sidebar-brand-icon">
-              <img src={require('../../../Styles/img/acelogo.png')} alt="" style={{width: "80px"}}/>
-            </div>
-            <div class="sidebar-brand-text mx-2"><span style={{fontSize: "8px"}}>Ace of Clubs</span> Dashboard</div>
-          </NavLink>
+            <NavLink className="sidebar-brand d-flex align-items-center justify-content-center" to="/dashboard">
+              <div className="sidebar-brand-icon">
+                <img src={require('../../../Styles/img/acelogo.png')} alt="" style={{width: "80px"}}/>
+              </div>
+              <div class="sidebar-brand-text mx-2"><span style={{fontSize: "8px"}}>Ace of Clubs</span> Dashboard</div>
+            </NavLink>
           {/* Divider */}
           <hr className="sidebar-divider my-0" />
           {/* Nav Item - Dashboard */}
@@ -42,7 +42,7 @@ export default class Sidebar extends Component {
               <span>Account</span>
             </NavLink>
             <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-              <div className="bg-white py-2 collapse-inner rounded">
+              <div className="bg-dark-new py-2 collapse-inner rounded">
                 <h6 className="collapse-header">Mijn Account:</h6>
                 <NavLink className="collapse-item" to="/dashboard/deposits">Stortingen</NavLink>
                 <NavLink className="collapse-item" to="/dashboard/transactions">Uitgaves</NavLink>
@@ -56,7 +56,7 @@ export default class Sidebar extends Component {
               <span>Instellingen</span>
             </a>
             <div id="collapseUtilities" className="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-              <div className="bg-white py-2 collapse-inner rounded">
+              <div className="bg-dark-new py-2 collapse-inner rounded">
                 <h6 className="collapse-header">Mijn instellingen:</h6>
                 <a className="collapse-item" href="utilities-color.html">Colors</a>
                 <a className="collapse-item" href="utilities-border.html">Borders</a>
@@ -78,7 +78,7 @@ export default class Sidebar extends Component {
               <span>Pages</span>
             </a>
             <div id="collapsePages" className="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-              <div className="bg-white py-2 collapse-inner rounded">
+              <div className="bg-dark-new py-2 collapse-inner rounded">
                 <h6 className="collapse-header">Login Screens:</h6>
                 <a className="collapse-item" href="login.html">Login</a>
                 <a className="collapse-item" href="register.html">Register</a>
@@ -105,8 +105,8 @@ export default class Sidebar extends Component {
           {/* Divider */}
           <hr className="sidebar-divider d-none d-md-block" />
           {/* Sidebar Toggler (Sidebar) */}
-          <div className="text-center d-none d-md-inline">
-            <button className="rounded-circle border-0" onClick={this.toggleNavBar} id="sidebarToggle" />
+          <div className="text-center d-none d-md-inline pt-4">
+            <button className="bg-transparent border-0" onClick={this.toggleNavBar} id="sidebarToggle" />
           </div>
         </ul>
         )

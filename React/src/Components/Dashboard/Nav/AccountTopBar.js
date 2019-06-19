@@ -3,7 +3,7 @@ import TimeAgo from 'react-timeago'
 import {NavLink} from 'react-router-dom';
 import dutchStrings from 'react-timeago/lib/language-strings/nl'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
- 
+
 const formatter = buildFormatter(dutchStrings)
 
 
@@ -29,6 +29,7 @@ export default class AccountTopBar extends Component {
             var notifications_amount = this.props.data.notifications.length;
             if (notifications_amount > 0) {
                 output_amount_notifications = notifications_amount;
+                if (notifications_amount > 9) output_amount_notifications = "9+"
             } else {
                 output_amount_notifications = "";
             }
@@ -126,7 +127,7 @@ class MiniNotifications extends Component {
     
                 notifications = this.props.notifications && this.props.notifications.slice(0, size).map(
                     notification => {
-                        var message = notification.name === "deposit" ?  `€${notification.amount} is zojuist gestort in uw account!` : notification.message;
+                        var message = notification.name === "deposit" ?  `€${notification.amount.toFixed(2)} is zojuist gestort in uw account!` : notification.message;
                         return (
                             <a className="dropdown-item d-flex align-items-center" href="#">
                                 <div className="mr-3">

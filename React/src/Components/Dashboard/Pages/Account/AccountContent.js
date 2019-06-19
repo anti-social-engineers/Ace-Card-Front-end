@@ -15,68 +15,31 @@ class AccountContent extends Component {
     async componentDidMount() {
       const header = 'Bearer ' + localStorage.getItem('jwt token')
       const res = await axios.get(config.API_URL+'/api/account/graphs/payments', {headers: {Authorization:header}});
-      // const graph_data
+
       const graph = res.data.data[0]
-      // graph = graph.map (date => new Date(date));
-      // console.log("GRAPH", graph);
+      this.setupGraphData(graph);
+    }
+
+    setupGraphData = (graph) => {
       var data = []
       var now = new Date();
       for (var i = 0; i < 30; i++) {
-        console.log(i);
         now = new Date(now)
         now.setDate(now.getDate() - 1);
         data.push(now.toISOString().substring(0, 10));
       }
       data = data.reverse();
-      console.log("graph", graph);
-      console.log("dates", data);
 
       var graph_values = data.map(item => {
         for (var key in graph) {
-          if (key === item) {
-            console.log("found1item");
-            return graph[key];
-          }
+          if (key === item) return graph[key];
           return 0;
         }
       });
-      console.log("graph_values", graph_values);
 
       this.setState({graph_values: Object.values(graph_values), dates:data});
-      // data.forEach(item => {
-      //   if (item in graph) {
-      //     console.log("thedate", item);
-      //   } else {
-      //     console.log("thedate", "NONE");
-      //   }
-      // });
-      // for (var i = 0; i < 30; i++) {
-      //   for (var key in graph) {
-      //     console.log("-----")
-      //     console.log(key);
-      //     console.log(graph[key]);
-      //   }
-      // }
-
-      // var newlist = new Array(30);
-      // for (var i in data){
-      //   for (var x in newlist) {
-      //     if ()
-      //   }
-      // }
-      // console.log(data.reverse());
-      console.log("dataaa", data);
-      // var kek = graph.map( (item, index) => if () )
     }
     
-    componentWillReceiveProps(nextProps){
-      console.log("ACCOUNT RCV PROPS")
-      console.log(nextProps);
-      if (nextProps.balance) {
-          var balance = parseFloat(nextProps.balance)
-          this.setState({balance: balance});
-      }
-    }
 
     updateBalance = (end) => {
       this.setState({prevBalance: parseInt(this.context.data.user.credits), currentBalance: end});      
@@ -84,34 +47,13 @@ class AccountContent extends Component {
     
 
     render() {
-        // const countAnimation;
-        console.log("ACCOUNT CONTENT!!!!!!");
-        console.log(this.context.data.notifications && this.context.data.notifications[0] && this.context.data.notifications[0].datetime);
-        
         const hasNotification = this.context.data.notifications && this.context.data.notifications[0];
         if (hasNotification) {
-          console.log("HAS NOTIFICATION");
+          console.log("PREVIOUS NOTIF AMOUNT: ", this.context.data.previous_notification_amount);
+          console.log("current NOTIF AMOUNT: ", this.context.data.notifications.length);
           const lastNotification = this.context.data.notifications[0];
-
           // if got notification less than 5 seconds ago
-          if (((new Date()) - new Date(lastNotification.datetime)) < 5000) {
-            console.log("JUST NOW");
-            var end;
-            if (lastNotification.name === 'deposit') {
-              end = parseInt(lastNotification.amount) + parseInt(lastNotification.updated_balance);
-              console.log("final end:", end);
-              console.log("calculation: adding updated_balance:" + lastNotification.updated_balance + " " + lastNotification.amount)
-            } else {
-              end = parseInt(lastNotification.updated_balance);
-            }
-            console.log("start:", this.context.data.user.credits);
-            console.log("end", end);
-            var justGotNotification = true;
-            // this.updateBalance(end);
-            // this.setState({prevBalance: parseInt(this.context.data.user.credits), currentBalance: end});
-          } else {
-            console.log("AGES AGO");
-          }
+          if (((new Date()) - new Date(lastNotification.datetime)) < 5000) var justGotNotification = true;
         }
 
         return (
@@ -129,12 +71,12 @@ class AccountContent extends Component {
                         <div className="row no-gutters align-items-center mb-2">
                           <div className="col mr-2">
                             <div className="text-xs font-weight-bold text-primary text-success text-uppercase mb-1">Huidige Saldo</div>
-                            <div className="h5 mb-0 font-weight-bold text-gray-800">€{this.context.data.user.credits} regular</div>
+                            { !justGotNotification && <div className="h5 mb-0 font-weight-bold text-gray-800">€ {this.context.data.user.credits}</div>}
                             <div className="h5 mb-0 font-weight-bold text-gray-800">
                               { justGotNotification && <CountUp
-                                    start={this.state.prevBalance}
-                                    end={end}
-                                    duration={20.75}
+                                    start={this.context.data.user.previous_credits}
+                                    end={this.context.data.user.credits}
+                                    duration={2.75}
                                     decimals={2}
                                     prefix="€ "
                                   />}
@@ -197,11 +139,14 @@ class AccountContent extends Component {
                       <div className="card-body">
                         <div className="row no-gutters align-items-center">
                           <div className="col mr-2">
-                            <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
-                            <div className="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">Nieuwe Notificaties</div>
+                            <div className="h5 mb-0 font-weight-bold text-gray-800">
+                            {/* { this.context.data.notifications && this.context.data.notifications.length && this.context.data.notifications.length > 0 } */}
+                              {hasNotification ? this.context.data.notifications.length : <span className="text-sm">U bent er helemaal bij!</span>}
+                            </div>
                           </div>
                           <div className="col-auto">
-                            <i className="fas fa-comments fa-2x text-gray-300" />
+                            <i className="fas fa-comment-alt fa-2x text-gray-300" />
                           </div>
                         </div>
                       </div>
@@ -215,7 +160,7 @@ class AccountContent extends Component {
                     <div className="card shadow mb-4">
                       {/* Card Header - Dropdown */}
                       <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 className="m-0 font-weight-bold text-primary">Overzicht Uitgaves</h6>
+                        <h6 className="m-0 font-weight-bold text-primary">Uitgaves afgelopen maand</h6>
                         <div className="dropdown no-arrow">
                           <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400" />
