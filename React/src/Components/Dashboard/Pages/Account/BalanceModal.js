@@ -16,8 +16,10 @@ class BalanceModal extends Component {
   };
 
   handleResult = (amount, stripe) => {
-    this.setState({waiting: true, loading: !this.state.loading});
+    console.log("HANDLING RESULTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+    this.setState({waiting: true});
     if (stripe) {
+      console.log("IS STRIPE");
           var return_url = config.HOME_URL;
           var response = this.createDeposit(amount, return_url);
           response.then(
@@ -47,6 +49,18 @@ class BalanceModal extends Component {
   }
 
   render() {
+    const hasNotification = this.context.data.notifications && this.context.data.notifications[0];
+    var waiting = this.state.waiting;
+    if (hasNotification) {
+      const lastNotification = this.context.data.notifications[0];
+      if (((new Date()) - new Date(lastNotification.datetime)) < 5000){
+        waiting = false;
+        if (this.state.submitted) {
+          this.toggleSubmit();
+        }
+        document.getElementById("closeModal").click();
+      }
+    }
     return (
         <div className="modal fade" id="saldoModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog" role="document">
@@ -54,18 +68,18 @@ class BalanceModal extends Component {
                 <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 className="m-0 font-weight-bold text-primary">Opwaarderen</h6>
                   <div className="dropdown no-arrow">
-                      <a className="dropdown-toggle" role="button" data-dismiss="modal">
+                      <a id="closeModal" className="dropdown-toggle" role="button" data-dismiss="modal">
                           <i className="fas fa-times fa-sm fa-fw text-gray-400" />
                       </a>
                   </div>
                 </div>
                 <Fade>
                   <div className="modal-body py-4">
-                    { !this.state.waiting && <IdealArea {...this.state} {...this.props} toggleSubmit={this.toggleSubmit} handleResult={this.handleResult} />}
-                    { this.state.waiting && <Fade><span className="text-sm text-gray-800"><i className="fas fa-circle-notch fa-spin" style={{marginRight: "10px"}} ></i>Aan het wachten op transactie...</span></Fade> }
+                    { !waiting && <IdealArea {...this.state} {...this.props} toggleSubmit={this.toggleSubmit} handleResult={this.handleResult} />}
+                    { waiting && <Fade><span className="text-sm text-gray-800"><i className="fas fa-circle-notch fa-spin" style={{marginRight: "10px"}} ></i>Aan het wachten op transactie...</span></Fade> }
                   </div>
                 </Fade>
-              { !this.state.waiting && <div className="modal-footer d-flex justify-content-between">
+              { !waiting && <div className="modal-footer d-flex justify-content-between">
                 <button className="btn btn-secondary text-sm" type="button" data-dismiss="modal">Annuleren</button>
                 <a className="btn btn-primary text-sm" onClick={() => this.setState({submitted: true})}>Opwaarderen</a>
               </div>}

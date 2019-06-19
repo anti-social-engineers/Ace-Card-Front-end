@@ -54,7 +54,7 @@ class _IdealBankForm extends Component {
 
     updateAddedValue = (e) => {
         var amount = e.target.value;
-        if (!isNaN(e.target.value)){
+        if (!isNaN(e.target.value) && e.target.value !== ""){
             var calc = this.state.balance + parseFloat(e.target.value);
             if (isNaN(calc)) {
                 this.setState({amount});
@@ -64,7 +64,7 @@ class _IdealBankForm extends Component {
             }
 
         } else {
-            this.setState({newBalance: this.state.balance});
+            this.setState({newBalance: this.props.balance});
         };
     }
 
@@ -78,7 +78,7 @@ class _IdealBankForm extends Component {
     render() {
         if (this.props.submitted) {
             var form = document.getElementById('depositForm');
-            form.reportValidity();
+            if (form) form.reportValidity();
             if(this.state.amount){
                 console.log(this.state.amount);
                 console.log("FORM HS BEEN SUBMITTED");
@@ -93,13 +93,13 @@ class _IdealBankForm extends Component {
             <div className="form-content">
                     <div className={this.state.loading ? "d-none" : "inputs inputs-space"}>
                         <div className="group">
-                            <input type="number" step="0.01" min="5" max="10000" name="amount" id="bedrag" onChange={this.updateAddedValue} required />
+                            <input type="number" step="1" min="5" max="10000" name="amount" id="bedrag" onChange={this.updateAddedValue} required />
                             <span className="highlight"></span>
                             <span className="bar"></span>
                             <label>Kies over te schrijven bedrag</label>
                         </div>
                         <div className="group pb-5">
-                            <input type="text" value={"€" + this.state.newBalance.toFixed(2)} readOnly/>
+                            <input type="text" value={"€" + parseFloat(this.state.newBalance).toFixed(2)} readOnly/>
                             <span className="highlight"></span>
                             <span className="bar"></span>
                             <label style={{top: "-20px"}}>Nieuwe saldo</label>

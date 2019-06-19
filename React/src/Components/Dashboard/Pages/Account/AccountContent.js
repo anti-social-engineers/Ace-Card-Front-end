@@ -53,7 +53,9 @@ class AccountContent extends Component {
           console.log("current NOTIF AMOUNT: ", this.context.data.notifications.length);
           const lastNotification = this.context.data.notifications[0];
           // if got notification less than 5 seconds ago
-          if (((new Date()) - new Date(lastNotification.datetime)) < 5000) var justGotNotification = true;
+          if (((new Date()) - new Date(lastNotification.datetime)) < 5000){
+            var justGotNotification = true;
+          }
         }
 
         return (
@@ -74,8 +76,8 @@ class AccountContent extends Component {
                             { !justGotNotification && <div className="h5 mb-0 font-weight-bold text-gray-800">€ {this.context.data.user.credits}</div>}
                             <div className="h5 mb-0 font-weight-bold text-gray-800">
                               { justGotNotification && <CountUp
-                                    start={this.context.data.user.previous_credits}
-                                    end={this.context.data.user.credits}
+                                    start={parseFloat(this.context.data.user.previous_credits)}
+                                    end={parseFloat(this.context.data.user.credits)}
                                     duration={2.75}
                                     decimals={2}
                                     prefix="€ "

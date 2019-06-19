@@ -47,8 +47,10 @@ export default class Authenticator extends Component {
             io.on("event", data => {
                 // Als er tussen nu en 5 seconden geleden een deposit binnen komt krijgt de gebruiker een toast notificatie
                 if (data[0] && data[0].name === "deposit")
-                    if (((new Date()) - new Date(data[0].datetime)) < 5000) toast.success("Uw transactie is geslaagd! Uw heeft zojuist € " + data[0].amount.toFixed(2) + " opgewaardeerd!");
-                console.log("AUTHENTICATOR NOTIFICATIONS:", data);
+                    if (((new Date()) - new Date(data[0].datetime)) < 5000) {
+                        toast.success("Uw transactie is geslaagd! Uw heeft zojuist € " + parseFloat(data[0].amount).toFixed(2) + " opgewaardeerd!");
+                    }
+                        console.log("AUTHENTICATOR NOTIFICATIONS:", data);
                 if (data !== this.state.notifications) {
                     var curr_data = Object.assign({}, this.state.data);
 
@@ -56,7 +58,7 @@ export default class Authenticator extends Component {
                         curr_data.user.previous_credits = curr_data.user.credits;
 
                         if ((data[0].name === "deposit" || data[0].name === "transaction")) {
-                            curr_data.user.credits = data[0].updated_balance.toFixed(2);                            
+                            curr_data.user.credits = parseFloat(data[0].updated_balance).toFixed(2);                            
                         }
                     }
 

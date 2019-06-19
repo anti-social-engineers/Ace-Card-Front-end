@@ -127,7 +127,7 @@ class MiniNotifications extends Component {
     
                 notifications = this.props.notifications && this.props.notifications.slice(0, size).map(
                     notification => {
-                        var message = notification.name === "deposit" ?  `€${notification.amount.toFixed(2)} is zojuist gestort in uw account!` : notification.message;
+                        var message = notification.name === "deposit" ?  `€${parseFloat(notification.amount).toFixed(2)} is zojuist gestort in uw account!` : notification.message;
                         return (
                             <a className="dropdown-item d-flex align-items-center" href="#">
                                 <div className="mr-3">
