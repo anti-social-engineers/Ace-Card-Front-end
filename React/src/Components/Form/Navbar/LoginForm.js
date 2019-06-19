@@ -17,6 +17,7 @@ class LoginForm extends Component {
       logged_in: false,
       login_status: "none",
       decodeToken: null,
+      message:'',
    }
 
    handleChange = (e) => {
@@ -33,11 +34,13 @@ class LoginForm extends Component {
       if (logininfo.classList.contains("animated")){
          logininfo.classList.remove("animated", "shake");
       }
+
       this.setState({loading: true, logged_in: false, login_status: "none"})
       console.log(this.state.account)
       //Api Call Login
       axios.post(config.API_URL+'/api/login', this.state.account)
          .then(response => {
+            
             console.log(response);
             if (response.status === 200) {
                console.log("lel");
@@ -57,7 +60,19 @@ class LoginForm extends Component {
             console.log(err);
             console.log("INCORRECT");
             var email_field = document.getElementById("email");
-            this.setState({ login_status: "wrong", loading: false, logged_in: false });
+            if(err == 'Error: Request failed with status code 401'){
+               console.log('handling 401');
+               this.setState({ login_status: "wrong", loading: false, logged_in: false, message:'Email of wachtwoord is incorrect!' });
+            }
+           if(err == 'Error: Request failed with status code 403'){
+            this.setState({ login_status: "wrong", loading: false, logged_in: false, message: 'Uw account is nog niet geactiveerd!' });
+         }
+           if(err == 'Error: Request failed with status code 500'){
+            this.setState({ login_status: "wrong", loading: false, logged_in: false, message: 'Er is iets fout met de server. Excuses voor het ongemak!'});
+           }
+           if(err == 'Error: Request failed with status code 422'){
+            this.setState({ login_status: "wrong", loading: false, logged_in: false, message:'Verkeerd email formaat.' });
+           }
             logininfo.classList.add("animated", "shake");
             email_field.focus();
          });
@@ -73,7 +88,7 @@ class LoginForm extends Component {
                   <h2>Inloggen</h2>
                </div>
                   <div className="login-info">
-                  <span className={this.state.login_status === "wrong" && !this.state.loading ? "loading-text" : "d-none invis"}><i className="fas fa-exclamation-circle"></i>Inloggen mislukt.</span>
+                  <span className={this.state.login_status === "wrong" && !this.state.loading ? "loading-text" : "d-none invis"}><i className="fas fa-exclamation-circle"></i>{this.state.message}</span>
                </div>
                <div className="form-content">
                   <div className={this.state.loading ? "d-none" : "inputs"}>

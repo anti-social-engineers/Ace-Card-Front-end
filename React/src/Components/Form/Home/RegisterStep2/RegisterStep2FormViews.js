@@ -14,7 +14,7 @@ class RegisterStep2Form extends Component {
         case 3:
           return (<RegisterStep3 handleChange={this.props.handleChange}/>)
         case 4:
-          return (<RegisterFinished name={this.props.values.voornaam} />)
+          return (<RegisterFinished values={this.props.values}  name={this.props.values.voornaam} />)
         default:
           return (<RegisterStep1/>)
       }

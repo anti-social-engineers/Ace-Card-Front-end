@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
-
+import jwt from 'jsonwebtoken'
+import config from '../../../config/config'
 export default class Sidebar extends Component {
     state = {
         navCollapsed: false
@@ -10,16 +11,24 @@ export default class Sidebar extends Component {
     toggleNavBar = () => {
         this.setState({navCollapsed: !this.state.navCollapsed});
     }
-    
+
     render() {
-        return (
+      var decoded = jwt.verify(localStorage.getItem('jwt token'), config.signature);
+
+      console.log('decode')
+      let ad = ""
+      if(decoded.permissions=="sysop"){
+       ad = <a className="collapse-item" href="/dashboard/admin">Admin</a>
+      }
+     
+      return (
           <ul className={ classNames("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion", { toggled: this.state.navCollapsed }) } id="accordionSidebar" ref='sidebar'>
           {/* Sidebar - Brand */}
           <NavLink className="sidebar-brand d-flex align-items-center justify-content-center" to="/dashboard">
-            <div className="sidebar-brand-icon rotate-n-15">
-              <i className="fas fa-laugh-wink" />
+            <div className="sidebar-brand-icon">
+              <img src={require('../../../Styles/img/acelogo.png')} alt="" style={{width: "80px"}}/>
             </div>
-            <div className="sidebar-brand-text mx-3">Ace Paneel</div>
+            <div class="sidebar-brand-text mx-2"><span style={{fontSize: "8px"}}>Ace of Clubs</span> Dashboard</div>
           </NavLink>
           {/* Divider */}
           <hr className="sidebar-divider my-0" />
@@ -46,6 +55,7 @@ export default class Sidebar extends Component {
                 <h6 className="collapse-header">Mijn Account:</h6>
                 <NavLink className="collapse-item" to="/dashboard/deposits">Stortingen</NavLink>
                 <NavLink className="collapse-item" to="/dashboard/transactions">Uitgaves</NavLink>
+                {ad}
               </div>
             </div>
           </li>

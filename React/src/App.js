@@ -22,7 +22,7 @@ import FAQ from './Components/FAQ';
 import Vacatures from './Components/Vacatures';
 import Clubeigenaar from './Components/Clubeigenaar';
 import Bewaker from './Components/Bewaker';
-
+import Admin from './Components/Dashboard/Pages/Account/Admin'
 class App extends Component {
   render() {
     return (<Router>
@@ -37,6 +37,7 @@ class App extends Component {
                     <Dashboard sup={"lel"}>
                       <Switch>
                         <Route path={`${url}/Account`} component={Account} exact />
+                        <Route path={`${url}/Admin`} component={Admin} exact />
                         <Route path={`${url}/Deposits`} component={Deposits} exact />
                         <Route path={`${url}/Notifications`} component={Notifications} exact />
                         <Route path={`${url}/Table`} component={EnhancedTable} exact />

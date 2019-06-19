@@ -67,6 +67,8 @@ class RegisterStep2 extends Component {
       console.log(this.refs.form);
   }
 
+  
+
   render() {
     return (
       <div>

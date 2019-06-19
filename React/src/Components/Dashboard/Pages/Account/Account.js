@@ -5,10 +5,12 @@ import {myContext} from '../../../Authenticator'
 
 class Account extends Component {
     render() {
-        console.log(this.context.data && this.context.data);
-        console.log("RENDERING ACCOUNT");
-        const accountContent = this.context.data.user && !this.context.data.user.has_card ? <PendingCard/> : <AccountContent/>
-        console.log(accountContent);
+        var accountContent;
+        if (this.context.data.user && this.context.data.user.has_card) {
+            accountContent = <AccountContent {...this.props} />
+        } else {
+            accountContent = <PendingCard/>
+        }
         return (
             <>
                 {/* {this.context.data && this.context.data.user && <AccountContent/> } */}
