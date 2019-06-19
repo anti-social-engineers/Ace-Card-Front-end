@@ -19,7 +19,7 @@ export class Confirm extends Component {
         })
 
         const {id} = this.props.match.params
-        axios.get(config.API_URL+'/api/activate/'+id)
+        axios.get(config.API_URL+'api/activate/'+id)
         .then(res => {
             console.log(res)
         })
