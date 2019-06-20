@@ -2,17 +2,22 @@ import React, { Component } from 'react'
 import { Bar } from 'react-chartjs-2';
 
 class BarChart extends Component {
-    data = {
-        labels: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"],
+  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data) {
+      this.data = {
+        labels: nextProps.labels.map(date => this.convertDate(date)),
         datasets: [{
           label: "Uitgave",
           backgroundColor: "#4e73df",
           hoverBackgroundColor: "#2e59d9",
           borderColor: "#4e73df",
-          data: this.props.data,
+          data: nextProps.data,
         }],
       };
-
+    }
+  }
+  
     options = {
         maintainAspectRatio: false,
         layout: {
@@ -26,7 +31,7 @@ class BarChart extends Component {
         scales: {
           xAxes: [{
             time: {
-              unit: 'month'
+              unit: 'day'
             },
             gridLines: {
               display: false,
@@ -43,7 +48,7 @@ class BarChart extends Component {
               max: 400,
               maxTicksLimit: 5,
               padding: 10,
-              // Include a dollar sign in the ticks
+              // Include a euro sign in the ticks
               callback: function(value, index, values) {
                 return '€' + this.number_format(value);
               }.bind(this)
@@ -75,7 +80,7 @@ class BarChart extends Component {
           callbacks: {
             label: function(tooltipItem, chart) {
               var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-              return datasetLabel + ': €' + this.number_format(tooltipItem.yLabel);
+              return datasetLabel + ': €' + this.number_format(tooltipItem.yLabel);;
             }.bind(this)
           }
         },
@@ -105,11 +110,19 @@ class BarChart extends Component {
         }
         return s.join(dec);
     }
+
+    convertDate = (inputFormat) => {
+      function pad(s) { return (s < 10) ? '0' + s : s; }
+      var d = new Date(inputFormat);
+      return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+    }
     
 
     render() {
         return (
-            <Bar ref='chart' data={this.data} options={this.options} />
+          <>
+            {this.data && <Bar ref='chart' data={this.data} options={this.options} />}
+          </>
         )
     }
 }

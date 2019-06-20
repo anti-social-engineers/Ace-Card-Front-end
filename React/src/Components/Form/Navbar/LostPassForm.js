@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
+import axios from 'axios';
+import config from '../../../config/config'
 
 class LostPassForm extends Component {
     constructor(props){
@@ -42,6 +44,7 @@ class LostPassForm extends Component {
         }
         
         setTimeout(function(){
+            this.requestPasswordRequest();
               if (this.state.email === "selimaydi@gmail.com") {
                 // Valid email
                 this.setState({submission_status: "success"})
@@ -54,7 +57,22 @@ class LostPassForm extends Component {
                  email_field.focus();
               }
         }.bind(this), 400);
-     }
+    }
+
+    requestPasswordRequest = async () => {
+        // TODO
+        const header = 'Bearer ' + localStorage.getItem('jwt token');
+        const body = {
+            mail: this.state.email
+        }
+        try {
+            const res = await axios.post(config.API_URL + 'api/passwordreset', body, {headers: {Authorization:header}});
+            console.log(res);
+        } catch(err) {
+            console.log(err);
+        }
+    }
+    
 
     render() {
         return (

@@ -12,10 +12,8 @@ export default class Logout extends Component {
         localStorage.removeItem('jwt token');
         auth.loguit();
         setTimeout(() => {
-            console.log("waiting");
             this.setState({redirect: true})
         }, 500);
-        // this.props.callback();
     }
 
     render() {

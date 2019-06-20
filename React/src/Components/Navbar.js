@@ -53,7 +53,7 @@ class Nav extends Component {
   }
 
   toggleVisibility = () => {
-    this.setState({login_clicked: !this.login_clicked}, () => console.log("CHANGE VIS"));
+    this.setState({login_clicked: !this.login_clicked});
   }
   render(){
           return (<header className="header header--collapsed">

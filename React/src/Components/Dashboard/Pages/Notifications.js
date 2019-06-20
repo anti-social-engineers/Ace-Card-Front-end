@@ -12,14 +12,7 @@ class Notifications extends Component {
         pageCount: 0
     }
     
-    componentDidMount() {
-        console.log("MOUNTING")
-        console.log(this.context);
-    }
-    
     render() {
-        console.log(this.context.data && this.context.data);
-        console.log("RENDERING NOTIFICATIONS");
         return (
             <div>
                 <div className="container-fluid" data-aos="fade-up" data-aos-duration="400">
@@ -51,11 +44,7 @@ class Notification extends Component {
     render() {
         const notifications = this.props.notifications && this.props.notifications.map(
             notification => {
-                console.log("INSIDE NOTIFICATION")
-                console.log(notification);
-                var time = new Date();
-                // console.log(time);
-                var message = notification.name === "deposit" ?  `€${notification.amount} is zojuist gestort in uw account!` : notification.message;
+                var message = notification.name === "deposit" ?  `€${notification.amount.toFixed(2)} is zojuist gestort in uw account!` : notification.message;
                 return (
                     <a className="dropdown-item d-flex align-items-center" href="#">
                         <div className="mr-3">
