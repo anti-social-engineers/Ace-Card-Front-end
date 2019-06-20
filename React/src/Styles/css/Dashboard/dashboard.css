@@ -6053,6 +6053,9 @@ body {
 .Toastify__toast--success {
   background: #1dc88a;
 }
+.dashboard .disabled-fields label {
+  top: -15px;
+}
 .dashboard a.bg-info:hover, .dashboard a.bg-info:focus,
 .dashboard button.bg-info:hover,
 .dashboard button.bg-info:focus {
@@ -6353,6 +6356,9 @@ body {
     display: -webkit-inline-box !important;
     display: -ms-inline-flexbox !important;
     display: inline-flex !important;
+  }
+  .dashboard .profile-image {
+    margin-top: 0px !important;
   }
 }
 @media print {

@@ -10,14 +10,18 @@ class BalanceModal extends Component {
 
   state ={
     submitted: false,
-    loading: false,
-    waiting: false,
-    redirect: ""
+    showWaitingScreen: true,
+    has_submitted: false,
+    receivedNotification: false
   };
 
   handleResult = (amount, stripe) => {
-    console.log("HANDLING RESULTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-    this.setState({waiting: true});
+    if (this.state.hasJustReceivedDeposit) {
+      this.setState({submitted: false, receivedNotification: true});
+    } else {
+      this.setState({submitted: false});
+    }
+
     if (stripe) {
       console.log("IS STRIPE");
           var return_url = config.HOME_URL;
@@ -35,7 +39,7 @@ class BalanceModal extends Component {
   }
 
   toggleSubmit = () => {
-    this.setState({submitted: !this.state.submitted});
+    this.setState({submitted: !this.state.submitted, has_submitted: true});
   }
   
   createDeposit = async (amount, return_url) => {
@@ -49,18 +53,12 @@ class BalanceModal extends Component {
   }
 
   render() {
-    const hasNotification = this.context.data.notifications && this.context.data.notifications[0];
-    var waiting = this.state.waiting;
-    if (hasNotification) {
-      const lastNotification = this.context.data.notifications[0];
-      if (((new Date()) - new Date(lastNotification.datetime)) < 5000){
-        waiting = false;
-        if (this.state.submitted) {
-          this.toggleSubmit();
-        }
-        document.getElementById("closeModal").click();
+    if (this.context.data.hasJustReceivedDeposit) {
+      if (this.state.has_submitted) {
+        this.setState({has_submitted: false}, () => document.getElementById("closeModal").click());
       }
     }
+
     return (
         <div className="modal fade" id="saldoModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog" role="document">
@@ -75,25 +73,17 @@ class BalanceModal extends Component {
                 </div>
                 <Fade>
                   <div className="modal-body py-4">
-                    { !waiting && <IdealArea {...this.state} {...this.props} toggleSubmit={this.toggleSubmit} handleResult={this.handleResult} />}
-                    { waiting && <Fade><span className="text-sm text-gray-800"><i className="fas fa-circle-notch fa-spin" style={{marginRight: "10px"}} ></i>Aan het wachten op transactie...</span></Fade> }
+                    <Ideal balance={this.context.data.user.credits} submitted={this.state.submitted} toggleSubmit={this.toggleSubmit} handleResult={this.handleResult} />
+                    { this.state.has_submitted && !this.state.receivedNotification && <Fade><span className="text-sm text-gray-800" style={{paddingLeft: "25px", paddingRight: "25px"}}><i className="fas fa-circle-notch fa-spin" style={{marginRight: "10px"}} ></i>Aan het wachten op transactie...</span></Fade> }
                   </div>
                 </Fade>
-              { !waiting && <div className="modal-footer d-flex justify-content-between">
+              <div className="modal-footer d-flex justify-content-between">
                 <button className="btn btn-secondary text-sm" type="button" data-dismiss="modal">Annuleren</button>
-                <a className="btn btn-primary text-sm" onClick={() => this.setState({submitted: true})}>Opwaarderen</a>
-              </div>}
+                <a className="btn btn-primary text-sm" onClick={() => this.setState({submitted: true, has_submitted: true})}>Opwaarderen</a>
+              </div>
             </div>
           </div>
         </div>
-    );
-  }
-}
-
-class IdealArea extends Component {
-  render() {
-    return (
-        <Ideal toggleSubmit={this.props.toggleSubmit} submitted={this.props.submitted} balance={this.props.balance && this.props.balance} handleResult={this.props.handleResult} toggleLoad={this.props.toggleLoad} balance={this.props.balance}/>
     );
   }
 }

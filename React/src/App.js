@@ -3,6 +3,7 @@ import Home  from './Components/Home';
 import Page404Dashboard  from './Components/Dashboard/Pages/Page404';
 import Register  from './Components/Register';
 import Account from './Components/Dashboard/Pages/Account/Account';
+import Profile from './Components/Dashboard/Pages/Profile';
 import RegisterStep2 from './Components/RegisterStep2';
 import Confirm from './Components/Confirm';
 import {ProtectedRoute} from './protected.route'
@@ -43,6 +44,7 @@ class App extends Component {
                     <Dashboard sup={"lel"}>
                       <Switch>
                         <Route path={`${url}/Account`} component={Account} exact />
+                        <Route path={`${url}/Profile`} component={Profile} exact />
                         <Route path={`${url}/Deposits`} component={Deposits} exact />
                         <Route path={`${url}/Notifications`} component={Notifications} exact />
                         <Route path={`${url}/Table`} component={EnhancedTable} exact />

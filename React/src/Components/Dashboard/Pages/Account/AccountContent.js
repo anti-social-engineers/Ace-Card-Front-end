@@ -76,8 +76,8 @@ class AccountContent extends Component {
                             { !justGotNotification && <div className="h5 mb-0 font-weight-bold text-gray-800">€ {this.context.data.user.credits}</div>}
                             <div className="h5 mb-0 font-weight-bold text-gray-800">
                               { justGotNotification && <CountUp
-                                    start={parseFloat(this.context.data.user.previous_credits)}
-                                    end={parseFloat(this.context.data.user.credits)}
+                                    start={this.context.data.user.previous_credits}
+                                    end={this.context.data.user.credits}
                                     duration={2.75}
                                     decimals={2}
                                     prefix="€ "

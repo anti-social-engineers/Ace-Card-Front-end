@@ -69,6 +69,8 @@ class _IdealBankForm extends Component {
     }
 
     handleSubmit = (ev) => {
+        document.getElementById('bedrag').value = "";
+        console.log("submitting ideal")
         var return_url = 'http://localhost:3000/dashboard';
         if (this.props.submitted){
             this.props.handleResult(parseInt(ev.target.amount.value) * 100, return_url);
@@ -76,17 +78,22 @@ class _IdealBankForm extends Component {
     };
 
     render() {
+        console.log("IDEAL IS RERENDERING");
         if (this.props.submitted) {
             var form = document.getElementById('depositForm');
-            if (form) form.reportValidity();
+            var isValid = form.reportValidity();
+            
+            if (isValid){
             if(this.state.amount){
                 console.log(this.state.amount);
-                console.log("FORM HS BEEN SUBMITTED");
+                    console.log("FORM HAS BEEN SUBMITTED");
                 this.props.handleResult(this.state.amount, this.props.stripe);
             } else {
                 console.log("NO AMOUNT GIVEN");
                 this.props.toggleSubmit();
             }
+        }
+
         }
         return (
         <form id='depositForm' onSubmit={this.handleSubmit.bind(this)} autocomplete="off">
@@ -126,7 +133,7 @@ export class Ideal extends Component {
         return (
         <StripeProvider apiKey={config.STRIPE_API_KEY}>
             <Elements locale={"nl"} family={"Montserrat"}>
-                <IdealForm toggleSubmit={this.props.toggleSubmit} context={this.props.context} submitted={this.props.submitted} queryparams={this.props.queryparams} handleResult={this.props.handleResult} balance={this.props.balance} toggleLoad={this.props.toggleLoad} />
+                <IdealForm toggleSubmit={this.props.toggleSubmit} submitted={this.props.submitted} handleResult={this.props.handleResult} balance={this.props.balance} />
             </Elements>
         </StripeProvider>
         );
