@@ -53,9 +53,8 @@ export default class Authenticator extends Component {
                     if (data[0]){
                         // Als er tussen nu en 5 seconden geleden een deposit binnen komt krijgt de gebruiker een toast notificatie
                         if (((new Date()) - new Date(data[0].datetime)) < 5000) {
-                            toast.success("Uw transactie is geslaagd! Uw heeft zojuist € " + parseFloat(data[0].amount).toFixed(2) + " opgewaardeerd!");
-                            
                             if (data[0].name === "deposit") {
+                                toast.success("Uw transactie is geslaagd! Uw heeft zojuist € " + parseFloat(data[0].amount).toFixed(2) + " opgewaardeerd!");
                                 curr_data.hasJustReceivedDeposit = true;
                                 setTimeout(() => {
                                     curr_data.hasJustReceivedDeposit = false;
