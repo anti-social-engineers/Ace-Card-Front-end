@@ -51,11 +51,9 @@ class RegisterForm extends Component {
 
 
     isValidForm = () => {
-        console.log("VALIDATING FORM");
 
         if (this.state.form_submit_count >= 5) {
-            console.log("Blocking for 5 minutes");
-            console.log(this.state.form_error);
+
             this.setState({form_error: this.form_errors.TOO_MANY_TRIES});
             setTimeout(function (){
                 this.setState({form_submit_count: 0}, () => console.log(this.state.form_error));
@@ -67,7 +65,6 @@ class RegisterForm extends Component {
         }
 
         if (this.state.password !== this.state.repeat_password) {
-            console.log("MISMATCH PASSWORD");
             this.setState({form_error: this.form_errors.PASSWORD_MISMATCH});
             return false;
         }
@@ -77,12 +74,9 @@ class RegisterForm extends Component {
     handleSubmit = (e) => {
         this.setState({hasSubmitted: true});
         if (!this.isValidForm()) {
-          console.log("FAILED VALIDATION");
           return;
         }
-        console.log("PASSED VALIDATION");
         
-
         if (this.state.submission_status === "success") {
             this.setState({loading:false, submission_status: "none"});
             return false;
@@ -100,23 +94,20 @@ class RegisterForm extends Component {
             // this is a placeholder for server side validation
             axios.post(config.API_URL+'/api/register', this.state.account)
             .then(res => {
-              console.log(res)
               this.setState({form_error:'', submission_status: "success"})
-              console.log("Created account");
-
             })
             .catch(err => {
-              console.log(err)
-              if(err === 'Error: Request failed with status code 409'){
+
+              if(err == 'Error: Request failed with status code 409'){
                 this.setState({submission_status: "wrong", loading: false, form_error:'Het gegeven email adres bestaat al!' });
               }
-              if(err === 'Error: Request failed with status code 422'){
-                this.setState({ submission_status: "wrong", loading: false, form_error: 'Wachtwoord is niet lang genoeg! (minimaal 8 karakters)' });
+              if(err == 'Error: Request failed with status code 422'){
+                this.setState({ submission_status: "wrong", loading: false, form_error: 'Wachtwoord is niet lang genoeg! (minimaal 8 karakters)' })                ;
               }
-              if(err === 'Error: Request failed with status code 500'){
+              if(err == 'Error: Request failed with status code 500'){
                 this.setState({ submission_status: "wrong", loading: false, form_error: 'Er is iets fout met de server. Excuses voor het ongemak!'});
-              }})
-
+              }}
+              )
         }.bind(this), 400);
      }
 
