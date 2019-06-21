@@ -12,7 +12,6 @@ import {NavLink} from 'react-router-dom';
 import auth from '../../Helper/actions/auth'
 import {myContext} from '../Authenticator'
 
-
 if (process.env.NODE_ENV !== 'production') {
   const whyDidYouRender = require('@welldone-software/why-did-you-render/dist/no-classes-transpile/umd/whyDidYouRender.min.js');
   whyDidYouRender(React);
@@ -43,8 +42,6 @@ class Dashboard extends Component {
   }
   
   render() {
-    console.log("Rendering dashboard");
-    console.log(this.context.data);
       const {children} = this.props;
       return (
         <>
@@ -54,7 +51,7 @@ class Dashboard extends Component {
       { !this.state.loggedIn && <Redirect to={{pathname: "/Dashboard"}}  /> }
       <div className={'dashboard'}>
       <div id="wrapper">
-        <Sidebar/>
+        <Sidebar data={this.context.data}/>
         <div id="content-wrapper" className="d-flex flex-column">
           <div id="content">
               <AccountTopBar data={this.context.data}/>
@@ -79,20 +76,20 @@ class Dashboard extends Component {
                   </a>
               </div>
             </div>
-            <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div className="modal-body"><p class="text-sm">Klik op "Uitloggen" als je je huidige sessie wilt beeindigen.</p></div>
             <div className="modal-footer d-flex justify-content-between">
-              <button className="btn btn-secondary" type="button" data-dismiss="modal">Annuleren</button>
-              <a className="btn btn-primary" data-dismiss="modal" onClick={this.logout}>Logout</a>
+              <button className="btn btn-secondary text-sm" type="button" data-dismiss="modal">Annuleren</button>
+              <a className="btn btn-primary text-sm" data-dismiss="modal" onClick={this.logout}>Uitloggen</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  { !this.state.loggedIn && <Redirect to={
-                      {
-                          pathname: "/"
-                      }
-      }/>}
+    { !this.state.loggedIn && <Redirect to={
+        {
+            pathname: "/"
+        }
+    }/>}
     </>
       )
   }

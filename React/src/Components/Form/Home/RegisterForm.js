@@ -107,13 +107,13 @@ class RegisterForm extends Component {
             })
             .catch(err => {
               console.log(err)
-              if(err == 'Error: Request failed with status code 409'){
+              if(err === 'Error: Request failed with status code 409'){
                 this.setState({submission_status: "wrong", loading: false, form_error:'Het gegeven email adres bestaat al!' });
               }
-              if(err == 'Error: Request failed with status code 422'){
+              if(err === 'Error: Request failed with status code 422'){
                 this.setState({ submission_status: "wrong", loading: false, form_error: 'Wachtwoord is niet lang genoeg! (minimaal 8 karakters)' });
               }
-              if(err == 'Error: Request failed with status code 500'){
+              if(err === 'Error: Request failed with status code 500'){
                 this.setState({ submission_status: "wrong", loading: false, form_error: 'Er is iets fout met de server. Excuses voor het ongemak!'});
               }})
 

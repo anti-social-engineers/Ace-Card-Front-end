@@ -5,11 +5,9 @@ import {
   StripeProvider,
   Elements,
 } from 'react-stripe-elements';
-import axios from 'axios'
 import config from '../config/config'
 import { myContext } from './Authenticator';
 
-// You can customize your Elements to give it the look and feel of your site.
 const createOptions = () => {
   return {
     style: {
@@ -55,62 +53,59 @@ class _IdealBankForm extends Component {
     }
 
     updateAddedValue = (e) => {
-        if (e.target.value && !isNaN(e.target.value)){
+        var amount = e.target.value;
+        if (!isNaN(e.target.value) && e.target.value !== ""){
             var calc = this.state.balance + parseFloat(e.target.value);
-            this.setState({newBalance: calc});
+            if (isNaN(calc)) {
+                this.setState({amount});
+            } else {
+                calc = this.state.balance + parseFloat(e.target.value);
+                this.setState({amount, newBalance: calc});
+            }
+
         } else {
-            this.setState({newBalance: this.state.balance});
+            this.setState({newBalance: this.props.balance});
         };
     }
-
-    createDeposit = async (amount, return_url) => {
-        console.log(amount);
-        console.log(return_url);
-        const body = {
-            amount,
-            return_url
-        };
-        console.log(body);
-        const header = 'Bearer ' + localStorage.getItem('jwt token');
-        const res = await axios.post(config.API_URL + 'api/deposits/create', body, {headers: {Authorization:header}});
-        console.log("response", res);
-        return res;
-    }
-
 
     handleSubmit = (ev) => {
-        ev.preventDefault();
-        if (this.props.stripe) {
-            var return_url = 'http://localhost:3000/dashboard';
-            var response = this.createDeposit(parseInt(ev.target.amount.value) * 100, return_url);
-            response.then(
-                (res) => {
-                    console.log(res.data.url);
-                    // window.close();
-                    this.props.handleResult();
-                    if (res.data.url) window.open(res.data.url, '_blank');
-                }
-            ).catch((err) => {
-                console.log(err);
-            });
-        } else {
-        console.log("Stripe.js hasn't loaded yet.");
+        document.getElementById('bedrag').value = "";
+        console.log("submitting ideal")
+        var return_url = 'http://localhost:3000/dashboard';
+        if (this.props.submitted){
+            this.props.handleResult(parseInt(ev.target.amount.value) * 100, return_url);
         }
     };
 
     render() {
+        if (this.props.submitted) {
+            var form = document.getElementById('depositForm');
+            var isValid = form.reportValidity();
+            
+            if (isValid){
+            if(this.state.amount){
+                console.log(this.state.amount);
+                    console.log("FORM HAS BEEN SUBMITTED");
+                this.props.handleResult(this.state.amount, this.props.stripe);
+            } else {
+                console.log("NO AMOUNT GIVEN");
+                this.props.toggleSubmit();
+            }
+        }
+
+        }
         return (
-        <form onSubmit={this.handleSubmit.bind(this)} autocomplete="off">
+        <form id='depositForm' onSubmit={this.handleSubmit.bind(this)} autocomplete="off">
             <div className="form-content">
                     <div className={this.state.loading ? "d-none" : "inputs inputs-space"}>
                         <div className="group">
-                            <input type="number" step="0.01" min="5" name="amount" id="bedrag" onChange={this.updateAddedValue} required />
+                            <input type="number" step="1" min="5" max="10000" name="amount" id="bedrag" onChange={this.updateAddedValue} required />
                             <span className="highlight"></span>
                             <span className="bar"></span>
                             <label>Kies over te schrijven bedrag</label>
                         </div>
                         <div className="group pb-5">
-                            <input type="text" value={"€" + this.state.newBalance.toFixed(2)} readOnly/>
+                            <input type="text" value={"€" + parseFloat(this.state.newBalance).toFixed(2)} readOnly/>
                             <span className="highlight"></span>
                             <span className="bar"></span>
                             <label style={{top: "-20px"}}>Nieuwe saldo</label>
@@ -129,13 +124,7 @@ class _IdealBankForm extends Component {
 _IdealBankForm.contextType = myContext;
 const IdealForm = injectStripe(_IdealBankForm);
 export class Ideal extends Component {
-    componentDidMount() {
-        console.log("IDEAL: ", this.props);
-    }
-    
     componentWillReceiveProps(nextProps) {
-        console.log("NEXT PROPS")
-        console.log(nextProps);
         this.setState({mydata: nextProps.data})
     }
 
@@ -143,11 +132,9 @@ export class Ideal extends Component {
         return (
         <StripeProvider apiKey={config.STRIPE_API_KEY}>
             <Elements locale={"nl"} family={"Montserrat"}>
-                <IdealForm context={this.props.context} queryparams={this.props.queryparams} handleResult={this.props.handleResult} balance={this.props.balance} toggleLoad={this.props.toggleLoad} />
+                <IdealForm toggleSubmit={this.props.toggleSubmit} submitted={this.props.submitted} handleResult={this.props.handleResult} balance={this.props.balance} />
             </Elements>
         </StripeProvider>
         );
     }
 }
-
-
