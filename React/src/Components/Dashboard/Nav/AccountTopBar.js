@@ -20,8 +20,7 @@ export default class AccountTopBar extends Component {
         let name;
         let img;
         let imgStyle;
-        let imgSrc;
-        let defaultimg ='../../Styles/img/acelogo.png';
+    
         if (this.props.data.user && this.props.data.user.has_card) {
             name = this.props.data.user.first_name + " " + this.props.data.user.surname;
             img = this.props.data.user.image;

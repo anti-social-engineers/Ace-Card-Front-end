@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import '../Styles/css/style.css'
-import {connect} from 'react-redux'
-import {createAcc} from '../Helper/actions/authorizationAction'
 import RegisterStep2Form from './Form/Home/RegisterStep2/RegisterStep2Form';
 import Nav from '../Components/Navbar'
 import aos from 'aos'

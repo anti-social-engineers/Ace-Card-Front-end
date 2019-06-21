@@ -36,7 +36,7 @@ export default class Graph extends Component {
         }
         data = data.reverse();
   
-        var graph_values = data.map(item => {
+        var graph_values = data.map((item) => {
           for (var key in graph) {
             if (key === item) return graph[key];
             return 0;

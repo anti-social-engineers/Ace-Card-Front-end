@@ -17,7 +17,7 @@ class Profile extends Component {
                 </div>
                 <div className="row no-gutters" style={{ overflow: "hidden" }}>
                     <div className="col-md-12 d-flex justify-content-center col-xl-5">
-                        <img className="profile-image" src={this.context.data.user.image} style={{ height: 520, width: "100%", zIndex: 1, marginTop: "-100px", objectFit: "cover" }} />
+                        <img className="profile-image" alt="profile" src={this.context.data.user.image} style={{ height: 520, width: "100%", zIndex: 1, marginTop: "-100px", objectFit: "cover" }} />
                     </div>
                     <div className="card-body col-md-12 col-xl-6 pt-4 mx-auto">
                         <div className="inputs inputs-space mx-sm-auto disabled-fields pt-4 mx-auto" style={{ width: "85%", backgroundColor: "white" }}>

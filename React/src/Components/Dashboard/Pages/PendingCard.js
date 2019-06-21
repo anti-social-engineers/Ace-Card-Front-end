@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import aos from 'aos'
 import {NavLink} from 'react-router-dom';
 
 export default class PendingCard extends Component {

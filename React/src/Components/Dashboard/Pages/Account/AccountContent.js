@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
-import BalanceModal from './BalanceModal';
-import queryString from "query-string";
 import {myContext} from '../../../Authenticator'
 import CountUp from 'react-countup';
-import axios from 'axios';
-import config from '../../../../config/config'
 import LastDeposit from './Cards/LastDeposit';
 import LastTransaction from './Cards/LastTransaction';
 import LastPaymentsGraph from './Cards/LastPaymentsGraph';

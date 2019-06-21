@@ -3,7 +3,7 @@ import axios from 'axios'
 import config from '../../../config/config'
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { lighten, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import {Route, Redirect} from 'react-router-dom';
@@ -14,23 +14,18 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import { relativeTimeRounding } from 'moment';
 
 
 let rows = [
     
 ];
 
-function selectedUser(name){
-  return name
-}
+
 
 function createData(name, email,gender,_date,birth,card) {
     let date = new Date(_date).toLocaleDateString()
@@ -81,7 +76,7 @@ function createData(name, email,gender,_date,birth,card) {
   
   function EnhancedTableHead(props) {
     const classes = useHeadStyles();
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+    const { order, orderBy, onRequestSort } = props;
     const createSortHandler = property => event => {
       onRequestSort(event, property);
     };

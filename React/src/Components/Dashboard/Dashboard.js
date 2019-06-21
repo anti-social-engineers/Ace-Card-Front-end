@@ -1,14 +1,11 @@
-import React, { Component , createContext} from 'react'
+import React, { Component } from 'react'
 import '../../Styles/css/Dashboard/dashboard.css'
 import AccountTopBar from './Nav/AccountTopBar';
 import Sidebar from './Nav/Sidebar';
 import Footer from './Footer';
 import BalanceModal from './Pages/Account/BalanceModal';
 import aos from 'aos'
-import axios from 'axios'
-import config from '../../config/config'
 import {Redirect} from 'react-router-dom';
-import {NavLink} from 'react-router-dom';
 import auth from '../../Helper/actions/auth'
 import {myContext} from '../Authenticator'
 
