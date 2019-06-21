@@ -78,7 +78,6 @@ class _IdealBankForm extends Component {
     };
 
     render() {
-        console.log("IDEAL IS RERENDERING");
         if (this.props.submitted) {
             var form = document.getElementById('depositForm');
             var isValid = form.reportValidity();

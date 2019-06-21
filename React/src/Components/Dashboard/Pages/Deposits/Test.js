@@ -140,7 +140,7 @@ function EnhancedTableHead(props) {
   }));
   
 function EnhancedTable(props) {
-    const rows = props.rows;
+ 
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
@@ -163,13 +163,25 @@ function EnhancedTable(props) {
   
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
     var spacerPagination = document.querySelector(".MuiTablePagination-spacer");
+    if (emptyRows < 0) {
+      spacerPagination.innerHTML = "Geen stortingen meer!";
+    } else {
+      if (spacerPagination) {
+        spacerPagination.innerHTML = "";
+      }
+    }
     
     return (
-          <div className={classes.root}>
 
+        <div className="card shadow mb-4">
+          <div className="card-header py-3">
+            <h6 className="m-0 font-weight-bold text-primary">
+              Lijst van Ace Card aanvragen
+            </h6>
+          </div>
+          <div className={classes.root}>
           <Paper className={classes.paper}>
             <div className={classes.tableWrapper}>
-
               <Table
                 className={classes.table}
                 aria-labelledby="tableTitle"
@@ -191,10 +203,10 @@ function EnhancedTable(props) {
                           key={row.name}
                         >
                           <TableCell className={classes.tablecell}>
-                            {row.id}
+                            {row.depositID}
                           </TableCell>
                           <TableCell className={classes.tablecell} align="center">{row.amount}</TableCell>
-                          <TableCell className={classes.tablecell} style={{width: "500px"}} align="center">{new Date(row.time).toLocaleDateString()}</TableCell>
+                          <TableCell className={classes.tablecell} style={{width: "500px"}} align="center">{row.date}</TableCell>
                         </TableRow>
                       );
                     })}
@@ -217,44 +229,37 @@ function EnhancedTable(props) {
               onChangeRowsPerPage={handleChangeRowsPerPage}
             />
           </Paper>
-        </div>           
+        </div>
+        </div>            
    );
   }
 
 
-export class Deposits extends Component {
-  state = {
-    rows: []
-  }
-  
-  componentDidMount = () => {
-      const header = 'Bearer ' + localStorage.getItem('jwt token');
-      axios.get(config.API_URL+'api/account/deposits/desc', {headers: {Authorization:header}})
+export class Test extends Component {
+    componentDidMount = () => {
+        const header = 'Bearer ' + localStorage.getItem('jwt token')
+        axios.get(config.API_URL+'api/account/deposits/asc', {headers: {Authorization:header}})
         .then(res => {
-            this.setState({rows: res.data.deposits}, () => console.log(this.state.rows));
+            res.data.deposits.forEach(deposit => {
+                createData(deposit.id, deposit.amount, deposit.time);
+            })
+            this.setState({deposits: res.data.deposits}, () => console.log(this.state.deposits));
         }).catch(err => {
             console.log(err)
         })
-  }
+    }
 
-  render() {
-      return (
+    render() {
+        return (
         <div className="container-fluid" data-aos="fade-up" data-aos-duration="400">
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 className="h3 mb-0 text-gray-800 panel-header-text">Storting overzicht</h1>
+            <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm text-xs"><i className="fas fa-download fa-sm text-white-50" /> Genereer Rapport</a>
         </div>
-        <div className="card shadow mb-4">
-            <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-primary">
-                Lijst van uw stortingen
-              </h6>
-            </div>
-            { !this.state.rows && <p className="px-4 pt-3 text-gray-600 small">U heeft nog geen transacties!</p>}
-            {this.state.rows && <EnhancedTable rows={this.state.rows}/>}
-            </div>
+            <EnhancedTable/>
         </div>
-      )
-  }
+        )
+    }
 }
 
-export default Deposits
+export default Test

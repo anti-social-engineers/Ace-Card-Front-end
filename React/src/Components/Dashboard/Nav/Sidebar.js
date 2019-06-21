@@ -13,38 +13,29 @@ export default class Sidebar extends Component {
     }
 
     render() {
-      var decoded = jwt.verify(localStorage.getItem('jwt token'), config.signature);
-
-      console.log('decode')
       let ad = ""
-      if(decoded.permissions=="sysop"){
+      if(this.props.data.user.attributes.permissions=="sysop"){
        ad = <a className="collapse-item" href="/dashboard/admin">Admin</a>
       }
      
       return (
           <ul className={ classNames("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion", { toggled: this.state.navCollapsed }) } id="accordionSidebar" ref='sidebar'>
-          {/* Sidebar - Brand */}
             <NavLink className="sidebar-brand d-flex align-items-center justify-content-center" to="/dashboard">
               <div className="sidebar-brand-icon">
                 <img src={require('../../../Styles/img/acelogo.png')} alt="" style={{width: "80px"}}/>
               </div>
               <div class="sidebar-brand-text mx-2"><span style={{fontSize: "8px"}}>Ace of Clubs</span> Dashboard</div>
             </NavLink>
-          {/* Divider */}
           <hr className="sidebar-divider my-0" />
-          {/* Nav Item - Dashboard */}
           <li className="nav-item active">
             <NavLink className="nav-link" to="/dashboard">
               <i className="fas fa-fw fa-home" />
               <span>Dashboard</span></NavLink>
           </li>
-          {/* Divider */}
           <hr className="sidebar-divider" />
-          {/* Heading */}
           <div className="sidebar-heading">
             Overzicht
           </div>
-          {/* Nav Item - Pages Collapse Menu */}
           <li className="nav-item">
             <NavLink className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
               <i className="fas fa-fw fa-user" />
@@ -55,12 +46,11 @@ export default class Sidebar extends Component {
                 <h6 className="collapse-header">Mijn Account:</h6>
                 <NavLink className="collapse-item" to="/dashboard/profile">Profiel</NavLink>
                 <NavLink className="collapse-item" to="/dashboard/deposits">Stortingen</NavLink>
-                <NavLink className="collapse-item" to="/dashboard/transactions">Uitgaves</NavLink>
+                <NavLink className="collapse-item" to="/dashboard/transactions">Transacties</NavLink>
                 {ad}
               </div>
             </div>
           </li>
-          {/* Nav Item - Utilities Collapse Menu */}
           <li className="nav-item">
             <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
               <i className="fas fa-fw fa-wrench" />
@@ -76,9 +66,7 @@ export default class Sidebar extends Component {
               </div>
             </div>
           </li>
-          {/* Divider */}
           <hr className="sidebar-divider d-none d-md-block" />
-          {/* Sidebar Toggler (Sidebar) */}
           <div className="text-center d-none d-md-inline pt-4">
             <button className="bg-transparent border-0" onClick={this.toggleNavBar} id="sidebarToggle" />
           </div>

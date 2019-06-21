@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import config from '../../../../config/config'
+import config from '../../../config/config'
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -165,6 +165,8 @@ function EnhancedTable(props) {
     var spacerPagination = document.querySelector(".MuiTablePagination-spacer");
     
     return (
+
+
           <div className={classes.root}>
 
           <Paper className={classes.paper}>
@@ -217,19 +219,19 @@ function EnhancedTable(props) {
               onChangeRowsPerPage={handleChangeRowsPerPage}
             />
           </Paper>
-        </div>           
+        </div>
    );
   }
 
 
-export class Deposits extends Component {
+export class Transactions extends Component {
   state = {
     rows: []
   }
   
   componentDidMount = () => {
       const header = 'Bearer ' + localStorage.getItem('jwt token');
-      axios.get(config.API_URL+'api/account/deposits/desc', {headers: {Authorization:header}})
+      axios.get(config.API_URL+'api/account/payments/desc', {headers: {Authorization:header}})
         .then(res => {
             this.setState({rows: res.data.deposits}, () => console.log(this.state.rows));
         }).catch(err => {
@@ -239,22 +241,22 @@ export class Deposits extends Component {
 
   render() {
       return (
-        <div className="container-fluid" data-aos="fade-up" data-aos-duration="400">
-        <div className="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 className="h3 mb-0 text-gray-800 panel-header-text">Storting overzicht</h1>
-        </div>
-        <div className="card shadow mb-4">
-            <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-primary">
-                Lijst van uw stortingen
-              </h6>
-            </div>
-            { !this.state.rows && <p className="px-4 pt-3 text-gray-600 small">U heeft nog geen transacties!</p>}
-            {this.state.rows && <EnhancedTable rows={this.state.rows}/>}
-            </div>
-        </div>
+      <div className="container-fluid" data-aos="fade-up" data-aos-duration="400">
+      <div className="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 className="h3 mb-0 text-gray-800 panel-header-text">Transactie overzicht</h1>
+      </div>
+      <div className="card shadow mb-4">
+          <div className="card-header py-3">
+            <h6 className="m-0 font-weight-bold text-primary">
+              Lijst van uw transacties
+            </h6>
+          </div>
+          { !this.state.rows && <p className="px-4 pt-3 text-gray-600 small">U heeft nog geen transacties!</p>}
+          {this.state.rows && <EnhancedTable rows={this.state.rows}/>}
+          </div>
+      </div>
       )
   }
 }
 
-export default Deposits
+export default Transactions

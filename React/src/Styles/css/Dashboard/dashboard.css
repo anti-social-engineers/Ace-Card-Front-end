@@ -6035,6 +6035,9 @@ body {
 .dashboard .bg-success {
   background: -webkit-linear-gradient(top, #e8bd6c, #eac762, #d8a23c) !important;
 }
+.dashboard .bg-success-green {
+  background-color: #1cc88a;
+}
 .dashboard a.bg-success:hover, .dashboard a.bg-success:focus,
 .dashboard button.bg-success:hover,
 .dashboard button.bg-success:focus {

@@ -51,7 +51,7 @@ class Dashboard extends Component {
       { !this.state.loggedIn && <Redirect to={{pathname: "/Dashboard"}}  /> }
       <div className={'dashboard'}>
       <div id="wrapper">
-        <Sidebar/>
+        <Sidebar data={this.context.data}/>
         <div id="content-wrapper" className="d-flex flex-column">
           <div id="content">
               <AccountTopBar data={this.context.data}/>

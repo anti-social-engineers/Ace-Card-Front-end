@@ -4,6 +4,7 @@ import config from '../config/config'
 import socketIOClient from "socket.io-client";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import jwt from 'jsonwebtoken'
 export const myContext = React.createContext();
 
 export default class Authenticator extends Component {
@@ -25,6 +26,8 @@ export default class Authenticator extends Component {
             
             this.initSocketConnection();
         }
+        var decoded = jwt.verify(localStorage.getItem('jwt token'), config.signature);
+        user["attributes"] = decoded;
 
         this.setState({
             data: {user}
@@ -45,7 +48,6 @@ export default class Authenticator extends Component {
             });
 
             io.on("event", data => {
-
                 console.log("AUTHENTICATOR NOTIFICATIONS:", data);
                 if (data !== this.state.notifications) {
                     var curr_data = Object.assign({}, this.state.data);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import config from '../../../../config/config'
+import config from '../../../config/config'
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -269,13 +269,6 @@ function EnhancedTable(props) {
     
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
     var spacerPagination = document.querySelector(".MuiTablePagination-spacer");
-    if (emptyRows < 0) {
-      spacerPagination.innerHTML = "Geen notificaties meer!";
-    } else {
-      if (spacerPagination) {
-        spacerPagination.innerHTML = "";
-      }
-    }
     
     const email = selected
     return (
