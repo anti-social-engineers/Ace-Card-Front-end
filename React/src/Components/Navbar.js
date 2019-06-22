@@ -39,7 +39,6 @@ class Nav extends Component {
   
   setUser = (user_arr) => {
     this.setState({user: user_arr, logged_in: true});
-    
   }
 
   logout = () => {
@@ -55,7 +54,9 @@ class Nav extends Component {
   toggleVisibility = () => {
     this.setState({login_clicked: !this.login_clicked});
   }
+
   render(){
+    let logged_in = this.state.user.length > 0 ? true : false;
           return (<header className="header header--collapsed">
               <nav className="navbar navbar-home navbar-expand-lg justify-content-between">
                       <NavLink className="sidebar-brand d-flex align-items-center justify-content-center active" to="/">
@@ -77,22 +78,22 @@ class Nav extends Component {
                           </div>
                       </button>
                       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div className={this.state.logged_in ? "invis d-none" : "navbar-nav no-invis"}>
+                        { !logged_in && <div className="navbar-nav no-invis">
                           <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
                           <NavLink className="nav-item nav-link" to="/Over">Over</NavLink>
                           <a className="nav-item nav-link" onClick={this.toggleLoginHeader}>Inloggen</a>
                           <NavLink className="nav-item nav-link" to="/Contact">Contact</NavLink>
-                        </div>
+                        </div>}
                         
-                        <div className={this.state.logged_in ? "navbar-nav no-invis" : "invis d-none"}>
-                          <span className={this.state.user ? "nav-item nav-link user-nav" : "d-none"}>{this.state.user ? this.state.user.email : ""}</span>
+                        { logged_in && <div className="navbar-nav no-invis">
+                          <span className="nav-item nav-link user-nav">{this.state.user ? this.state.user.email : ""}</span>
                           <NavLink className="nav-item nav-link active" to="/">Home</NavLink> <span className="sr-only">(current)</span>
                           <NavLink className="nav-item nav-link" to="/Dashboard">Account</NavLink>
-                          <a className="nav-item nav-link">Contact</a>
+                          <NavLink className="nav-item nav-link" to="/Contact">Contact</NavLink>
                           <NavLink to="/" className="nav-item nav-link loading-text--pd" onClick={this.logout}>
                             <i className={this.state.nav_loading ? "fas fa-circle-notch fa-spin no-invis" : "invis d-none"}></i>Uitloggen
                           </NavLink>
-                        </div>
+                        </div>}
                       </div>
                 </nav>
                 <NavbarFormWrapper toggleVisibility={this.toggleLoginHeader}  login_visible={this.state.login_clicked} collapseHeader={this.collapseHeader} setUser={this.setUser} ref={this.NavbarFormWrapper}>

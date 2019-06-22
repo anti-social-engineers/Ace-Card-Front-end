@@ -157,7 +157,7 @@ body {
 .dashboard a:not([href]):not([tabindex]):focus {
   outline: 0;
 }
-.dashboard .card .card-body .text-link, .dashboard .card .card-body .text-link:hover {
+.dashboard .text-link, .dashboard .card .card-body .text-link:hover {
   text-decoration: underline;
   text-underline-position: under;
   color: #2196F3 !important;
@@ -166,6 +166,9 @@ body {
   border: none;
   outline: 0;
   padding: 0;
+}
+.dashboard .text-link:focus {
+  outline: 0;
 }
 .dashboard pre,
 .dashboard code,

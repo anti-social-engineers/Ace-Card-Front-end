@@ -51,21 +51,6 @@ export default class Sidebar extends Component {
               </div>
             </div>
           </li>
-          <li className="nav-item">
-            <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-              <i className="fas fa-fw fa-wrench" />
-              <span>Instellingen</span>
-            </a>
-            <div id="collapseUtilities" className="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-              <div className="bg-dark-new py-2 collapse-inner rounded">
-                <h6 className="collapse-header">Mijn instellingen:</h6>
-                <a className="collapse-item" href="utilities-color.html">Colors</a>
-                <a className="collapse-item" href="utilities-border.html">Borders</a>
-                <a className="collapse-item" href="utilities-animation.html">Animations</a>
-                <a className="collapse-item" href="utilities-other.html">Other</a>
-              </div>
-            </div>
-          </li>
           <hr className="sidebar-divider d-none d-md-block" />
           <div className="text-center d-none d-md-inline pt-4">
             <button className="bg-transparent border-0" onClick={this.toggleNavBar} id="sidebarToggle" />

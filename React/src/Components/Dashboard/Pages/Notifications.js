@@ -27,7 +27,7 @@ class Notifications extends Component {
                             </h6>
                         </div>
                         <div className="card-body">
-                            { this.context.data && <Notification notifications={this.context.data.notifications}/>}
+                            {this.context.data.notifications ? <Notification notifications={this.context.data.notifications} /> : <span class="text-gray-600 small">Nog geen notificaties!</span>}
                         </div>
 
                         </div>

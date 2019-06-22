@@ -61,7 +61,7 @@ class AccountContent extends Component {
                           </div>
                         </div>
                         <div className="row no-gutters">
-                              <button data-toggle="modal" data-target="#saldoModal" className="text-xs font-weight-bold text-primary mb-1 text-link">Opwaarderen...</button>
+                              <button data-toggle="modal" data-target="#saldoModal" className="text-xs font-weight-bold mb-1 text-link">Opwaarderen...</button>
                         </div>
                       </div>
                     </div>

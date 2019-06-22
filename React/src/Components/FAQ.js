@@ -19,7 +19,7 @@ class FAQ extends Component {
       <div>
         <Nav/>
         <section className="accordion-section" aria-label="Question Accordions" data-aos="fade-up" data-aos-duration="500">
-            <div class="container">
+            <div className="container">
                 <h2 className="accordion-margin mainPageTitle FAQTitle" >Frequently Asked Questions </h2>
                 <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     <div className="panel panel-default">
@@ -32,7 +32,7 @@ class FAQ extends Component {
                         </h3>
                         <div className="accordion-border"></div>
                     </div>
-                    <div id="collapse0" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading0">
+                    <div id="collapse0" className="panel-collapse collapse" role="tabpanel" aria-labelledby="heading0">
                         <div className="panel-body px-3 mb-4">
                         <p>
                             De acecard is een kaart die het betalen en binnenkomen bij clubs makkelijk maakt. In plaats van een bewaker die

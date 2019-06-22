@@ -12,14 +12,13 @@ export default class Graph extends Component {
     
 
     componentDidMount() {
-        console.log(this.props.header)
         this.getGraphPayments();
     }
     
     getGraphPayments = async () => {
         try {
           const res = await axios.get(config.API_URL+'api/account/graphs/payments', {headers: {Authorization:this.props.header}});
-          const graph = res.data.data[0]
+          const graph = res.data.data
           this.setupGraphData(graph);
         } catch (err) {
           console.log(err);
@@ -34,16 +33,20 @@ export default class Graph extends Component {
           now.setDate(now.getDate() - 1);
           data.push(now.toISOString().substring(0, 10));
         }
+        
         data = data.reverse();
-  
-        var graph_values = data.map(item => {
-          for (var key in graph) {
-            if (key === item) return graph[key];
-            return 0;
-          }
-        });
 
-        this.setState({graph_values: Object.values(graph_values), dates:data});
+        var values = data.map(date => {
+            var value = 0;
+            graph.forEach(pair => { 
+                if (date === Object.keys(pair)[0]){
+                    value = pair[date];
+                }
+            });
+            return value;
+        })
+
+        this.setState({graph_values: values, dates:data});
     }
 
 

@@ -151,10 +151,6 @@ a.nav-item.nav-link {
     padding-bottom: 50px;
 }
 
-.formarea--center {
-    padding-top: 70px;
-}
-
 .form-loader {
     opacity: 1;
     transition: 0.5s;

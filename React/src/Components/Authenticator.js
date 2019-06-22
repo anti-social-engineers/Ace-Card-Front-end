@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import config from '../config/config'
+import React, { Component } from 'react';
+import axios from 'axios';
+import config from '../config/config';
 import socketIOClient from "socket.io-client";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+import { Redirect } from 'react-router-dom';
+
 export const myContext = React.createContext();
 
 export default class Authenticator extends Component {

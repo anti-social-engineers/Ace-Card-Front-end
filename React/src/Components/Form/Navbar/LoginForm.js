@@ -46,15 +46,15 @@ class LoginForm extends Component {
                this.setState({ login_status: "success" })
                auth.login()
                setTimeout(function () {
+                  var decodeToken = jwt.verify(response.data.jsonWebToken, config.signature)
+                  if (decodeToken) {
+                     this.props.setUser(decodeToken.permissions);
+                  }
                   this.props.toggleVisibility();
-                  this.props.setUser(this.state.user);
                }.bind(this), 800);
                this.setState({ logged_in: true });
             }
             localStorage.setItem('jwt token',response.data.jsonWebToken)
-            // var decodeToken = jwt.verify(response.data.jsonWebToken, config.signature)
-            // console.log(decodeToken);
-            // this.setState({decodeToken: decodeToken})
          }).catch((err) => {
             console.log(err);
             console.log("INCORRECT");
@@ -97,7 +97,7 @@ class LoginForm extends Component {
                         <span className="bar"></span>
                         <label>E-mail</label>
                      </div>
-                     <div className="group pb-5">      
+                     <div className="group pb-4">      
                         <input type="password" id="password" ref="password" onChange={this.handleChange} required/>
                         <span className="highlight"></span>
                         <span className="bar"></span>

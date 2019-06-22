@@ -36,7 +36,7 @@ class NavbarFormWrapper extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit} className={this.props.login_visible ? "login--visible" : "login--hidden"} id="login">
-            <div className="formarea formarea--center">
+            <div className="formarea">
                <div className="outerform outerform--center">
                     {this.state.login_view_open && <LoginForm setUser={this.props.setUser} toggleVisibility={this.props.toggleVisibility} switchView={this.switchView} ref={this.login}/>}
                     {this.state.lostpass_view_open && <LostPassForm toggleVisibility={this.props.toggleVisibility} switchView={this.switchView} ref={this.lostpass}/>}

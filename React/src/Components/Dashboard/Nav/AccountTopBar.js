@@ -91,10 +91,6 @@ class Dropdown extends Component {
                     <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
                         Profiel
                     </NavLink>
-                    <NavLink className="dropdown-item" >
-                        <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" />
-                        Settings
-                    </NavLink>
                     <NavLink to="/dashboard/notifications" className="dropdown-item" >
                         <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />
                         Notificaties

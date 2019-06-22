@@ -71,7 +71,7 @@ class _IdealBankForm extends Component {
     handleSubmit = (ev) => {
         document.getElementById('bedrag').value = "";
         console.log("submitting ideal")
-        var return_url = 'http://localhost:3000/dashboard';
+        var return_url = config.HOME_URL + 'dashboard';
         if (this.props.submitted){
             this.props.handleResult(parseInt(ev.target.amount.value) * 100, return_url);
         }

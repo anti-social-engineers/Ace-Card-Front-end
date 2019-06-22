@@ -35,7 +35,6 @@ class LostPassForm extends Component {
             return;
         }
 
-        console.log("Actually submitting");
         this.setState({email:this.refs.email.value, loading:true});
         var logininfo = document.getElementsByClassName("login-info")[0];
   
@@ -44,32 +43,39 @@ class LostPassForm extends Component {
         }
         
         setTimeout(function(){
-            this.requestPasswordRequest();
-              if (this.state.email === "selimaydi@gmail.com") {
-                // Valid email
-                this.setState({submission_status: "success"})
-                console.log("SENT EMAIL");
-              } else {
-                // Invalid email
-                 var email_field = document.getElementById("email");
-                 this.setState({submission_status: "wrong", loading: false});
-                 logininfo.classList.add("animated","shake");
-                 email_field.focus();
-              }
+            const res = this.requestPassword();
+            res.then(result => {
+                switch (result) {
+                    case 200:
+                        this.setState({ submission_status: "success" });
+                        break;
+                    case 404:
+                        var email_field = document.getElementById("email");
+                        this.setState({ submission_status: "wrong", loading: false });
+                        logininfo.classList.add("animated", "shake");
+                        email_field.focus();
+                        break;
+                    default:
+                        var email_field = document.getElementById("email");
+                        this.setState({ submission_status: "error", loading: false });
+                        logininfo.classList.add("animated", "shake");
+                        email_field.focus();
+                }
+            })
         }.bind(this), 400);
     }
 
-    requestPasswordRequest = async () => {
-        // TODO
+    requestPassword = async () => {
         const header = 'Bearer ' + localStorage.getItem('jwt token');
         const body = {
             mail: this.state.email
         }
         try {
             const res = await axios.post(config.API_URL + 'api/passwordreset', body, {headers: {Authorization:header}});
-            console.log(res);
+            return 200
         } catch(err) {
-            console.log(err);
+            console.log(err.response.status);
+            return err.response.status
         }
     }
     
@@ -85,6 +91,7 @@ class LostPassForm extends Component {
                 </Fade>
 
                    <div className="login-info">
+                     <span className={this.state.submission_status === "error" && !this.state.loading && this.state.form_submit_count < 5 ? "loading-text" : "d-none invis"}><i className="fas fa-exclamation-circle"></i>Er is iets fout gegaan.</span>
                      <span className={this.state.submission_status === "wrong" && !this.state.loading && this.state.form_submit_count < 5 ? "loading-text" : "d-none invis"}><i className="fas fa-exclamation-circle"></i>Uw email is incorrect of kan niet gevonden worden.</span>
                      <span className={this.state.form_submit_count >= 5 && !this.state.loading ? "loading-text" : "d-none invis"}><i className="fas fa-exclamation-circle"></i>U heeft het formulier te vaak gestuurd. Probeer nog eens over {this.timeout / 60000} minuten.</span>                  
                   </div>

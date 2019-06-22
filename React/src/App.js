@@ -9,7 +9,7 @@ import Confirm from './Components/Confirm';
 import {ProtectedRoute} from './protected.route'
 import Dashboard, { GlobalTheme } from './Components/Dashboard/Dashboard';
 import CookieConsent from "react-cookie-consent";
-import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+import {Redirect, BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import Notifications from './Components/Dashboard/Pages/Notifications';
 import Logout from './Components/Logout';
 import Deposits from './Components/Dashboard/Pages/Deposits/Deposits';
@@ -43,8 +43,8 @@ class App extends Component {
   render() {
     return (
     <Router>
-      <CookieConsent>
-        This website uses cookies to enhance the user experience.
+      <CookieConsent buttonText="Akkoord">
+        Om de gebruiksvriendelijkheid van onze website en diensten te optimaliseren maken wij gebruik van cookies.
       </CookieConsent>
 
       <Authenticator>
@@ -59,8 +59,6 @@ class App extends Component {
                         <Route path={`${url}/Transactions`} component={Transactions} exact />
                         <Route path={`${url}/Deposits`} component={Deposits} exact />
                         <Route path={`${url}/Notifications`} component={Notifications} exact />
-                        <Route path={`${url}/Table`} component={EnhancedTable} exact />
-                        {/* <Route path={`${url}/Settings`} component={Settings} exact /> */}
                         <Route path={`${url}/`} component={Account} exact /> */}
                         <Route component={Page404Dashboard} />
                       </Switch>
