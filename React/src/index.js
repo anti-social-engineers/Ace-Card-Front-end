@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'babel-polyfill';
+import 'filepond-polyfill';
+import 'promise-polyfill';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
