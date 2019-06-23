@@ -1,23 +1,15 @@
-import React, { Component , createContext} from 'react'
+import React, { Component } from 'react'
 import '../../Styles/css/Dashboard/dashboard.css'
 import AccountTopBar from './Nav/AccountTopBar';
 import Sidebar from './Nav/Sidebar';
 import Footer from './Footer';
 import BalanceModal from './Pages/Account/BalanceModal';
 import aos from 'aos'
-import axios from 'axios'
-import config from '../../config/config'
 import {Redirect} from 'react-router-dom';
-import {NavLink} from 'react-router-dom';
 import auth from '../../Helper/actions/auth'
 import {myContext} from '../Authenticator'
 
-if (process.env.NODE_ENV !== 'production') {
-  const whyDidYouRender = require('@welldone-software/why-did-you-render/dist/no-classes-transpile/umd/whyDidYouRender.min.js');
-  whyDidYouRender(React);
-}
 class Dashboard extends Component {
-  // static whyDidYouRender = true
 
   state = {
     loggedIn: true,
@@ -32,10 +24,8 @@ class Dashboard extends Component {
   }
 
   logout = () => {
-    // this.setState({nav_loading:true});
     localStorage.removeItem('jwt token')
     auth.loguit()
-    // this.setState({loggedIn: false})
     setTimeout(function () {
       this.setState({loggedIn: false});
     }.bind(this), 500);
@@ -45,10 +35,7 @@ class Dashboard extends Component {
       const {children} = this.props;
       return (
         <>
-        {/* <myContext.Consumer>
-          {(context) => (<h1>test {context[</h1>)}
-        </myContext.Consumer> */}
-      { !this.state.loggedIn && <Redirect to={{pathname: "/Dashboard"}}  /> }
+      { !localStorage.getItem("jwt token") && <Redirect to={{pathname: "/"}}  /> }
       <div className={'dashboard'}>
       <div id="wrapper">
         <Sidebar data={this.context.data}/>
@@ -63,7 +50,7 @@ class Dashboard extends Component {
       <a className="scroll-to-top rounded" href="#page-top">
         <i className="fas fa-angle-up" />
       </a>
-      <BalanceModal queryparams={this.state.queryparams} balance={this.context.data.user && this.context.data.user.credits} />           
+      <BalanceModal balance={this.context.data.user && this.context.data.user.credits} />           
 
       <div className="modal fade" id="logoutModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog" role="document">
@@ -76,7 +63,7 @@ class Dashboard extends Component {
                   </a>
               </div>
             </div>
-            <div className="modal-body"><p class="text-sm">Klik op "Uitloggen" als je je huidige sessie wilt beeindigen.</p></div>
+            <div className="modal-body"><p className="text-sm">Klik op "Uitloggen" als u uw huidige sessie wilt beeindigen.</p></div>
             <div className="modal-footer d-flex justify-content-between">
               <button className="btn btn-secondary text-sm" type="button" data-dismiss="modal">Annuleren</button>
               <a className="btn btn-primary text-sm" data-dismiss="modal" onClick={this.logout}>Uitloggen</a>
@@ -85,11 +72,6 @@ class Dashboard extends Component {
         </div>
       </div>
     </div>
-    { !this.state.loggedIn && <Redirect to={
-        {
-            pathname: "/"
-        }
-    }/>}
     </>
       )
   }

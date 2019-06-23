@@ -28,7 +28,6 @@ class LoginForm extends Component {
       )
     } 
    handleSubmit = () => {
-      console.log("INSIDE LOGINFORM");
       var logininfo = document.getElementsByClassName("login-info")[0];
 
       if (logininfo.classList.contains("animated")){
@@ -36,31 +35,27 @@ class LoginForm extends Component {
       }
 
       this.setState({loading: true, logged_in: false, login_status: "none"})
-      console.log(this.state.account)
       //Api Call Login
       axios.post(config.API_URL+'/api/login', this.state.account)
          .then(response => {
-            
-            console.log(response);
             if (response.status === 200) {
                this.setState({ login_status: "success" })
                auth.login()
-               setTimeout(function () {
-                  var decodeToken = jwt.verify(response.data.jsonWebToken, config.signature)
-                  if (decodeToken) {
-                     this.props.setUser(decodeToken.permissions);
-                  }
-                  this.props.toggleVisibility();
-               }.bind(this), 800);
-               this.setState({ logged_in: true });
+               var decodeToken = jwt.verify(response.data.jsonWebToken, config.signature)
+               if (decodeToken) {
+                  localStorage.setItem('jwt token',response.data.jsonWebToken);
+                  setTimeout(function () {
+                     this.props.toggleVisibility();
+                  }.bind(this), 800);
+                  this.setState({ logged_in: true });
+                  this.context.setAuthenticated();
+               }
             }
-            localStorage.setItem('jwt token',response.data.jsonWebToken)
-         }).catch((err) => {
+         })
+         .catch((err) => {
             console.log(err);
-            console.log("INCORRECT");
             var email_field = document.getElementById("email");
             if(err == 'Error: Request failed with status code 401'){
-               console.log('handling 401');
                this.setState({ login_status: "wrong", loading: false, logged_in: false, message:'Email of wachtwoord is incorrect!' });
             }
            if(err == 'Error: Request failed with status code 403'){
@@ -138,4 +133,5 @@ class LoginForm extends Component {
 
 }
 
+// LoginForm.contextType = mainContext;
 export default LoginForm

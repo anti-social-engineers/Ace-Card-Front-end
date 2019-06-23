@@ -56,12 +56,12 @@ class Nav extends Component {
   }
 
   render(){
-    let logged_in = this.state.user.length > 0 ? true : false;
+    let logged_in = localStorage.getItem('jwt token') != null;
           return (<header className="header header--collapsed">
               <nav className="navbar navbar-home navbar-expand-lg justify-content-between">
                       <NavLink className="sidebar-brand d-flex align-items-center justify-content-center active" to="/">
                           <div className="sidebar-brand-icon">
-                              <img src="/static/media/acelogo.00b6d2e8.png" alt style={{ width: 88 }} />
+                              <img src="/static/media/acelogo.00b6d2e8.png" style={{ width: 88 }} />
                           </div>
                           <div className="sidebar-brand-text mx-2">
                               <div className="row">
@@ -103,4 +103,5 @@ class Nav extends Component {
                       
   }
 }
+
 export default Nav

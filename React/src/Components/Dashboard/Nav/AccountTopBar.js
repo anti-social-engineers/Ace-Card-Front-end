@@ -10,7 +10,6 @@ const formatter = buildFormatter(dutchStrings)
 export default class AccountTopBar extends Component {
 
     toggleNav = () => {
-        console.log("toggling nav");
         var accordion =  document.getElementById('accordionSidebar');
         document.getElementById('accordionSidebar').style.display = accordion.style.display === 'none' ? '' : 'none';
     }

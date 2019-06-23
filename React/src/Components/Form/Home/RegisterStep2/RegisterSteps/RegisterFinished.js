@@ -16,12 +16,9 @@ class RegisterFinished extends Component {
 
     }
 
-    
     componentWillMount =() =>{
         const state = this.props.values
         const header = 'Bearer ' + localStorage.getItem('jwt token')
-
-        console.log(state)
 
         var formData = new FormData()
             formData.set('address',state.straat)   
@@ -34,17 +31,11 @@ class RegisterFinished extends Component {
             formData.set('gender',state.geslacht)   
             formData.set('dob',state.geboortedatum)   
             formData.append('profile_image',state.file[0])
-        for (var i of formData.keys()){
-        }
-        for (var v of formData.values()){
-            console.log(v)
-        }
 
         axios.post(config.API_URL+'/api/acecard',formData,{
             headers: {Authorization:header}})
         .then(res => {   
-            console.log(res)
-            this.setState({result:'Registratie Voltooid', body:'Bedankt voor het registreren bij Ace! We heten u welkom.', img:<RegisterFinishedSVG/>
+            this.setState({result:'Registratie Voltooid', body:'Bedankt voor het registreren bij Ace! We heten u welkom, ', img:<RegisterFinishedSVG/>
         })
 
         })
@@ -81,8 +72,6 @@ class RegisterFinished extends Component {
                 </div>
                 <div className="row no-gutterr">
                     <p>{this.state.body} {this.props.name}!</p>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
                 </div>
                 <div className="row no-gutterr">
                     {this.state.img}

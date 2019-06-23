@@ -300,7 +300,6 @@ function EnhancedTable(props) {
         {/* Page Heading */}
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 className="h3 mb-0 text-gray-800 panel-header-text">Admin Paneel</h1>
-          <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm text-xs"><i className="fas fa-download fa-sm text-white-50" /> Genereer Rapport</a>
         </div>
         <div className="card shadow mb-4">
           <div className="card-header py-3">
@@ -384,9 +383,6 @@ function EnhancedTable(props) {
   }
 
   class Form extends Component{
-    constructor(props){
-      super(props)
-    }
     state = {
       code : '',
     }

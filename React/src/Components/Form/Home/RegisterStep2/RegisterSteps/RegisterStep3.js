@@ -12,10 +12,8 @@ class RegisterStep3 extends Component {
                     </Fade>
                 </div>
                 <div className="row no-gutterr">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Indien je akkoord gaat met de voorwaarden zult je binnen 3-5 werkdagen de Acecard thuis geleverd krijgen.</p>
+                    <p>Alle rechten en aanspraken in de voorwaarden en in eventuele nadere overeenkomsten worden bedongen ten behoeve van Aceofclubs.nl  gelden ook ten behoeve van eventueel door Aceofclubs.nl ingeschakelde tussenpersonen en derden.</p>
                 </div>
                 <div className="row no-gutterr">
                         <div className="akkoord">

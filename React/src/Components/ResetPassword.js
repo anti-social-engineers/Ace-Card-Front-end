@@ -1,21 +1,69 @@
 import React, { Component } from 'react'
-import PasswordStrengthMeter from '../../Tools/PasswordStrengthMeter';
-import config from '../../../config/config'
+import '../Styles/css/style.css'
+import {connect} from 'react-redux'
+import RegisterForm from './Form/Home/RegisterForm'
 import axios from 'axios'
+import Nav from '../Components/Navbar';
+import aos from 'aos'
+import config from '../config/config'
+import PasswordStrengthMeter from './Tools/PasswordStrengthMeter';
+import queryString from "query-string";
 
-class RegisterForm extends Component {
+class ResetPassword extends Component {
+  constructor(props) {
+    super(props);
+    this.passwordresetform = React.createRef();
+  }
+  state = {
+    password:'',
+    repeatpassword:'',
+    error: '',
+    message:''
+  }
+
+  componentDidMount = () => {
+    aos.init({
+      duration: 2000
+    })
+  }
+  
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.passwordresetform.current.handleSubmit();
+  }
+
+
+  render() {
+    return (
+      <div>
+      <Nav/>
+      <form onSubmit={this.handleSubmit}>
+        <div className="content-wrapper">
+          <div className="cont">
+            <div className="row no-gutters d-flex justify-content-center">
+                <div className="formarea col-md-6" data-aos="fade-right" data-aos-duration="500">
+                <ResetPasswordForm query={queryString.parse(this.props.location.search)} timeout={300000} ref={this.passwordresetform}/>                </div>
+              </div>
+          </div>    
+        </div>
+      </form>
+      </div>
+                
+    )
+  }
+}
+
+
+class ResetPasswordForm extends Component {
 
     constructor(props){
       super(props);
       this.passwordRepeatRef = React.createRef()
-      this.createAcc = this.createAcc.bind(this)
     }
 
     state = {
-        email: "",
         password: "",
         repeat_password: "",
-        account: {email: "", password: ""},
         submission_status: "none",
         loading: false,
         form_submit_count: 0,
@@ -25,11 +73,15 @@ class RegisterForm extends Component {
     }
 
     form_errors = {
-        PASSWORD_MISMATCH: "Uw herhaalwachtwoord komt niet overeen met uw wachtwoord",
-        INVALID_EMAIL: "Uw email is incorrect.",
-        ACCOUNT_EXISTS: "De opgegeven email is al in gebruik.",
-        TOO_MANY_TRIES: "U heeft het formulier te vaak gestuurd. Probeer nog eens over " + this.props.timeout / 60000 + " minuten."
+        PASSWORD_MISMATCH: "Uw herhaalwachtwoord komt niet overeen met uw wachtwoord"
     }
+
+    componentDidMount() {
+      if (this.props.query && this.props.query.token) {
+        this.setState({token: this.props.query.token})
+      }
+    }
+    
 
     handleChange = (e) => {
       this.setState({
@@ -42,20 +94,9 @@ class RegisterForm extends Component {
         [e.target.id]: e.target.value 
       })
     }
-
-    createAcc(account){
-      console.log(account)
-
-    }  
   
-
-
     isValidForm = () => {
-        console.log("VALIDATING FORM");
-
         if (this.state.form_submit_count >= 5) {
-            console.log("Blocking for 5 minutes");
-            console.log(this.state.form_error);
             this.setState({form_error: this.form_errors.TOO_MANY_TRIES});
             setTimeout(function (){
                 this.setState({form_submit_count: 0}, () => console.log(this.state.form_error));
@@ -67,7 +108,6 @@ class RegisterForm extends Component {
         }
 
         if (this.state.password !== this.state.repeat_password) {
-            console.log("MISMATCH PASSWORD");
             this.setState({form_error: this.form_errors.PASSWORD_MISMATCH});
             return false;
         }
@@ -77,18 +117,14 @@ class RegisterForm extends Component {
     handleSubmit = (e) => {
         this.setState({hasSubmitted: true});
         if (!this.isValidForm()) {
-          console.log("FAILED VALIDATION");
           return;
         }
-        console.log("PASSED VALIDATION");
-        
 
         if (this.state.submission_status === "success") {
             this.setState({loading:false, submission_status: "none"});
             return false;
         }
 
-        console.log("Actually submitting");
         this.setState({account:{email: this.state.email, password: this.state.password}, loading:true});
         var logininfo = document.getElementsByClassName("login-info")[0];
   
@@ -97,33 +133,31 @@ class RegisterForm extends Component {
         }
         
         setTimeout(function(){
-            // this is a placeholder for server side validation
-            axios.post(config.API_URL+'/api/register', this.state.account)
-            .then(res => {
-              console.log(res)
-              this.setState({form_error:'', submission_status: "success"})
-              console.log("Created account");
-
-            })
-            .catch(err => {
-              console.log(err)
-              if(err === 'Error: Request failed with status code 409'){
-                console.log("email exists")
-                this.setState({submission_status: "wrong", loading: false, form_error:'Het gegeven email adres bestaat al!' });
+            if (this.state.token){
+              var body = {
+                token: this.state.token,
+                password: this.state.password
               }
-              if(err === 'Error: Request failed with status code 422'){
-                console.log("password too short")
-                this.setState({ submission_status: "wrong", loading: false, form_error: 'Wachtwoord is niet lang genoeg! (minimaal 8 karakters)' });
-              }
-              if(err === 'Error: Request failed with status code 500'){
-                this.setState({ submission_status: "wrong", loading: false, form_error: 'Er is iets fout met de server. Excuses voor het ongemak!'});
-              }})
-
+              axios.post(config.API_URL+'api/passwordreset/process', body)
+              .then(res => {
+                this.setState({form_error:'', submission_status: "success"})
+              })
+              .catch(err => {
+                if(err.response.status === 500){
+                  this.setState({submission_status: "wrong", loading: false, form_error:'Er is iets fout met de server. Excuses voor het ongemak!' });
+                }
+                if(err.response.status === 422){
+                  this.setState({ submission_status: "wrong", loading: false, form_error: 'Wachtwoord is niet lang genoeg! (minimaal 8 karakters)' });
+                }
+                if(err.response.status === 404){
+                  this.setState({ submission_status: "wrong", loading: false, form_error: 'Ongeldige token!'});
+                }
+              })
+            }
         }.bind(this), 400);
      }
 
     getResult = (result) => {
-      console.log(result);
       this.setState({hasSubmitted: false});
     }
     
@@ -133,29 +167,23 @@ class RegisterForm extends Component {
             <div className="outerform">
               <div className="form-wrapper">
                 <div className="form-title">
-                  <h2>Registreren</h2>
+                  <h2>Wachtwoord wijzigen</h2>
                 </div>
                 <div className="login-info">
                      <span className={this.state.form_error ? "loading-text loading-text--small" : "d-none invis"}><i className="fas fa-exclamation-circle"></i>{this.state.form_error}</span>
                 </div>
                   <div className={this.state.loading ? "form-loader" : "d-none form-loader--hidden"}>
-                        <span className={this.state.submission_status !== "success" ? "loading-text loading-text--small" : "d-none invis"}><i className="fas fa-circle-notch fa-spin"></i>Email valideren...</span>
-                        <span className={this.state.submission_status === "success" ? "loading-text loading-text--small" : "d-none invis"}><i className="fas fa-check"></i>Een email is zojuist gestuurd naar: {this.state.email}</span>
+                        <span className={this.state.submission_status !== "success" ? "loading-text loading-text--small" : "d-none invis"}><i className="fas fa-circle-notch fa-spin"></i>Wachtwoord reset valideren...</span>
+                        <span className={this.state.submission_status === "success" ? "loading-text loading-text--small" : "d-none invis"}><i className="fas fa-check"></i>Uw wachtwoord is gewijzigd! </span>
                 </div>
                   <div className="form-content">
                    <div className={this.state.loading ? "d-none" : "inputs inputs-space"}>
-                        <div className="group">
-                            <input type="email" id="email" ref="email" onChange={this.handleChange} required />
-                            <span className="highlight"></span>
-                            <span className="bar"></span>
-                            <label>E-mail</label>
-                        </div>
                         <div className={this.state.password.length > 0 ? "group pb-4" : "group"}>      
                             <input autoComplete="off" id="password" type="password" onChange={this.handlePasswordChange} required />
                             <span className="highlight"></span>
                             <span className="bar"></span>
                             <PasswordStrengthMeter hasSubmitted={this.state.hasSubmitted} getResult={this.getResult} password={this.state.password} />
-                            <label>Wachtwoord</label>
+                            <label>Nieuwe Wachtwoord</label>
                         </div>
     
                       <div className="group">      
@@ -167,14 +195,12 @@ class RegisterForm extends Component {
                         </div>
                      </div> 
                   </div>
-                 
-
                   </div>
-                    {(this.state.submission_status === "none" || this.state.submission_status === "wrong") && <button className="main-button main-button--margin float-right"><span className="main-button-action">Registreren</span></button>}
+                    {(this.state.submission_status === "none" || this.state.submission_status === "wrong") && <button className="main-button main-button--margin float-right"><span className="main-button-action">Wijzigen</span></button>}
                   </div>
         );
     }
 
 }
 
-export default RegisterForm
+export default ResetPassword

@@ -123,7 +123,6 @@ class RegisterStep1 extends Component {
                                     placeholder='Toevoeging'
                                     ref="toevoeging"
                                     pipe={(v) => {return v.toUpperCase()}}
-                                    required
                                 />
                                 <span className="highlight" />
                                 <span className="bar" />

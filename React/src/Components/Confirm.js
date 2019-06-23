@@ -20,9 +20,6 @@ export class Confirm extends Component {
 
         const {id} = this.props.match.params
         axios.get(config.API_URL+'api/activate/'+id)
-        .then(res => {
-            console.log(res)
-        })
     }
 
     render() {
@@ -36,7 +33,7 @@ export class Confirm extends Component {
                             <div className="mainPageParagraph">Stap elke club binnen, dankzij de ACE-card.</div> 
                         </div>
                     </div>
-                    <div class="row">
+                    <div className="row">
                     <div className="col" align="center">
                             <div className="pt-2" style={{height: "initial"}}>
                                 {/* <img src={require('../Styles/img/success.svg')} style={{width: "100%"}}/> */}

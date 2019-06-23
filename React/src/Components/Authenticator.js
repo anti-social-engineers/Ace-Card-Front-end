@@ -9,7 +9,7 @@ import { Redirect } from 'react-router-dom';
 
 export const myContext = React.createContext();
 
-export default class Authenticator extends Component {
+class Authenticator extends Component {
 
     state = {
         data: [],
@@ -38,19 +38,25 @@ export default class Authenticator extends Component {
     }
     
     initSocketConnection = () => {
-        const io = socketIOClient(config.REDIS_URL, { query: {jwt: localStorage.getItem('jwt token')} , forceNew: true}, () => console.log("hi"));
-
+        const io = socketIOClient(config.REDIS_URL, { query: {jwt: localStorage.getItem('jwt token')} , forceNew: true});
+            console.log("IO:", io);
             io.on("connection", socket => {
-                console.log("Initial connect");
+                console.log("HAS CONNECTED");
                 socket.emit("jwt", localStorage.getItem('jwt token'));
             });
 
-            io.on("firstConnect", data => {
-                this.setState({hasConnected: true});
+            io.on("init", data => {
+                var curr_data = Object.assign({}, this.state.data);
+                curr_data["notifications"] = data.map(notification => {
+                    notification.amount = parseFloat(notification.amount);
+                    notification.updated_balance = parseFloat(notification.updated_balance);
+                    return notification;
+                });
+
+                this.setState({data: curr_data });
             });
 
             io.on("event", data => {
-                console.log("AUTHENTICATOR NOTIFICATIONS:", data);
                 if (data !== this.state.notifications) {
                     var curr_data = Object.assign({}, this.state.data);
 
@@ -58,7 +64,7 @@ export default class Authenticator extends Component {
                         // Als er tussen nu en 5 seconden geleden een deposit binnen komt krijgt de gebruiker een toast notificatie
                         if (((new Date()) - new Date(data[0].datetime)) < 5000) {
                             if (data[0].name === "deposit") {
-                                toast.success("Uw transactie is geslaagd! Uw heeft zojuist € " + parseFloat(data[0].amount).toFixed(2) + " opgewaardeerd!");
+                                toast.success("Uw transactie is geslaagd! U heeft zojuist € " + parseFloat(data[0].amount).toFixed(2) + " opgewaardeerd!");
                                 curr_data.hasJustReceivedDeposit = true;
                                 setTimeout(() => {
                                     curr_data.hasJustReceivedDeposit = false;
@@ -86,19 +92,20 @@ export default class Authenticator extends Component {
             });
 
             io.on("reconnect", () => {
-                console.log("RECONNECTING")
                 io.emit("jwt", localStorage.getItem('jwt token'));
             })
         }
 
     render() {
-        console.log("RENDERING AUTH");
         return (
             <>
-            {this.state.data.user && <myContext.Provider value={{ ...this.state, updateNumber: this.updateNumber }}>
-                {this.props.children}
-            </myContext.Provider>}
+                <myContext.Provider value={{ ...this.state }}>
+                    {this.props.children}
+                </myContext.Provider>
             </>
         )
     }
 }
+
+
+export default Authenticator;

@@ -23,11 +23,11 @@ class Notifications extends Component {
                         <div className="card shadow mb-4">
                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-primary">
-                            Lijst van al je notificaties
+                            Lijst van al uw notificaties
                             </h6>
                         </div>
                         <div className="card-body">
-                            {this.context.data.notifications ? <Notification notifications={this.context.data.notifications} /> : <span class="text-gray-600 small">Nog geen notificaties!</span>}
+                            {this.context.data.notifications ? <Notification notifications={this.context.data.notifications} /> : <span className="text-gray-600 small">Nog geen notificaties!</span>}
                         </div>
 
                         </div>

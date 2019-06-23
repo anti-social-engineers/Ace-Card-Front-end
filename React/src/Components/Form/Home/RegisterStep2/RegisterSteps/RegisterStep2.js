@@ -48,7 +48,6 @@ class RegisterStep2 extends Component {
     }
 
     onUpload = () => {
-        console.log("HAS BEEN UPLOADED");
     }
 
     handleChange = (file) => {
@@ -58,7 +57,6 @@ class RegisterStep2 extends Component {
     }
 
     onFileRemove = () => {
-        console.log("remove file");
     }
 
     onAddFile = (error, file) => {

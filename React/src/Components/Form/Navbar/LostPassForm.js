@@ -19,9 +19,7 @@ class LostPassForm extends Component {
     }
 
     handleSubmit = () => {
-        console.log(this.state.form_submit_count);
         if (this.state.form_submit_count >= 5) {
-            console.log("Blocking for 5 minutes");
             setTimeout(function (){
                 this.setState({form_submit_count: 0});
             }.bind(this), this.timeout);

@@ -16,7 +16,6 @@ class NavbarFormWrapper extends Component {
     }
 
     switchView = (view) => {
-        console.log("Switching");
         if (view === "login") {
             this.setState({login_view_open: true, lostpass_view_open: false}, () => document.getElementById("email").focus());
         } else {

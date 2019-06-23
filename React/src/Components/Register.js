@@ -29,8 +29,6 @@ class Register extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.registerform.current.handleSubmit();
-    // console.log(this.registerform.current.state.account);
-    // this.props.createAcc(this.registerform.current.state.account);
   }
 
 
@@ -45,7 +43,12 @@ class Register extends Component {
                 <div className="card-area col-sm-12 col-md-12 col-lg-12 col-xl-7" data-aos="fade-left" data-aos-duration="500">
                   <div className="textarea">
                     <h3>Account aanmaken</h3>
-                    <p>lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
+                    <p className="small">Maak hier uw account aan.
+
+                    U ontvangt van ons een mailtje om uw account te activeren.<br/>
+
+                    U kunt vervolgens door gaan met de aanvraag van uw Acecard!
+                    </p>
                   </div>
                   <img src={require('../Styles/img/cardbox.png')} alt="" className="acecard" />
                 </div>
@@ -56,15 +59,8 @@ class Register extends Component {
         </div>
       </form>
       </div>
-                
     )
   }
 }
-
-// const ObjToProps = (object) => {
-//   return {
-//     createAcc: (account) => object(createAcc(account))
-//   }
-// }
 
 export default Register

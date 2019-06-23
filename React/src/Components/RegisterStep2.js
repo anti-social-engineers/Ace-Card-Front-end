@@ -62,9 +62,6 @@ class RegisterStep2 extends Component {
   }
 
   handleSubmit = (e) => {
-      // e.preventDefault();
-      console.log("submitting form");
-      console.log(this.refs.form);
   }
 
   

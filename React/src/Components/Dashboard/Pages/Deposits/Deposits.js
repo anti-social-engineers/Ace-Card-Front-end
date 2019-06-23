@@ -178,7 +178,7 @@ function EnhancedTable(props) {
                           <TableCell className={classes.tablecell}>
                             {row.id}
                           </TableCell>
-                          <TableCell className={classes.tablecell} align="center">€ {row.amount}</TableCell>
+                          <TableCell className={classes.tablecell} align="center">€ {parseFloat(row.amount).toFixed(2)}</TableCell>
                           <TableCell className={classes.tablecell} align="center">{new Date(row.time).toLocaleString()}</TableCell>
                         </TableRow>
                       );
@@ -190,7 +190,7 @@ function EnhancedTable(props) {
             <div className="py-4 px-4">
               {props.next ? <button onClick={handleLoad} className="text-xs font-weight-bold mb-1 text-link">
                 Meer laden...
-              </button> : <span class="text-gray-600 small">Alle stortingen geladen.</span>}
+              </button> : <span className="text-gray-600 small">Alle stortingen geladen.</span>}
               </div>
               <div className="py-4 px-4">
                 <span className="text-gray-600 small">Aantal stortingen: {rows.length}</span>

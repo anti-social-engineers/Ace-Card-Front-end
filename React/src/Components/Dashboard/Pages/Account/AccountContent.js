@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import BalanceModal from './BalanceModal';
-import queryString from "query-string";
 import {myContext} from '../../../Authenticator'
 import CountUp from 'react-countup';
 import axios from 'axios';
@@ -21,11 +20,8 @@ class AccountContent extends Component {
 
 
     render() {
-      console.log("OUR HEADERRRR", this.auth);
         const hasNotification = this.context.data.notifications && this.context.data.notifications[0];
         if (hasNotification) {
-          console.log("PREVIOUS NOTIF AMOUNT: ", this.context.data.previous_notification_amount);
-          console.log("current NOTIF AMOUNT: ", this.context.data.notifications.length);
           const lastNotification = this.context.data.notifications[0];
           // if got notification less than 5 seconds ago
           if (((new Date()) - new Date(lastNotification.datetime)) < 5000){
@@ -67,7 +63,7 @@ class AccountContent extends Component {
                     </div>
                   </div>
                   <div className="col-xl-3 col-md-6 mb-4">
-                      <LastDeposit header={this.auth.header}/>
+                      <LastDeposit header={this.auth.header} justGotNotification={justGotNotification}  />
                   </div>
                   <div className="col-xl-3 col-md-6 mb-4">
                       <LastTransaction header={this.auth.header}/>

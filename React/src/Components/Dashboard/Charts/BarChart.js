@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Bar } from 'react-chartjs-2';
 
 class BarChart extends Component {
-  
+
   componentWillReceiveProps(nextProps) {
-    if (nextProps.data) {
+    if (nextProps.data && nextProps.labels) {
       this.data = {
         labels: nextProps.labels.map(date => this.convertDate(date)),
         datasets: [{
