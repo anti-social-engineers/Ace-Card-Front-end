@@ -7,13 +7,12 @@ import Profile from './Components/Dashboard/Pages/Profile';
 import RegisterStep2 from './Components/RegisterStep2';
 import Confirm from './Components/Confirm';
 import {ProtectedRoute} from './protected.route'
-import Dashboard, { GlobalTheme } from './Components/Dashboard/Dashboard';
+import Dashboard from './Components/Dashboard/Dashboard';
 import CookieConsent from "react-cookie-consent";
 import {Redirect, BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import Notifications from './Components/Dashboard/Pages/Notifications';
 import Logout from './Components/Logout';
 import Deposits from './Components/Dashboard/Pages/Deposits/Deposits';
-import Page404 from './Components/Page404';
 import Authenticator from './Components/Authenticator'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

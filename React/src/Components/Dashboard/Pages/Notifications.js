@@ -46,7 +46,7 @@ class Notification extends Component {
             notification => {
                 var message = notification.name === "deposit" ?  `€${notification.amount.toFixed(2)} is zojuist gestort in uw account!` : notification.message;
                 return (
-                    <a className="dropdown-item d-flex align-items-center" href="#">
+                    <a className="dropdown-item d-flex align-items-center" href="#/">
                         <div className="mr-3">
                             <div className="icon-circle bg-success">
                             <i className="fas fa-donate text-white" />

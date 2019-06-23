@@ -706,6 +706,13 @@ a.nav-item.nav-link {
     padding-top: 45px;
 }
 
+.inputs .react-date-picker__wrapper {
+    padding: 5px;
+    display: flex;
+    border-radius: 3px;
+    border: thin solid rgba(128, 128, 128, 0.09019607843137255);
+}
+
 .group {
 	position: relative;
 	font-family: "Montserrat";
