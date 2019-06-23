@@ -19,7 +19,7 @@ class FAQ extends Component {
       <div>
         <Nav/>
         <section className="accordion-section" aria-label="Question Accordions" data-aos="fade-up" data-aos-duration="500">
-            <div class="container">
+            <div className="container">
                 <h2 className="accordion-margin mainPageTitle FAQTitle" >Frequently Asked Questions </h2>
                 <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     <div className="panel panel-default">
@@ -32,7 +32,7 @@ class FAQ extends Component {
                         </h3>
                         <div className="accordion-border"></div>
                     </div>
-                    <div id="collapse0" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading0">
+                    <div id="collapse0" className="panel-collapse collapse" role="tabpanel" aria-labelledby="heading0">
                         <div className="panel-body px-3 mb-4">
                         <p>
                             De acecard is een kaart die het betalen en binnenkomen bij clubs makkelijk maakt. In plaats van een bewaker die
@@ -62,8 +62,8 @@ class FAQ extends Component {
                         </p>
                         <ul>
                             <li>
-                                <p>1. Het organiseren en beheren van je saldo voor het uitgaan.</p>
-                                <p>2. Het registreren van je gegevens waardoor je makkelijk clubs binnnekomt.</p>
+                                <p>1. Het organiseren en beheren van u saldo voor het uitgaan.</p>
+                                <p>2. Het registreren van uw gegevens waardoor u makkelijk clubs binnnekomt.</p>
                                 <p>3. Het bieden van leuke voordelen bij verschillende clubs en horecagelegenheden.</p>
                             </li>
                         </ul>
@@ -84,8 +84,8 @@ class FAQ extends Component {
                     <div id="collapse2" className="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
                         <div className="panel-body px-3 mb-4">
                         <p>
-                            Nee! Het kost niks om de acecard aan te vragen. Als je het uiteindelijk als betaalmiddel wilt gebruiken dan moet je uiteraard wel
-                            geld overmaken naar je kaart.
+                            Nee! Het kost niks om de acecard aan te vragen. Als u het uiteindelijk als betaalmiddel wilt gebruiken dan moet je uiteraard wel
+                            geld overmaken naar uw kaart.
                         </p>
                         </div>
                     </div>
@@ -104,7 +104,7 @@ class FAQ extends Component {
                     <div id="collapse3" className="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
                         <div className="panel-body px-3 mb-4">
                         <p>
-                            Wij hechten enorm veel waarde aan jouw privacy en aan de beveiliging van je data. We besteden dan ook erg veel tijd aan de beveiliging
+                            Wij hechten enorm veel waarde aan uw privacy en aan de beveiliging van uw data. We besteden dan ook erg veel tijd aan de beveiliging
                             van onze diensten.
                         </p>
                         </div>

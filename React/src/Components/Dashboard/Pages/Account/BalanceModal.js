@@ -15,27 +15,22 @@ class BalanceModal extends Component {
     receivedNotification: false
   };
 
-  handleResult = (amount, stripe) => {
+  handleResult = (amount) => {
     if (this.state.hasJustReceivedDeposit) {
       this.setState({submitted: false, receivedNotification: true});
     } else {
       this.setState({submitted: false});
     }
 
-    if (stripe) {
-      console.log("IS STRIPE");
-          var return_url = config.HOME_URL;
-          var response = this.createDeposit(amount, return_url);
-          response.then(
-              (res) => {
-                  if (res.data.url) window.open(res.data.url, '_blank');
-              }
-          ).catch((err) => {
-              console.log(err);
-          });
-      } else {
-      console.log("Stripe.js hasn't loaded yet.");
-      }
+    var return_url = config.HOME_URL + 'dashboard';
+    var response = this.createDeposit(amount, return_url);
+    response.then(
+        (res) => {
+            if (res.data.url) window.open(res.data.url, '_blank');
+        }
+    ).catch((err) => {
+        console.log(err);
+    });
   }
 
   toggleSubmit = () => {
@@ -73,7 +68,7 @@ class BalanceModal extends Component {
                 </div>
                 <Fade>
                   <div className="modal-body py-4">
-                    <Ideal balance={this.context.data.user.credits} submitted={this.state.submitted} toggleSubmit={this.toggleSubmit} handleResult={this.handleResult} />
+                    <Ideal balance={this.context.data.user && this.context.data.user.credits} submitted={this.state.submitted} toggleSubmit={this.toggleSubmit} handleResult={this.handleResult} />
                     { this.state.has_submitted && !this.state.receivedNotification && <Fade><span className="text-sm text-gray-800" style={{paddingLeft: "25px", paddingRight: "25px"}}><i className="fas fa-circle-notch fa-spin" style={{marginRight: "10px"}} ></i>Aan het wachten op transactie...</span></Fade> }
                   </div>
                 </Fade>

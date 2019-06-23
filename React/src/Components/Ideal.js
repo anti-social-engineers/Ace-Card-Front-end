@@ -70,10 +70,9 @@ class _IdealBankForm extends Component {
 
     handleSubmit = (ev) => {
         document.getElementById('bedrag').value = "";
-        console.log("submitting ideal")
-        var return_url = 'http://localhost:3000/dashboard';
+        var return_url = config.HOME_URL + 'dashboard';
         if (this.props.submitted){
-            this.props.handleResult(parseInt(ev.target.amount.value) * 100, return_url);
+            this.props.handleResult(parseInt(ev.target.amount.value) * 100);
         }
     };
 
@@ -84,18 +83,15 @@ class _IdealBankForm extends Component {
             
             if (isValid){
             if(this.state.amount){
-                console.log(this.state.amount);
-                    console.log("FORM HAS BEEN SUBMITTED");
                 this.props.handleResult(this.state.amount, this.props.stripe);
             } else {
-                console.log("NO AMOUNT GIVEN");
                 this.props.toggleSubmit();
             }
         }
 
         }
         return (
-        <form id='depositForm' onSubmit={this.handleSubmit.bind(this)} autocomplete="off">
+        <form id='depositForm' onSubmit={this.handleSubmit.bind(this)} autoComplete={"off"}>
             <div className="form-content">
                     <div className={this.state.loading ? "d-none" : "inputs inputs-space"}>
                         <div className="group">

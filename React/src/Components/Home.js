@@ -17,7 +17,6 @@ class Home extends Component {
     aos.init({
       duration : 2000
     })
-    console.log(config.API_URL + " //remove this line after testing")
   }
 
   render() {

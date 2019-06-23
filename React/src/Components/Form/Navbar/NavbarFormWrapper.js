@@ -16,7 +16,6 @@ class NavbarFormWrapper extends Component {
     }
 
     switchView = (view) => {
-        console.log("Switching");
         if (view === "login") {
             this.setState({login_view_open: true, lostpass_view_open: false}, () => document.getElementById("email").focus());
         } else {
@@ -36,7 +35,7 @@ class NavbarFormWrapper extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit} className={this.props.login_visible ? "login--visible" : "login--hidden"} id="login">
-            <div className="formarea formarea--center">
+            <div className="formarea">
                <div className="outerform outerform--center">
                     {this.state.login_view_open && <LoginForm setUser={this.props.setUser} toggleVisibility={this.props.toggleVisibility} switchView={this.switchView} ref={this.login}/>}
                     {this.state.lostpass_view_open && <LostPassForm toggleVisibility={this.props.toggleVisibility} switchView={this.switchView} ref={this.lostpass}/>}

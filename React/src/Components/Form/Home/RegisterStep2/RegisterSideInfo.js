@@ -7,8 +7,8 @@ class RegisterSideInfo extends Component {
             <div className="no-gutterr col-sm-0 col-md-5 col-lg-5 col-xl-4">
                 <div className="row col-md-12 no-gutterr">
                     <div className="info-text-wrapper">
-                        <h3 className="info">Wat heb je nodig</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.est laborum.</p>
+                        <h3 className="info">Wat heeft u nodig</h3>
+                        <p>Om een Acecard aan te kunnen vragen moet u dit formulier volledig naar waarheid invullen. Daarnaast moetu een foto uploaden dat aan de onderstaande voorwaarden voldoet.</p>
                     </div>
                 </div>
                 <div className="form-divider col-md-12 no-gutterr">

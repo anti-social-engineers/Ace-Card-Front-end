@@ -2,18 +2,23 @@ import React, { Component } from 'react'
 import AccountContent from './AccountContent';
 import PendingCard from '../PendingCard';
 import {myContext} from '../../../Authenticator'
+import CardNotActivated from '../../CardNotActivated';
 
 class Account extends Component {
     render() {
         var accountContent;
-        if (this.context.data.user && this.context.data.user.has_card) {
-            accountContent = <AccountContent {...this.props} />
-        } else {
-            accountContent = <PendingCard/>
+        if (this.context.data.user) {
+            if (this.context.data.user.has_card && this.context.data.user.active_card) {
+                accountContent = <AccountContent {...this.props} />
+            } else if(!this.context.data.user.active_card && this.context.data.user.has_card) {
+                accountContent = <CardNotActivated/>
+            } else {
+                accountContent = <PendingCard/>
+            }
         }
+        
         return (
             <>
-                {/* {this.context.data && this.context.data.user && <AccountContent/> } */}
                 { accountContent }
             </>
         )

@@ -19,7 +19,6 @@ class Account extends Component {
         })
 
         const header = 'Bearer ' + localStorage.getItem('jwt token')
-        console.log(localStorage.getItem('jwt token'))
         axios.get(config.API_URL+'/api/account', {headers: {Authorization:header}})
             .then(res => {
                 this.setState({
@@ -32,7 +31,6 @@ class Account extends Component {
                         dob: res.data.dob,
                         gender: res.data.gender
                     }})
-                    console.log(this.state.user)    
                 })
             .catch((err) => {
             });

@@ -33,8 +33,6 @@ class PasswordStrengthMeter extends Component {
     render() {
         const { password } = this.props;
         const testedResult = this.getTestResult();
-        console.log(this.props.hasSubmitted);
-        // console.log(this.result);
         if (this.props.hasSubmitted) {
             this.passTestResult();
         }

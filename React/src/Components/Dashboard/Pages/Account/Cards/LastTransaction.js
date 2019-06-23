@@ -10,9 +10,7 @@ export default class LastTransaction extends Component {
     async componentDidMount() {
         try {
             const res = await axios.get(config.API_URL+'api/account/payments/desc', {headers: {Authorization:this.props.header}});
-            console.log(res.data);
             const last_transaction = res.data.payments[0];
-            console.log(last_transaction);
             if (last_transaction)
                 this.setState({last_transaction: parseFloat(last_transaction.amount)});
           } catch (err) {

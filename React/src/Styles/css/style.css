@@ -151,10 +151,6 @@ a.nav-item.nav-link {
     padding-bottom: 50px;
 }
 
-.formarea--center {
-    padding-top: 70px;
-}
-
 .form-loader {
     opacity: 1;
     transition: 0.5s;
@@ -708,6 +704,13 @@ a.nav-item.nav-link {
 
 .inputs--large {
     padding-top: 45px;
+}
+
+.inputs .react-date-picker__wrapper {
+    padding: 5px;
+    display: flex;
+    border-radius: 3px;
+    border: thin solid rgba(128, 128, 128, 0.09019607843137255);
 }
 
 .group {

@@ -23,11 +23,11 @@ class Notifications extends Component {
                         <div className="card shadow mb-4">
                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-primary">
-                            Lijst van al je notificaties
+                            Lijst van al uw notificaties
                             </h6>
                         </div>
                         <div className="card-body">
-                            { this.context.data && <Notification notifications={this.context.data.notifications}/>}
+                            {this.context.data.notifications ? <Notification notifications={this.context.data.notifications} /> : <span className="text-gray-600 small">Nog geen notificaties!</span>}
                         </div>
 
                         </div>
@@ -46,7 +46,7 @@ class Notification extends Component {
             notification => {
                 var message = notification.name === "deposit" ?  `€${notification.amount.toFixed(2)} is zojuist gestort in uw account!` : notification.message;
                 return (
-                    <a className="dropdown-item d-flex align-items-center" href="#">
+                    <a className="dropdown-item d-flex align-items-center" href="#/">
                         <div className="mr-3">
                             <div className="icon-circle bg-success">
                             <i className="fas fa-donate text-white" />

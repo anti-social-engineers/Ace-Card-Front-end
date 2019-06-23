@@ -10,7 +10,6 @@ const formatter = buildFormatter(dutchStrings)
 export default class AccountTopBar extends Component {
 
     toggleNav = () => {
-        console.log("toggling nav");
         var accordion =  document.getElementById('accordionSidebar');
         document.getElementById('accordionSidebar').style.display = accordion.style.display === 'none' ? '' : 'none';
     }
@@ -20,8 +19,7 @@ export default class AccountTopBar extends Component {
         let name;
         let img;
         let imgStyle;
-        let imgSrc;
-        let defaultimg ='../../Styles/img/acelogo.png';
+    
         if (this.props.data.user && this.props.data.user.has_card) {
             name = this.props.data.user.first_name + " " + this.props.data.user.surname;
             img = this.props.data.user.image;
@@ -90,10 +88,6 @@ class Dropdown extends Component {
                 { this.props.img && <> <NavLink to="/dashboard/profile" className="dropdown-item" >
                     <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
                         Profiel
-                    </NavLink>
-                    <NavLink className="dropdown-item" >
-                        <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" />
-                        Settings
                     </NavLink>
                     <NavLink to="/dashboard/notifications" className="dropdown-item" >
                         <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />

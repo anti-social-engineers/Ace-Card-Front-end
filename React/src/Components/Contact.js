@@ -3,7 +3,6 @@ import {ReactComponent as EmailSVG} from '../Styles/img/svg/email.svg'
 import aos from 'aos'
 import '../Styles/css/style.css'
 import Nav from '../Components/Navbar';
-import {NavLink} from 'react-router-dom';
 import HomeFooter from '../Components/HomeFooter';
 
 

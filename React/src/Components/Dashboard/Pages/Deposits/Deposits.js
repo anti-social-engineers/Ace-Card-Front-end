@@ -1,36 +1,22 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import config from '../../../../config/config'
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { lighten, makeStyles } from '@material-ui/core/styles';
+import {  makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import jwt from 'jsonwebtoken'
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import { relativeTimeRounding } from 'moment';
+
 
 
 let rows = [
     
 ];
-
-function createData(depositID, amount, _date) {
-    let date = new Date(_date).toLocaleDateString()
-    let deposit = {depositID, amount, date}
-    rows.push(deposit)
-}
-
   
 function desc(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -144,8 +130,6 @@ function EnhancedTable(props) {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
   
     function handleRequestSort(event, property) {
       const isDesc = orderBy === property && order === 'desc';
@@ -153,17 +137,12 @@ function EnhancedTable(props) {
       setOrderBy(property);
     }
   
-    function handleChangePage(event, newPage) {
-      setPage(newPage);
+  function handleLoad() {
+      if (props.next) {
+        props.loadMore(props.next);
+      }
     }
   
-    function handleChangeRowsPerPage(event) {
-      setRowsPerPage(+event.target.value);
-    }
-  
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-    var spacerPagination = document.querySelector(".MuiTablePagination-spacer");
-    
     return (
           <div className={classes.root}>
 
@@ -183,7 +162,6 @@ function EnhancedTable(props) {
                 />
                 <TableBody>
                   {stableSort(rows, getSorting(order, orderBy))
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => {
                       return (
                         <TableRow
@@ -193,29 +171,24 @@ function EnhancedTable(props) {
                           <TableCell className={classes.tablecell}>
                             {row.id}
                           </TableCell>
-                          <TableCell className={classes.tablecell} align="center">{row.amount}</TableCell>
-                          <TableCell className={classes.tablecell} style={{width: "500px"}} align="center">{new Date(row.time).toLocaleDateString()}</TableCell>
+                          <TableCell className={classes.tablecell} align="center">€ {parseFloat(row.amount).toFixed(2)}</TableCell>
+                          <TableCell className={classes.tablecell} align="center">{new Date(row.time).toLocaleString()}</TableCell>
                         </TableRow>
                       );
                     })}
                 </TableBody>
               </Table>
             </div>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
-              component="div"
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              backIconButtonProps={{
-                'aria-label': 'Previous Page',
-              }}
-              nextIconButtonProps={{
-                'aria-label': 'Next Page',
-              }}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-            />
+          <div className="row pagination-area no-gutters d-flex justify-content-between">
+            <div className="py-4 px-4">
+              {props.next ? <button onClick={handleLoad} className="text-xs font-weight-bold mb-1 text-link">
+                Meer laden...
+              </button> : <span className="text-gray-600 small">Alle stortingen geladen.</span>}
+              </div>
+              <div className="py-4 px-4">
+                <span className="text-gray-600 small">Aantal stortingen: {rows.length}</span>
+              </div>
+            </div>
           </Paper>
         </div>           
    );
@@ -224,17 +197,30 @@ function EnhancedTable(props) {
 
 export class Deposits extends Component {
   state = {
-    rows: []
+    rows: [],
+    next: ""
   }
   
+  header = 'Bearer ' + localStorage.getItem('jwt token');
+
   componentDidMount = () => {
-      const header = 'Bearer ' + localStorage.getItem('jwt token');
-      axios.get(config.API_URL+'api/account/deposits/desc', {headers: {Authorization:header}})
+      axios.get(config.API_URL+'api/account/deposits/desc', {headers: {Authorization:this.header}})
         .then(res => {
-            this.setState({rows: res.data.deposits}, () => console.log(this.state.rows));
+            this.setState({rows: res.data.deposits, next: res.data.next_cursor}, () => console.log(this.state.rows));
         }).catch(err => {
             console.log(err)
         })
+  }
+
+  loadMore = (next) => {
+    axios.get(config.API_URL + 'api/account/deposits/desc/' + next, { headers: { Authorization: this.header } })
+      .then(res => {
+        var current_rows = this.state.rows;
+        current_rows.push(...res.data.deposits);
+        this.setState({ rows: current_rows, next: res.data.next_cursor}, () => console.log(this.state.rows));
+      }).catch(err => {
+        console.log(err)
+      })
   }
 
   render() {
@@ -250,7 +236,7 @@ export class Deposits extends Component {
               </h6>
             </div>
             { !this.state.rows && <p className="px-4 pt-3 text-gray-600 small">U heeft nog geen transacties!</p>}
-            {this.state.rows && <EnhancedTable rows={this.state.rows}/>}
+            {this.state.rows && <EnhancedTable rows={this.state.rows} next={this.state.next} loadMore={this.loadMore} />}
             </div>
         </div>
       )
