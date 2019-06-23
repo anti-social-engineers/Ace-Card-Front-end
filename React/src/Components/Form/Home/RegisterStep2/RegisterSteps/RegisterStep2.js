@@ -18,6 +18,7 @@ import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
 import FilePondPluginImageResize from 'filepond-plugin-image-resize';
 import FilePondPluginImageEdit from 'filepond-plugin-image-edit';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+import config from '../../../../../config/config';
 
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, 
@@ -122,7 +123,7 @@ class RegisterStep2 extends Component {
                         labelButtonUndoItemProcessing="Ongedaan maken"
                         labelButtonRetryItemProcessing="Opnieuw proberen"
                         labelButtonProcessItem="Uploaden"
-                        server="https://api.aceofclubs.nl/api/acecard"
+                        server={config.API_URL + 'api/acecard'}
                         instantUpload={false}
                         oninit={() => this.handleInit()}
                         onupdatefiles={fileItems => {
@@ -137,6 +138,17 @@ class RegisterStep2 extends Component {
                         onremovefile={this.onFileRemove}
                     />
                 </div>
+                { (this.state.file.length < 1 || this.state.error) && <> <div class="row no-gutterr"><p class="small">
+                    Uw foto grootte moet aan het volgende voldoen:
+                        </p></div>
+                        <div class="row no-gutterr">
+                    <ul className="small">
+                        <li>Minimum breedte: 300px</li>
+                        <li>Maximum breedte: 800px</li>
+                        <li>Minimum hoogte: 300px</li>
+                        <li>Maximum hoogte: 800px</li>
+                    </ul>
+                        </div></>}
                 {(this.state.file.length < 1 || this.state.error) && <div className="row no-gutterr" style={{height: '430px'}}><SelfieWoman/></div>}
                 {this.state.file.length > 0 && !this.state.error && <Fade><div className="row no-gutterr"><p>Het geuploade bestand lijkt geldig te zijn. U kunt door naar de volgende stap om de registratieproces af te ronden.</p></div></Fade>}
             </div>
