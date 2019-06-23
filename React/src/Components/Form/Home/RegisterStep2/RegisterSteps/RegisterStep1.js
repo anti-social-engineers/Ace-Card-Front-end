@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import RegisterInfoBar from '../RegisterInfoBar';
 import MaskedInput from 'react-text-mask'
-  
+import DatePicker from 'react-date-picker'  
+
 class RegisterStep1 extends Component {
     state = {
         voornaam: "",
@@ -19,9 +20,7 @@ class RegisterStep1 extends Component {
     }
 
     handleDate = (e) => { 
-        if (e.target.checkValidity()) {
-            this.props.handleDate(e.target.value);
-        }
+     this.setState({geboortedatum: e}, console.log(e))
     }
 
     getDOB = (age) => {
@@ -134,9 +133,9 @@ class RegisterStep1 extends Component {
                     <div className="form-label">
                         <p>Geboortedatum</p>
                     </div>
+                    <DatePicker value={this.state.geboortedatum} onChange={this.handleDate} maxDate={new Date(2001,6,22)} required/>
                     <div className="group row pb-4">
                     <div className="col-md-5">
-                            <input type="date" value={this.props.values.geboortedatum} onChange={this.handleDate} max={this.getDOB(18)} min={this.getDOB(80)} required></input>
                     </div>
                     </div>
                     <div className="form-label">
