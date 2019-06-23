@@ -182,7 +182,7 @@ function EnhancedTable(props) {
                       </TableCell>
                       <TableCell className={classes.tablecell} align="center">€ {parseFloat(row.amount).toFixed(2)}</TableCell>
                       <TableCell className={classes.tablecell} align="center">{row.club}</TableCell>
-                      <TableCell className={classes.tablecell} align="center">{new Date(row.time).toLocaleDateString()}</TableCell>
+                      <TableCell className={classes.tablecell} align="center">{new Date(row.time).toLocaleString()}</TableCell>
                     </TableRow>
                   );
                 })}
