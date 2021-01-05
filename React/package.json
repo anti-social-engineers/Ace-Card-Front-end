@@ -7,7 +7,7 @@
     "@material-ui/icons": "^4.2.0",
     "@welldone-software/why-did-you-render": "^3.2.0",
     "aos": "^2.3.4",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "babel-polyfill": "^6.26.0",
     "chart.js": "^2.8.0",
     "classnames": "^2.2.6",
